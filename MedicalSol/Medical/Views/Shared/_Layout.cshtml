@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/JqueryUI/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/JqueryUI/jquery-ui.structure.min.css" rel="stylesheet" />
+    <link href="~/Content/JqueryUI/jquery-ui.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @{
+        if (Session["User_name"] == null)
+        {
+            Session.Abandon();
+            Response.Redirect("~/User/Login");
+        }
+    }
+    <link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Custom/Dungchung.css" rel="stylesheet" />
+
+    @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+    <script src="~/Scripts/Custom/Dungchung.js"></script>
+    <script src="~/Scripts/Custom/Filter.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="notice" class="alert col-lg-12 col-md-12 col-sm-12 col-xs-12 fade">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+            @*@Html.Partial("../Partial/_Header")*@
+        </div>
+        <div class="row" style="border-bottom:1px solid #cccccc;margin-bottom:15px;background-color:white">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="border-top: 1px solid #ccc;z-index:100;">
+                <div class="row">
+                    @Html.Partial("../Partial/_LeftSidebar")
+                </div>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="padding-left: 0; border-left: 1px solid #cccccc; border-top: 1px solid #cccccc; padding-bottom: 15px;">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $('#notice').append('@ViewBag.Message');
+        if ("@ViewBag.Alert" != null && "@ViewBag.Alert" != "") {
+            $('#notice').children().last().removeClass("field-validation-error");
+            $('#notice').addClass("@ViewBag.Alert");
+            $('#notice').children().last().css("font-size", "20px");
+            $('#notice').css("font-size", "20px");
+            $('#notice').addClass("in");
+        }
+        setTimeout(function () { $('#notice').removeClass("in"); }, 3000);
+    });
+</script>

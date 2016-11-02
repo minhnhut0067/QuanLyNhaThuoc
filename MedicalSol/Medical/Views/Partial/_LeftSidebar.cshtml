@@ -1,0 +1,190 @@
+﻿<div class="nav-side-menu">
+    <div class="brand">Tên cơ sở</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li data-toggle="collapse" data-target="#manage" class="collapsed">
+                <a href="#"><i class="fa fa-life-ring fa-lg"></i> Thông tin quản lý <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="manage">
+                <li class="dropdown" data-target="#quan-ly-thanh-vien">
+                    Quản lý thành viên
+                    <ul id="quan-ly-thanh-vien" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#quan-ly-dich-vu">
+                    Quản lý dịch vụ
+                    <ul id="quan-ly-dich-vu" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+            </ul>
+            <li data-toggle="collapse" data-target="#profile" class="collapsed">
+                <a href="#"><i class="fa fa-user fa-lg"></i> Thông tin tài khoản <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="profile">
+                <li class="dropdown" data-target="#cap-nhat-thong-tin">
+                    Cập nhật thông tin
+                    <ul id="cap-nhat-thong-tin" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#doi-mat-khau">
+                    Đổi mật khẩu
+                    <ul id="doi-mat-khau" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+            </ul>
+            <li data-toggle="collapse" data-target="#khamchuabenh" class="collapsed">
+                <a href="#"><i class="fa fa-heartbeat fa-lg"></i> Khám - Chữa bệnh <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="khamchuabenh">
+                <li class="dropdown" data-target="#tiep-don">
+                    Tiếp đón
+                    <ul id="tiep-don" class="dropdown-menu menu-level">
+                        <li onclick="window.location.href = '@Url.Action("tiepdon","khambenh")'">Phiếu tiếp đón</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#kham-benh">
+                    Khám bệnh
+                    <ul id="kham-benh" class="dropdown-menu menu-level">
+                        <li onclick="window.location.href = '@Url.Action("phieukham", "khambenh")'">Phiếu khám bệnh</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#noi-tru">
+                    Nội trú
+                    <ul id="noi-tru" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#ngoai-tru">
+                    Ngoại trú
+                    <ul id="ngoai-tru" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+            </ul>
+            <li data-toggle="collapse" data-target="#vienphi" class="collapsed">
+                <a href="#"><i class="fa fa-money fa-lg"></i> Viện Phí <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="vienphi">
+                <li class="dropdown" data-target="#thu-tam-ung">
+                    Thu tạm ứng
+                    <ul id="thu-tam-ung" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#lap-hoa-don">
+                    Lập hóa đơn
+                    <ul id="lap-hoa-don" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#hoan-hoa-don">
+                    Hoàn hóa đơn
+                    <ul id="hoan-hoa-don" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+            </ul>
+            <li data-toggle="collapse" data-target="#duoc" class="collapsed">
+                <a href="#"><i class="fa fa-medkit fa-lg"></i> Quản lý dược <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="duoc">
+                <li class="dropdown" data-target="#tienich">
+                    Tiện ích
+                    <ul id="tienich" class="dropdown-menu menu-level">
+                        <li onclick="window.location.href = '@Url.Action("khaibaokho","quanlyduoc")'" >Khai báo kho</li>
+                        <li>Khai báo biệt dược</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#nhap">
+                    Nhập
+                    <ul id="nhap" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#xuat">
+                    Xuất
+                    <ul id="xuat" class="dropdown-menu menu-level">
+                        <li onclick="window.location.href = '@Url.Action("xuatban","quanlyduoc")'" >Xuất bán</li>
+                        <li>Xuất chuyển kho</li>
+                        <li>Xuất khác</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#ton">
+                    Tồn
+                    <ul id="ton" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#cong-no">
+                    Công nợ
+                    <ul id="cong-no" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#du-tru">
+                    Dự trù
+                    <ul id="du-tru" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+            </ul>
+            <li data-toggle="collapse" data-target="#khaibaohethong" class="collapsed">
+                <a href="#"><i class="fa fa-cog fa-lg"></i> Khai báo hệ thống <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="khaibaohethong">
+                <li class="dropdown" data-target="#danh-muc">
+                    Danh mục
+                    <ul id="danh-muc" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#su-dung">
+                    Sử dụng
+                    <ul id="su-dung" class="dropdown-menu menu-level">
+                        <li>Submenu 1-1</li>
+                        <li>Submenu 1-2</li>
+                        <li>Submenu 1-3</li>
+                    </ul>
+                </li>
+            </ul>
+        </ul>
+    </div>
+</div>

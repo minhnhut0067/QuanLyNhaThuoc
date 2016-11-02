@@ -1,0 +1,52 @@
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\obj\Debug\Medical.csprojResolveAssemblyReference.cache
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\Medical.dll.config
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\Medical.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\Medical.pdb
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\Antlr3.Runtime.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\EntityFramework.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\Newtonsoft.Json.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.Mvc.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.Optimization.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.Providers.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.Razor.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.WebPages.Deployment.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.WebPages.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.WebPages.Razor.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\WebGrease.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\EntityFramework.xml
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\Newtonsoft.Json.xml
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.Mvc.xml
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.Razor.xml
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.WebPages.xml
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.WebPages.Deployment.xml
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\bin\System.Web.WebPages.Razor.xml
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\obj\Debug\Medical.dll
+C:\Users\NMN\Google Drive\Project\ASP\MedicalSol\Medical\obj\Debug\Medical.pdb
+E:\MedicalSol\Medical\bin\Medical.dll.config
+E:\MedicalSol\Medical\bin\Medical.dll
+E:\MedicalSol\Medical\bin\Medical.pdb
+E:\MedicalSol\Medical\bin\Antlr3.Runtime.dll
+E:\MedicalSol\Medical\bin\EntityFramework.dll
+E:\MedicalSol\Medical\bin\Microsoft.Web.Infrastructure.dll
+E:\MedicalSol\Medical\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+E:\MedicalSol\Medical\bin\Newtonsoft.Json.dll
+E:\MedicalSol\Medical\bin\System.Web.Mvc.dll
+E:\MedicalSol\Medical\bin\System.Web.Optimization.dll
+E:\MedicalSol\Medical\bin\System.Web.Providers.dll
+E:\MedicalSol\Medical\bin\System.Web.Razor.dll
+E:\MedicalSol\Medical\bin\System.Web.WebPages.Deployment.dll
+E:\MedicalSol\Medical\bin\System.Web.WebPages.dll
+E:\MedicalSol\Medical\bin\System.Web.WebPages.Razor.dll
+E:\MedicalSol\Medical\bin\WebGrease.dll
+E:\MedicalSol\Medical\bin\EntityFramework.xml
+E:\MedicalSol\Medical\bin\Newtonsoft.Json.xml
+E:\MedicalSol\Medical\bin\System.Web.Mvc.xml
+E:\MedicalSol\Medical\bin\System.Web.Razor.xml
+E:\MedicalSol\Medical\bin\System.Web.WebPages.xml
+E:\MedicalSol\Medical\bin\System.Web.WebPages.Deployment.xml
+E:\MedicalSol\Medical\bin\System.Web.WebPages.Razor.xml
+E:\MedicalSol\Medical\obj\Debug\Medical.csprojResolveAssemblyReference.cache
+E:\MedicalSol\Medical\obj\Debug\Medical.dll
+E:\MedicalSol\Medical\obj\Debug\Medical.pdb

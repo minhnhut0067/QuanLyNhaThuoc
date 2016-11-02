@@ -1,0 +1,84 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid title">@ViewData["title"]</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_doituong_label" style="min-width:90px;">Đối tượng</span>
+                <input id="@ViewData["page"]_doituong" type="text" class="form-control input-sm" placeholder="Loại bệnh nhân" aria-describedby="@ViewData["page"]_doituong_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_doituong_filter"><i class="fa fa-sort-desc"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="row input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_sothe_label" style="min-width:90px;">Số thẻ</span>
+                <input id="@ViewData["page"]_sothe" type="text" class="form-control input-sm" placeholder="Số thẻ BHYT" aria-describedby="@ViewData["page"]_sothe_label" maxlength="20">
+                <span class="input-group-addon" id="@ViewData["page"]_sothe_sokitu" style="color:red">0</span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_tn_label" style="min-width:90px;">Từ ngày</span>
+                <input id="@ViewData["page"]_tn" type="text" class="form-control input-sm" placeholder="dd/mm/yyyy" aria-describedby="@ViewData["page"]_tn_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_tn_calendar"><i class="fa fa-calendar"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="row input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_dt_label" style="min-width:90px;">Đến ngày</span>
+                <input id="@ViewData["page"]_dn" type="text" class="form-control input-sm" placeholder="dd/mm/yyyy" aria-describedby="@ViewData["page"]_dn_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_dn_calendar"><i class="fa fa-calendar"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="input-group" style="margin-right:-15px">
+                <span class="input-group-addon" id="@ViewData["page"]_dungtuyen_label" style="min-width:90px;">Tuyến</span>
+                <input id="@ViewData["page"]_dungtuyen" type="text" class="form-control input-sm" placeholder="Đúng tuyến" aria-describedby="@ViewData["page"]_dungtuyen_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_dungtuyen_filter"><i class="fa fa-sort-desc"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_khuvuc_label" style="min-width:90px;">Khu vực</span>
+                <input id="@ViewData["page"]_khuvuc" type="text" class="form-control input-sm" placeholder="Khu vực" aria-describedby="@ViewData["page"]_khuvuc_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_khuvuc_filter"><i class="fa fa-sort-desc"></i></a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_ts_label" style="min-width:90px;">Thai sản</span>
+                <input id="@ViewData["page"]_ts" type="text" class="form-control input-sm" placeholder="dd/mm/yyyy" aria-describedby="@ViewData["page"]_ts_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_ts_calendar"><i class="fa fa-calendar"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="row input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_ut_label" style="min-width:90px;">Ung thư</span>
+                <input id="@ViewData["page"]_ut" type="text" class="form-control input-sm" placeholder="dd/mm/yyyy" aria-describedby="@ViewData["page"]_ut_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_ut_calendar"><i class="fa fa-calendar"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="input-group" style="margin-right:-15px">
+                <span class="input-group-addon" id="@ViewData["page"]_ktc_label" style="min-width:90px;">Kỹ thuật cao</span>
+                <input id="@ViewData["page"]_ktc" type="text" class="form-control input-sm" placeholder="dd/mm/yyyy" aria-describedby="@ViewData["page"]_ktc_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_ktc_calendar"><i class="fa fa-calendar"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <div class="input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_bhyt5nam_label" style="">
+                    <input id="@ViewData["page"]_bhyt5nam_chk" class="" type="checkbox" aria-label="checkbox bhyt 5 năm">
+                </span>
+                <input style="background-color:#fff;" id="@ViewData["page"]_bhyt5nam" type="text" class="form-control checkbox-placeholder input-sm" placeholder="BHYT 5 năm" disabled aria-describedby="@ViewData["page"]_bhyt5nam_label">
+            </div>
+        </div>
+    </div>
+</div>
