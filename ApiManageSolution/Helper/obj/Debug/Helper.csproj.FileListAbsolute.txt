@@ -1,0 +1,7 @@
+D:\nhut\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helper.csprojResolveAssemblyReference.cache
+D:\nhut\Project\ASP\ApiManageSolution\Helper\bin\Debug\Helper.dll
+D:\nhut\Project\ASP\ApiManageSolution\Helper\bin\Debug\Helper.pdb
+D:\nhut\Project\ASP\ApiManageSolution\Helper\bin\Debug\Npgsql.dll
+D:\nhut\Project\ASP\ApiManageSolution\Helper\bin\Debug\Npgsql.xml
+D:\nhut\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helper.dll
+D:\nhut\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helper.pdb

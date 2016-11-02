@@ -1,0 +1,17 @@
+D:\nhut\Project\ASP\ApiManageSolution\Helper\bin\Debug\Helper.dll
+D:\nhut\Project\ASP\ApiManageSolution\Helper\bin\Debug\Helper.pdb
+D:\nhut\Project\ASP\ApiManageSolution\Helper\bin\Debug\Npgsql.dll
+D:\nhut\Project\ASP\ApiManageSolution\Helper\bin\Debug\Npgsql.xml
+D:\nhut\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helper.dll
+D:\nhut\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helper.pdb
+D:\nhut\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
+C:\Users\NMN\Google Drive\Project\ASP\ApiManageSolution\Helper\bin\Debug\Helper.dll
+C:\Users\NMN\Google Drive\Project\ASP\ApiManageSolution\Helper\bin\Debug\Helper.pdb
+C:\Users\NMN\Google Drive\Project\ASP\ApiManageSolution\Helper\bin\Debug\Npgsql.xml
+C:\Users\NMN\Google Drive\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
+C:\Users\NMN\Google Drive\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helper.dll
+C:\Users\NMN\Google Drive\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helper.pdb
+C:\Users\PC07\Google Drive\Project\ASP\ApiManageSolution\Helper\bin\Debug\Helper.dll
+C:\Users\PC07\Google Drive\Project\ASP\ApiManageSolution\Helper\bin\Debug\Helper.pdb
+C:\Users\PC07\Google Drive\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helper.dll
+C:\Users\PC07\Google Drive\Project\ASP\ApiManageSolution\Helper\obj\Debug\Helper.pdb
