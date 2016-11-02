@@ -1,6 +1,6 @@
 ﻿/*trangchu-start*/
 .home-bg {
-    background: url("Images/home_background1.jpg") no-repeat center center fixed;
+    background: url("../Images/home_background1.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

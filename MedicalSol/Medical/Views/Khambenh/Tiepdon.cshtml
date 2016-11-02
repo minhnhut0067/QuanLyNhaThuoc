@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Tiepdon";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Custom/Khambenh.css" rel="stylesheet" />
+<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="padding-left: 0; border-left: 1px solid #cccccc; border-top: 1px solid #cccccc; padding-bottom: 15px;">
+    @Html.Partial("../Partial/_ThongtinHanhchanh", new ViewDataDictionary { { "title", "Thông tin bệnh nhân" }, { "page", "page_khambenh" } })
+    <br />
+    @Html.Partial("../Partial/_ThongtinDoituong", new ViewDataDictionary { { "title", "Thông tin BHYT" }, { "page", "page_khambenh" } })
+    <br />
+    @Html.Partial("../Partial/_ThongtinDangky", new ViewDataDictionary { { "title", "Đăng ký khám" }, { "page", "page_khambenh" } })
+    <br />
+    @Html.Partial("../Partial/_ThongtinKhambenh", new ViewDataDictionary { { "title", "Thông tin khám bệnh" }, { "page", "page_khambenh" } })
+    <br />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container-fluid title"><a href="#thongtinchitiet" data-toggle="collapse">Bổ sung thông tin</a></div>
+        </div>
+    </div>
+    <div id="thongtinchitiet" class="collapse">
+        @Html.Partial("../Partial/_ThongtinChitiet", new ViewDataDictionary { { "page", "page_khambenh" } })
+    </div>
+</div>
+<script src="~/Scripts/Custom/Khambenh.js"></script>

@@ -105,9 +105,53 @@ namespace Medical.Models
             public class Register
             {
 
-            }     
+            }
         }
 
+        public class NhomKho
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string stt { get; set; }
+            public string ten { get; set; }
+            public string userid { get; set; }
+            public static string GetAll()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("nhomkhos");
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            public static IEnumerable<NhomKho> GetAllObj()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("nhomkhos");
+                    List<NhomKho> dsnhomkho = new List<NhomKho>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        NhomKho nhomkho = new NhomKho();
+                        nhomkho.id = item.id;
+                        nhomkho.ma = item.ma;
+                        nhomkho.stt = item.stt;
+                        nhomkho.ten = item.ten;
+                        nhomkho.userid = item.userid;
+                        dsnhomkho.Add(nhomkho);
+                    }
+                    return dsnhomkho;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
         public class Kho
         {
             public string id { get; set; }
@@ -208,6 +252,22 @@ namespace Medical.Models
             public XuatBan(IEnumerable<Kho> _kho)
             {
                 dmkho = _kho;
+            }
+        }
+
+        public class Filter
+        {
+            public string Name { get; set; }
+            public Object Rows { get; set; }
+            public Filter()
+            {
+                this.Name = "Table";
+                this.Rows = null;
+            }
+            public Filter(Object jarr)
+            {
+                this.Name = "Table";
+                this.Rows = jarr;
             }
         }
     }

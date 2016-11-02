@@ -1,0 +1,14 @@
+﻿@model Medical.Models.Data
+@{
+    ViewBag.Title = "Xuất Bán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Custom/Duoc.css" rel="stylesheet" />
+@Html.Partial("../Partial/_XuatbanHanhchanh", new ViewDataDictionary { { "title", "Thông tin bệnh nhân" }, { "page", "page_duoc_xuatban" } })
+@* Data Grivew: Start *@
+<div class="container-fluid">
+
+</div>
+@* Data Grivew: End *@
+@Html.Partial("../Partial/_XuatbanChitiet", new ViewDataDictionary { { "title", "Thông tin biệt dược" }, { "page", "page_duoc_xuatban" } })
+<script src="~/Scripts/Custom/Duoc.js"></script>

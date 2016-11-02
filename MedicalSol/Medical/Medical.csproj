@@ -144,10 +144,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom\dataTables.bootstrap.min.css" />
     <Content Include="Content\Custom\Dungchung.css" />
     <Content Include="Content\Custom\Duoc.css" />
     <Content Include="Content\Custom\Khambenh.css" />
-    <Content Include="Content\Custom\Site.css" />
     <Content Include="Content\Custom\User.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -236,9 +236,11 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\Custom\dataTables.bootstrap.min.js" />
     <Content Include="Scripts\Custom\Dungchung.js" />
     <Content Include="Scripts\Custom\Duoc.js" />
     <Content Include="Scripts\Custom\Filter.js" />
+    <Content Include="Scripts\Custom\jquery.dataTables.min.js" />
     <Content Include="Scripts\Custom\Khambenh.js" />
     <Content Include="Scripts\Custom\Trangchu.js" />
     <Content Include="Scripts\Custom\User.js" />
@@ -278,6 +280,14 @@
     <Content Include="Views\Partial\_ThongtinKhambenh.cshtml" />
     <Content Include="Views\Partial\_XuatbanChitiet.cshtml" />
     <Content Include="Views\Partial\_XuatbanHanhchanh.cshtml" />
+    <Content Include="Views\Shared\_LayoutNoBg.cshtml" />
+    <Content Include="Views\Trangchu\Index.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Quanlyduoc\Khaibaokho.cshtml" />
+    <Content Include="Views\Quanlyduoc\Xuatban.cshtml" />
+    <Content Include="Views\Khambenh\Tiepdon.cshtml" />
+    <Content Include="Views\Khambenh\Phieukham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

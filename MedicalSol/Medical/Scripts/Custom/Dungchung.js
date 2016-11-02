@@ -301,6 +301,63 @@ function ms_to_decimal_n(v_text, v_limit) {
     }
     return art;
 }
+
+function ms_gdelimiter(v_delimiter_text, v_delimiter, v_index, v_default) {
+    var art = "";
+    try {
+        art = v_delimiter_text.split(v_delimiter)[v_index];
+    }
+    catch (ex) {
+        art = v_default;
+    }
+    if (art == null) {
+        art = v_default;
+    }
+    return art;
+}
+
+function ms_grid_click(v_this,v_dg)
+{
+    try
+    {
+        ms_gobj(ms_gval(v_dg,"lang","?")).style.color="#505050";
+        ms_gobj(ms_gval(v_dg,"lang","?")).style.backgroundColor="Transparent";
+
+        ms_sval(ms_gval(v_dg,"lang","?")+'_rh',"className","cm_rcell_c");
+    }
+    catch(ex)
+    {
+    }
+    try
+    {
+        v_this.style.color="#A80000";
+        v_this.style.backgroundColor="#D3F09E";
+        ms_sval(v_dg,"lang",v_this.id);
+        ms_sval(v_this.id+'_rh',"className","cm_rcell_c_sel");
+    }
+    catch(ex)
+    {
+    }
+}
+
+function ms_gfields(v_ds, v_i, v_field, v_default) {
+    var art = "";
+    try {
+        art = (v_ds.Rows[v_i][v_field] ? v_ds.Rows[v_i][v_field].toString() : v_default);
+    }
+    catch (ex) {
+        art = v_default;
+    }
+    return art;
+}
+
+function ms_sfields(v_ds, v_i, v_field, v_val) {
+    try {
+        v_ds.Rows[i][v_field] = v_val;
+    }
+    catch (ex) {
+    }
+}
 //basic
 
 function f_create_input() {

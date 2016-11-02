@@ -1,4 +1,5 @@
 ﻿using Medical.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,12 @@ namespace Medical.Controllers
         #region Tiện Ích
         public ActionResult Khaibaokho()
         {
+            //var Datanhomkho = new JObject();
+            //Datanhomkho.Add("Name", "Table");
+            //Datanhomkho.Add("Rows", JArray.Parse(Data.NhomKho.GetAll()));
+            //ViewData["nhomkho_filter"] = Datanhomkho;
+            Data.Filter filter = new Data.Filter(Data.NhomKho.GetAllObj());
+            ViewBag.dsnhomkho = filter;
             return View(Data.Kho.GetAllObj());
         }
         #endregion

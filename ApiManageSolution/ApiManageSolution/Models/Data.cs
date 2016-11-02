@@ -66,6 +66,7 @@ namespace ApiManageSolution.Models
             public string ma { get; set; }
             public string stt { get; set; }
             public string ten { get; set; }
+            public string userid { get; set; }
             public static IEnumerable<Nhomkhos> GetAll()
             {
                 try
@@ -73,7 +74,7 @@ namespace ApiManageSolution.Models
                     DataSet ds = new DataSet();
                     List<Nhomkhos> lts = new List<Nhomkhos>();
                     string sql = "";
-                    sql = "SELECT id,ma,stt,ten "
+                    sql = "SELECT id,ma,stt,ten,userid "
                     + "FROM dmnhomkho";
                     ds = dbHelper.getDataSetbySql(sql);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -85,6 +86,7 @@ namespace ApiManageSolution.Models
                             item.ma = dr["ma"].ToString();
                             item.stt = dr["stt"].ToString();
                             item.ten = dr["ten"].ToString();
+                            item.userid = dr["userid"].ToString();
                             lts.Add(item);
                         }
                     }
