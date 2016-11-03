@@ -26,6 +26,7 @@ function filter_click(v_this) {
                 //    break;
                 break;
             case "page_duoc_khaibaokho_nhomkho":
+                ms_filter_hide();
                 f_filter_nhomkho_show(aid);
                 break;
             default:
@@ -46,7 +47,6 @@ function f_filter_kp_show(v_id_active) {
 }
 
 function f_filter_kp() {
-    debugger;
     var atext = ms_gval(g_filter_active_ct, "value", "");
     var aid = "";
     g_filter_cur_val = atext;
@@ -91,7 +91,6 @@ function f_filter_nhomkho_callback(res) {
             return;
         }
     }
-    debugger
     ms_filter_load(filter_ds, "ma~ten", "Mã~Tên");
     g_filter_cur_val = "";
 }
