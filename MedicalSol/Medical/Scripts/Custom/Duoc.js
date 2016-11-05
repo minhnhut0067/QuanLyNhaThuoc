@@ -1,12 +1,12 @@
 ﻿jQuery(document).ready(function () {
     $('#page_duoc_khaibaokho_gidview').DataTable();
 });
-//JavaScript
-var filter_ds = null;
 
+//Filter-End
+var filter_ds = null;
 function filter_click(v_this) {
     try {
-        var aid = v_this.id;        
+        var aid = v_this.id;
         if (aid.length > 7) {
             aid = aid.substr(0, aid.length - 7);
         }
@@ -42,7 +42,6 @@ function filter_click(v_this) {
 }
 
 function f_filter_kp_show(v_id_active) {
-    var filter_ds = null;
     ms_filter_show(v_id_active, "", "f_filter_kp", "1", "id", "page_duoc_xuatban_cosoyte", "ten", "f_filter_kp_selected");
 }
 
@@ -50,7 +49,7 @@ function f_filter_kp() {
     var atext = ms_gval(g_filter_active_ct, "value", "");
     var aid = "";
     g_filter_cur_val = atext;
-    //cm_baocao_bn.f_filter_dieutri(s_conn, aid, atext, g_filter_limit, f_filter_kp_callback);
+    //ms_baocao_bn.f_filter_dieutri(s_conn, aid, atext, g_filter_limit, f_filter_kp_callback);
 }
 
 function f_filter_kp_callback(res) {
@@ -71,16 +70,16 @@ function f_filter_kp_selected() {
 }
 
 function f_filter_nhomkho_show(v_id_active) {
-    var jsonString = ms_gval(v_id_active + "_hidden", "value", "");
-    filter_ds = JSON.parse(jsonString);
+    var jsonString = ms_gval(v_id_active + "_hidden", "value", "");    
     ms_filter_show(v_id_active, "", "f_filter_nhomkho", "1", "id", "page_duoc_khaibaokho_nhomkho", "ten", "f_filter_nhomkho_selected");
 }
 
-function f_filter_nhomkho() {        
+function f_filter_nhomkho() {
     var atext = ms_gval(g_filter_active_ct, "value", "");
-    var aid = "";
+    debugger
+    //var aid = "";
     g_filter_cur_val = atext;
-    //cm_baocao_bn.f_filter_dieutri(s_conn, aid, atext, g_filter_limit, f_filter_kp_callback);
+    filter_ds = JSON.parse(jsonString);    
     f_filter_nhomkho_callback(filter_ds)
 }
 
@@ -100,3 +99,82 @@ function f_filter_nhomkho_selected() {
         ms_sval("page_duoc_xuatban_cosoyte", "selectedvalue", ms_gfields(g_filter_ds, g_filter_index, "id", ""));
     }
 }
+//Filter-End
+
+var khaibaokho_input = "page_duoc_khaibaokho_ma~page_duoc_khaibaokho_ten~page_duoc_khaibaokho_nhomkho~page_duoc_khaibaokho_ghichu";
+//Keypress-Start
+function input_keypress(event, v_this) {
+    var keyCode;
+    if (typeof (event.keyCode) != "undefined") {
+        keyCode = event.keyCode;
+    }
+    else {
+        keyCode = event.which;
+    }
+    if (keyCode.toString() == "13") {
+        switch (v_this.id) {
+            case "page_duoc_khaibaokho_nhomkho":
+                ms_filter_get_selected();
+                ms_filter_hide();
+                break;
+            default:
+                break;
+        }
+    }
+}
+//Ketpress-End
+
+//Keyup-Start
+function input_keyup(event, v_this) {    
+    var keyCode;
+    if (typeof(event.keyCode) != "undefined") {
+        keyCode = event.keyCode;
+    }
+    else {
+        keyCode = event.which;
+    }
+    var aid_active = "";
+    switch (v_this.id) {
+        case "page_duoc_khaibaokho_nhomkho":
+            aid_active = v_this.id;
+            switch (keyCode.toString()) {
+                case "38"://Up
+                    if (ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_up();
+                    }
+                    else {
+                        f_filter_nhomkho_show(aid_active);
+                    }
+                    break;
+                case "40"://Down
+                    if (ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_down();
+                    }
+                    else {
+                        f_filter_nhomkho_show(aid_active);
+                    }
+                    break;
+                case "27"://ESC
+                    ms_filter_hide();
+                    break;
+                case "37"://Left
+                case "39"://Right
+                    break;
+                case "13"://Enter
+                    ms_filter_get_selected();
+                    ms_filter_hide();
+                    break;
+                case "32"://Space
+                default:
+                    f_filter_nhomkho_show(aid_active);
+                    break;
+            }
+            break;
+    }
+}
+//Keyup-End
+
+//Onblur-Start
+function input_onblur(v_this) {
+}
+//Onblur-End

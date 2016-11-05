@@ -39,8 +39,8 @@ namespace Medical.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Tài khoản hoặc mật khẩu không đúng !";
-                    ViewBag.Alert = "alert-danger";
+                    ViewData["message"] = "Tài khoản hoặc mật khẩu không đúng !";
+                    ViewData["alert"] = "alert-danger";
                     ModelState.AddModelError("", "Login data is incorrect!");
                 }
             }

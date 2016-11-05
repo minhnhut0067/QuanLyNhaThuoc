@@ -14,8 +14,8 @@ namespace Medical.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewBag.Message = "Đăng nhập thành công !";
-            ViewBag.Alert = "alert-success";
+            ViewData["message"] = "Đăng nhập thành công !";
+            ViewData["alert"] = "alert-success";
             return View();
         }
 

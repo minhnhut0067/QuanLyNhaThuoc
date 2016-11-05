@@ -26,7 +26,8 @@ namespace Medical.Controllers
             //Datanhomkho.Add("Rows", JArray.Parse(Data.NhomKho.GetAll()));
             //ViewData["nhomkho_filter"] = Datanhomkho;
             Data.Filter filter = new Data.Filter(Data.NhomKho.GetAllObj());
-            ViewBag.dsnhomkho = filter;
+            ViewData["page"] = "page_duoc_khaibaokho";
+            ViewData["dsnhomkho"] = filter;
             return View(Data.Kho.GetAllObj());
         }
         #endregion

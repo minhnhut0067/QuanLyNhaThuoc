@@ -24,7 +24,7 @@ insert into dmnhomkho(id,stt,ten) values (0,(select count(*) + 1 from dmnhomkho)
 insert into dmnhomkho(id,stt,ten) values (1,(select count(*) + 1 from dmnhomkho),'Thuốc');
 insert into dmnhomkho(id,stt,ten) values (3,(select count(*) + 1 from dmnhomkho),'Trang thiết bị');
 insert into dmnhomkho(id,stt,ten) values (4,(select count(*) + 1 from dmnhomkho),'Nhà thuốc');
-insert into dmnhomkho(id,stt,ten) values (5,(select count(*) + 1 from dmnhomkho),'Nhóm tủ trựcc');
+insert into dmnhomkho(id,stt,ten) values (5,(select count(*) + 1 from dmnhomkho),'Nhóm tủ trực');
 insert into dmnhomkho(id,stt,ten) values (2,(select count(*) + 1 from dmnhomkho),'Vật tu tiêu hao');
 UPDATE dmnhomkho set ma = 'NKH'||lpad(to_char(stt),4,'0');
   

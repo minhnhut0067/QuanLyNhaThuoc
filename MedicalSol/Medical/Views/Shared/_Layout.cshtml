@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewData["title"]</title>
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/JqueryUI/jquery-ui.theme.min.css" rel="stylesheet" />
     <link href="~/Content/JqueryUI/jquery-ui.structure.min.css" rel="stylesheet" />
@@ -59,10 +59,10 @@
 </html>
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        $('#notice').append('@ViewBag.Message');
-        if ("@ViewBag.Alert" != null && "@ViewBag.Alert" != "") {
+        $('#notice').append('@ViewData["message"]');
+        if ("@ViewData["alert"]" != null && "@ViewData["alert"]" != "") {
             $('#notice').children().last().removeClass("field-validation-error");
-            $('#notice').addClass("@ViewBag.Alert");
+            $('#notice').addClass("@ViewData["alert"]");
             $('#notice').children().last().css("font-size", "20px");
             $('#notice').css("font-size", "20px");
             $('#notice').addClass("in");

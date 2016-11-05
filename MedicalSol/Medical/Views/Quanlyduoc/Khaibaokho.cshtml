@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<Medical.Models.Data.Kho>
 @{
-    ViewBag.Title = "Khai Báo Kho";
+    ViewData["title"] = "Khai Báo Kho";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/Custom/Duoc.css" rel="stylesheet" />
 @{
     var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
-    var dsnhomkhojson = jss.Serialize(ViewBag.dsnhomkho);
+    var dsnhomkhojson = jss.Serialize(ViewData["dsnhomkho"]);
 }
 <div class="container-fluid">
     <div class="row">
@@ -17,14 +17,14 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <div class="input-group">
-                        <span class="input-group-addon" id="page_duoc_khaibaokho_ma_label" style="min-width:90px;">Mã</span>
-                        <input id="page_duoc_khaibaokho_ma" type="text" class="form-control input-sm" placeholder="" aria-describedby="page_duoc_khaibaokho_ma_label">
+                        <span class="input-group-addon" id="@ViewData["page"]_ma_label" style="min-width:90px;">Mã</span>
+                        <input id="@ViewData["page"]_ma" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_ma_label">
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     <div class="input-group">
-                        <span class="input-group-addon" id="page_duoc_khaibaokho_ten_label" style="min-width:90px;">Tên(*)</span>
-                        <input id="page_duoc_khaibaokho_ten" type="text" class="form-control input-sm" placeholder="" aria-describedby="page_duoc_khaibaokho_ten_label">
+                        <span class="input-group-addon" id="@ViewData["page"]_ten_label" style="min-width:90px;">Tên(*)</span>
+                        <input id="@ViewData["page"]_ten" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_ten_label">
                     </div>
                 </div>
             </div>
@@ -32,10 +32,10 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="input-group" style="">
-                        <span class="input-group-addon" id="page_duoc_khaibaokho_nhomkho_label" style="min-width:90px;">Nhóm kho(*)</span>
-                        <input id="page_duoc_khaibaokho_nhomkho_hidden" type="hidden" value="@Html.Raw(dsnhomkhojson)" />
-                        <input id="page_duoc_khaibaokho_nhomkho" type="text" class="form-control input-sm" placeholder="" aria-describedby="page_duoc_khaibaokho_nhomkho_label">
-                        <a href="#" class="input-group-addon" id="page_duoc_khaibaokho_nhomkho_filter" onclick="filter_click(this)"><i class="fa fa-sort-desc"></i></a>
+                        <span class="input-group-addon" id="@ViewData["page"]_nhomkho_label" style="min-width:90px;">Nhóm kho(*)</span>
+                        <input id="@ViewData["page"]_nhomkho_hidden" type="hidden" value="@Html.Raw(dsnhomkhojson)" />
+                        <input id="@ViewData["page"]_nhomkho" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_nhomkho_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);">
+                        <a href="#" class="input-group-addon" id="@ViewData["page"]_nhomkho_filter" onclick="filter_click(this);"><i class="fa fa-sort-desc"></i></a>
                     </div>
                 </div>
             </div>
@@ -43,8 +43,8 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="input-group">
-                        <span class="input-group-addon" id="page_duoc_khaibaokho_ghichu_label" style="min-width:90px;">Ghi chú</span>
-                        <textarea class="form-control" rows="3" id="page_duoc_khaibaokho_ghichu" aria-describedby="page_duoc_khaibaokho_ghichu_label"></textarea>
+                        <span class="input-group-addon" id="@ViewData["page"]_ghichu_label" style="min-width:90px;">Ghi chú</span>
+                        <textarea class="form-control" rows="3" id="@ViewData["page"]_ghichu" aria-describedby="@ViewData["page"]_ghichu_label"></textarea>
                     </div>
                 </div>
             </div>
@@ -52,27 +52,27 @@
     </div>
 </div>
 <br />
-<div id="page_duoc_khaibaokho_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+<div id="@ViewData["page"]_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
     <div class="col-sm-12">
-        <table id="page_duoc_khaibaokho_gidview" class="table table-striped table-bordered dataTable" role="grid" aria-describedby="page_duoc_khaibaokho_gidview_info" style="width: 100%;" width="100%" cellspacing="0">
+        <table id="@ViewData["page"]_gidview" class="table table-sm table-striped table-bordered dataTable" role="grid" aria-describedby="@ViewData["page"]_gidview_info" style="width: 100%;" width="100%" cellspacing="0">
             <thead>
                 <tr role="row">
-                    <th class="sorting_asc" tabindex="0" aria-controls="page_duoc_khaibaokho_gidview" rowspan="1" colspan="1" style="width: auto;" aria-sort="ascending" aria-label="ID: activate to sort column descending">ID</th>
-                    <th class="sorting" tabindex="0" aria-controls="page_duoc_khaibaokho_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Nhóm: activate to sort column ascending">Nhóm</th>
-                    <th class="sorting" tabindex="0" aria-controls="page_duoc_khaibaokho_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Mã: activate to sort column ascending">Mã</th>
-                    <th class="sorting" tabindex="0" aria-controls="page_duoc_khaibaokho_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Tên: activate to sort column ascending">Tên</th>
-                    <th class="sorting" tabindex="0" aria-controls="page_duoc_khaibaokho_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Ghi chú: activate to sort column ascending">Ghi chú</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-sort="ascending" aria-label="ID: activate to sort column descending">ID</th>
+                    <th class="sorting" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Nhóm: activate to sort column ascending">Nhóm</th>
+                    <th class="sorting" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Mã: activate to sort column ascending">Mã</th>
+                    <th class="sorting" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Tên: activate to sort column ascending">Tên</th>
+                    <th class="sorting" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Ghi chú: activate to sort column ascending">Ghi chú</th>
                 </tr>
             </thead>
             @*<tfoot>
-                    <tr>
-                        <th rowspan="1" colspan="1">Name</th>
-                        <th rowspan="1" colspan="1">Position</th>
-                        <th rowspan="1" colspan="1">Office</th>
-                        <th rowspan="1" colspan="1">Age</th>
-                        <th rowspan="1" colspan="1">Start date</th>
-                    </tr>
-                </tfoot>*@
+                <tr>
+                    <th rowspan="1" colspan="1">Name</th>
+                    <th rowspan="1" colspan="1">Position</th>
+                    <th rowspan="1" colspan="1">Office</th>
+                    <th rowspan="1" colspan="1">Age</th>
+                    <th rowspan="1" colspan="1">Start date</th>
+                </tr>
+            </tfoot>*@
             <tbody>
                 @foreach (var item in Model)
                 {
@@ -89,7 +89,17 @@
         </table>
     </div>
 </div>
-<script type="text/javascript">
+<br />
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:right">
+        <input id="@ViewData["page"]_luu" type="button" class="btn btn-sm btn-primary" value="Lưu" />
+        <input id="@ViewData["page"]_boqua" type="button" class="btn btn-sm btn-info" value="Bỏ Qua" />
+        <input id="@ViewData["page"]_sua" type="button" class="btn btn-sm btn-warning" value="Sữa" />
+        <input id="@ViewData["page"]_xoa" type="button" class="btn btn-sm btn-danger" value="Xóa" />
+        <input id="@ViewData["page"]_ketthuc" type="button" class="btn btn-sm btn-default" value="Kết Thúc" />
+    </div>
+</div>
+@*<script type="text/javascript">
     var dsnhomkho = JSON.parse('@Html.Raw(dsnhomkhojson)');
-</script>
+</script>*@
 <script src="~/Scripts/Custom/Duoc.js"></script>

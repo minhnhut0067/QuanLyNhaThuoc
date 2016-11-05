@@ -10,7 +10,7 @@ var g_filter_selected_ct_delimiter = "";//danh sach control se nhan gia tri tu f
 var g_filter_selected_field_delimiter = "";//danh sach field se lay gia tri tu filter (~)
 var g_filter_display_ct = "ct_filter_list";//ten control se chua list display
 var g_filter_display_position = "1";//1: hien thi ben duoi control, nguoc lai hien thi ben tren
-var g_filter_display_height = "200";//chieu cao mat dinh cua control
+var g_filter_display_height = "210";//chieu cao mat dinh cua control
 var g_filter_ds = null;
 var g_filter_index = 0;
 var g_filter_cur_val = "";
@@ -20,8 +20,8 @@ var g_filter_id_container = "";
 function ms_create_filter() {
     if (ms_gobj(g_filter_display_ct) == null) {
         ms_cobj("", "div", g_filter_display_ct);
-        ms_satt(g_filter_display_ct, "class", "cm_form_dg");
-        ms_sval(g_filter_display_ct, "className", "cm_form_dg");
+        ms_satt(g_filter_display_ct, "class", "ms_form_dg");
+        ms_sval(g_filter_display_ct, "className", "ms_form_dg");
         ms_gobj(g_filter_display_ct).style.display = "none";
     }
 }
@@ -50,8 +50,8 @@ function ms_filter_show_left(v_filter_active_ct, v_left, v_filter_width, v_filte
 
     if (ms_gobj(g_filter_display_ct) == null) {
         ms_cobj("", "div", g_filter_display_ct);
-        ms_satt(g_filter_display_ct, "class", "cm_form_dg");
-        ms_sval(g_filter_display_ct, "className", "cm_form_dg");
+        ms_satt(g_filter_display_ct, "class", "ms_form_dg");
+        ms_sval(g_filter_display_ct, "className", "ms_form_dg");
     }
 
     var aleft = ms_to_decimal(v_left);
@@ -96,7 +96,8 @@ function ms_filter_show_left(v_filter_active_ct, v_left, v_filter_width, v_filte
     else {
         atop = atop - g_filter_display_height - 2 - 8;
     }
-    awidth = awidth - 10;
+    //awidth = awidth - 10;
+    awidth = awidth + 32;    
 
     ms_sval(g_filter_display_ct, "innerHTML", "");
     var aobj = ms_gobj(g_filter_display_ct);
@@ -114,16 +115,16 @@ function ms_filter_show_left(v_filter_active_ct, v_left, v_filter_width, v_filte
 function ms_filter_html_toolbar(v_top) {
     var ahtml = "";
     ahtml += "<tr>";
-    ahtml += "<td class=\"cm_toolbar\" style=\"text-align:right;cursor:pointer;padding-top:1px;padding-bottom:1px;padding-right:1px;height:14px;border-left:solid 1px #FFFFFF;" + (v_top != "1" ? "border-top:solid 1px #FFFFFF;border-bottom:solid 0px #e0e0e0;" : "border-top:solid 1px #FFFFFF;border-bottom:solid 1px #b0b0b0;") + "background-color:#e0e0e0;\">";
+    ahtml += "<td class=\"ms_toolbar\" style=\"text-align:right;cursor:pointer;padding-top:1px;padding-bottom:1px;padding-right:1px;height:14px;border-left:solid 1px #FFFFFF;" + (v_top != "1" ? "border-top:solid 1px #FFFFFF;border-bottom:solid 0px #e0e0e0;" : "border-top:solid 1px #FFFFFF;border-bottom:solid 1px #b0b0b0;") + "background-color:#e0e0e0;\">";
     ahtml += "<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"right\" style=\"height:100%;\">";
     ahtml += "<tr>";
-    ahtml += "<td class=\"cm_tb\" style=\"width:30px;\" onclick=\"ms_filter_up();\" title=\"" + _lang_filter(0, "Trước") + "\" ><b><</b></td>";
-    ahtml += "<td class=\"cm_tb\" style=\"width:30px;\" onclick=\"ms_filter_dbclick();\" title=\"" + _lang_filter(2, "Chọn") + "\" ><b>OK</b></td>";
+    ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"ms_filter_up();\" title=\"" + _lang_filter(0, "Trước") + "\" ><b><</b></td>";
+    ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"ms_filter_dbclick();\" title=\"" + _lang_filter(2, "Chọn") + "\" ><b>OK</b></td>";
     if (g_filter_selected_none == "1") {
-        ahtml += "<td class=\"cm_tb\" style=\"width:30px;\" onclick=\"g_filter_index=-1;ms_filter_dbclick();\" title=\"" + _lang_filter(4, "Chọn dòng trống (none)") + "\" ><b>[ ]</b></td>";
+        ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"g_filter_index=-1;ms_filter_dbclick();\" title=\"" + _lang_filter(4, "Chọn dòng trống (none)") + "\" ><b>[ ]</b></td>";
     }
-    ahtml += "<td class=\"cm_tb\" style=\"width:30px;\" onclick=\"ms_filter_down();\" title=\"" + _lang_filter(1, "Sau") + "\" ><b>></b></td>";
-    ahtml += "<td class=\"cm_tb\" style=\"width:30px;\" onclick=\"ms_filter_hide();\" title=\"" + _lang_filter(3, "Đóng") + "\" ><b>X</b></td>";
+    ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"ms_filter_down();\" title=\"" + _lang_filter(1, "Sau") + "\" ><b>></b></td>";
+    ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"ms_filter_hide();\" title=\"" + _lang_filter(3, "Đóng") + "\" ><b>X</b></td>";
     ahtml += "</tr>";
     ahtml += "</table>";
     ahtml += "</td>";
@@ -150,7 +151,7 @@ function ms_filter_load_css(v_ds, v_display_field_delimiter, v_display_header_de
     if (v_display_header_delimiter != "") {
         ahtml += "<tr>";
         for (var i = 0; i < v_display_header_delimiter.split('~').length; i++) {
-            ahtml += "<td class=\"cm_hcell" + ms_gdelimiter(v_css_delimiter, "~", i, "") + "\">" + (v_display_header_delimiter.split('~')[i]) + "&nbsp;</td>";
+            ahtml += "<td class=\"ms_hcell" + ms_gdelimiter(v_css_delimiter, "~", i, "") + "\">" + (v_display_header_delimiter.split('~')[i]) + "&nbsp;</td>";
         }
         ahtml += "<tr>";
     }
@@ -160,7 +161,7 @@ function ms_filter_load_css(v_ds, v_display_field_delimiter, v_display_header_de
         for (var i = 0; i < g_filter_ds.Rows.length; ++i) {
             ahtml += "<tr id=\"gfilter_" + i.toString() + "\" onmouseover=\"ms_grid_over(this,'ct_dg_filter');\" onmouseout=\"ms_grid_out(this,'ct_dg_filter');\" onclick=\"ms_grid_click(this,'ct_dg_filter');ms_filter_click('" + i.toString() + "');\" ondblclick=\"ms_filter_dbclick('" + i.toString() + "');\">";
             for (var j = 0; j < aarr.length; j++) {
-                ahtml += "<td id=\"gfilter_td" + j.toString() + "_" + i.toString() + "\" class=\"cm_dcell" + ms_gdelimiter(v_css_delimiter, "~", j, "") + "\">" + ms_gfields(g_filter_ds, i, aarr[j], "") + "&nbsp;</td>";
+                ahtml += "<td id=\"gfilter_td" + j.toString() + "_" + i.toString() + "\" class=\"ms_dcell" + ms_gdelimiter(v_css_delimiter, "~", j, "") + "\">" + ms_gfields(g_filter_ds, i, aarr[j], "") + "&nbsp;</td>";
             }
             ahtml += "</tr>";
         }

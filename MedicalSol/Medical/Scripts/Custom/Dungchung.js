@@ -264,6 +264,39 @@ function ms_satt(v_id, v_name, v_val) {
     }
 }
 
+function ms_to_int(v_text) {
+    var art = 0;
+    try {
+        v_text = v_text.toString();
+        if (v_text.indexOf(".") > 0) {
+            v_text = v_text.split('.')[0];
+        }
+        v_text = v_text.replace(/[^0-9]/g, '')
+        art = parseInt(v_text, 10);
+        if (art.toString() == 'NaN') {
+            art = 0;
+        }
+    }
+    catch (ex) {
+        art = 0;
+    }
+    return art;
+}
+function ms_to_int_l(v_text, v_limit) {
+    var art = ms_to_int(v_text);
+    if (art < v_limit) {
+        art = v_limit;
+    }
+    return art;
+}
+function ms_to_int_n(v_text, v_limit) {
+    var art = ms_to_int(v_text);
+    if (art > v_limit) {
+        art = v_limit;
+    }
+    return art;
+}
+
 function ms_to_decimal(v_text) {
     var art = 0;
     try {
@@ -302,6 +335,25 @@ function ms_to_decimal_n(v_text, v_limit) {
     return art;
 }
 
+function ms_gfields(v_ds, v_i, v_field, v_default) {
+    var art = "";
+    try {
+        art = (v_ds.Rows[v_i][v_field] ? v_ds.Rows[v_i][v_field].toString() : v_default);
+    }
+    catch (ex) {
+        art = v_default;
+    }
+    return art;
+}
+
+function ms_sfields(v_ds, v_i, v_field, v_val) {
+    try {
+        v_ds.Rows[i][v_field] = v_val;
+    }
+    catch (ex) {
+    }
+}
+
 function ms_gdelimiter(v_delimiter_text, v_delimiter, v_index, v_default) {
     var art = "";
     try {
@@ -323,7 +375,7 @@ function ms_grid_click(v_this,v_dg)
         ms_gobj(ms_gval(v_dg,"lang","?")).style.color="#505050";
         ms_gobj(ms_gval(v_dg,"lang","?")).style.backgroundColor="Transparent";
 
-        ms_sval(ms_gval(v_dg,"lang","?")+'_rh',"className","cm_rcell_c");
+        ms_sval(ms_gval(v_dg,"lang","?")+'_rh',"className","ms_rcell_c");
     }
     catch(ex)
     {
@@ -333,29 +385,48 @@ function ms_grid_click(v_this,v_dg)
         v_this.style.color="#A80000";
         v_this.style.backgroundColor="#D3F09E";
         ms_sval(v_dg,"lang",v_this.id);
-        ms_sval(v_this.id+'_rh',"className","cm_rcell_c_sel");
+        ms_sval(v_this.id+'_rh',"className","ms_rcell_c_sel");
     }
     catch(ex)
     {
     }
 }
 
-function ms_gfields(v_ds, v_i, v_field, v_default) {
-    var art = "";
+function ms_grid_over(v_this, v_dg) {
     try {
-        art = (v_ds.Rows[v_i][v_field] ? v_ds.Rows[v_i][v_field].toString() : v_default);
+        if (ms_gval(v_dg, "lang", "") == v_this.id) {
+            v_this.style.color = "#FF0000";
+            v_this.style.backgroundColor = "#D3F09E";
+        }
+        else {
+            v_this.style.backgroundColor = "#D3F09E";
+            ms_sval(v_this.id + '_rh', "className", "ms_rcell_c_sel");
+        }
     }
     catch (ex) {
-        art = v_default;
     }
-    return art;
 }
 
-function ms_sfields(v_ds, v_i, v_field, v_val) {
+function ms_grid_out(v_this, v_dg) {
     try {
-        v_ds.Rows[i][v_field] = v_val;
+        if (ms_gval(v_dg, "lang", "") == v_this.id) {
+            v_this.style.color = "#A80000";
+            v_this.style.backgroundColor = "#D3F09E";
+            ms_sval(v_this.id + '_rh', "className", "ms_rcell_c_sel");
+        }
+        else {
+            v_this.style.color = "#505050";
+            v_this.style.backgroundColor = "Transparent";
+            ms_sval(v_this.id + '_rh', "className", "ms_rcell_c");
+        }
     }
     catch (ex) {
+    }
+}
+
+function ms_grid_scroll(v_divH, v_divM) {
+    if (ms_gobj(v_divH) != null && ms_gobj(v_divM) != null) {
+        ms_gobj(v_divH).style.left = (ms_gobj(v_divM).scrollLeft * -1 - 1) + "px";
     }
 }
 //basic
