@@ -270,5 +270,21 @@ namespace Medical.Models
                 this.Rows = jarr;
             }
         }
+
+        public class FilterSelect
+        {
+            public string Value { get; set; }
+            public string Datafilter { get; set; }
+            public FilterSelect()
+            {
+                this.Value = "";
+                this.Datafilter = "";
+            }
+            public FilterSelect(string _value, string _datafilter)
+            {
+                this.Value = _value;
+                this.Datafilter = _datafilter;
+            }
+        }
     }
 }

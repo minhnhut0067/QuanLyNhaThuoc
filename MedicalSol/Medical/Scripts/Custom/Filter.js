@@ -10,7 +10,7 @@ var g_filter_selected_ct_delimiter = "";//danh sach control se nhan gia tri tu f
 var g_filter_selected_field_delimiter = "";//danh sach field se lay gia tri tu filter (~)
 var g_filter_display_ct = "ct_filter_list";//ten control se chua list display
 var g_filter_display_position = "1";//1: hien thi ben duoi control, nguoc lai hien thi ben tren
-var g_filter_display_height = "210";//chieu cao mat dinh cua control
+var g_filter_display_height = "205";//chieu cao mat dinh cua control
 var g_filter_ds = null;
 var g_filter_index = 0;
 var g_filter_cur_val = "";
@@ -115,16 +115,16 @@ function ms_filter_show_left(v_filter_active_ct, v_left, v_filter_width, v_filte
 function ms_filter_html_toolbar(v_top) {
     var ahtml = "";
     ahtml += "<tr>";
-    ahtml += "<td class=\"ms_toolbar\" style=\"text-align:right;cursor:pointer;padding-top:1px;padding-bottom:1px;padding-right:1px;height:14px;border-left:solid 1px #FFFFFF;" + (v_top != "1" ? "border-top:solid 1px #FFFFFF;border-bottom:solid 0px #e0e0e0;" : "border-top:solid 1px #FFFFFF;border-bottom:solid 1px #b0b0b0;") + "background-color:#e0e0e0;\">";
+    ahtml += "<td class=\"ms_toolbar\" style=\"text-align:right;cursor:pointer;padding-top:1px;padding-bottom:1px;padding-right:1px;height:14px;border-left:solid 1px #FFFFFF;" + (v_top != "1" ? "border-top:solid 1px #FFFFFF;border-bottom:solid 0px #e0e0e0;" : "border-top:solid 1px #FFFFFF;border-bottom:solid 1px #b0b0b0;") + "background-color:#81daff;\">";
     ahtml += "<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"right\" style=\"height:100%;\">";
     ahtml += "<tr>";
-    ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"ms_filter_up();\" title=\"" + _lang_filter(0, "Trước") + "\" ><b><</b></td>";
-    ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"ms_filter_dbclick();\" title=\"" + _lang_filter(2, "Chọn") + "\" ><b>OK</b></td>";
+    ahtml += "<td class=\"ms_tb\" style=\"width:25px;\" onclick=\"ms_filter_up();\" title=\"" + _lang_filter(0, "Trước") + "\" ><</td>";
+    ahtml += "<td class=\"ms_tb\" style=\"width:25px;\" onclick=\"ms_filter_dbclick();\" title=\"" + _lang_filter(2, "Chọn") + "\" >OK</td>";
     if (g_filter_selected_none == "1") {
-        ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"g_filter_index=-1;ms_filter_dbclick();\" title=\"" + _lang_filter(4, "Chọn dòng trống (none)") + "\" ><b>[ ]</b></td>";
+        ahtml += "<td class=\"ms_tb\" style=\"width:25px;\" onclick=\"g_filter_index=-1;ms_filter_dbclick();\" title=\"" + _lang_filter(4, "Chọn dòng trống (none)") + "\" >[ ]</td>";
     }
-    ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"ms_filter_down();\" title=\"" + _lang_filter(1, "Sau") + "\" ><b>></b></td>";
-    ahtml += "<td class=\"ms_tb\" style=\"width:30px;\" onclick=\"ms_filter_hide();\" title=\"" + _lang_filter(3, "Đóng") + "\" ><b>X</b></td>";
+    ahtml += "<td class=\"ms_tb\" style=\"width:25px;\" onclick=\"ms_filter_down();\" title=\"" + _lang_filter(1, "Sau") + "\" >></td>";
+    ahtml += "<td class=\"ms_tb\" style=\"width:25px;\" onclick=\"ms_filter_hide();\" title=\"" + _lang_filter(3, "Đóng") + "\" >X</td>";
     ahtml += "</tr>";
     ahtml += "</table>";
     ahtml += "</td>";
@@ -176,9 +176,10 @@ function ms_filter_load_css(v_ds, v_display_field_delimiter, v_display_header_de
     ahtml += "</table>";
     ms_sval(g_filter_display_ct, "innerHTML", ahtml);
     var aobj = ms_gobj(g_filter_display_ct);
-    aobj.style.backgroundColor = "#F0F0F0";
-    aobj.style.border = "solid 5px #777777";
+    aobj.style.backgroundColor = "#fff";
+    aobj.style.border = "solid 3px #5ac6fc";
     aobj.style.overflow = "hidden";
+    aobj.style.borderRadius = "5px";
     ms_filter_selected(g_filter_index);
 }
 

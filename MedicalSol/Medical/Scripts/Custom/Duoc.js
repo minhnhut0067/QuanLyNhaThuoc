@@ -3,6 +3,7 @@
 });
 
 //Filter-End
+var strdatafilter = "";
 var filter_ds = null;
 function filter_click(v_this) {
     try {
@@ -49,7 +50,6 @@ function f_filter_kp() {
     var atext = ms_gval(g_filter_active_ct, "value", "");
     var aid = "";
     g_filter_cur_val = atext;
-    //ms_baocao_bn.f_filter_dieutri(s_conn, aid, atext, g_filter_limit, f_filter_kp_callback);
 }
 
 function f_filter_kp_callback(res) {
@@ -70,28 +70,32 @@ function f_filter_kp_selected() {
 }
 
 function f_filter_nhomkho_show(v_id_active) {
-    var jsonString = ms_gval(v_id_active + "_hidden", "value", "");    
+    strdatafilter = ms_gval(v_id_active + "_hidden", "value", "");
     ms_filter_show(v_id_active, "", "f_filter_nhomkho", "1", "id", "page_duoc_khaibaokho_nhomkho", "ten", "f_filter_nhomkho_selected");
 }
 
 function f_filter_nhomkho() {
     var atext = ms_gval(g_filter_active_ct, "value", "");
-    debugger
-    //var aid = "";
-    g_filter_cur_val = atext;
-    filter_ds = JSON.parse(jsonString);    
-    f_filter_nhomkho_callback(filter_ds)
+    if (atext != null) {
+        var data = {
+            Value: atext,
+            Datafilter: strdatafilter
+        };
+        g_filter_cur_val = atext;
+        f_filter_select(data);
+    }        
 }
 
-function f_filter_nhomkho_callback(res) {
+function f_filter_nhomkho_callback(v_ds) {//res
+    
     if (ms_gobj(g_filter_active_ct) != null) {
         if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_kp();
+            f_filter_nhomkho();
             return;
         }
     }
-    ms_filter_load(filter_ds, "ma~ten", "Mã~Tên");
-    g_filter_cur_val = "";
+    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
+    //g_filter_cur_val = "";
 }
 
 function f_filter_nhomkho_selected() {
@@ -125,9 +129,9 @@ function input_keypress(event, v_this) {
 //Ketpress-End
 
 //Keyup-Start
-function input_keyup(event, v_this) {    
+function input_keyup(event, v_this) {
     var keyCode;
-    if (typeof(event.keyCode) != "undefined") {
+    if (typeof (event.keyCode) != "undefined") {
         keyCode = event.keyCode;
     }
     else {
