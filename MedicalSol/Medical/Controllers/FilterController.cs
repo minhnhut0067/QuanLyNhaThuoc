@@ -20,7 +20,12 @@ namespace Medical.Controllers
                 //JObject job = JObject.Parse(filterselect.Datafilter);
                 List<Data.NhomKho> lstnhomkho = new List<Data.NhomKho>();
                 //IEnumerable<JObject> arr = JObject.Parse(filterselect.Datafilter)["Rows"].Values<IEnumerable<JObject>>().Where(m => m["ma"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "") || m["ten"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "")).Take(50);
-                IEnumerable<JObject> lst = JObject.Parse(filterselect.Datafilter)["Rows"].Values<JObject>().Where(m => m["ma"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "") || m["ten"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "")).Take(50);
+                IEnumerable<JObject> lst = JObject.Parse(filterselect.Datafilter)["Rows"].Values<JObject>()
+                    .Where(m => 
+                        m["ma"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "") 
+                        || m["ten"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "")
+                    )
+                    .Take(50);
                 foreach (JObject jo in lst)
                 {
                     lstnhomkho.Add(JsonConvert.DeserializeObject<Data.NhomKho>(jo.ToString()));

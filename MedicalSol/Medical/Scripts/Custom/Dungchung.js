@@ -466,6 +466,7 @@ function ms_enable(v_id, v_bool) {
         ms_gobj(v_id).disabled = !v_bool;
         ms_sval(v_id, "className", ms_gval(v_id, "className", "").replace("_dis", "") + (ms_gobj(v_id).disabled ? "_dis" : ""));
         ms_sval(v_id + "_filter", "className", ms_gval(v_id + "_filter", "className", "").replace("_dis", "") + (ms_gobj(v_id).disabled ? "_dis" : ""));
+        ms_sval(v_id + "_filter","onClick","return false;")
         return true;
     }
     catch (ex) {

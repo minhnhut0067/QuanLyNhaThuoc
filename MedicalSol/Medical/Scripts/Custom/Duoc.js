@@ -1,5 +1,6 @@
 ﻿jQuery(document).ready(function () {
     $('#page_duoc_khaibaokho_gidview').DataTable();
+    enable(false);
 });
 
 //Filter-End
@@ -182,3 +183,10 @@ function input_keyup(event, v_this) {
 function input_onblur(v_this) {
 }
 //Onblur-End
+
+//Enable-Start
+function enable(v_bool)
+{
+    ms_enable_arr(khaibaokho_input, v_bool);
+}
+//Enable-End
