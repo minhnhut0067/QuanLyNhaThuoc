@@ -21,14 +21,13 @@ namespace Medical.Controllers
         #region Tiện Ích
         public ActionResult Khaibaokho()
         {
-            //var Datanhomkho = new JObject();
-            //Datanhomkho.Add("Name", "Table");
-            //Datanhomkho.Add("Rows", JArray.Parse(Data.NhomKho.GetAll()));
-            //ViewData["nhomkho_filter"] = Datanhomkho;
-            Data.Filter filter = new Data.Filter(Data.NhomKho.GetAllObj());
-            ViewData["page"] = "page_duoc_khaibaokho";
-            ViewData["dsnhomkho"] = filter;
+            ViewData["page"] = "page_duoc_khaibaokho";            
             return View(Data.Kho.GetAllObj());
+        }
+
+        public ActionResult Khaibaothuoc()
+        {
+            return View(Data.Thuoc.GetAllObj());
         }
         #endregion
 

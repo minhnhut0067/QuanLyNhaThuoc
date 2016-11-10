@@ -167,6 +167,7 @@
     <Compile Include="Controllers\KhosController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\NhomKhosController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ThuocsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

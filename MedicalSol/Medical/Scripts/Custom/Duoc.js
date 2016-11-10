@@ -78,17 +78,22 @@ function f_filter_nhomkho_show(v_id_active) {
 function f_filter_nhomkho() {
     var atext = ms_gval(g_filter_active_ct, "value", "");
     if (atext != null) {
+        //var data = {
+        //    Value: atext,
+        //    Datafilter: strdatafilter
+        //};
         var data = {
-            Value: atext,
-            Datafilter: strdatafilter
+            Obj: "nhomkhos",
+            Col: "ma~ten",
+            Val: atext
         };
         g_filter_cur_val = atext;
         f_filter_select(data);
-    }        
+    }
 }
 
 function f_filter_nhomkho_callback(v_ds) {//res
-    
+
     if (ms_gobj(g_filter_active_ct) != null) {
         if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
             f_filter_nhomkho();
@@ -119,6 +124,26 @@ function input_keypress(event, v_this) {
     if (keyCode.toString() == "13") {
         switch (v_this.id) {
             case "page_duoc_khaibaokho_nhomkho":
+                ms_filter_get_selected();
+                ms_filter_hide();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+function btn_keypress(event, v_this) {
+    var keyCode;
+    if (typeof (event.keyCode) != "undefined") {
+        keyCode = event.keyCode;
+    }
+    else {
+        keyCode = event.which;
+    }
+    if (keyCode.toString() == "13") {
+        switch (v_this.id) {
+            case "page_duoc_khaibaokho_luu":
                 ms_filter_get_selected();
                 ms_filter_hide();
                 break;
@@ -184,9 +209,22 @@ function input_onblur(v_this) {
 }
 //Onblur-End
 
+//btn-clck-Start
+function btn_click(v_this) {
+    switch (v_this.id) {
+        case "page_duoc_khaibaokho_themmoi":
+            enable(true);
+            break;
+        default:
+            break;
+    }
+}
+//btn-clck-End
+
 //Enable-Start
-function enable(v_bool)
-{
-    ms_enable_arr(khaibaokho_input, v_bool);
+function enable(v_bool) {
+    ms_enable_arr(khaibaokho_input + "~page_duoc_khaibaokho_luu", v_bool);
+    ms_enable_arr("page_duoc_khaibaokho_boqua~page_duoc_khaibaokho_sua~page_duoc_khaibaokho_xoa", v_bool);
+    ms_enable_arr("page_duoc_khaibaokho_themmoi", !v_bool);
 }
 //Enable-End

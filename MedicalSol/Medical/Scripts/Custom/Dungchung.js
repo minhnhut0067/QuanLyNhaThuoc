@@ -370,28 +370,23 @@ function ms_gdelimiter(v_delimiter_text, v_delimiter, v_index, v_default) {
     return art;
 }
 
-function ms_grid_click(v_this,v_dg)
-{
-    try
-    {
-        ms_gobj(ms_gval(v_dg,"lang","?")).style.color="#505050";
-        ms_gobj(ms_gval(v_dg,"lang","?")).style.backgroundColor="Transparent";
+function ms_grid_click(v_this, v_dg) {
+    try {
+        ms_gobj(ms_gval(v_dg, "lang", "?")).style.color = "#505050";
+        ms_gobj(ms_gval(v_dg, "lang", "?")).style.backgroundColor = "Transparent";
 
-        ms_sval(ms_gval(v_dg,"lang","?")+'_rh',"className","ms_rcell_c");
+        ms_sval(ms_gval(v_dg, "lang", "?") + '_rh', "className", "ms_rcell_c");
     }
-    catch(ex)
-    {
+    catch (ex) {
     }
-    try
-    {
+    try {
         v_this.style.color = "#000";
         //v_this.style.fontWeight = 0;
         v_this.style.backgroundColor = "#ccffff";
-        ms_sval(v_dg,"lang",v_this.id);
-        ms_sval(v_this.id+'_rh',"className","ms_rcell_c_sel");
+        ms_sval(v_dg, "lang", v_this.id);
+        ms_sval(v_this.id + '_rh', "className", "ms_rcell_c_sel");
     }
-    catch(ex)
-    {
+    catch (ex) {
     }
 }
 
@@ -414,7 +409,7 @@ function ms_grid_over(v_this, v_dg) {
 
 function ms_grid_out(v_this, v_dg) {
     try {
-        if (ms_gval(v_dg, "lang", "") == v_this.id) {            
+        if (ms_gval(v_dg, "lang", "") == v_this.id) {
             v_this.style.color = "#000";
             //v_this.style.fontWeight = 700;
             v_this.style.backgroundColor = "#ccffff";
@@ -466,7 +461,7 @@ function ms_enable(v_id, v_bool) {
         ms_gobj(v_id).disabled = !v_bool;
         ms_sval(v_id, "className", ms_gval(v_id, "className", "").replace("_dis", "") + (ms_gobj(v_id).disabled ? "_dis" : ""));
         ms_sval(v_id + "_filter", "className", ms_gval(v_id + "_filter", "className", "").replace("_dis", "") + (ms_gobj(v_id).disabled ? "_dis" : ""));
-        ms_sval(v_id + "_filter","onClick","return false;")
+        ms_sval(v_id + "_filter", "onClick", "return false;")
         return true;
     }
     catch (ex) {
@@ -511,8 +506,34 @@ function ms_enable_arr_from(v_id_start, v_id_arr) {
 }
 //basic
 
-function f_create_input() {
+function f_create_btn_group(v_id, v_id_arr, v_style_arr, v_name_arr) {
     rhtml = "";
+    if (v_id != "" && v_id_arr != "") {
+        for (var i = 0; i < v_id_arr.split('~').length ; i++) {
+            rhtml += "<input id=\"" + v_id + "_" + v_id_arr.split('~')[i] + "\" type=\"button\" class=\"btn btn-sm btn-" + v_style_arr.split('~')[i] + "\" value=\"" + v_name_arr.split('~')[i] + "\" onclick = \"btn_click(this)\" onkeypress = \"btn_keypress(event,this)\" />";
+        }
+    }
+    return rhtml;
+}
+
+function f_create_input(v_id, v_type, v_name) {
+    rhtml = "";
+    if (v_id != "") {
+        switch (v_type) {
+            case "input":
+                rhtml += "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
+                break;
+            case "filter":
+                rhtml += "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
+                rhtml += "<a href=\"#\" class=\"input-group-addon\" id=\"" + v_id + "_filter\" onclick=\"filter_click(this);\"><i class=\"fa fa-sort-desc\"></i></a>";
+                break;
+            case "textarea":
+            default:
+                break;
+        }
+    }
     return rhtml;
 }
 
@@ -533,9 +554,8 @@ function f_filter_select(data) {
         success: function (data) {
             f_filter_nhomkho_callback(JSON.parse(data));
         },
-        error: function(data)
-        {
-            f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));            
+        error: function (data) {
+            f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
         }
     });
 }

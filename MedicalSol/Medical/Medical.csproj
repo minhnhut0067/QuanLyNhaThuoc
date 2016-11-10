@@ -289,6 +289,7 @@
     <Content Include="Views\Quanlyduoc\Xuatban.cshtml" />
     <Content Include="Views\Khambenh\Tiepdon.cshtml" />
     <Content Include="Views\Khambenh\Phieukham.cshtml" />
+    <Content Include="Views\Quanlyduoc\Khaibaothuoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

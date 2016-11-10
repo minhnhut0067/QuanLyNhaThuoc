@@ -9,6 +9,68 @@ namespace ApiManageSolution.Models
     public class Data
     {
         dbHelper dbh = new dbHelper();
+
+        public class Search
+        {
+            public string obj { get; set; }
+            public string col { get; set; }
+            public string val { get; set; }
+
+            public static IEnumerable<Object> Filter(Search search)
+            {
+                try
+                {
+                    IEnumerable<Object> lts = new List<Object>();
+                    DataSet ds = new DataSet();
+                    string sql = "";
+                    string sqlwhere = "";
+                    switch (search.obj)
+                    {
+                        case "nhomkhos":
+                            sql = "SELECT id,ma,stt,ten,userid "
+                            + "FROM dmnhomkho "
+                            + "WHERE 1 = 1";
+                            break;
+                        default:
+                            break;
+                    }
+                    if (search.col.Split('~').Length > 0)
+                    {
+                        foreach (var item in search.col.Split('~'))
+                        {
+                            if (sqlwhere == "")
+                            {
+                                sqlwhere += " AND " + item + "";
+                            }
+                            sqlwhere += "||" + item + "";
+                        }
+                        sqlwhere += " ILIKE '%" + search.val + "%'";
+                    }
+                    ds = dbHelper.getDataSetbySql(sql + sqlwhere);
+                    switch (search.obj)
+                    {
+                        case "nhomkhos":
+                            lts = ds.Tables[0].AsEnumerable().Select(dataRow => new Nhomkhos
+                            {
+                                id = dataRow.Field<decimal>("id").ToString(),
+                                ma = dataRow.Field<string>("ma"),
+                                stt = dataRow.Field<decimal>("stt").ToString(),
+                                ten = dataRow.Field<string>("ten"),
+                                userid = dataRow.Field<decimal>("userid").ToString()
+                            }).ToList();
+                            break;
+                        default:
+                            break;
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
         public class Users
         {
             public string iduser { get; set; }
@@ -98,7 +160,7 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-        
+
         public class Khos
         {
             public string id { get; set; }
@@ -147,7 +209,7 @@ namespace ApiManageSolution.Models
             public string ma { get; set; }
             public string ten { get; set; }
             public string tenhc { get; set; }
-            public string sodk { get; set; }          
+            public string sodk { get; set; }
             public static IEnumerable<Thuocs> GetAll()
             {
                 try
@@ -177,7 +239,7 @@ namespace ApiManageSolution.Models
                 {
                     return null;
                 }
-            }            
+            }
         }
     }
 }

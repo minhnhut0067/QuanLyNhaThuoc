@@ -17,22 +17,27 @@ namespace Medical.Controllers
         {
             try
             {
-                //JObject job = JObject.Parse(filterselect.Datafilter);
-                List<Data.NhomKho> lstnhomkho = new List<Data.NhomKho>();
-                //IEnumerable<JObject> arr = JObject.Parse(filterselect.Datafilter)["Rows"].Values<IEnumerable<JObject>>().Where(m => m["ma"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "") || m["ten"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "")).Take(50);
-                IEnumerable<JObject> lst = JObject.Parse(filterselect.Datafilter)["Rows"].Values<JObject>()
-                    .Where(m => 
-                        m["ma"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "") 
-                        || m["ten"].Value<string>().ToLower().Contains(filterselect.Value != null ? filterselect.Value.ToLower() : "")
-                    )
-                    .Take(50);
-                foreach (JObject jo in lst)
-                {
-                    lstnhomkho.Add(JsonConvert.DeserializeObject<Data.NhomKho>(jo.ToString()));
+                if(filterselect.Obj != "")
+                {           
+                    List<Object> lts = new List<Object>();
+                    foreach (JObject jo in JArray.Parse(Data.FilterSelect.Select(filterselect)))
+                    {
+                        switch(filterselect.Obj)
+                        { 
+                            case "nhomkhos":
+                                lts.Add(JsonConvert.DeserializeObject<Data.NhomKho>(jo.ToString()));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    Data.Filter filter = new Data.Filter(lts);
+                    return new JavaScriptSerializer().Serialize(filter);
                 }
-                //var auctions = JsonConvert.DeserializeObject<IEnumerable<Data.NhomKho>>(jarr);
-                Data.Filter filter = new Data.Filter(lstnhomkho);
-                return new JavaScriptSerializer().Serialize(filter);
+                else
+                {
+                    return "";
+                }                
             }
             catch(Exception ex)
             {

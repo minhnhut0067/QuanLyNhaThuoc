@@ -151,6 +151,7 @@ namespace Medical.Models
                     return null;
                 }
             }
+
         }
         public class Kho
         {
@@ -273,17 +274,19 @@ namespace Medical.Models
 
         public class FilterSelect
         {
-            public string Value { get; set; }
-            public string Datafilter { get; set; }
-            public FilterSelect()
+            public string Obj { get; set; }
+            public string Col { get; set; }
+            public string Val { get; set; }
+            public static string Select(Object data)
             {
-                this.Value = "";
-                this.Datafilter = "";
-            }
-            public FilterSelect(string _value, string _datafilter)
-            {
-                this.Value = _value;
-                this.Datafilter = _datafilter;
+                try
+                {
+                    return Bridge.HttpPostApi("Search", data);
+                }
+                catch(Exception ex)
+                {
+                    return ex.Message;
+                }
             }
         }
     }
