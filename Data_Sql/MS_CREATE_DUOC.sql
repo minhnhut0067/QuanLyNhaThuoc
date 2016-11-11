@@ -860,8 +860,8 @@ CREATE TABLE dmduoc
   sodk character varying(100) DEFAULT ''::character varying,
   ngay timestamp without time zone DEFAULT now(),
   ngayud timestamp without time zone DEFAULT now(),
-  tenhangsx character varying(500) DEFAULT ''::character varying,
-  tenquocgia character varying(500) DEFAULT ''::character varying,
+  -- tenhangsx character varying(500) DEFAULT ''::character varying,
+  -- tenquocgia character varying(500) DEFAULT ''::character varying,
   CONSTRAINT pk_dmduoc PRIMARY KEY (id),
   CONSTRAINT dmduoc_id_nhomthuoc_fkey FOREIGN KEY (id_loaiduoc)
   REFERENCES dmloaiduoc (id) MATCH SIMPLE

@@ -256,38 +256,55 @@ namespace Medical.Models
             }
         }
 
-        public class Filter
+        public class AjaxData
         {
             public string Name { get; set; }
             public Object Rows { get; set; }
-            public Filter()
+            public AjaxData()
             {
                 this.Name = "Table";
                 this.Rows = null;
             }
-            public Filter(Object jarr)
+            public AjaxData(Object jarr)
             {
                 this.Name = "Table";
                 this.Rows = jarr;
             }
         }
 
-        public class FilterSelect
+        public class Filter
         {
             public string Obj { get; set; }
             public string Col { get; set; }
             public string Val { get; set; }
-            public static string Select(Object data)
-            {
-                try
-                {
-                    return Bridge.HttpPostApi("Search", data);
-                }
-                catch(Exception ex)
-                {
-                    return ex.Message;
-                }
-            }
+            //public static string Get(Object data)
+            //{
+            //    try
+            //    {
+            //        return Bridge.HttpPostApi("Search", data);
+            //    }
+            //    catch(Exception ex)
+            //    {
+            //        return ex.Message;
+            //    }
+            //}
+        }
+
+        public class Table
+        {
+            public string Obj { get; set; }
+            //public string Col { get; set; }
+            //public static string Get(Object data)
+            //{
+            //    try
+            //    {
+            //        return Bridge.HttpPostApi("Search", data);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        return ex.Message;
+            //    }
+            //}
         }
     }
 }

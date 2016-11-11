@@ -521,21 +521,92 @@ function f_create_input(v_id, v_type, v_name) {
     if (v_id != "") {
         switch (v_type) {
             case "input":
-                rhtml += "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
                 rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
                 break;
             case "filter":
-                rhtml += "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
                 rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
                 rhtml += "<a href=\"#\" class=\"input-group-addon\" id=\"" + v_id + "_filter\" onclick=\"filter_click(this);\"><i class=\"fa fa-sort-desc\"></i></a>";
                 break;
             case "textarea":
+                rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                rhtml += "<textarea class=\"form-control\" rows=\"3\" id=\"" + v_id + "\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\"></textarea>";
             default:
                 break;
         }
     }
     return rhtml;
 }
+
+//function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
+//    var rhtml = "";
+//    if (v_id != "" && v_obj != "") {
+//        var data = {
+//            Obj: v_obj
+//        };
+//        $.ajax({
+//            type: "POST",
+//            url: "../Process/Table",
+//            data: data,
+//            success: function (result) {
+//                if (result != "") {
+//                    rhtml =  f_create_table_html(JSON.parse(result), v_id, v_colname, v_col, v_footer);
+//                }
+//                else
+//                {
+//                    rhtml = "";
+//                }
+//            },
+//            error: function (result) {
+//                rhtml = "";
+//            }
+//        });
+//    }
+//    return rhtml;
+//}
+
+//function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
+//    rhtml = "";
+//    rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
+//    rhtml += "<div class=\"col-sm-12\">";
+//    rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
+//    rhtml += "<thead>";
+//    rhtml += "<tr role=\"row\">";
+//    for (var i = 0; i < v_col.split('~').length; i++) {
+//        if (i <= 0) {
+//            rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
+//        }
+//        else {
+//            rhtml += "<th class=\"sorting\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column ascending\">" + v_colname.split('~')[i] + "</th>";
+//        }
+//    }
+//    rhtml += "</tr>";
+//    rhtml += "</thead>";
+//    if (v_footer) {
+//        rhtml += "<tfoot>";
+//        rhtml += "<tr>";
+//        for (var i = 0; i < v_col.split('~').length; i++) {
+//            rhtml += "<th rowspan=\"1\" colspan=\"1\">" + v_colname.split('~')[i] + "</th>";
+//        }
+//        rhtml += "</tr>";
+//        rhtml += "</tfoot>";
+//    }
+//    rhtml += "<tbody>";
+//    for (var i = 0; i < v_ds.Rows.length; i++) {
+//        rhtml += "<tr>";
+//        for (var j = 0; j < v_col.split('~').length ; j++) {
+//            rhtml += "<td>" + ms_gfields(v_ds, i, v_col.split('~')[j], "") + "</td>";
+//        }
+//        rhtml += "</tr>";
+//    }
+//    rhtml += "</tbody>";
+
+//    rhtml += "</table>";
+//    rhtml += "</div>";
+//    rhtml += "</div>";    
+//    return rhtml;
+//}
 
 //function f_call_action_no_data(action, controller) {
 //    $.ajax({
@@ -549,12 +620,17 @@ function f_create_input(v_id, v_type, v_name) {
 function f_filter_select(data) {
     $.ajax({
         type: "POST",
-        url: "../Filter/Select",
+        url: "../Process/Filter",
         data: data,
-        success: function (data) {
-            f_filter_nhomkho_callback(JSON.parse(data));
+        success: function (result) {
+            if (result != "") {
+                f_filter_nhomkho_callback(JSON.parse(result));
+            }
+            else {
+                f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+            }
         },
-        error: function (data) {
+        error: function (result) {
             f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
         }
     });
