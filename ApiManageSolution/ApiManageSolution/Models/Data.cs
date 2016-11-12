@@ -153,6 +153,7 @@ namespace ApiManageSolution.Models
         {
             public string id { get; set; }
             public string id_nhomkho { get; set; }
+            public string nhomkho { get; set; }
             public string ma { get; set; }
             public string stt { get; set; }
             public string ten { get; set; }
@@ -168,8 +169,10 @@ namespace ApiManageSolution.Models
                     DataSet ds = new DataSet();
                     List<Khos> lts = new List<Khos>();
                     string sql = "";
-                    sql = "SELECT id,id_nhomkho,ma,stt,ten,ghichu"
-                    + "\nFROM dmkho" + v_where;
+                    sql = "SELECT a.id, a.ma, a.stt, a.ten, a.ghichu, a.id_nhomkho, b.ten as nhomkho"
+                    + "\nFROM dmkho a" 
+                    + "\nLEFT JOIN dmnhomkho b on b.id = a.id_nhomkho"
+                    + v_where;
                     ds = dbHelper.getDataSetbySql(sql);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
@@ -178,6 +181,7 @@ namespace ApiManageSolution.Models
                             Khos item = new Khos();
                             item.id = dr["id"].ToString();
                             item.id_nhomkho = dr["id_nhomkho"].ToString();
+                            item.nhomkho = dr["nhomkho"].ToString();
                             item.ma = dr["ma"].ToString();
                             item.stt = dr["stt"].ToString();
                             item.ten = dr["ten"].ToString();
@@ -205,14 +209,12 @@ namespace ApiManageSolution.Models
             public string hamluong { get; set; }
             public string donvidg { get; set; }
             public string donvisd { get; set; }
-            public string duongdung { get; set; }
             public string hoatchat { get; set; }
             public string thanhphan { get; set; }
             public string tyle1 { get; set; }
             public string tyle2 { get; set; }
             public string tinhtrang { get; set; }
             public string atc { get; set; }
-            public string donggoi { get; set; }
             public string route { get; set; }
             public string generic { get; set; }
             public string userid { get; set; }
@@ -239,8 +241,8 @@ namespace ApiManageSolution.Models
                     DataSet ds = new DataSet();
                     List<Thuocs> lts = new List<Thuocs>();
                     string sql = "";
-                    sql = "SELECT a.id, a.stt, a.ma, a.ten, a.dang, a.hamluong, a.donvidg, a.donvisd, a.duongdung, " +
-                    "\na.hoatchat, a.thanhphan, a.tyle1, a.tyle2, a.tinhtrang, a.atc, a.donggoi, a.route, " +
+                    sql = "SELECT a.id, a.stt, a.ma, a.ten, a.dang, a.hamluong, a.donvidg, a.donvisd, " +
+                    "\na.hoatchat, a.thanhphan, a.tyle1, a.tyle2, a.tinhtrang, a.atc, a.route, " +
                     "\na.generic, a.userid, a.stt_40, a.sodk, " +
                     "\nto_char(a.ngay, 'dd/mm/yyyy hh24:mi') as ngay, to_char(a.ngayud, 'dd/mm/yyyy hh24:mi') as ngayud, a.id_loaiduoc, b.ten as ten_loaiduoc," +
                     "\na.id_hangsx, c.ten as ten_hangsx, a.id_quocgia, d.ten as ten_quocgia, a.id_duongdung, e.ten as ten_duongdung" +
@@ -248,8 +250,9 @@ namespace ApiManageSolution.Models
                     "\nLEFT JOIN dmloaiduoc b ON b.id = a.id_loaiduoc" +
                     "\nLEFT JOIN dmhangsx c ON c.id = a.id_hangsx" +
                     "\nLEFT JOIN dmquocgia d ON d.id = a.id_quocgia" +
-                    "\nLEFT JOIN dmduongdung e ON e.id = a.id_duongdung" + v_where;
-                    //"\nLIMIT 50";
+                    "\nLEFT JOIN dmduongdung e ON e.id = a.id_duongdung" + v_where
+                    //"\nAND A.ID IN (4819,4817,4820,4434,4818,4154) LIMIT 500";
+                    + "\nLIMIT 1500";
                     ds = dbHelper.getDataSetbySql(sql);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
@@ -260,19 +263,17 @@ namespace ApiManageSolution.Models
                             item.id_loaiduoc = dr["id_loaiduoc"].ToString();
                             item.stt = dr["stt"].ToString();
                             item.ma = dr["ma"].ToString();
-                            item.ten = dr["ten"].ToString();
+                            item.ten = dr["ten"].ToString().Replace("\"","'");
                             item.dang = dr["dang"].ToString();
                             item.hamluong = dr["hamluong"].ToString();
                             item.donvidg = dr["donvidg"].ToString();
                             item.donvisd = dr["donvisd"].ToString();
-                            item.duongdung = dr["duongdung"].ToString();
                             item.hoatchat = dr["hoatchat"].ToString();
                             item.thanhphan = dr["thanhphan"].ToString();
                             item.tyle1 = dr["tyle1"].ToString();
                             item.tyle2 = dr["tyle2"].ToString();
                             item.tinhtrang = dr["tinhtrang"].ToString();
                             item.atc = dr["atc"].ToString();
-                            item.donggoi = dr["donggoi"].ToString();
                             item.route = dr["route"].ToString();
                             item.generic = dr["generic"].ToString();
                             item.userid = dr["userid"].ToString();

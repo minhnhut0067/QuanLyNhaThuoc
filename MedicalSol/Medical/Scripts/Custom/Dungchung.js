@@ -507,133 +507,173 @@ function ms_enable_arr_from(v_id_start, v_id_arr) {
 //basic
 
 function f_create_btn_group(v_id, v_id_arr, v_style_arr, v_name_arr) {
-    rhtml = "";
-    if (v_id != "" && v_id_arr != "") {
-        for (var i = 0; i < v_id_arr.split('~').length ; i++) {
-            rhtml += "<input id=\"" + v_id + "_" + v_id_arr.split('~')[i] + "\" type=\"button\" class=\"btn btn-sm btn-" + v_style_arr.split('~')[i] + "\" value=\"" + v_name_arr.split('~')[i] + "\" onclick = \"btn_click(this)\" onkeypress = \"btn_keypress(event,this)\" />";
+    try
+    {
+        rhtml = "";
+        if (v_id != "" && v_id_arr != "") {
+            for (var i = 0; i < v_id_arr.split('~').length ; i++) {
+                rhtml += "<input id=\"" + v_id + "_" + v_id_arr.split('~')[i] + "\" type=\"button\" class=\"btn btn-sm btn-" + v_style_arr.split('~')[i] + "\" value=\"" + v_name_arr.split('~')[i] + "\" onclick = \"btn_click(this)\" onkeypress = \"btn_keypress(event,this)\" />";
+            }
         }
+        return rhtml;
     }
-    return rhtml;
+    catch(ex)
+    {
+        return "";
+    }
 }
 
 function f_create_input(v_id, v_type, v_name) {
-    rhtml = "";
-    if (v_id != "") {
-        switch (v_type) {
-            case "input":
-                rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
-                rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
-                break;
-            case "filter":
-                rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
-                rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
-                rhtml += "<a href=\"#\" class=\"input-group-addon\" id=\"" + v_id + "_filter\" onclick=\"filter_click(this);\"><i class=\"fa fa-sort-desc\"></i></a>";
-                break;
-            case "textarea":
-                rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
-                rhtml += "<textarea class=\"form-control\" rows=\"3\" id=\"" + v_id + "\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\"></textarea>";
-            default:
-                break;
+    try
+    {
+        rhtml = "";
+        if (v_id != "") {
+            switch (v_type) {
+                case "input":
+                    rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                    rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
+                    break;
+                case "filter":
+                    rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                    rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
+                    rhtml += "<a href=\"#\" class=\"input-group-addon\" id=\"" + v_id + "_filter\" onclick=\"filter_click(this);\"><i class=\"fa fa-sort-desc\"></i></a>";
+                    break;
+                case "textarea":
+                    rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                    rhtml += "<textarea class=\"form-control\" rows=\"3\" id=\"" + v_id + "\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\"></textarea>";
+                default:
+                    break;
+            }
         }
+        return rhtml;
     }
-    return rhtml;
+    catch(ex)
+    {
+        return "";
+    }
 }
 
-//function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
-//    var rhtml = "";
-//    if (v_id != "" && v_obj != "") {
-//        var data = {
-//            Obj: v_obj
-//        };
-//        $.ajax({
-//            type: "POST",
-//            url: "../Process/Table",
-//            data: data,
-//            success: function (result) {
-//                if (result != "") {
-//                    rhtml =  f_create_table_html(JSON.parse(result), v_id, v_colname, v_col, v_footer);
-//                }
-//                else
-//                {
-//                    rhtml = "";
-//                }
-//            },
-//            error: function (result) {
-//                rhtml = "";
-//            }
-//        });
-//    }
-//    return rhtml;
-//}
+function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
+    try
+    {
+        var rhtml = "";
+        if (v_id != "" && v_obj != "") {
+            var data = {
+                Obj: v_obj
+            };
+            $.ajax({
+                type: "POST",
+                url: "../Process/Table",
+                data: data,
+                success: function (result) {
+                    if (result != "") {
+                        rhtml =  f_create_table_html(JSON.parse(result), v_id, v_colname, v_col, v_footer);
+                    }
+                    else
+                    {
+                        rhtml = "";
+                    }
+                },
+                error: function (result) {
+                    rhtml = "";
+                }
+            });
+        }
+        return rhtml;
+    }
+    catch(ex)
+    {
+        return "";
+    }
+}
 
-//function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
-//    rhtml = "";
-//    rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
-//    rhtml += "<div class=\"col-sm-12\">";
-//    rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
-//    rhtml += "<thead>";
-//    rhtml += "<tr role=\"row\">";
-//    for (var i = 0; i < v_col.split('~').length; i++) {
-//        if (i <= 0) {
-//            rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
-//        }
-//        else {
-//            rhtml += "<th class=\"sorting\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column ascending\">" + v_colname.split('~')[i] + "</th>";
-//        }
-//    }
-//    rhtml += "</tr>";
-//    rhtml += "</thead>";
-//    if (v_footer) {
-//        rhtml += "<tfoot>";
-//        rhtml += "<tr>";
-//        for (var i = 0; i < v_col.split('~').length; i++) {
-//            rhtml += "<th rowspan=\"1\" colspan=\"1\">" + v_colname.split('~')[i] + "</th>";
-//        }
-//        rhtml += "</tr>";
-//        rhtml += "</tfoot>";
-//    }
-//    rhtml += "<tbody>";
-//    for (var i = 0; i < v_ds.Rows.length; i++) {
-//        rhtml += "<tr>";
-//        for (var j = 0; j < v_col.split('~').length ; j++) {
-//            rhtml += "<td>" + ms_gfields(v_ds, i, v_col.split('~')[j], "") + "</td>";
-//        }
-//        rhtml += "</tr>";
-//    }
-//    rhtml += "</tbody>";
+function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
+    try
+    {
+        //debugger;
+        //v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds + "}";
+        v_ds = JSON.parse("{\"Name\":\"Table\",\"Rows\":" + v_ds + "}");
+        rhtml = "";
+        if (v_ds.Rows.length > 0) {        
+            rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
+            rhtml += "<div class=\"col-lg-12 col-sm-12 col-md-12 col-xs-12\">";
+            rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
+            rhtml += "<thead>";
+            rhtml += "<tr role=\"row\">";
+            for (var i = 0; i < v_col.split('~').length; i++) {
+                if (i <= 0) {
+                    rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
+                }
+                else {
+                    rhtml += "<th class=\"sorting\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column ascending\">" + v_colname.split('~')[i] + "</th>";
+                }
+            }
+            rhtml += "</tr>";
+            rhtml += "</thead>";
+            if (v_footer) {
+                rhtml += "<tfoot>";
+                rhtml += "<tr>";
+                for (var i = 0; i < v_col.split('~').length; i++) {
+                    rhtml += "<th rowspan=\"1\" colspan=\"1\">" + v_colname.split('~')[i] + "</th>";
+                }
+                rhtml += "</tr>";
+                rhtml += "</tfoot>";
+            }
+            rhtml += "<tbody>";
+            for (var i = 0; i < v_ds.Rows.length; i++) {
+                rhtml += "<tr>";
+                for (var j = 0; j < v_col.split('~').length ; j++) {
+                    rhtml += "<td>" + ms_gfields(v_ds, i, v_col.split('~')[j], "") + "</td>";
+                }
+                rhtml += "</tr>";
+            }
+            rhtml += "</tbody>";
 
-//    rhtml += "</table>";
-//    rhtml += "</div>";
-//    rhtml += "</div>";    
-//    return rhtml;
-//}
+            rhtml += "</table>";
+            rhtml += "</div>";
+            rhtml += "</div>";
+        }
+        return rhtml;
+    }
+    catch(ex)
+    {
+        return "";
+    }
+}
 
-//function f_call_action_no_data(action, controller) {
-//    $.ajax({
-//        url: '@Url.Action("' + action + '","' + controller + '")',
-//        success: function (data) {
-//            alert(data);
-//        }
-//    });
-//}
-
-function f_filter_select(data) {
+function f_call_action_no_data(action, controller) {
     $.ajax({
-        type: "POST",
-        url: "../Process/Filter",
-        data: data,
-        success: function (result) {
-            if (result != "") {
-                f_filter_nhomkho_callback(JSON.parse(result));
-            }
-            else {
-                f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
-            }
-        },
-        error: function (result) {
-            f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+        url: '@Url.Action("' + action + '","' + controller + '")',
+        success: function (data) {
+            alert(data);
         }
     });
+}
+
+function f_filter_select(data) {
+    try
+    {
+        $.ajax({
+            type: "POST",
+            url: "../Process/Filter",
+            data: data,
+            success: function (result) {
+                if (result != "") {
+                    f_filter_nhomkho_callback(JSON.parse(result));
+                }
+                else {
+                    f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                }
+            },
+            error: function (result) {
+                f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+            }
+        });
+    }
+    catch(ex)
+    {
+        return "";
+    }
 }
 
 

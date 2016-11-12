@@ -157,6 +157,7 @@ namespace Medical.Models
         {
             public string id { get; set; }
             public string id_nhomkho { get; set; }
+            public string nhomkho { get; set; }
             public string ma { get; set; }
             public string stt { get; set; }
             public string ten { get; set; }
@@ -185,6 +186,7 @@ namespace Medical.Models
                         Kho kho = new Kho();
                         kho.id = item.id;
                         kho.id_nhomkho = item.id_nhomkho;
+                        kho.nhomkho = item.nhomkho;
                         kho.ma = item.ma;
                         kho.stt = item.stt;
                         kho.ten = item.ten;
@@ -203,10 +205,34 @@ namespace Medical.Models
         public class Thuoc
         {
             public string id { get; set; }
+            public string stt { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public string tenhc { get; set; }
+            public string dang { get; set; }
+            public string hamluong { get; set; }
+            public string donvidg { get; set; }
+            public string donvisd { get; set; }
+            public string hoatchat { get; set; }
+            public string thanhphan { get; set; }
+            public string tyle1 { get; set; }
+            public string tyle2 { get; set; }
+            public string tinhtrang { get; set; }
+            public string atc { get; set; }
+            public string route { get; set; }
+            public string generic { get; set; }
+            public string userid { get; set; }
+            public string stt_40 { get; set; }
             public string sodk { get; set; }
+            public string ngay { get; set; }
+            public string ngayud { get; set; }
+            public string id_loaiduoc { get; set; }
+            public string ten_loaiduoc { get; set; }
+            public string id_hangsx { get; set; }
+            public string ten_hangsx { get; set; }
+            public string id_quocgia { get; set; }
+            public string ten_quocgia { get; set; }
+            public string id_duongdung { get; set; }
+            public string ten_duongdung { get; set; }
             public static string GetAll()
             {
                 try
@@ -224,17 +250,43 @@ namespace Medical.Models
                 try
                 {
                     var value = Bridge.HttpGetApi("thuocs");
-                    Thuoc thuoc = new Thuoc();
+                    List<Thuoc> dsthuoc = new List<Thuoc>();
                     var jarr = JArray.Parse(value);
-                    foreach (var item in jarr)
+                    foreach (dynamic item in jarr)
                     {
-                        thuoc.id = "";
-                        thuoc.ma = "";
-                        thuoc.ten = "";
-                        thuoc.tenhc = "";
-                        thuoc.sodk = "";
+                        Thuoc thuoc = new Thuoc();
+                        thuoc.id = item.id;
+                        thuoc.stt = item.stt;
+                        thuoc.ma = item.ma;
+                        thuoc.ten = item.ten;
+                        thuoc.dang = item.dang;
+                        thuoc.hamluong = item.hamluong;
+                        thuoc.donvidg = item.donvidg;
+                        thuoc.donvisd = item.donvisd;
+                        thuoc.hoatchat = item.hoatchat;
+                        thuoc.thanhphan = item.thanhphan;
+                        thuoc.tyle1 = item.tyle1;
+                        thuoc.tyle2 = item.tyle2;
+                        thuoc.tinhtrang = item.tinhtrang;
+                        thuoc.atc = item.atc;
+                        thuoc.route = item.route;
+                        thuoc.generic = item.generic;
+                        thuoc.userid = item.userid;
+                        thuoc.stt_40 = item.stt_40;
+                        thuoc.sodk = item.sodk;
+                        thuoc.ngay = item.ngay;
+                        thuoc.ngayud = item.ngayud;
+                        thuoc.id_loaiduoc = item.id_loaiduoc;
+                        thuoc.ten_loaiduoc = item.ten_loaiduoc;
+                        thuoc.id_hangsx = item.id_hangsx;
+                        thuoc.ten_hangsx = item.ten_hangsx;
+                        thuoc.id_quocgia = item.id_quocgia;
+                        thuoc.ten_quocgia = item.ten_quocgia;
+                        thuoc.id_duongdung = item.id_duongdung;
+                        thuoc.ten_duongdung = item.ten_duongdung;
+                        dsthuoc.Add(thuoc);
                     }
-                    return null;
+                    return dsthuoc;
                 }
                 catch (Exception ex)
                 {
@@ -277,34 +329,11 @@ namespace Medical.Models
             public string Obj { get; set; }
             public string Col { get; set; }
             public string Val { get; set; }
-            //public static string Get(Object data)
-            //{
-            //    try
-            //    {
-            //        return Bridge.HttpPostApi("Search", data);
-            //    }
-            //    catch(Exception ex)
-            //    {
-            //        return ex.Message;
-            //    }
-            //}
         }
 
         public class Table
         {
             public string Obj { get; set; }
-            //public string Col { get; set; }
-            //public static string Get(Object data)
-            //{
-            //    try
-            //    {
-            //        return Bridge.HttpPostApi("Search", data);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        return ex.Message;
-            //    }
-            //}
         }
     }
 }

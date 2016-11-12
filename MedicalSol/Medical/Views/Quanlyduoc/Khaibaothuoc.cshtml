@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Newtonsoft.Json;
+@model IEnumerable<Medical.Models.Data.Thuoc>
+@{
     ViewBag.Title = "Khaibaothuoc";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -49,41 +51,15 @@
     </div>
 </div>
 <br />
-<div id="@ViewData["page"]_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-    <div class="col-sm-12">
-        <table id="@ViewData["page"]_gidview" class="table table-sm table-striped table-bordered dataTable" role="grid" aria-describedby="@ViewData["page"]_gidview_info" style="width: 100%;" width="100%" cellspacing="0">
-            <thead>
-                <tr role="row">
-                    <th class="sorting_asc" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-sort="ascending" aria-label="ID: activate to sort column descending">ID</th>
-                    <th class="sorting" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Nhóm: activate to sort column ascending">Nhóm</th>
-                    <th class="sorting" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Mã: activate to sort column ascending">Mã</th>
-                    <th class="sorting" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Tên: activate to sort column ascending">Tên</th>
-                    <th class="sorting" tabindex="0" aria-controls="@ViewData["page"]_gidview" rowspan="1" colspan="1" style="width: auto;" aria-label="Ghi chú: activate to sort column ascending">Ghi chú</th>
-                </tr>
-            </thead>
-            @*<tfoot>
-                    <tr>
-                        <th rowspan="1" colspan="1">Name</th>
-                        <th rowspan="1" colspan="1">Position</th>
-                        <th rowspan="1" colspan="1">Office</th>
-                        <th rowspan="1" colspan="1">Age</th>
-                        <th rowspan="1" colspan="1">Start date</th>
-                    </tr>
-                </tfoot>*@
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.id</td>
-                        <td>@item.id_nhomkho</td>
-                        <td>@item.ma</td>
-                        <td>@item.ten</td>
-                        <td>@item.ghichu</td>
-                    </tr>
-                }
-            </tbody>
-
-        </table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                <script type="text/javascript">
+                    document.write(f_create_table_html('@Html.Raw(JsonConvert.SerializeObject(Model).Replace("'", "\\'"))', "@ViewData["page"]", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
+                </script>
+            </div>
+        </div>
     </div>
 </div>
 <br />

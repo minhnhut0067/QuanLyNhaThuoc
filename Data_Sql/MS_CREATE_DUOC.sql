@@ -839,7 +839,6 @@ CREATE TABLE dmduoc
   donvidg_en character varying(255) DEFAULT ''::character varying,
   donvisd character varying(255) DEFAULT ''::character varying,
   donvisd_en character varying(255) DEFAULT ''::character varying,
-  duongdung character varying(255) DEFAULT ''::character varying,
   duongdung_en character varying(255) DEFAULT ''::character varying,
   hoatchat character varying(1000) DEFAULT ''::character varying,
   hoatchat_en character varying(1000) DEFAULT ''::character varying,
@@ -1670,7 +1669,7 @@ INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4019,177,'MOB003','Mobic 15mg/1.5ml, H/5A','','','Ống','Meloxicam','',1015,50069,794,65);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4171,329,'MOB004','Mobic 7.5mg, H/20','','','Viên','Meloxicam','',1001,50105,746,84);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4161,319,'MOC008','Mộc hoa trắng HT, H/100','','','Viên','Cao Mộc hoa trắng + Berberin clorid + Mộc hương','',1001,50105,963,229);
-INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4154,312,E'MOD001','Modom\"S 10mg, H/100','','','Viên','Domperidon','',1001,50105,712,229);
+INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4154,312,'MOD001',E'Modom\'S 10mg, H/100','','','Viên','Domperidon','',1001,50105,712,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4447,604,'MOF001','Moflox 400mg, H/5','','','Viên','Moxifloxacin','VD-16454-12',1001,50105,925,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4134,292,'MOT002','Motalv Plus, H/20','','','Viên','Alverin + Simethicon','VD-13466-10',1001,50105,925,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4159,317,'MOT003','Motilium-M 30ml','','','Chai','Domperidon','',1001,50105,761,205);

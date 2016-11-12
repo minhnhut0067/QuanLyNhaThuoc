@@ -27,6 +27,7 @@ namespace Medical.Controllers
 
         public ActionResult Khaibaothuoc()
         {
+            ViewData["page"] = "page_duoc_khaibaothuoc"; 
             return View(Data.Thuoc.GetAllObj());
         }
         #endregion
