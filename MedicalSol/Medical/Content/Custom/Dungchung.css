@@ -1088,6 +1088,12 @@
     width: 8px;
     background-color: #f5f5f5;
 }
+.dataTables_length{
+    width:100%;
+}
+.dataTables_filter {
+    text-align:right
+}
 /*Grid -Start*/
 
 /*input[type="text"]:disabled {
@@ -1135,7 +1141,6 @@
     border-radius: 4px;
     border-bottom-left-radius:0;
     border-top-left-radius:0;
-}
 }
 
 .form-control_dis {
