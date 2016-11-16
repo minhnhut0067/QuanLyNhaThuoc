@@ -1,6 +1,8 @@
 ﻿jQuery(document).ready(function () {
     $('#page_duoc_khaibaokho_gidview').DataTable();
+    $('#page_duoc_khaibaokho_gidview').parent().css("overflow-x", "scroll");
     $('#page_duoc_khaibaothuoc_gidview').DataTable();
+    $('#page_duoc_khaibaothuoc_gidview').parent().css("overflow-x", "scroll");
     enable(false);
 });
 

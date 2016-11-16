@@ -530,16 +530,17 @@ function f_create_input(v_id, v_type, v_name) {
         if (v_id != "") {
             switch (v_type) {
                 case "input":
-                    rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                    rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
                     rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
                     break;
                 case "filter":
-                    rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                    rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
+                    rhtml += "<input id=\"" + v_id + "_val\" type=\"hidden\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"\">";
                     rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
-                    rhtml += "<a href=\"#\" class=\"input-group-addon\" id=\"" + v_id + "_filter\" onclick=\"filter_click(this);\"><i class=\"fa fa-sort-desc\"></i></a>";
+                    rhtml += "<a href=\"#\" class=\"input-group-addon input-filter\" id=\"" + v_id + "_filter\" onclick=\"filter_click(this);\"><i class=\"fa fa-sort-desc\"></i></a>";
                     break;
                 case "textarea":
-                    rhtml = "<span class=\"input-group-addon\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                    rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
                     rhtml += "<textarea class=\"form-control\" rows=\"3\" id=\"" + v_id + "\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\"></textarea>";
                 default:
                     break;
@@ -596,7 +597,7 @@ function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
         rhtml = "";
         if (v_ds.Rows.length > 0) {        
             rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
-            rhtml += "<div class=\"col-lg-12 col-sm-12 col-md-12 col-xs-12\">";
+            rhtml += "<div class=\"col-lg-12 col-sm-12 col-md-12 col-xs-12\"\">";
             rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
             rhtml += "<thead>";
             rhtml += "<tr role=\"row\">";
