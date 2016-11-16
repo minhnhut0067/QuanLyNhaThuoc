@@ -349,7 +349,7 @@ CREATE TABLE dmvung
   ngayud timestamp without time zone default now(),
   CONSTRAINT dmvung_pk PRIMARY KEY (idvung),
   CONSTRAINT dmvung_idquocgia_fkey FOREIGN KEY (idquocgia)
-  REFERENCES dmquocgia (idquocgia) MATCH SIMPLE
+  REFERENCES dmquocgia (id) MATCH SIMPLE
   ON UPDATE RESTRICT ON DELETE RESTRICT
 )
 WITH (
@@ -388,7 +388,7 @@ CREATE TABLE dmtt
   REFERENCES dmvung (idvung) MATCH SIMPLE
   ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT dmtt_idquocgia_fkey FOREIGN KEY (idquocgia)
-  REFERENCES dmquocgia (idquocgia) MATCH SIMPLE
+  REFERENCES dmquocgia (id) MATCH SIMPLE
   ON UPDATE RESTRICT ON DELETE RESTRICT
 )
 WITH (

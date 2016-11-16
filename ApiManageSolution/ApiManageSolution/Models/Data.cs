@@ -250,9 +250,9 @@ namespace ApiManageSolution.Models
                     "\nLEFT JOIN dmloaiduoc b ON b.id = a.id_loaiduoc" +
                     "\nLEFT JOIN dmhangsx c ON c.id = a.id_hangsx" +
                     "\nLEFT JOIN dmquocgia d ON d.id = a.id_quocgia" +
-                    "\nLEFT JOIN dmduongdung e ON e.id = a.id_duongdung" + v_where
+                    "\nLEFT JOIN dmduongdung e ON e.id = a.id_duongdung" + v_where;
                     //"\nAND A.ID IN (4819,4817,4820,4434,4818,4154) LIMIT 500";
-                    + "\nLIMIT 1500";
+                    //+ "\nLIMIT 1500";
                     ds = dbHelper.getDataSetbySql(sql);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
