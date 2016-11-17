@@ -32,6 +32,11 @@ namespace Medical.Controllers
         }
         #endregion
 
+        public ActionResult Nhapkho()        
+        {
+            ViewData["page"] = "page_duoc_nhapkho";
+            return View();
+        }
         public ActionResult Xuatban()
         {
             Data.XuatBan xuatban = new Data.XuatBan(Data.Kho.GetAllObj());

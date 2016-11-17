@@ -6,151 +6,164 @@
 }
 <link href="~/Content/Custom/Duoc.css" rel="stylesheet" />
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="container-fluid title">Thông tin thuốc</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="input-group">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_sodk", "input", "Số ĐK"));
-                </script>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#thonhtin" aria-controls="thonhtin" role="tab" data-toggle="tab">Thông tin chi tiết</a></li>
+        <li role="presentation"><a href="#danhsach" aria-controls="danhsach" role="tab" data-toggle="tab">Danh sách</a></li>
+        @*<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>*@
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="thonhtin">
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="container-fluid custom-title">Thông tin thuốc</div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="input-group">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_ten", "input", "Tên thuốc(*)"));
-                </script>
+            <div class="row custom-row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_sodk", "input", "Số ĐK"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_ten", "input", "Tên thuốc(*)"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_nhomduoc", "filter", "Nhóm thuốc"));
+                        </script>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="input-group">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_nhomduoc", "filter", "Nhóm thuốc"));
-                </script>
+            <div class="row custom-row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_atccode", "input", "ATC Code"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_duongdung", "filter", "Đường dùng"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_hamluong", "filter", "Hàm lượng"));
+                        </script>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="input-group">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_atccode", "input", "ATC Code"));
-                </script>
+            <div class="row custom-row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_dang", "filter", "Dạng"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_dvt", "filter", "Đơn vị tính"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_donvisd", "filter", "Đơn vị SD"));
+                        </script>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="input-group" style="">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_duongdung", "filter", "Đường dùng"));
-                </script>
+            <div class="row custom-row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_hangsx", "filter", "Hãng SX"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_quocgia", "filter", "Quốc gia"));
+                        </script>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="input-group" style="">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_hamluong", "filter", "Hàm lượng"));
-                </script>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group" style="">
+                        <span id="@ViewData["page"]_donggoi_label" class="input-group-addon input-label">Đóng gói</span>
+                        <input id="@ViewData["page"]_dongoi1" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_dongoi1_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
+                        <span id="@ViewData["page"]_donggoi1_label" class="input-group-addon input-label">Viên</span>
+                        <input id="@ViewData["page"]_donggoi2" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_donggoi2_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
+                        <span id="@ViewData["page"]_donggoi2_label" class="input-group-addon input-label">Vỉ</span>
+                        <input id="@ViewData["page"]_atccode" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_donggoi3_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
+                        <span id="@ViewData["page"]_donggoi3_label" class="input-group-addon input-label">Hộp</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="input-group" style="">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_dang", "filter", "Dạng"));
-                </script>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_thanhphan", "textarea", "Thành phần"));
+                        </script>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="input-group" style="">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_dvt", "filter", "Đơn vị tính"));
-                </script>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_hoatchat", "textarea", "Hoạt chất"));
+                        </script>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <div class="input-group" style="">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_donvisd", "filter", "Đơn vị SD"));
-                </script>
+            <div class="row custom-row custom-btn-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:right">
+                    <script type="text/javascript">
+                        document.write(f_create_btn_group("@ViewData["page"]", "themmoi~luu~boqua~sua~xoa~ketthuc", "primary~primary~primary~primary~primary~primary", "Thêm mới~Lưu~Bỏ Qua~Sữa~Xóa~Kết Thúc"));
+                    </script>
+                </div>
             </div>
+
         </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <div class="input-group" style="">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_hangsx", "filter", "Hãng SX"));
-                </script>
+        <div role="tabpanel" class="tab-pane fade" id="danhsach">
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="container-fluid custom-title">Danh sách thuốc</div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <div class="input-group" style="">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_quocgia", "filter", "Quốc gia"));
-                </script>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="input-group" style="">
-                <span id="@ViewData["page"]_donggoi_label" class="input-group-addon input-label">Đóng gói</span>
-                <input id="@ViewData["page"]_dongoi1" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_dongoi1_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
-                <span id="@ViewData["page"]_donggoi1_label" class="input-group-addon input-label">Viên</span>
-                <input id="@ViewData["page"]_donggoi2" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_donggoi2_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
-                <span id="@ViewData["page"]_donggoi2_label" class="input-group-addon input-label">Vỉ</span>
-                <input id="@ViewData["page"]_atccode" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_donggoi3_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
-                <span id="@ViewData["page"]_donggoi3_label" class="input-group-addon input-label">Hộp</span>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="input-group" style="">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_thanhphan", "textarea", "Thành phần"));
-                </script>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="input-group" style="">
-                <script type="text/javascript">
-                    document.write(f_create_input("@ViewData["page"]_hoatchat", "textarea", "Hoạt chất"));
-                </script>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:right">
-            <script type="text/javascript">
-                document.write(f_create_btn_group("@ViewData["page"]", "themmoi~luu~boqua~sua~xoa~ketthuc", "success~primary~info~warning~danger~default", "Thêm mới~Lưu~Bỏ Qua~Sữa~Xóa~Kết Thúc"));
-            </script>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="row">
-                <script type="text/javascript">
-                    document.write(f_create_table_html('@Html.Raw(JsonConvert.SerializeObject(Model).Replace("'", "\\'"))', "@ViewData["page"]", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
-                </script>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <script type="text/javascript">
+                                document.write(f_create_table_html('@Html.Raw(JsonConvert.SerializeObject(Model).Replace("'", "\\'"))', "@ViewData["page"]", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
+                        </script>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 <script src="~/Scripts/Custom/Duoc.js"></script>

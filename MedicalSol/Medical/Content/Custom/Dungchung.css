@@ -1089,24 +1089,6 @@
     background-color: #f5f5f5;
 }
 
-.input-label {
-    background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
-    padding: 6px;
-    min-width: 90px;
-}
-
-.input-filter {
-    background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
-}
-
-.title {
-    border-bottom: 1px solid #ccc;
-    font-size: 11pt;
-    font-weight: bold;
-    margin: 5px 0 30px;
-    padding: 15px 0 !important;
-    text-transform: uppercase;
-}
 /*Grid -Start*/
 
 /*input[type="text"]:disabled {
@@ -1182,4 +1164,44 @@
 
 .form-control_dis[disabled], fieldset_dis[disabled] .form-control_dis {
     cursor: not-allowed;
+}
+
+.input-label {
+    background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
+    padding: 6px;
+    min-width: 90px;
+}
+
+.input-filter {
+    background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
+}
+
+.custom-title {
+    border-bottom: 1px solid #ccc;
+    font-size: 11pt;
+    font-weight: bold;
+    /*margin: 5px 0 30px;*/
+    padding: 15px 0 !important;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.custom-row {
+    margin-bottom: 10px;
+}
+
+.custom-btn-group {
+    margin-top: 30px;
+}
+
+.custom-btn {
+    min-width: 90px;
+    margin: 0px 3px;
+}
+
+.custom-btn_dis {
+    min-width: 90px;
+    margin: 0px 3px;
+    color: #000;
+    background-color: #D0D0D0;
 }

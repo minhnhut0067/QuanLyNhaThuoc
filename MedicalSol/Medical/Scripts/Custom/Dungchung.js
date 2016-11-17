@@ -63,6 +63,11 @@ $(document).ready(function () {
         //    $($(this).data().target).css({ "left": left, "top": top });
         //}
     });
+
+    $('.nav-tabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
 });
 
 //Javascript
@@ -512,7 +517,7 @@ function f_create_btn_group(v_id, v_id_arr, v_style_arr, v_name_arr) {
         rhtml = "";
         if (v_id != "" && v_id_arr != "") {
             for (var i = 0; i < v_id_arr.split('~').length ; i++) {
-                rhtml += "<input id=\"" + v_id + "_" + v_id_arr.split('~')[i] + "\" type=\"button\" class=\"btn btn-sm btn-" + v_style_arr.split('~')[i] + "\" value=\"" + v_name_arr.split('~')[i] + "\" onclick = \"btn_click(this)\" onkeypress = \"btn_keypress(event,this)\" />";
+                rhtml += "<input id=\"" + v_id + "_" + v_id_arr.split('~')[i] + "\" type=\"button\" class=\"btn btn-sm btn-" + v_style_arr.split('~')[i] + " custom-btn\" value=\"" + v_name_arr.split('~')[i] + "\" onclick = \"btn_click(this)\" onkeypress = \"btn_keypress(event,this)\" />";
             }
         }
         return rhtml;
