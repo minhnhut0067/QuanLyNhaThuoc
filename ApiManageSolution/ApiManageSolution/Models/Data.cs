@@ -170,7 +170,7 @@ namespace ApiManageSolution.Models
                     List<Khos> lts = new List<Khos>();
                     string sql = "";
                     sql = "SELECT a.id, a.ma, a.stt, a.ten, a.ghichu, a.id_nhomkho, b.ten as nhomkho"
-                    + "\nFROM dmkho a" 
+                    + "\nFROM dmkho a"
                     + "\nLEFT JOIN dmnhomkho b on b.id = a.id_nhomkho"
                     + v_where;
                     ds = dbHelper.getDataSetbySql(sql);
@@ -263,7 +263,7 @@ namespace ApiManageSolution.Models
                             item.id_loaiduoc = dr["id_loaiduoc"].ToString();
                             item.stt = dr["stt"].ToString();
                             item.ma = dr["ma"].ToString();
-                            item.ten = dr["ten"].ToString().Replace("\"","'");
+                            item.ten = dr["ten"].ToString().Replace("\"", "'");
                             item.dang = dr["dang"].ToString();
                             item.hamluong = dr["hamluong"].ToString();
                             item.donvidg = dr["donvidg"].ToString();
@@ -289,6 +289,208 @@ namespace ApiManageSolution.Models
                             item.ten_quocgia = dr["ten_quocgia"].ToString();
                             item.id_duongdung = dr["id_duongdung"].ToString();
                             item.ten_duongdung = dr["ten_duongdung"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Nhapkhoct
+        {
+            public string id { get; set; }
+            public string idnhapkho { get; set; }
+            public string idduoc { get; set; }
+            public string tenduoc { get; set; }
+            public string idnguon { get; set; }
+            public string tennguon { get; set; }
+            public string mavach { get; set; }
+            public string losx { get; set; }
+            public string ngaysx { get; set; }
+            public string handung { get; set; }
+            public string baohanh { get; set; }
+            public string numeric { get; set; }
+            public string vat { get; set; }
+            public string chietkhau { get; set; }
+            public string soluongdg { get; set; }
+            public string soluongsd { get; set; }
+            public string soluongn { get; set; }
+            public string soluongx { get; set; }
+            public string dongia { get; set; }
+            public string dongiavat { get; set; }
+            public string sotien { get; set; }
+            public string sotienvat { get; set; }
+            public string ghichu { get; set; }
+            public string tinhtrang { get; set; }
+            public string userid { get; set; }
+            public string userten { get; set; }
+            public string ngayud { get; set; }
+            public string soluongyeucau { get; set; }
+            public static IEnumerable<Nhapkhoct> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Nhapkhoct> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Nhapkhoct> lts = new List<Nhapkhoct>();
+                    string sql = "";
+                    sql = "SELECT a.id, a.idnhapkho, a.idduoc, b.ten as tenduoc, a.idnguon, c.ten as tennguon, a.mavach, a.losx, a.ngaysx, a.handung, a.baohanh, a.vat, a.chietkhau" +
+                    "\n, a.soluongdg, a.soluongsd, a.soluongn, a.soluongx, a.dongia, a.dongiavat, a.sotien, a.sotienvat, a.ghichu, a.tinhtrang, a.userid, d.hoten as userten, a.ngayud, a.soluongyeucau" +
+                    "\nFROM nhapkhoct a" +
+                    "\nLEFT JOIN dmduoc b ON b.id = a.idduoc" +
+                    "\nLEFT JOIN dmnguon c ON c.id = a.idnguon" +
+                    "\nLEFT JOIN users d ON c.id = a.userid"
+                    + v_where;
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Nhapkhoct item = new Nhapkhoct();
+                            item.id = dr["id"].ToString();
+                            item.idnhapkho = dr["idnhapkho"].ToString();
+                            item.idduoc = dr["idduoc"].ToString();
+                            item.tenduoc = dr["tenduoc"].ToString();
+                            item.idnguon = dr["idnguon"].ToString();
+                            item.tennguon = dr["tennguon"].ToString();
+                            item.mavach = dr["mavach"].ToString();
+                            item.losx = dr["losx"].ToString();
+                            item.ngaysx = dr["ngaysx"].ToString();
+                            item.handung = dr["handung"].ToString();
+                            item.baohanh = dr["baohanh"].ToString();
+                            item.numeric = dr["numeric"].ToString();
+                            item.vat = dr["vat"].ToString();
+                            item.chietkhau = dr["chietkhau"].ToString();
+                            item.soluongdg = dr["soluongdg"].ToString();
+                            item.soluongsd = dr["soluongsd"].ToString();
+                            item.soluongn = dr["soluongn"].ToString();
+                            item.soluongx = dr["soluongx"].ToString();
+                            item.dongia = dr["dongia"].ToString();
+                            item.dongiavat = dr["dongiavat"].ToString();
+                            item.sotien = dr["sotien"].ToString();
+                            item.sotienvat = dr["sotienvat"].ToString();
+                            item.ghichu = dr["ghichu"].ToString();
+                            item.tinhtrang = dr["tinhtrang"].ToString();
+                            item.userid = dr["userid"].ToString();
+                            item.userten = dr["userten"].ToString();
+                            item.ngayud = dr["ngayud"].ToString();
+                            item.soluongyeucau = dr["soluongyeucau"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+
+            }
+        }
+        public class Nhapkho
+        {
+            public string id { get; set; }
+            public string idlydonx { get; set; }
+            public string tenlydonx { get; set; }
+            public string idnhacc { get; set; }
+            public string tennhacc { get; set; }
+            public string idkho { get; set; }
+            public string tenkho { get; set; }
+            public string ngay { get; set; }
+            public string ngaytk { get; set; }
+            public string ngayhd { get; set; }
+            public string ngaykk { get; set; }
+            public string ngaynhan { get; set; }
+            public string sophieu { get; set; }
+            public string chietkhau { get; set; }
+            public string chiphivc { get; set; }
+            public string miengiam1 { get; set; }
+            public string miengiam2 { get; set; }
+            public string miengiam3 { get; set; }
+            public string miengiam4 { get; set; }
+            public string miengiam5 { get; set; }
+            public string vat { get; set; }
+            public string sotien { get; set; }
+            public string sotienhd { get; set; }
+            public string nguoinhan { get; set; }
+            public string nguoigiao { get; set; }
+            public string noinhan { get; set; }
+            public string ghichu { get; set; }
+            public string tinhtrang { get; set; }
+            public string userid { get; set; }
+            public string userten { get; set; }
+            public string ngayud { get; set; }
+            public IEnumerable<Nhapkhoct> nhapkhoct { get; set; }
+
+            public static IEnumerable<Nhapkho> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Nhapkho> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Nhapkho> lts = new List<Nhapkho>();
+                    string sql = "";
+                    sql = @"SELECT a.id, a.idlydonx, b.ten as tenlydonx, a.idnhacc, c.ten as tennhacc, a.idkho, d.ten as tenkho, to_char(a.ngay,'dd/mm/yyyy') as ngay " +
+                    "\n, to_char(a.ngaytk,'dd/mm/yyyy') as ngaytk, a.ngayhd, a.ngaykk, ngaynhan, a.sophieu, a.chietkhau, a.chiphivc, a.miengiam1, a.miengiam2, miengiam3 " +
+                    "\n, a.miengiam4, a.miengiam5, a.vat, a.sotien, a.sotienhd, a.nguoinhan, nguoigiao, a.noinhan, a.ghichu, a.tinhtrang, a.userid, e.hoten as userten, to_char(a.ngayud,'dd/mm/yyyy hh24:mi') as ngayud " +
+                    "\nFROM nhapkho a " +
+                    "\nLEFT JOIN dmlydonx b ON b.id = a.idlydonx " +
+                    "\nLEFT JOIN dmnhacc c ON c.id = a.idnhacc " +
+                    "\nLEFT JOIN dmkho d ON d.id = a.idkho " +
+                    "\nLEFT JOIN users e ON e.id = a.userid " 
+                    + v_where;
+
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Nhapkho item = new Nhapkho();
+                            item.id = dr["id"].ToString();
+                            item.idlydonx = dr["idlydonx"].ToString();
+                            item.tenlydonx = dr["tenlydonx"].ToString();
+                            item.idnhacc = dr["idnhacc"].ToString();
+                            item.tennhacc = dr["tennhacc"].ToString();
+                            item.idkho = dr["idkho"].ToString();
+                            item.tenkho = dr["tenkho"].ToString();
+                            item.ngay = dr["ngay"].ToString();
+                            item.ngaytk = dr["ngaytk"].ToString();
+                            item.ngayhd = dr["ngayhd"].ToString();
+                            item.ngaykk = dr["ngaykk"].ToString();
+                            item.ngaynhan = dr["ngaynhan"].ToString();
+                            item.sophieu = dr["sophieu"].ToString();
+                            item.chietkhau = dr["chietkhau"].ToString();
+                            item.chiphivc = dr["chiphivc"].ToString();
+                            item.miengiam1 = dr["miengiam1"].ToString();
+                            item.miengiam2 = dr["miengiam2"].ToString();
+                            item.miengiam3 = dr["miengiam3"].ToString();
+                            item.miengiam4 = dr["miengiam4"].ToString();
+                            item.miengiam5 = dr["miengiam5"].ToString();
+                            item.vat = dr["vat"].ToString();
+                            item.sotien = dr["sotien"].ToString();
+                            item.sotienhd = dr["sotienhd"].ToString();
+                            item.nguoinhan = dr["nguoinhan"].ToString();
+                            item.nguoigiao = dr["nguoigiao"].ToString();
+                            item.noinhan = dr["noinhan"].ToString();
+                            item.ghichu = dr["ghichu"].ToString();
+                            item.tinhtrang = dr["tinhtrang"].ToString();
+                            item.userid = dr["userid"].ToString();
+                            item.userid = dr["userten"].ToString();
+                            item.userid = dr["ngayud"].ToString();
+                            item.nhapkhoct = Nhapkhoct.GetAll("\nWHERE idnhapkho =" + dr["id"].ToString());                                                        
                             lts.Add(item);
                         }
                     }
