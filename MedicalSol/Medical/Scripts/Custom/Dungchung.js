@@ -547,6 +547,10 @@ function f_create_input(v_id, v_type, v_name) {
                 case "textarea":
                     rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
                     rhtml += "<textarea class=\"form-control\" rows=\"3\" id=\"" + v_id + "\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\"></textarea>";
+                case "datepicker":
+                    rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"min-width:90px;\">" + v_name + "</span>";
+                    rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"dd/mm/yyyy\" aria-describedby=\"" + v_id + "_label\">";
+                    rhtml += "<a href=\"#\" class=\"input-group-addon input-datepicker\" id=\"" + v_id + "_calendar\"><i class=\"fa fa-calendar\"></i></a>";
                 default:
                     break;
             }
@@ -596,35 +600,35 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
 function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
     try
     {
-        //debugger;
+        debugger;
         //v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds + "}";
         v_ds = JSON.parse("{\"Name\":\"Table\",\"Rows\":" + v_ds + "}");
         rhtml = "";
-        if (v_ds.Rows.length > 0) {        
-            rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
-            rhtml += "<div class=\"col-lg-12 col-sm-12 col-md-12 col-xs-12\"\">";
-            rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
-            rhtml += "<thead>";
-            rhtml += "<tr role=\"row\">";
+        rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
+        rhtml += "<div class=\"col-lg-12 col-sm-12 col-md-12 col-xs-12\"\">";
+        rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
+        rhtml += "<thead>";
+        rhtml += "<tr role=\"row\">";
+        for (var i = 0; i < v_col.split('~').length; i++) {
+            if (i <= 0) {
+                rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
+            }
+            else {
+                rhtml += "<th class=\"sorting\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column ascending\">" + v_colname.split('~')[i] + "</th>";
+            }
+        }
+        rhtml += "</tr>";
+        rhtml += "</thead>";
+        if (v_footer) {
+            rhtml += "<tfoot>";
+            rhtml += "<tr>";
             for (var i = 0; i < v_col.split('~').length; i++) {
-                if (i <= 0) {
-                    rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
-                }
-                else {
-                    rhtml += "<th class=\"sorting\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column ascending\">" + v_colname.split('~')[i] + "</th>";
-                }
+                rhtml += "<th rowspan=\"1\" colspan=\"1\">" + v_colname.split('~')[i] + "</th>";
             }
             rhtml += "</tr>";
-            rhtml += "</thead>";
-            if (v_footer) {
-                rhtml += "<tfoot>";
-                rhtml += "<tr>";
-                for (var i = 0; i < v_col.split('~').length; i++) {
-                    rhtml += "<th rowspan=\"1\" colspan=\"1\">" + v_colname.split('~')[i] + "</th>";
-                }
-                rhtml += "</tr>";
-                rhtml += "</tfoot>";
-            }
+            rhtml += "</tfoot>";
+        }
+        if (v_ds.Rows.length > 0) {                    
             rhtml += "<tbody>";
             for (var i = 0; i < v_ds.Rows.length; i++) {
                 rhtml += "<tr>";
@@ -634,11 +638,10 @@ function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
                 rhtml += "</tr>";
             }
             rhtml += "</tbody>";
-
-            rhtml += "</table>";
-            rhtml += "</div>";
-            rhtml += "</div>";
         }
+        rhtml += "</table>";
+        rhtml += "</div>";
+        rhtml += "</div>";
         return rhtml;
     }
     catch(ex)

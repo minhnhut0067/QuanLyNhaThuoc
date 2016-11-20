@@ -27,7 +27,7 @@ namespace ApiManageSolution.Models
                 DataSet ds = new DataSet();
                 List<Users> lts = new List<Users>();
                 string sql = "";
-                sql = "SELECT iduser, username_, password_, hoten, ngaysinh, diachi, sdt, email, ngay, ngayud, loaiuser " +
+                sql = "SELECT id as iduser, username_, password_, hoten, ngaysinh, diachi, sdt, email, ngay, ngayud, loaiuser " +
                 "FROM users;";
                 ds = dbHelper.getDataSetbySql(sql);
                 if (ds != null && ds.Tables[0].Rows.Count > 0)

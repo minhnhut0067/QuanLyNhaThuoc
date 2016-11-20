@@ -1,5 +1,5 @@
 ﻿@using Newtonsoft.Json;
-@model IEnumerable<Medical.Models.Data.Kho>
+@model IEnumerable<Medical.Models.Data.NhomKho>
 @{
     ViewBag.Title = "Nhapkho";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,14 +8,12 @@
 <div class="container-fluid">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#thonhtin" aria-controls="thonhtin" role="tab" data-toggle="tab">Thông tin chi tiết</a></li>
-        <li role="presentation"><a href="#danhsach" aria-controls="danhsach" role="tab" data-toggle="tab">Danh sách</a></li>
-        @*<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>*@
+        <li role="presentation"><a href="#chitiet" aria-controls="chitiet" role="tab" data-toggle="tab">Chi tiết phiếu</a></li>
+        <li role="presentation" class="active"><a href="#danhsach" aria-controls="danhsach" role="tab" data-toggle="tab">Danh sách phiếu nhập</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane fade in active" id="thonhtin">
+        <div role="tabpanel" class="tab-pane fade" id="chitiet">
             <div class="row custom-row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="container-fluid custom-title">Thông tin kho</div>
@@ -63,10 +61,61 @@
                 </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="danhsach">
+        <div role="tabpanel" class="tab-pane fade  in active" id="danhsach">
             <div class="row custom-row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="container-fluid custom-title">Danh sách kho</div>
+                    <div class="container-fluid custom-title">Lọc phiếu</div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_lydo", "filter", "Lý do"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_tn", "datepicker", "Từ"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_dn", "datepicker", "Đến"));
+                        </script>
+                    </div>
+                </div>                
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_kho", "filter", "Tại kho"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_user", "filter", "Nhân viên"));
+                        </script>
+                    </div>
+                </div>                
+            </div>
+            <div class="row custom-row custom-btn-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:left">
+                    <script type="text/javascript">
+                        document.write(f_create_btn_group("@ViewData["page"]", "tim~themmoi", "primary~primary", "Tìm~Thêm mới"));//success~primary~info~warning~danger~default
+                    </script>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="container-fluid custom-title">Danh sách phiếu nhập</div>
                 </div>
             </div>
             <div class="row custom-row">

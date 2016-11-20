@@ -1176,6 +1176,10 @@
     background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
 }
 
+.input-datepicker{
+    background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
+}
+
 .custom-title {
     border-bottom: 1px solid #ccc;
     font-size: 11pt;
