@@ -1,4 +1,5 @@
 ﻿DROP TABLE IF EXISTS dmnhomkho CASCADE;
+DROP TABLE IF EXISTS dmnhomkho CASCADE;
 CREATE TABLE dmnhomkho
 (
   id numeric(4,0) NOT NULL DEFAULT 0,
