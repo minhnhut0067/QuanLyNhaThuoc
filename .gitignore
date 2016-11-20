@@ -1,3 +1,5 @@
 *.suo
 ApiManageSolution/ApiManageSolution.v12.suo
 MedicalSol/MedicalSol.v12.suo
+*.suo
+*.cache
