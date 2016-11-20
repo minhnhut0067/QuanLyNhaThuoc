@@ -1670,7 +1670,7 @@ INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4019,177,'MOB003','Mobic 15mg/1.5ml, H/5A','','','Ống','Meloxicam','',1015,50069,794,65);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4171,329,'MOB004','Mobic 7.5mg, H/20','','','Viên','Meloxicam','',1001,50105,746,84);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4161,319,'MOC008','Mộc hoa trắng HT, H/100','','','Viên','Cao Mộc hoa trắng + Berberin clorid + Mộc hương','',1001,50105,963,229);
-INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4154,312,'MOD001',E'Modom\'S 10mg, H/100','','','Viên','Domperidon','',1001,50105,712,229);
+INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4154,312,'MOD001','Modom''S 10mg, H/100','','','Viên','Domperidon','',1001,50105,712,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4447,604,'MOF001','Moflox 400mg, H/5','','','Viên','Moxifloxacin','VD-16454-12',1001,50105,925,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4134,292,'MOT002','Motalv Plus, H/20','','','Viên','Alverin + Simethicon','VD-13466-10',1001,50105,925,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4159,317,'MOT003','Motilium-M 30ml','','','Chai','Domperidon','',1001,50105,761,205);
@@ -1873,7 +1873,7 @@ INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4394,551,'PRO013','Prospan Cough Syrup 100ml','','','Chai','Cao khô lá Thuòng xuân','VN-17873-14',1001,50106,1029,55);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4022,180,'PUL003','Pulmicort Respules 500mcg/2ml, H/20A','','','Tuýp','Budesonid','',1062,50072,779,198);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(5280,1245,'PUL005','PULMOFAR Siro 90ml','','','Chai','Thuốc ho trẻ em','',1001,50106,782,229);
-INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4456,613,'PUR001',E'Puritan\'s Pride Premium, L/240','','','Viên','Glucosamine + Chondroitin + MSM','XT',1001,50067,1038,222);
+INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4456,613,'PUR001','Puritan''s Pride Premium, L/240','','','Viên','Glucosamine + Chondroitin + MSM','XT',1001,50067,1038,222);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4757,898,'QUE005','Que thử thai Chip chip, H/12test','','','Test','','22/2013/BYT-TB-CT',1025,50051,1000,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4758,899,'QUE006','Que thử thai Quick test, H/100 (L2)','','','Test','','',1025,50051,0,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4759,900,'QUE007','Que thử thai Quickstick, B/25 (L1)','','','Test','','',1025,50051,1084,229);
@@ -2051,7 +2051,7 @@ INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4279,437,'TOM002','Tomax genta, L/10','','','Tuýp','Clotrimazol + Triamcinolon Acetonid + Gentamicin sulfat','VD-9079-09',1021,50083,979,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4384,541,'TOP005','Toplexil, H/24','','','Viên','','',1001,50107,741,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(3373,136,'TOP004','Toptropin 800mg, H/100','','','Viên','Piracetam','',1001,50107,745,229);
-INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4214,372,'TOT005',E'Tot\'hema, H/20A','','','Ống','Sắt Gluconat + Mangan + Đồng gluconat','',1001,50107,856,71);
+INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4214,372,'TOT005','Tot''hema, H/20A','','','Ống','Sắt Gluconat + Mangan + Đồng gluconat','',1001,50107,856,71);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4656,797,'TOT006','Totri, H/15','','','Hộp','','',1001,50055,747,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4352,509,'TOU002','Toussolen 5mg, H/250','','','Viên','Alimemazin','',1001,50107,735,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4514,655,'TRA013','Trà gừng, H/10','','','Hộp','','VD-12142-10',1001,50107,747,229);
@@ -2172,3 +2172,11 @@ INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(5278,1243,'ZIN004','Zincelen, H/50v','','','Viên','A+C+E+Selen+Kẽm','',1001,50109,782,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(3393,140,'ZOL002','Zolmed 150mg, H/1','','','Viên','Fluconazol','',1001,50109,734,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,id_duongdung,id_loaiduoc,id_hangsx,id_quocgia) VALUES(4061,219,'ZYM001','Zymafluor D 500, H/90','','','Viên','','',1001,50067,943,55);
+
+
+
+
+
+
+
+
