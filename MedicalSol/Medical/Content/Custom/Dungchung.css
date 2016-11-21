@@ -1209,3 +1209,10 @@
     color: #000;
     background-color: #D0D0D0;
 }
+
+.dataTables_filter{
+    text-align:right;
+}
+.dataTables_paginate{
+    text-align:right;
+}

@@ -600,8 +600,7 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
 function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
     try
     {
-        debugger;
-        //v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds + "}";
+        v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds + "}";
         v_ds = JSON.parse("{\"Name\":\"Table\",\"Rows\":" + v_ds + "}");
         rhtml = "";
         rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
@@ -667,15 +666,47 @@ function f_filter_select(data) {
             url: "../Process/Filter",
             data: data,
             success: function (result) {
-                if (result != "") {
-                    f_filter_nhomkho_callback(JSON.parse(result));
+                if (result == "") {
+                    result = "{\"Name\":\"Table\",\"Rows\":[]}";                    
                 }
-                else {
-                    f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
-                }
+                switch(data.Obj)
+                {
+                    case "nhomkhos":
+                        f_filter_nhomkho_callback(JSON.parse(result));
+                        break;
+                    case "lydonxs":
+                        f_filter_lydo_callback(JSON.parse(result));
+                        break;
+                    case "khos":
+                        f_filter_kho_callback(JSON.parse(result));
+                        break;
+                    case "nhanviens":
+                        f_filter_nhanvien_callback(JSON.parse(result));
+                        break;
+                    default:
+                        break;
+                }                
+                //else {
+                //    f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                //}
             },
             error: function (result) {
-                f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                switch (data.Obj) {
+                    case "nhomkhos":
+                        f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "lydonxs":
+                        f_filter_lydo_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "lydonxs":
+                        f_filter_kho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "nhanviens":
+                        f_filter_nhanvien_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    default:
+                        break;
+                }                
             }
         });
     }

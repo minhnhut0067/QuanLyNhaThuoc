@@ -27,9 +27,12 @@ namespace ApiManageSolution.Models
                         {
                             if (sqlwhere == "")
                             {
-                                sqlwhere += "\nWHERE " + item + "";
+                                sqlwhere += "\nWHERE a." + item + "";
                             }
-                            sqlwhere += "||" + item + "";
+                            else
+                            {
+                                sqlwhere += "||a." + item + "";
+                            }                            
                         }
                         sqlwhere += " ILIKE '%" + search.val + "%'";
                         sqlwhere += "\nLIMIT 50";
@@ -38,6 +41,12 @@ namespace ApiManageSolution.Models
                     {
                         case "nhomkhos":
                             return Nhomkhos.GetAll(sqlwhere);
+                        case "khos":
+                            return Khos.GetAll(sqlwhere);
+                        case "lydonxs":
+                            return Lydonxs.GetAll(sqlwhere);
+                        case "nhanviens":
+                            return Users.GetAll(sqlwhere);
                         default:
                             return null;
                     }
@@ -73,15 +82,15 @@ namespace ApiManageSolution.Models
                     DataSet ds = new DataSet();
                     List<Users> lts = new List<Users>();
                     string sql = "";
-                    sql = "SELECT iduser, username_, password_, hoten, ngaysinh, diachi, sdt, email, ngay, ngayud, loaiuser " +
-                    "\nFROM users" + v_where;
+                    sql = "SELECT a.id, a.username_, a.password_, a.hoten, a.ngaysinh, a.diachi, a.sdt, a.email, a.ngay, a.ngayud, a.loaiuser " +
+                    "\nFROM users a" + v_where;
                     ds = dbHelper.getDataSetbySql(sql);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
                         {
                             Users item = new Users();
-                            item.iduser = dr["iduser"].ToString();
+                            item.iduser = dr["id"].ToString();
                             item.username_ = dr["username_"].ToString();
                             item.password_ = dr["password_"].ToString();
                             item.hoten = dr["hoten"].ToString();
@@ -122,8 +131,8 @@ namespace ApiManageSolution.Models
                     DataSet ds = new DataSet();
                     List<Nhomkhos> lts = new List<Nhomkhos>();
                     string sql = "";
-                    sql = "SELECT id,ma,stt,ten,userid "
-                    + "\nFROM dmnhomkho" + v_where;
+                    sql = "SELECT a.id,a.ma,a.stt,a.ten,a.userid "
+                    + "\nFROM dmnhomkho a" + v_where;
                     //+ "\nLIMIT 50";
 
                     ds = dbHelper.getDataSetbySql(sql);
@@ -301,7 +310,48 @@ namespace ApiManageSolution.Models
             }
         }
 
-        public class Nhapkhoct
+        public class Lydonxs
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Lydonxs> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Lydonxs> GetAll(string v_where)
+            {
+                                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Lydonxs> lts = new List<Lydonxs>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.ten "
+                    + "\nFROM dmlydonx a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Lydonxs item = new Lydonxs();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Nhapkhocts
         {
             public string id { get; set; }
             public string idnhapkho { get; set; }
@@ -331,16 +381,16 @@ namespace ApiManageSolution.Models
             public string userten { get; set; }
             public string ngayud { get; set; }
             public string soluongyeucau { get; set; }
-            public static IEnumerable<Nhapkhoct> GetAll()
+            public static IEnumerable<Nhapkhocts> GetAll()
             {
                 return GetAll("\nWHERE 1=1");
             }
-            public static IEnumerable<Nhapkhoct> GetAll(string v_where)
+            public static IEnumerable<Nhapkhocts> GetAll(string v_where)
             {
                 try
                 {
                     DataSet ds = new DataSet();
-                    List<Nhapkhoct> lts = new List<Nhapkhoct>();
+                    List<Nhapkhocts> lts = new List<Nhapkhocts>();
                     string sql = "";
                     sql = "SELECT a.id, a.idnhapkho, a.idduoc, b.ten as tenduoc, a.idnguon, c.ten as tennguon, a.mavach, a.losx, a.ngaysx, a.handung, a.baohanh, a.vat, a.chietkhau" +
                     "\n, a.soluongdg, a.soluongsd, a.soluongn, a.soluongx, a.dongia, a.dongiavat, a.sotien, a.sotienvat, a.ghichu, a.tinhtrang, a.userid, d.hoten as userten, a.ngayud, a.soluongyeucau" +
@@ -354,7 +404,7 @@ namespace ApiManageSolution.Models
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
                         {
-                            Nhapkhoct item = new Nhapkhoct();
+                            Nhapkhocts item = new Nhapkhocts();
                             item.id = dr["id"].ToString();
                             item.idnhapkho = dr["idnhapkho"].ToString();
                             item.idduoc = dr["idduoc"].ToString();
@@ -395,7 +445,7 @@ namespace ApiManageSolution.Models
 
             }
         }
-        public class Nhapkho
+        public class Nhapkhos
         {
             public string id { get; set; }
             public string idlydonx { get; set; }
@@ -428,18 +478,18 @@ namespace ApiManageSolution.Models
             public string userid { get; set; }
             public string userten { get; set; }
             public string ngayud { get; set; }
-            public IEnumerable<Nhapkhoct> nhapkhoct { get; set; }
+            public IEnumerable<Nhapkhocts> nhapkhocts { get; set; }
 
-            public static IEnumerable<Nhapkho> GetAll()
+            public static IEnumerable<Nhapkhos> GetAll()
             {
                 return GetAll("\nWHERE 1=1");
             }
-            public static IEnumerable<Nhapkho> GetAll(string v_where)
+            public static IEnumerable<Nhapkhos> GetAll(string v_where)
             {
                 try
                 {
                     DataSet ds = new DataSet();
-                    List<Nhapkho> lts = new List<Nhapkho>();
+                    List<Nhapkhos> lts = new List<Nhapkhos>();
                     string sql = "";
                     sql = @"SELECT a.id, a.idlydonx, b.ten as tenlydonx, a.idnhacc, c.ten as tennhacc, a.idkho, d.ten as tenkho, to_char(a.ngay,'dd/mm/yyyy') as ngay " +
                     "\n, to_char(a.ngaytk,'dd/mm/yyyy') as ngaytk, a.ngayhd, a.ngaykk, ngaynhan, a.sophieu, a.chietkhau, a.chiphivc, a.miengiam1, a.miengiam2, miengiam3 " +
@@ -458,7 +508,7 @@ namespace ApiManageSolution.Models
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
                         {
-                            Nhapkho item = new Nhapkho();
+                            Nhapkhos item = new Nhapkhos();
                             item.id = dr["id"].ToString();
                             item.idlydonx = dr["idlydonx"].ToString();
                             item.tenlydonx = dr["tenlydonx"].ToString();
@@ -490,7 +540,7 @@ namespace ApiManageSolution.Models
                             item.userid = dr["userid"].ToString();
                             item.userid = dr["userten"].ToString();
                             item.userid = dr["ngayud"].ToString();
-                            item.nhapkhoct = Nhapkhoct.GetAll("\nWHERE idnhapkho =" + dr["id"].ToString());                                                        
+                            item.nhapkhocts = Nhapkhocts.GetAll("\nWHERE idnhapkho =" + dr["id"].ToString());                                                        
                             lts.Add(item);
                         }
                     }
@@ -502,5 +552,7 @@ namespace ApiManageSolution.Models
                 }
             }
         }
+
+
     }
 }

@@ -53,7 +53,6 @@ function ms_filter_show_left(v_filter_active_ct, v_left, v_filter_width, v_filte
         ms_satt(g_filter_display_ct, "class", "ms_form_dg");
         ms_sval(g_filter_display_ct, "className", "ms_form_dg");
     }
-
     var aleft = ms_to_decimal(v_left);
     var atop = 0;
     var awidth = 0;
@@ -75,8 +74,8 @@ function ms_filter_show_left(v_filter_active_ct, v_left, v_filter_width, v_filte
     if (awidth <= 0) {
         awidth = 100;
     }
-    aheight = ms_gval(g_filter_active_ct, "offsetHeight", "0")
-    atop = ms_top(g_filter_active_ct);
+    aheight = ms_gval(g_filter_active_ct, "offsetHeight", "0")    
+    //atop = ms_top(g_filter_active_ct);
     if (g_filter_id_container != "") {
         var ascrolltop = 0;
         try {
@@ -90,7 +89,7 @@ function ms_filter_show_left(v_filter_active_ct, v_left, v_filter_width, v_filte
 
     g_filter_display_position = "1";
     if (atop - g_filter_display_height - 6 < 0) {
-        atop = atop + aheight + 2 + 0;
+        atop = atop + ms_top(g_filter_active_ct) + aheight + 2 + 0;
         g_filter_display_position = "0";
     }
     else {

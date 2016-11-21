@@ -3,13 +3,17 @@
     $('#page_duoc_khaibaokho_gidview').parent().css("overflow-x", "scroll");
     $('#page_duoc_khaibaothuoc_gidview').DataTable();
     $('#page_duoc_khaibaothuoc_gidview').parent().css("overflow-x", "scroll");
+    $('#page_duoc_nhapkho_gidview').DataTable();
+    $('#page_duoc_nhapkho_gidview').parent().css("overflow-x", "scroll");
+    $('#page_duoc_nhapkho_gidview_ct').DataTable();
+    $('#page_duoc_nhapkho_gidview_ct').parent().css("overflow-x", "scroll");
     enable(false);
 });
 
 //Filter-End
 var strdatafilter = "";
 var filter_ds = null;
-function filter_click(v_this) {
+function filter_click(v_this) {    
     try {
         var aid = v_this.id;
         if (aid.length > 7) {
@@ -21,18 +25,24 @@ function filter_click(v_this) {
         var g_filter_limit = 100;
         ms_sval(aid, "value", "");
         switch (aid) {
-            case "page_duoc_xuatban_cosoyte":
-                f_filter_kp_show(aid);
-                break;
-                //case "ct_form_page1_giuong":
-                //    ms_filter_get_selected();
-                //    ms_filter_hide();
-                //    ct_form_page1_giuong_filter(aid);
-                //    break;
-                break;
+            //case "page_duoc_xuatban_cosoyte":
+            //    f_filter_kp_show(aid);
+            //    break;
             case "page_duoc_khaibaokho_nhomkho":
                 ms_filter_hide();
                 f_filter_nhomkho_show(aid);
+                break;
+            case "page_duoc_nhapkho_lydo":
+                ms_filter_hide();
+                f_filter_lydo_show(aid);
+                break;
+            case "page_duoc_nhapkho_kho":
+                ms_filter_hide();
+                f_filter_kho_show(aid);
+                break;
+            case "page_duoc_nhapkho_nhanvien":
+                ms_filter_hide();
+                f_filter_nhanvien_show(aid);
                 break;
             default:
                 alert(aid);
@@ -73,9 +83,11 @@ function f_filter_kp_selected() {
     }
 }
 
+
 function f_filter_nhomkho_show(v_id_active) {
     strdatafilter = ms_gval(v_id_active + "_hidden", "value", "");
-    ms_filter_show(v_id_active, "", "f_filter_nhomkho", "1", "id", "page_duoc_khaibaokho_nhomkho", "ten", "f_filter_nhomkho_selected");
+    //g_filter_id_container = "page_duoc_khaibaokho_nhomkho";
+    ms_filter_show(v_id_active, "", "f_filter_nhomkho", "1", "id", v_id_active, "ten", "f_filter_nhomkho_selected");
 }
 
 function f_filter_nhomkho() {
@@ -112,6 +124,129 @@ function f_filter_nhomkho_selected() {
         ms_sval("page_duoc_xuatban_cosoyte", "selectedvalue", ms_gfields(g_filter_ds, g_filter_index, "id", ""));
     }
 }
+
+
+function f_filter_lydo_show(v_id_active) {    
+    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
+    ms_filter_show(v_id_active, "0", "f_filter_lydo", "1", "id", v_id_active, "ten", "f_filter_lydo_selected");
+}
+
+function f_filter_lydo() {
+    var atext = ms_gval(g_filter_active_ct, "value", "");
+    if (atext != null) {
+        //var data = {
+        //    Value: atext,
+        //    Datafilter: strdatafilter
+        //};
+        var data = {
+            Obj: "lydonxs",
+            Col: "ma~ten",
+            Val: atext
+        };
+        g_filter_cur_val = atext;
+        f_filter_select(data);
+    }
+}
+
+function f_filter_lydo_callback(v_ds) {//res
+
+    if (ms_gobj(g_filter_active_ct) != null) {
+        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
+            f_filter_lydo();
+            return;
+        }
+    }
+    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
+    //g_filter_cur_val = "";
+}
+
+function f_filter_lydo_selected() {
+    if (ms_gfields(g_filter_ds, g_filter_index, "id", "") != "") {
+        ms_sval("page_duoc_nhapkho_lydo", "selectedvalue", ms_gfields(g_filter_ds, g_filter_index, "id", ""));
+    }
+}
+
+
+function f_filter_kho_show(v_id_active) {
+    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
+    ms_filter_show(v_id_active, "0", "f_filter_kho", "1", "id", v_id_active, "ten", "f_filter_kho_selected");
+}
+
+function f_filter_kho() {
+    var atext = ms_gval(g_filter_active_ct, "value", "");
+    if (atext != null) {
+        //var data = {
+        //    Value: atext,
+        //    Datafilter: strdatafilter
+        //};
+        var data = {
+            Obj: "khos",
+            Col: "ma~ten",
+            Val: atext
+        };
+        g_filter_cur_val = atext;
+        f_filter_select(data);
+    }
+}
+
+function f_filter_kho_callback(v_ds) {//res
+
+    if (ms_gobj(g_filter_active_ct) != null) {
+        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
+            f_filter_kho();
+            return;
+        }
+    }
+    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
+    //g_filter_cur_val = "";
+}
+
+function f_filter_kho_selected() {
+    if (ms_gfields(g_filter_ds, g_filter_index, "id", "") != "") {
+        ms_sval("page_duoc_nhapkho_kho", "selectedvalue", ms_gfields(g_filter_ds, g_filter_index, "id", ""));
+    }
+}
+
+
+function f_filter_nhanvien_show(v_id_active) {
+    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
+    ms_filter_show(v_id_active, "0", "f_filter_nhanvien", "1", "id", v_id_active, "ten", "f_filter_nhanvien_selected");
+}
+
+function f_filter_nhanvien() {
+    var atext = ms_gval(g_filter_active_ct, "value", "");
+    if (atext != null) {
+        //var data = {
+        //    Value: atext,
+        //    Datafilter: strdatafilter
+        //};
+        var data = {
+            Obj: "nhanviens",
+            Col: "id~hoten",
+            Val: atext
+        };
+        g_filter_cur_val = atext;
+        f_filter_select(data);
+    }
+}
+
+function f_filter_nhanvien_callback(v_ds) {//res
+
+    if (ms_gobj(g_filter_active_ct) != null) {
+        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
+            f_filter_nhanvien();
+            return;
+        }
+    }
+    ms_filter_load(v_ds, "iduser~hoten", "Mã~Tên");
+    //g_filter_cur_val = "";
+}
+
+function f_filter_nhanvien_selected() {
+    if (ms_gfields(g_filter_ds, g_filter_index, "iduser", "") != "") {
+        ms_sval("page_duoc_nhapkho_nhanvien", "selectedvalue", ms_gfields(g_filter_ds, g_filter_index, "iduser", ""));
+    }
+}
 //Filter-End
 
 var khaibaokho_input = "page_duoc_khaibaokho_ma~page_duoc_khaibaokho_ten~page_duoc_khaibaokho_nhomkho~page_duoc_khaibaokho_ghichu";
@@ -127,6 +262,18 @@ function input_keypress(event, v_this) {
     if (keyCode.toString() == "13") {
         switch (v_this.id) {
             case "page_duoc_khaibaokho_nhomkho":
+                ms_filter_get_selected();
+                ms_filter_hide();
+                break;
+            case "page_duoc_nhapkho_kho":
+                ms_filter_get_selected();
+                ms_filter_hide();
+                break;
+            case "page_duoc_nhapkho_lydo":
+                ms_filter_get_selected();
+                ms_filter_hide();
+                break;
+            case "page_duoc_nhanvien_nhanvien":
                 ms_filter_get_selected();
                 ms_filter_hide();
                 break;
@@ -202,6 +349,113 @@ function input_keyup(event, v_this) {
                     f_filter_nhomkho_show(aid_active);
                     break;
             }
+            break;
+        case "page_duoc_nhapkho_lydo":
+            aid_active = v_this.id;
+            switch (keyCode.toString()) {
+                case "38"://Up
+                    if (ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_up();
+                    }
+                    else {
+                        f_filter_lydo_show(aid_active);
+                    }
+                    break;
+                case "40"://Down
+                    if (ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_down();
+                    }
+                    else {
+                        f_filter_lydo_show(aid_active);
+                    }
+                    break;
+                case "27"://ESC
+                    ms_filter_hide();
+                    break;
+                case "37"://Left
+                case "39"://Right
+                    break;
+                case "13"://Enter
+                    ms_filter_get_selected();
+                    ms_filter_hide();
+                    break;
+                case "32"://Space
+                default:
+                    f_filter_lydo_show(aid_active);
+                    break;
+            }
+            break;
+        case "page_duoc_nhapkho_kho":
+            aid_active = v_this.id;
+            switch (keyCode.toString()) {
+                case "38"://Up
+                    if (ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_up();
+                    }
+                    else {
+                        f_filter_kho_show(aid_active);
+                    }
+                    break;
+                case "40"://Down
+                    if (ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_down();
+                    }
+                    else {
+                        f_filter_kho_show(aid_active);
+                    }
+                    break;
+                case "27"://ESC
+                    ms_filter_hide();
+                    break;
+                case "37"://Left
+                case "39"://Right
+                    break;
+                case "13"://Enter
+                    ms_filter_get_selected();
+                    ms_filter_hide();
+                    break;
+                case "32"://Space
+                default:
+                    f_filter_kho_show(aid_active);
+                    break;
+            }
+            break;
+        case "page_duoc_nhapkho_nhanvien":
+            aid_active = v_this.id;
+            switch (keyCode.toString()) {
+                case "38"://Up
+                    if (ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_up();
+                    }
+                    else {
+                        f_filter_nhanvien_show(aid_active);
+                    }
+                    break;
+                case "40"://Down
+                    if (ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_down();
+                    }
+                    else {
+                        f_filter_nhanvien_show(aid_active);
+                    }
+                    break;
+                case "27"://ESC
+                    ms_filter_hide();
+                    break;
+                case "37"://Left
+                case "39"://Right
+                    break;
+                case "13"://Enter
+                    ms_filter_get_selected();
+                    ms_filter_hide();
+                    break;
+                case "32"://Space
+                default:
+                    f_filter_nhanvien_show(aid_active);
+                    break;
+            }
+            break;
+        default:
             break;
     }
 }

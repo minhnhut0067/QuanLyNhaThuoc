@@ -11,9 +11,9 @@ namespace ApiManageSolution.Controllers
     public class NhapkhosController : ApiController
     {
         // GET api/nhapkhos
-        public IEnumerable<Data.Nhapkho> Get()
+        public IEnumerable<Data.Nhapkhos> Get()
         {
-            return Data.Nhapkho.GetAll();
+            return Data.Nhapkhos.GetAll();
         }
 
         // GET api/nhapkhos/5

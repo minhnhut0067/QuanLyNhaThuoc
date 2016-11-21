@@ -27,6 +27,15 @@ namespace Medical.Controllers
                             case "nhomkhos":
                                 lts.Add(JsonConvert.DeserializeObject<Data.NhomKho>(jo.ToString()));
                                 break;
+                            case "lydonxs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Lydonx>(jo.ToString()));
+                                break;
+                            case "khos":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));
+                                break;
+                            case "nhanviens":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Nhanvien>(jo.ToString()));
+                                break;
                             default:
                                 break;
                         }

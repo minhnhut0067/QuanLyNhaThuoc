@@ -35,7 +35,7 @@ namespace Medical.Controllers
         public ActionResult Nhapkho()        
         {
             ViewData["page"] = "page_duoc_nhapkho";
-            return View(Data.NhomKho.GetAllObj());
+            return View(Data.Nhapkho.GetAllObj());
         }
         public ActionResult Xuatban()
         {

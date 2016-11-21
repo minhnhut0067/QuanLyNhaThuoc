@@ -129,9 +129,13 @@ namespace Medical.Models
             }
             public static IEnumerable<NhomKho> GetAllObj()
             {
+                return GetAllObj(Bridge.HttpGetApi("nhomkhos"));
+            }
+            public static IEnumerable<NhomKho> GetAllObj(string value)
+            {
                 try
                 {
-                    var value = Bridge.HttpGetApi("nhomkhos");
+                    //var value = Bridge.HttpGetApi("nhomkhos");
                     List<NhomKho> dsnhomkho = new List<NhomKho>();
                     var jarr = JArray.Parse(value);
                     foreach (dynamic item in jarr)
@@ -153,6 +157,7 @@ namespace Medical.Models
             }
 
         }
+
         public class Kho
         {
             public string id { get; set; }
@@ -176,9 +181,13 @@ namespace Medical.Models
             }
             public static IEnumerable<Kho> GetAllObj()
             {
+                return GetAllObj(Bridge.HttpGetApi("khos"));
+            }
+            public static IEnumerable<Kho> GetAllObj(string value)
+            {
                 try
                 {
-                    var value = Bridge.HttpGetApi("khos");
+                    //var value = Bridge.HttpGetApi("khos");
                     List<Kho> dskho = new List<Kho>();
                     var jarr = JArray.Parse(value);
                     foreach (dynamic item in jarr)
@@ -194,6 +203,103 @@ namespace Medical.Models
                         dskho.Add(kho);
                     }
                     return dskho;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        
+        public class Lydonx
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static string GetAll()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("lydonxs");
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            public static IEnumerable<Lydonx> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("lydonxs"));
+            }
+            public static IEnumerable<Lydonx> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Lydonx> dslydo = new List<Lydonx>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Lydonx lydo = new Lydonx();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        dslydo.Add(lydo);
+                    }
+                    return dslydo;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Nhanvien
+        {
+            public string iduser { get; set; }
+            public string username_ { get; set; }
+            public string password_ { get; set; }
+            public string hoten { get; set; }
+            public string ngaysinh { get; set; }
+            public string diachi { get; set; }
+            public string sdt { get; set; }
+            public string email { get; set; }
+            public string ngay { get; set; }
+            public string ngayud { get; set; }
+            public string loaiuser { get; set; }
+            public static string GetAll()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("lydonxs");
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            public static IEnumerable<Nhanvien> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("nhanviens"));
+            }
+            public static IEnumerable<Nhanvien> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("nhanviens");
+                    List<Nhanvien> ds = new List<Nhanvien>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Nhanvien obj = new Nhanvien();
+                        obj.iduser = item.iduser;
+                        obj.hoten = item.hoten;
+                        ds.Add(obj);
+                    }
+                    return ds;
                 }
                 catch (Exception ex)
                 {
@@ -247,9 +353,13 @@ namespace Medical.Models
             }
             public static IEnumerable<Thuoc> GetAllObj()
             {
+                return GetAllObj(Bridge.HttpGetApi("thuocs"));
+            }
+            public static IEnumerable<Thuoc> GetAllObj(string value)
+            {
                 try
                 {
-                    var value = Bridge.HttpGetApi("thuocs");
+                    //var value = Bridge.HttpGetApi("thuocs");
                     List<Thuoc> dsthuoc = new List<Thuoc>();
                     var jarr = JArray.Parse(value);
                     foreach (dynamic item in jarr)
@@ -334,6 +444,205 @@ namespace Medical.Models
         public class Table
         {
             public string Obj { get; set; }
+        }
+
+        public class Nhapkhoct
+        {
+            public string id { get; set; }
+            public string idnhapkho { get; set; }
+            public string idduoc { get; set; }
+            public string tenduoc { get; set; }
+            public string idnguon { get; set; }
+            public string tennguon { get; set; }
+            public string mavach { get; set; }
+            public string losx { get; set; }
+            public string ngaysx { get; set; }
+            public string handung { get; set; }
+            public string baohanh { get; set; }
+            public string numeric { get; set; }
+            public string vat { get; set; }
+            public string chietkhau { get; set; }
+            public string soluongdg { get; set; }
+            public string soluongsd { get; set; }
+            public string soluongn { get; set; }
+            public string soluongx { get; set; }
+            public string dongia { get; set; }
+            public string dongiavat { get; set; }
+            public string sotien { get; set; }
+            public string sotienvat { get; set; }
+            public string ghichu { get; set; }
+            public string tinhtrang { get; set; }
+            public string userid { get; set; }
+            public string userten { get; set; }
+            public string ngayud { get; set; }
+            public string soluongyeucau { get; set; }
+            public static string GetAll()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("nhapkhocts");
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            public static IEnumerable<Nhapkhoct> GetAllObj()
+            {
+                //var value = Bridge.HttpGetApi("nhapkhocts");
+                return GetAllObj(Bridge.HttpGetApi("nhapkhocts"));
+            }
+            public static IEnumerable<Nhapkhoct> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("nhapkhocts");
+                    List<Nhapkhoct> ds = new List<Nhapkhoct>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Nhapkhoct obj = new Nhapkhoct();
+                        obj.id = item.id;
+                        obj.idnhapkho = item.idnhapkho;
+                        obj.idduoc = item.idduoc;
+                        obj.tenduoc = item.tenduoc;
+                        obj.idnguon = item.idnguon;
+                        obj.tennguon = item.tennguon;
+                        obj.mavach = item.mavach;
+                        obj.losx = item.losx;
+                        obj.ngaysx = item.ngaysx;
+                        obj.handung = item.handung;
+                        obj.baohanh = item.baohanh;
+                        obj.numeric = item.numeric;
+                        obj.vat = item.vat;
+                        obj.chietkhau = item.chietkhau;
+                        obj.soluongdg = item.soluongdg;
+                        obj.soluongsd = item.soluongsd;
+                        obj.soluongn = item.soluongn;
+                        obj.soluongx = item.soluongx;
+                        obj.dongia = item.dongia;
+                        obj.dongiavat = item.dongiavat;
+                        obj.sotien = item.sotien;
+                        obj.sotienvat = item.sotienvat;
+                        obj.ghichu = item.ghichu;
+                        obj.tinhtrang = item.tinhtrang;
+                        obj.userid = item.userid;
+                        obj.userten = item.userten;
+                        obj.ngayud = item.ngayud;
+                        obj.soluongyeucau = item.soluongyeucau;
+                        ds.Add(obj);
+                    }
+                    return ds;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Nhapkho
+        {
+            public string id { get; set; }
+            public string idlydonx { get; set; }
+            public string tenlydonx { get; set; }
+            public string idnhacc { get; set; }
+            public string tennhacc { get; set; }
+            public string idkho { get; set; }
+            public string tenkho { get; set; }
+            public string ngay { get; set; }
+            public string ngaytk { get; set; }
+            public string ngayhd { get; set; }
+            public string ngaykk { get; set; }
+            public string ngaynhan { get; set; }
+            public string sophieu { get; set; }
+            public string chietkhau { get; set; }
+            public string chiphivc { get; set; }
+            public string miengiam1 { get; set; }
+            public string miengiam2 { get; set; }
+            public string miengiam3 { get; set; }
+            public string miengiam4 { get; set; }
+            public string miengiam5 { get; set; }
+            public string vat { get; set; }
+            public string sotien { get; set; }
+            public string sotienhd { get; set; }
+            public string nguoinhan { get; set; }
+            public string nguoigiao { get; set; }
+            public string noinhan { get; set; }
+            public string ghichu { get; set; }
+            public string tinhtrang { get; set; }
+            public string userid { get; set; }
+            public string userten { get; set; }
+            public string ngayud { get; set; }
+            public IEnumerable<Nhapkhoct> nhapkhocts { get; set; }
+            public static string GetAll()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("nhapkhos");
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            public static IEnumerable<Nhapkho> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("nhapkhos"));
+            }
+            public static IEnumerable<Nhapkho> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("nhapkhos");
+                    List<Nhapkho> ds = new List<Nhapkho>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Nhapkho obj = new Nhapkho();
+                        obj.id = item.id;
+                        obj.idlydonx = item.idlydonx;
+                        obj.tenlydonx = item.tenlydonx;
+                        obj.idnhacc = item.idnhacc;
+                        obj.tennhacc = item.tennhacc;
+                        obj.idkho = item.idkho;
+                        obj.tenkho = item.tenkho;
+                        obj.ngay = item.ngay;
+                        obj.ngaytk = item.ngaytk;
+                        obj.ngayhd = item.ngayhd;
+                        obj.ngaykk = item.ngaykk;
+                        obj.ngaynhan = item.ngaynhan;
+                        obj.sophieu = item.sophieu;
+                        obj.chietkhau = item.chietkhau;
+                        obj.chiphivc = item.chiphivc;
+                        obj.miengiam1 = item.miengiam1;
+                        obj.miengiam2 = item.miengiam2;
+                        obj.miengiam3 = item.miengiam3;
+                        obj.miengiam4 = item.miengiam4;
+                        obj.miengiam5 = item.miengiam5;
+                        obj.vat = item.vat;
+                        obj.sotien = item.sotien;
+                        obj.sotienhd = item.sotienhd;
+                        obj.nguoinhan = item.nguoinhan;
+                        obj.nguoigiao = item.nguoigiao;
+                        obj.noinhan = item.noinhan;
+                        obj.ghichu = item.ghichu;
+                        obj.tinhtrang = item.tinhtrang;
+                        obj.userid = item.userid;
+                        obj.userten = item.userten;
+                        obj.ngayud = item.ngayud;
+                        obj.nhapkhocts = Nhapkhoct.GetAllObj(item.nhapkhocts);
+                        ds.Add(obj);
+                    }
+                    return ds;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
         }
     }
 }
