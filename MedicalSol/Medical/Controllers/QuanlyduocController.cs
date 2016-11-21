@@ -39,11 +39,8 @@ namespace Medical.Controllers
         }
         public ActionResult Xuatban()
         {
-            Data.XuatBan xuatban = new Data.XuatBan(Data.Kho.GetAllObj());
-            //return View(bietduocs);
-            var data = new Data();
-            data.val = DataProcess.ConvertObjectToJsonString(xuatban);
-            return View(data);
+            ViewData["page"] = "page_duoc_xuatban";
+            return View(Data.Kho.GetAllObj());
         }        
     }
 }

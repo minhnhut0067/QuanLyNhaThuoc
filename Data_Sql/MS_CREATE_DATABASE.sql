@@ -7,6 +7,7 @@ CREATE ROLE msolution LOGIN
   
 -- Database: ms_medical
 -- DROP DATABASE ms_medical;
+DROP DATABASE ms_root;
 CREATE DATABASE ms_root WITH OWNER = msolution ENCODING = 'UTF8'
 TABLESPACE = pg_default LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252'
 CONNECTION LIMIT = -1;

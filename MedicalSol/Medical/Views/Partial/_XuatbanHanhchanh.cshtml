@@ -4,88 +4,15 @@
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="@ViewData["page"]_captheotoa_label" style="">
-                            <input id="@ViewData["page"]_captheotoa_chk" class="" type="checkbox" aria-label="Cấp theo toa bác sĩ">
-                        </span>
-                        <input style="background-color:#fff;" id="@ViewData["page"]_khachvanglai" type="text" class="form-control checkbox-placeholder input-sm" placeholder="Khách vãng lai" disabled aria-describedby="@ViewData["page"]_khachvanglai_label">
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <div class="input-group row">
-                        <span class="input-group-addon" id="@ViewData["page"]_hoten_label" style="min-width:90px;">Họ tên</span>
-                        <input id="@ViewData["page"]_hoten" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_hoten_label">
-                        @*<a href="#" class="input-group-addon" id="@ViewData["page"]_ngaycap_calendar"><i class="fa fa-calendar"></i></a>*@
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="@ViewData["page"]_dienthoai_label" style="min-width:90px;">SĐT</span>
-                        <input id="@ViewData["page"]_dienthoai" type="text" class="form-control input-sm" placeholder="Ex:0909xxxxxx" aria-describedby="@ViewData["page"]_dienthoai_label">
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="@ViewData["page"]_ngaysinh_label" style="min-width:90px;">Ngày sinh</span>
-                        <input id="@ViewData["page"]_ngaysinh" type="text" class="form-control input-sm" placeholder="dd/mm/yyyy" aria-describedby="@ViewData["page"]_ngaysinh_label">
-                        <a href="#" class="input-group-addon" id="@ViewData["page"]_ngaysinh_calendar"><i class="fa fa-calendar"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <div class="input-group row">
-                        <span class="input-group-addon" id="@ViewData["page"]_namsinh_label" style="min-width:90px;">Năm sinh</span>
-                        <input id="@ViewData["page"]_namsinh" type="text" class="form-control input-sm" placeholder="Năm sinh" aria-describedby="@ViewData["page"]_namsinh_label">
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <div class="input-group">
-                        <input style="text-align:center; background-color:#fff" id="@ViewData["page"]_tuoi" type="text" class="form-control input-sm" disabled placeholder="" aria-describedby="@ViewData["page"]_tuoi_label" value="0">
-                        <span class="input-group-addon" id="@ViewData["page"]_tuoi_label" style="min-width:90px;">tuổi</span>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="@ViewData["page"]_diachi_label" style="min-width:90px;">Địa chỉ</span>
-                        <input id="@ViewData["page"]_diahchi" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_diachi_label">
-                    </div>
-                </div>
 
-            </div>
             <br />
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <div class="input-group" style="margin-right:-15px;">
-                        <span class="input-group-addon" id="@ViewData["page"]_bavsikham_label" style="min-width:90px;">Bác sĩ khám</span>
-                        <input id="@ViewData["page"]_bavsikham" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_bavsikham_label">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <div class="input-group" style="">
-                        <span class="input-group-addon" id="@ViewData["page"]_cosoyte_label" style="min-width:90px;">Cở sở y tế</span>
-                        <input id="@ViewData["page"]_cosoyte" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_cosoyte_label">
-                        <a href="#" class="input-group-addon" id="@ViewData["page"]_cosoyte_filter" onclick="filter_click(this)"><i class="fa fa-sort-desc"></i></a>
-                    </div>
-                </div>
-            </div>
+
             <br />
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="@ViewData["page"]_chandoan_label" style="min-width:90px;">Chẩn đoán</span>
-                        <input id="@ViewData["page"]_chandoan_ma" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_chandoan_label" style="width:15%">
-                        <input id="@ViewData["page"]_chandoan_ten" type="text" class="form-control input-sm" placeholder="" aria-describedby="" style="width:85%">
-                        <a href="#" class="input-group-addon" id="@ViewData["page"]_chandoan_filter"><i class="fa fa-sort-desc"></i></a>
-                    </div>
-                </div>
-            </div>
+
+            <br />
+
+            <br />
+
         </div>
     </div>
 </div>

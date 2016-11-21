@@ -1167,9 +1167,12 @@
 }
 
 .input-label {
-    background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
+    /*background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;*/
+    background:inherit;
     padding: 6px;
     min-width: 90px;
+    border:0;
+    text-align:left;
 }
 
 .input-filter {
