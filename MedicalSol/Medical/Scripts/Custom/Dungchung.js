@@ -606,8 +606,8 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
 function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
     try
     {
-        //v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds + "}";
-        v_ds = JSON.parse("{\"Name\":\"Table\",\"Rows\":" + v_ds + "}");
+        v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds.replace('"', '\"').replace("\'", "'") + "}";//.replace('"', '\\"')        
+        v_ds = JSON.parse(v_ds);
         rhtml = "";
         rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
         rhtml += "<div class=\"col-lg-12 col-sm-12 col-md-12 col-xs-12\"\">";
@@ -651,7 +651,7 @@ function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
     }
     catch(ex)
     {
-        return "";
+        return ex.message;
     }
 }
 

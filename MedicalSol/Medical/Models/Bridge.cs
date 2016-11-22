@@ -11,7 +11,8 @@ namespace Medical.Models
 {
     public class Bridge
     {
-        private static string DefaultUrl = "http://localhost:8080";
+        //private static string DefaultUrl = "http://localhost:8080";
+        private static string DefaultUrl = "http://localhost:48187";
         //private static string DefaultUrl = "http://www.cybermedisoft.com/apisol";
         public static string HttpPostApi(string apiControl, Object obj)
         {

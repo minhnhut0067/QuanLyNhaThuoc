@@ -272,7 +272,7 @@ namespace ApiManageSolution.Models
                             item.id_loaiduoc = dr["id_loaiduoc"].ToString();
                             item.stt = dr["stt"].ToString();
                             item.ma = dr["ma"].ToString();
-                            item.ten = dr["ten"].ToString().Replace("\"", "'");
+                            item.ten = dr["ten"].ToString().Replace('"','\'');
                             item.dang = dr["dang"].ToString();
                             item.hamluong = dr["hamluong"].ToString();
                             item.donvidg = dr["donvidg"].ToString();
