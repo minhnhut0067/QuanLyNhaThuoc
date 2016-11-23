@@ -512,8 +512,7 @@ function ms_enable_arr_from(v_id_start, v_id_arr) {
 //basic
 
 function f_create_btn_group(v_id, v_id_arr, v_style_arr, v_name_arr) {
-    try
-    {
+    try {
         rhtml = "";
         if (v_id != "" && v_id_arr != "") {
             for (var i = 0; i < v_id_arr.split('~').length ; i++) {
@@ -522,16 +521,14 @@ function f_create_btn_group(v_id, v_id_arr, v_style_arr, v_name_arr) {
         }
         return rhtml;
     }
-    catch(ex)
-    {
+    catch (ex) {
         return "";
     }
 }
 
 function f_create_input(v_id, v_type, v_name) {
-    try
-    {
-        rhtml = "";        
+    try {
+        rhtml = "";
         if (v_id != "") {
             switch (v_type) {
                 case "input":
@@ -540,7 +537,6 @@ function f_create_input(v_id, v_type, v_name) {
                     break;
                 case "filter":
                     rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
-                    rhtml += "<input id=\"" + v_id + "_val\" type=\"hidden\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"\">";
                     rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
                     rhtml += "<a href=\"#\" class=\"input-group-addon input-filter\" id=\"" + v_id + "_filter\" onclick=\"filter_click(this);\"><i class=\"fa fa-sort-desc\"></i></a>";
                     break;
@@ -563,15 +559,13 @@ function f_create_input(v_id, v_type, v_name) {
         }
         return rhtml;
     }
-    catch(ex)
-    {
+    catch (ex) {
         return "";
     }
 }
 
 function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
-    try
-    {
+    try {
         var rhtml = "";
         if (v_id != "" && v_obj != "") {
             var data = {
@@ -583,10 +577,9 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
                 data: data,
                 success: function (result) {
                     if (result != "") {
-                        rhtml =  f_create_table_html(JSON.parse(result), v_id, v_colname, v_col, v_footer);
+                        rhtml = f_create_table_html(JSON.parse(result), v_id, v_colname, v_col, v_footer);
                     }
-                    else
-                    {
+                    else {
                         rhtml = "";
                     }
                 },
@@ -597,16 +590,14 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
         }
         return rhtml;
     }
-    catch(ex)
-    {
+    catch (ex) {
         return "";
     }
 }
 
 function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
-    try
-    {
-        v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds.replace('"', '\"').replace("\'", "'") + "}";//.replace('"', '\\"')        
+    try {
+        v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds.replace('"', '\"').replace("\'", "'") + "}";
         v_ds = JSON.parse(v_ds);
         rhtml = "";
         rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
@@ -633,7 +624,7 @@ function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
             rhtml += "</tr>";
             rhtml += "</tfoot>";
         }
-        if (v_ds.Rows.length > 0) {                    
+        if (v_ds.Rows.length > 0) {
             rhtml += "<tbody>";
             for (var i = 0; i < v_ds.Rows.length; i++) {
                 rhtml += "<tr>";
@@ -649,8 +640,7 @@ function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
         rhtml += "</div>";
         return rhtml;
     }
-    catch(ex)
-    {
+    catch (ex) {
         return ex.message;
     }
 }
@@ -664,19 +654,54 @@ function f_call_action_no_data(action, controller) {
     });
 }
 
-function f_filter_select(data) {
-    try
-    {
+function f_tab_show(v_tab_in, v_tab_to) {
+    try {
+        $(".nav-tabs").find("[aria-controls=\"" + v_tab_in + "\"]").parent().removeClass("active");
+        $("#" + v_tab_in + "").removeClass("in active");
+        $(".nav-tabs").find("[aria-controls=\"" + v_tab_to + "\"]").parent().addClass("active");
+        $("#" + v_tab_to + "").addClass("in active");
+    }
+    catch (ex)
+    { }
+}
+
+function f_filter_select(v_obj, v_text) {
+    try {
+        var data;
+        switch (v_obj) {
+            case "nhomkhos":
+                data = {
+                    Obj: "nhomkhos",
+                    Col: "ma~ten",
+                    Val: v_text
+                };
+                break;
+            case "lydonxs":
+                data = {
+                    Obj: "lydonxs",
+                    Col: "ma~ten",
+                    Val: v_text
+                };
+                break;
+            case "khos":
+                data = {
+                    Obj: "khos",
+                    Col: "ma~ten",
+                    Val: v_text
+                };
+                break;
+            default:
+                break;
+        }
         $.ajax({
             type: "POST",
             url: "../Process/Filter",
             data: data,
             success: function (result) {
                 if (result == "") {
-                    result = "{\"Name\":\"Table\",\"Rows\":[]}";                    
+                    result = "{\"Name\":\"Table\",\"Rows\":[]}";
                 }
-                switch(data.Obj)
-                {
+                switch (data.Obj) {
                     case "nhomkhos":
                         f_filter_nhomkho_callback(JSON.parse(result));
                         break;
@@ -691,7 +716,7 @@ function f_filter_select(data) {
                         break;
                     default:
                         break;
-                }                
+                }
                 //else {
                 //    f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                 //}
@@ -712,14 +737,65 @@ function f_filter_select(data) {
                         break;
                     default:
                         break;
-                }                
+                }
             }
         });
     }
-    catch(ex)
-    {
+    catch (ex) {
         return "";
     }
 }
 
+function f_save_data(v_obj) {
+    try {
+        var v_val;
+        switch (v_obj) {
+            case "khos":
+                if (ms_gval("page_duoc_khaibaokho_ten", "value") == "") {
+                    alert("Vui lòng nhập tên kho");
+                    ms_focus("page_duoc_khaibaokho_ten");
+                    return null;
+                }
+                v_val = {
+                    Ma: ms_gval("page_duoc_khaibaokho_ma", "value"),
+                    Ten: ms_gval("page_duoc_khaibaokho_ten", "value"),
+                    Idnhom: ms_gval("page_duoc_khaibaokho_nhomkho", "selectedvalue"),
+                    Ghichu: ms_gval("page_duoc_khaibaokho_ghichu", "value")
+                };
+                break;
+            default:
+                break;
+        }
+        debugger;
+        return "";
+        $.ajax({
+            type: "POST",
+            url: "../Process/Save",
+            data: { Obj: v_obj, Val: v_val },
+            success: function (result) {
+            },
+            error: function (result) {
+            }
+        });
+    }
+    catch (ex) {
+    }
+}
+
+function f_get_ma(v_obj, v_val) {
+    try {
+        $.ajax({
+            type: "POST",
+            url: "../Process/Save",
+            data: { Obj: v_obj, Val: v_val },
+            success: function (result) {
+            },
+            error: function (result) {
+            }
+        });
+    }
+    catch (ex) {
+        return "";
+    }
+}
 
