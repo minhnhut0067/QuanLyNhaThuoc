@@ -441,7 +441,7 @@ namespace Medical.Models
             public string Val { get; set; }
         }
 
-        public class GetVal
+        public class CreateVal
         {
             public string Obj { get; set; }
             public string Val { get; set; }

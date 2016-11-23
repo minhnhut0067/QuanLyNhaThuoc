@@ -413,8 +413,14 @@ function btn_click(v_this) {
             f_tab_show("danhsach", "thonhtin");
             break;
         case "page_duoc_khaibaokho_themmoi":
-            f_get_ma("khos");
-            enable(true);
+            f_set_ma("khos", "ma");
+            //$.when(f_get_ma("khos", "ma")).done(function (ma) {
+            //    // the code here will be executed when all four ajax requests resolve.
+            //    // a1, a2, a3 and a4 are lists of length 3 containing the response text,
+            //    // status, and jqXHR object for each of the four ajax calls respectively.
+            //    ms_sval("page_duoc_khaibaokho_ma", "value", ma);
+            //    enable(true);
+            //});
             break;
         case "page_duoc_khaibaokho_boqua":
             f_clear_arr(khaibaokho_input);

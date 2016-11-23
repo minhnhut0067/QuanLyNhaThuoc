@@ -55,18 +55,17 @@ namespace Medical.Controllers
         }
 
         [HttpPost]
-        public string GetMa(Data.GetVal getval)
+        public string CreateVal(Data.CreateVal createval)
         {
             try
             {
-                var result = "";
-                if (getval.Obj != "")
+                if (createval.Obj != "")
                 {
-                    JObject jo = JObject.Parse(Bridge.HttpPostApi("Search", getval));
+                    return JObject.Parse(Bridge.HttpPostApi("CreateVal", createval))["result"].Value<string>();
                 }
-                return result;
+                return "";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return "";
             }

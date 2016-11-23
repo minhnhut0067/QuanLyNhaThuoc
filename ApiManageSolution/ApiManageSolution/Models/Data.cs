@@ -32,7 +32,7 @@ namespace ApiManageSolution.Models
                             else
                             {
                                 sqlwhere += "||a." + item + "";
-                            }                            
+                            }
                         }
                         sqlwhere += " ILIKE '%" + search.val + "%'";
                         sqlwhere += "\nLIMIT 50";
@@ -49,6 +49,41 @@ namespace ApiManageSolution.Models
                             return Users.GetAll(sqlwhere);
                         default:
                             return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class CreateVal
+        {
+            public string obj { get; set; }
+            public string val { get; set; }
+            public string result { get; set; }
+            public static CreateVal CreateMa(string v_obj)
+            {
+                try
+                {
+                    string sql = "";
+                    if (v_obj != "")
+                    {
+                        sql = "select ";
+                        switch (v_obj)
+                        {
+                            case "khos":
+                                sql += "'KHO'||lpad(max(to_number(replace(ma,'KHO',''))) + 1,4,'0') as val from dmkho";
+                                break;
+                            default:
+                                break;
+                        }
+                        return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? new CreateVal { obj = "", val = "", result = dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["val"].ToString() } : null;
+                    }
+                    else
+                    {
+                        return null;
                     }
                 }
                 catch (Exception ex)
@@ -272,7 +307,7 @@ namespace ApiManageSolution.Models
                             item.id_loaiduoc = dr["id_loaiduoc"].ToString();
                             item.stt = dr["stt"].ToString();
                             item.ma = dr["ma"].ToString();
-                            item.ten = dr["ten"].ToString().Replace('"','\'');
+                            item.ten = dr["ten"].ToString().Replace('"', '\'');
                             item.dang = dr["dang"].ToString();
                             item.hamluong = dr["hamluong"].ToString();
                             item.donvidg = dr["donvidg"].ToString();
@@ -321,7 +356,7 @@ namespace ApiManageSolution.Models
             }
             public static IEnumerable<Lydonxs> GetAll(string v_where)
             {
-                                try
+                try
                 {
                     DataSet ds = new DataSet();
                     List<Lydonxs> lts = new List<Lydonxs>();
@@ -498,7 +533,7 @@ namespace ApiManageSolution.Models
                     "\nLEFT JOIN dmlydonx b ON b.id = a.idlydonx " +
                     "\nLEFT JOIN dmnhacc c ON c.id = a.idnhacc " +
                     "\nLEFT JOIN dmkho d ON d.id = a.idkho " +
-                    "\nLEFT JOIN users e ON e.id = a.userid " 
+                    "\nLEFT JOIN users e ON e.id = a.userid "
                     + v_where;
 
                     //+ "\nLIMIT 50";
@@ -540,7 +575,7 @@ namespace ApiManageSolution.Models
                             item.userid = dr["userid"].ToString();
                             item.userid = dr["userten"].ToString();
                             item.userid = dr["ngayud"].ToString();
-                            item.nhapkhocts = Nhapkhocts.GetAll("\nWHERE idnhapkho =" + dr["id"].ToString());                                                        
+                            item.nhapkhocts = Nhapkhocts.GetAll("\nWHERE idnhapkho =" + dr["id"].ToString());
                             lts.Add(item);
                         }
                     }

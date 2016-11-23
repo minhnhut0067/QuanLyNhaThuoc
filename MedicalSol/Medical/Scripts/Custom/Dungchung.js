@@ -782,17 +782,27 @@ function f_save_data(v_obj) {
     }
 }
 
-function f_get_ma(v_obj, v_val) {
+function f_set_ma(v_obj, v_val) {
     try {
+        var resultval = "";
+        var data = { Obj: v_obj, Val: v_val };
         $.ajax({
             type: "POST",
-            url: "../Process/Save",
-            data: { Obj: v_obj, Val: v_val },
+            url: "../Process/CreateVal",
+            data: data,
             success: function (result) {
+                resultval = result;
+                debugger;
+                ms_sval("page_duoc_khaibaokho_ma", "value", result);
             },
+            //else {
+            //    f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+            //}
             error: function (result) {
+                resultval = "";
             }
         });
+        return resultval;        
     }
     catch (ex) {
         return "";
