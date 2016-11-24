@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace Medical.Models
@@ -13,17 +10,6 @@ namespace Medical.Models
     public class Data
     {
         private static string DefaultUrl = "http://localhost:48187/";
-        static HttpClient client = new HttpClient();
-
-        public static async Task RunAsync()
-        {
-            // New code:
-            client.BaseAddress = new Uri(DefaultUrl);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            Console.ReadLine();
-        }
 
         public class User
         {
@@ -121,6 +107,58 @@ namespace Medical.Models
 
             }
         }
+        public class Kho
+        {
+            public string id { get; set; }
+            public string id_nhomkho { get; set; }
+            public string nhomkho { get; set; }
+            public string ma { get; set; }
+            public string stt { get; set; }
+            public string ten { get; set; }
+            public string ghichu { get; set; }
+            public static string GetAll()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("khos");
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            public static IEnumerable<Kho> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("khos"));
+            }
+            public static IEnumerable<Kho> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("khos");
+                    List<Kho> dskho = new List<Kho>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Kho kho = new Kho();
+                        kho.id = item.id;
+                        kho.id_nhomkho = item.id_nhomkho;
+                        kho.nhomkho = item.nhomkho;
+                        kho.ma = item.ma;
+                        kho.stt = item.stt;
+                        kho.ten = item.ten;
+                        kho.ghichu = item.ghichu;
+                        dskho.Add(kho);
+                    }
+                    return dskho;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
 
         public class NhomKho
         {
@@ -169,83 +207,9 @@ namespace Medical.Models
                     return null;
                 }
             }
-            public static async Task<IEnumerable<NhomKho>> GetallAsync(string v_obj)
-            {
-                IEnumerable<NhomKho> nhomkho = null;
-                HttpResponseMessage response = await client.GetAsync(DefaultUrl + "api/" + v_obj);
-                if (response.IsSuccessStatusCode)
-                {
-                    nhomkho = await response.Content.ReadAsAsync<IEnumerable<NhomKho>>();
-                }
-                return nhomkho;
-            }
 
         }
 
-        public class Kho
-        {
-            public string id { get; set; }
-            public string id_nhomkho { get; set; }
-            public string nhomkho { get; set; }
-            public string ma { get; set; }
-            public string stt { get; set; }
-            public string ten { get; set; }
-            public string ghichu { get; set; }
-            public static string GetAll()
-            {
-                try
-                {
-                    var value = Bridge.HttpGetApi("khos");
-                    return value;
-                }
-                catch (Exception ex)
-                {
-                    return ex.Message;
-                }
-            }
-            public static IEnumerable<Kho> GetAllObj()
-            {
-                //Task<IEnumerable<Object>> khos = Bridge.GetProductAsync("");
-                return GetAllObj(Bridge.HttpGetApi("khos"));
-            }
-            public static IEnumerable<Kho> GetAllObj(string value)
-            {
-                try
-                {
-                    //var value = Bridge.HttpGetApi("khos");
-                    List<Kho> dskho = new List<Kho>();
-                    var jarr = JArray.Parse(value);
-                    foreach (dynamic item in jarr)
-                    {
-                        Kho kho = new Kho();
-                        kho.id = item.id;
-                        kho.id_nhomkho = item.id_nhomkho;
-                        kho.nhomkho = item.nhomkho;
-                        kho.ma = item.ma;
-                        kho.stt = item.stt;
-                        kho.ten = item.ten;
-                        kho.ghichu = item.ghichu;
-                        dskho.Add(kho);
-                    }
-                    return dskho;
-                }
-                catch (Exception ex)
-                {
-                    return null;
-                }
-            }
-            public static async Task<IEnumerable<Kho>> GetallAsync(string v_obj)
-            {
-                IEnumerable<Kho> kho = null;
-                HttpResponseMessage response = await client.GetAsync(DefaultUrl + "api/" + v_obj);
-                if (response.IsSuccessStatusCode)
-                {
-                    kho = await response.Content.ReadAsAsync<IEnumerable<Kho>>();
-                }
-                return kho;
-            }
-        }
-        
         public class Lydonx
         {
             public string id { get; set; }
@@ -288,16 +252,6 @@ namespace Medical.Models
                 {
                     return null;
                 }
-            }
-            public static async Task<IEnumerable<Lydonx>> GetallAsync(string v_obj)
-            {
-                IEnumerable<Lydonx> lydonx = null;
-                HttpResponseMessage response = await client.GetAsync(DefaultUrl + "api/" + v_obj);
-                if (response.IsSuccessStatusCode)
-                {
-                    lydonx = await response.Content.ReadAsAsync<IEnumerable<Lydonx>>();
-                }
-                return lydonx;
             }
         }
 
@@ -496,6 +450,13 @@ namespace Medical.Models
         {
             public string Obj { get; set; }
             public Object val { get; set; }
+        }
+
+        public class Del
+        {
+            public string obj { get; set; }
+            public string key { get; set; }
+            public string result { get; set; }
         }
 
         public class Table

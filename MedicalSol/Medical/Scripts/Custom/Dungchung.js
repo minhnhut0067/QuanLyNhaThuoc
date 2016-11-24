@@ -64,12 +64,13 @@ $(document).ready(function () {
         //}
     });
 
-    $('.nav-tabs a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-    })
+    //$(".nav-tabs").find("[aria-controls=\"danhsach\"]").on("click", function () {
+    //    if (!$(this).parent().hasClass("active"))
+    //    {
+    //        alert($(this));
+    //    }        
+    //});
 });
-
 //Javascript
 
 //basic
@@ -540,6 +541,34 @@ function ms_cap(v_this) {
 }
 //basic
 
+function f_table_reload(v_obj) {
+    try{
+        var data = { Obj: v_obj};
+        $.ajax({
+            type: "POST",
+            url: "../Process/Table",
+            data: data,
+            success: function (result) {
+                switch(v_obj)
+                {
+                    case "khos":
+                        $("#page_duoc_khaibaokho_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaokho", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false));
+                        $('#page_duoc_khaibaokho_gidview').DataTable();
+                        $('#page_duoc_khaibaokho_gidview').parent().css("overflow-x", "scroll");
+                        break;
+                    default:
+                        break;
+                }
+                //var ahtml = f_create_table_html(v_obj, result, "page_duoc_khaibaokho", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false);
+            },
+            error: function (result) {
+            }
+        });
+    }
+    catch(ex)
+    {}
+}
+
 function f_create_btn_group(v_id, v_id_arr, v_style_arr, v_name_arr) {
     try {
         rhtml = "";
@@ -696,6 +725,18 @@ function f_tab_show(v_tab_in, v_tab_to) {
     { }
 }
 
+function f_tab_click(v_this, v_obj, v_bool) {
+    try {
+        if (v_bool) {
+            if (!$(v_this).parent().hasClass("active")) {
+                f_table_reload(v_obj);
+            }
+        }
+    }
+    catch (ex)
+    { }
+}
+
 function f_filter_select(v_obj, v_text) {
     try {
         var data;
@@ -804,7 +845,6 @@ function f_save_data(v_obj) {
             url: "../Process/" + url,
             data: data,
             success: function (result) {
-                debugger;
                 switch (v_obj) {
                     case "khos":
                         f_dmkho_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), false);
@@ -823,7 +863,6 @@ function f_save_data(v_obj) {
 
 function f_set_val(v_id, v_obj, v_val) {
     try {
-        var resultval = "";
         var data = { Obj: v_obj, Val: v_val };
         $.ajax({
             type: "POST",
@@ -837,10 +876,37 @@ function f_set_val(v_id, v_obj, v_val) {
                 ms_sval(v_id, "value", "");
             }
         });
-        return resultval;        
     }
     catch (ex) {
         ms_sval(v_id, "value", "");
+    }
+}
+
+function f_del_record(v_obj, v_id) {
+    try {
+        var resultval = "";
+        var data = { obj: v_obj, key: v_id };
+        $.ajax({
+            type: "POST",
+            url: "../Process/DelRecode",
+            data: data,
+            success: function (result) {
+                if(result == "True")
+                {
+                    f_table_reload(v_obj);
+                    alert("Xóa dữ liệu thành công !");
+                }
+                //resultval = result;
+                //ms_sval(v_id, "value", result);
+            },
+            error: function (result) {
+                //ms_sval(v_id, "value", "");
+            }
+        });
+        return resultval;
+    }
+    catch (ex) {
+        aler("Lỗi hệ thống ! Không xóa được dữ liệu")
     }
 }
 

@@ -18,7 +18,7 @@ var filter_ds = null;
 var khaibaokho_input = "page_duoc_khaibaokho_ma~page_duoc_khaibaokho_ten~page_duoc_khaibaokho_nhomkho~page_duoc_khaibaokho_ghichu";
 //Filter-End
 function f_clear_arr(v_id_arr) {
-
+    f_dmkho_show(null, false);
 }
 
 function f_dmkho_show(v_ds, v_bool)
@@ -451,6 +451,11 @@ function btn_click(v_this) {
             break;
         case "page_duoc_khaibaokho_luu":
             f_save_data("khos");
+            break;
+        case "page_duoc_khaibaokho_sua":
+            enable(true);
+            break;
+        case "page_duoc_khaibaokho_xoa":
             break;
         default:
             break;

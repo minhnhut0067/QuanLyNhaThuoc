@@ -63,34 +63,13 @@ namespace ApiManageSolution.Models
             public string obj { get; set; }
             public string val { get; set; }
             public string result { get; set; }
-            //public static CreateVal CreateMa(string v_obj)
-            //{
-            //    try
-            //    {
-            //        string sql = "";
-            //        if (v_obj != "")
-            //        {
-            //            sql = "select ";
-            //            switch (v_obj)
-            //            {
-            //                case "khos":
-            //                    sql += "'KHO'||lpad(max(to_number(replace(ma,'KHO',''))) + 1,4,'0') as val from dmkho";
-            //                    break;
-            //                default:
-            //                    break;
-            //            }
-            //            return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? new CreateVal { obj = "", val = "", result = dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["val"].ToString() } : null;
-            //        }
-            //        else
-            //        {
-            //            return null;
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        return null;
-            //    }
-            //}
+        }
+
+        public class Del
+        {
+            public string obj { get; set; }
+            public string key { get; set; }
+            public bool result { get; set; }
         }
 
         public class Users
@@ -148,51 +127,6 @@ namespace ApiManageSolution.Models
             }
         }
 
-        public class Nhomkhos
-        {
-            public string id { get; set; }
-            public string ma { get; set; }
-            public string stt { get; set; }
-            public string ten { get; set; }
-            public string userid { get; set; }
-            public static IEnumerable<Nhomkhos> GetAll()
-            {
-                return GetAll("\nWHERE 1=1");
-            }
-            public static IEnumerable<Nhomkhos> GetAll(string v_where)
-            {
-                try
-                {
-                    DataSet ds = new DataSet();
-                    List<Nhomkhos> lts = new List<Nhomkhos>();
-                    string sql = "";
-                    sql = "SELECT a.id,a.ma,a.stt,a.ten,a.userid "
-                    + "\nFROM dmnhomkho a" + v_where;
-                    //+ "\nLIMIT 50";
-
-                    ds = dbHelper.getDataSetbySql(sql);
-                    if (ds != null && ds.Tables[0].Rows.Count > 0)
-                    {
-                        foreach (DataRow dr in ds.Tables[0].Rows)
-                        {
-                            Nhomkhos item = new Nhomkhos();
-                            item.id = dr["id"].ToString();
-                            item.ma = dr["ma"].ToString();
-                            item.stt = dr["stt"].ToString();
-                            item.ten = dr["ten"].ToString();
-                            item.userid = dr["userid"].ToString();
-                            lts.Add(item);
-                        }
-                    }
-                    return lts;
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-        }
-
         public class Khos
         {
             public string id { get; set; }
@@ -202,6 +136,32 @@ namespace ApiManageSolution.Models
             public string stt { get; set; }
             public string ten { get; set; }
             public string ghichu { get; set; }
+            public static string Getid()
+            {
+                try
+                {
+                    string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from dmkho";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static string Getma()
+            {
+                try
+                {
+                    string sql = "select 'KHO'||lpad(case when max(to_number(replace(ma,'KHO',''))) is not null then max(to_number(replace(ma,'KHO',''))) + 1 else 1 end,4,'0') as ma from dmkho";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
             public static IEnumerable<Khos> GetAll()
             {
                 return GetAll("\nWHERE 1=1");
@@ -241,37 +201,11 @@ namespace ApiManageSolution.Models
                 }
 
             }
-            public static string Getid()
-            {
-                try
-                {
-                    string sql = "select max(id) + 1 as id from dmkho";
-
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
-                }
-                catch (Exception ex)
-                {
-                    return "";
-                }
-            }
-            public static string Getma()
-            {
-                try
-                {
-                    string sql = "select 'KHO'||lpad(max(to_number(replace(ma,'KHO',''))) + 1,4,'0') as ma from dmkho";
-
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
-                }
-                catch (Exception ex)
-                {
-                    return "";
-                }
-            }
             public static IEnumerable<Khos> Upd(Khos data)
             {
                 try
                 {
-                    string sql = "";
+                    var sql = "";
                     var irec = 0;
                     if (data.id == null)
                     {
@@ -306,6 +240,76 @@ namespace ApiManageSolution.Models
 
                 }
                 catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            public static bool Del(Del data)
+            {
+                try
+                {
+                    if (data.obj != null && data.obj != "")
+                    {
+                        var sql = "";
+                        var irec = 0;
+                        sql = "delete dmkho where id =" + data.key;
+                        irec = dbHelper.ExecuteQuery(sql);
+                        if (irec == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        public class Nhomkhos
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string stt { get; set; }
+            public string ten { get; set; }
+            public string userid { get; set; }
+            public static IEnumerable<Nhomkhos> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Nhomkhos> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Nhomkhos> lts = new List<Nhomkhos>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.stt,a.ten,a.userid "
+                    + "\nFROM dmnhomkho a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Nhomkhos item = new Nhomkhos();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.stt = dr["stt"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            item.userid = dr["userid"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
                 {
                     return null;
                 }

@@ -21,10 +21,11 @@ namespace Medical.Controllers
 
         #region Tiện Ích
         public ActionResult Khaibaokho()
-        {            
-            ViewData["page"] = "page_duoc_khaibaokho";            
-            //return View(Data.Kho.GetAllObj());
-            return View(Data.Kho.GetallAsync("khos"));
+        {
+            //Data.RunAsync().Wait();
+            ViewData["page"] = "page_duoc_khaibaokho";
+            return View(Data.Kho.GetAllObj());
+            //return View(Data.Kho.GetallAsync("khos"));
         }
 
         public ActionResult Khaibaothuoc()

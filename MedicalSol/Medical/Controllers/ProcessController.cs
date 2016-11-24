@@ -72,36 +72,18 @@ namespace Medical.Controllers
         }
 
         [HttpPost]
-        public string SaveKho(Data.Kho data)
+        public string DelRecode(Data.Del data)
         {
             try
             {
-                List<Object> lts = new List<Object>();
-                foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Khos", data)))
+                if (data.obj != null && data.key != null)
                 {
-                    lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));
+                    return JObject.Parse(Bridge.HttpPostApi("DelRecord", data))["result"].Value<string>();
                 }
-                Data.AjaxData ajaxdata = new Data.AjaxData(lts);
-                return new JavaScriptSerializer().Serialize(ajaxdata);
-            }
-            catch (Exception ex)
-            {
-                return "";
-            }
-        }
-
-        [HttpPost]
-        public string DelKho(Data.Kho data)
-        {
-            try
-            {
-                List<Object> lts = new List<Object>();
-                foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Khos", data)))
+                else
                 {
-                    lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));
+                    return "";
                 }
-                Data.AjaxData ajaxdata = new Data.AjaxData(lts);
-                return new JavaScriptSerializer().Serialize(ajaxdata);
             }
             catch (Exception ex)
             {
@@ -129,7 +111,7 @@ namespace Medical.Controllers
                         }
                     }
                     Data.AjaxData data = new Data.AjaxData(lts);
-                    return new JavaScriptSerializer().Serialize(data);
+                    return new JavaScriptSerializer().Serialize(lts);
                 }
                 else
                 {
@@ -139,6 +121,25 @@ namespace Medical.Controllers
             catch (Exception ex)
             {
                 return ex.Message;
+            }
+        }
+
+        [HttpPost]
+        public string SaveKho(Data.Kho data)
+        {
+            try
+            {
+                List<Object> lts = new List<Object>();
+                foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Khos", data)))
+                {
+                    lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));
+                }
+                Data.AjaxData ajaxdata = new Data.AjaxData(lts);
+                return new JavaScriptSerializer().Serialize(ajaxdata);
+            }
+            catch (Exception ex)
+            {
+                return "";
             }
         }
     }
