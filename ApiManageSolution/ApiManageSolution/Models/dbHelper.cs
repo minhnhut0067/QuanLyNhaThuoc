@@ -49,7 +49,7 @@ namespace ApiManageSolution.Models
             }
         }
 
-        public static bool ExecuteQuery(string SqlQuery)
+        public static int ExecuteQuery(string SqlQuery)
         {
             try
             {
@@ -57,12 +57,12 @@ namespace ApiManageSolution.Models
             }
             catch (Exception)
             {
-                return false;
+                return 0;
             }
 
         }
 
-        public static bool ExecuteQuery(string SqlQuery, string connstr)
+        public static int ExecuteQuery(string SqlQuery, string connstr)
         {
             try
             {
@@ -71,15 +71,15 @@ namespace ApiManageSolution.Models
                     conn.Open();
 
                     NpgsqlCommand cmd = new NpgsqlCommand(SqlQuery, conn);
-                    cmd.ExecuteNonQuery();
+                    int e = cmd.ExecuteNonQuery();
 
                     conn.Close();
-                    return true;
+                    return e;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                return 0;
             }
         }
 

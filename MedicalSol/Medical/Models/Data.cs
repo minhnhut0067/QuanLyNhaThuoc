@@ -3,13 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Medical.Models
 {
     public class Data
     {
-        public string val { get; set; }
+        private static string DefaultUrl = "http://localhost:48187/";
+        static HttpClient client = new HttpClient();
+
+        public static async Task RunAsync()
+        {
+            // New code:
+            client.BaseAddress = new Uri(DefaultUrl);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            Console.ReadLine();
+        }
 
         public class User
         {
@@ -155,6 +169,16 @@ namespace Medical.Models
                     return null;
                 }
             }
+            public static async Task<IEnumerable<NhomKho>> GetallAsync(string v_obj)
+            {
+                IEnumerable<NhomKho> nhomkho = null;
+                HttpResponseMessage response = await client.GetAsync(DefaultUrl + "api/" + v_obj);
+                if (response.IsSuccessStatusCode)
+                {
+                    nhomkho = await response.Content.ReadAsAsync<IEnumerable<NhomKho>>();
+                }
+                return nhomkho;
+            }
 
         }
 
@@ -181,6 +205,7 @@ namespace Medical.Models
             }
             public static IEnumerable<Kho> GetAllObj()
             {
+                //Task<IEnumerable<Object>> khos = Bridge.GetProductAsync("");
                 return GetAllObj(Bridge.HttpGetApi("khos"));
             }
             public static IEnumerable<Kho> GetAllObj(string value)
@@ -208,6 +233,16 @@ namespace Medical.Models
                 {
                     return null;
                 }
+            }
+            public static async Task<IEnumerable<Kho>> GetallAsync(string v_obj)
+            {
+                IEnumerable<Kho> kho = null;
+                HttpResponseMessage response = await client.GetAsync(DefaultUrl + "api/" + v_obj);
+                if (response.IsSuccessStatusCode)
+                {
+                    kho = await response.Content.ReadAsAsync<IEnumerable<Kho>>();
+                }
+                return kho;
             }
         }
         
@@ -253,6 +288,16 @@ namespace Medical.Models
                 {
                     return null;
                 }
+            }
+            public static async Task<IEnumerable<Lydonx>> GetallAsync(string v_obj)
+            {
+                IEnumerable<Lydonx> lydonx = null;
+                HttpResponseMessage response = await client.GetAsync(DefaultUrl + "api/" + v_obj);
+                if (response.IsSuccessStatusCode)
+                {
+                    lydonx = await response.Content.ReadAsAsync<IEnumerable<Lydonx>>();
+                }
+                return lydonx;
             }
         }
 
@@ -445,6 +490,12 @@ namespace Medical.Models
         {
             public string Obj { get; set; }
             public string Val { get; set; }
+        }
+
+        public class Save
+        {
+            public string Obj { get; set; }
+            public Object val { get; set; }
         }
 
         public class Table

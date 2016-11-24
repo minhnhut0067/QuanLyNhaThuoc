@@ -72,6 +72,44 @@ namespace Medical.Controllers
         }
 
         [HttpPost]
+        public string SaveKho(Data.Kho data)
+        {
+            try
+            {
+                List<Object> lts = new List<Object>();
+                foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Khos", data)))
+                {
+                    lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));
+                }
+                Data.AjaxData ajaxdata = new Data.AjaxData(lts);
+                return new JavaScriptSerializer().Serialize(ajaxdata);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+        [HttpPost]
+        public string DelKho(Data.Kho data)
+        {
+            try
+            {
+                List<Object> lts = new List<Object>();
+                foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Khos", data)))
+                {
+                    lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));
+                }
+                Data.AjaxData ajaxdata = new Data.AjaxData(lts);
+                return new JavaScriptSerializer().Serialize(ajaxdata);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+        [HttpPost]
         public string Table(Data.Table table)
         {
             try

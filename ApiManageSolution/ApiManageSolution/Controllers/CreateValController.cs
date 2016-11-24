@@ -23,9 +23,24 @@ namespace ApiManageSolution.Controllers
         }
 
         // POST api/createvallue
-        public Data.CreateVal Post([FromBody]Data.CreateVal value)
+        public Data.CreateVal Post([FromBody]Data.CreateVal data)
         {
-            return Data.CreateVal.CreateMa(value.obj);
+            try
+            {
+                switch(data.obj)
+                {
+                    case "khos":
+                        data.result = Data.Khos.Getma();
+                        break;
+                    default:
+                        break;
+                }
+                return data;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         // PUT api/createvallue/5

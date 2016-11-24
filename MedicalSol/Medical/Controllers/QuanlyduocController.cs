@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,9 +21,10 @@ namespace Medical.Controllers
 
         #region Tiện Ích
         public ActionResult Khaibaokho()
-        {
+        {            
             ViewData["page"] = "page_duoc_khaibaokho";            
-            return View(Data.Kho.GetAllObj());
+            //return View(Data.Kho.GetAllObj());
+            return View(Data.Kho.GetallAsync("khos"));
         }
 
         public ActionResult Khaibaothuoc()

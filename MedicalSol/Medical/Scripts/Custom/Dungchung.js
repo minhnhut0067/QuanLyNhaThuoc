@@ -509,6 +509,35 @@ function ms_enable_arr_from(v_id_start, v_id_arr) {
     }
     return false;
 }
+
+function ms_caps(v_this) {
+    try {
+        var atmp = v_this.value.split(' ');
+        var atmp1 = "";
+        for (var i = 0; i < atmp.length; i++) {
+            if (atmp[i].length > 1) {
+                atmp1 += atmp[i].substr(0, 1).toUpperCase() + atmp[i].substr(1) + " ";
+            }
+            else {
+                atmp1 += atmp[i].substr(0, 1).toUpperCase() + " ";
+            }
+        }
+        v_this.value = atmp1.trim();
+    }
+    catch (ex) {
+    }
+}
+
+function ms_cap(v_this) {
+    try {
+        var atmp = v_this.value;
+        if (v_this.value.length > 0) {
+            v_this.value = v_this.value.substr(0, 1).toUpperCase() + v_this.value.substr(1);
+        }
+    }
+    catch (ex) {
+    }
+}
 //basic
 
 function f_create_btn_group(v_id, v_id_arr, v_style_arr, v_name_arr) {
@@ -577,7 +606,7 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
                 data: data,
                 success: function (result) {
                     if (result != "") {
-                        rhtml = f_create_table_html(JSON.parse(result), v_id, v_colname, v_col, v_footer);
+                        rhtml = f_create_table_html(v_obj, JSON.parse(result), v_id, v_colname, v_col, v_footer);
                     }
                     else {
                         rhtml = "";
@@ -595,7 +624,7 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
     }
 }
 
-function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
+function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer) {
     try {
         v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds.replace('"', '\"').replace("\'", "'") + "}";
         v_ds = JSON.parse(v_ds);
@@ -605,6 +634,7 @@ function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
         rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
         rhtml += "<thead>";
         rhtml += "<tr role=\"row\">";
+        rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-label=\"input\"></th>";
         for (var i = 0; i < v_col.split('~').length; i++) {
             if (i <= 0) {
                 rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
@@ -628,6 +658,7 @@ function f_create_table_html(v_ds, v_id, v_colname, v_col, v_footer) {
             rhtml += "<tbody>";
             for (var i = 0; i < v_ds.Rows.length; i++) {
                 rhtml += "<tr>";
+                rhtml += "<td style =\"text-align:center;\"><a href=\"#\" onclick=\"f_del_record('" + v_obj + "','" + ms_gfields(v_ds, i, "id", "") + "')\" style = \"color:red; font-size:13px;\"><i class=\"fa fa-trash\" aria-hidden=\"true\" /></a></td>";
                 for (var j = 0; j < v_col.split('~').length ; j++) {
                     rhtml += "<td>" + ms_gfields(v_ds, i, v_col.split('~')[j], "") + "</td>";
                 }
@@ -748,7 +779,8 @@ function f_filter_select(v_obj, v_text) {
 
 function f_save_data(v_obj) {
     try {
-        var v_val;
+        var data;
+        var url = "";
         switch (v_obj) {
             case "khos":
                 if (ms_gval("page_duoc_khaibaokho_ten", "value") == "") {
@@ -756,23 +788,30 @@ function f_save_data(v_obj) {
                     ms_focus("page_duoc_khaibaokho_ten");
                     return null;
                 }
-                v_val = {
-                    Ma: ms_gval("page_duoc_khaibaokho_ma", "value"),
-                    Ten: ms_gval("page_duoc_khaibaokho_ten", "value"),
-                    Idnhom: ms_gval("page_duoc_khaibaokho_nhomkho", "selectedvalue"),
-                    Ghichu: ms_gval("page_duoc_khaibaokho_ghichu", "value")
+                data = {
+                    ma: ms_gval("page_duoc_khaibaokho_ma", "value"),
+                    ten: ms_gval("page_duoc_khaibaokho_ten", "value"),
+                    id_nhomkho: ms_gval("page_duoc_khaibaokho_nhomkho", "selectedvalue"),
+                    ghichu: ms_gval("page_duoc_khaibaokho_ghichu", "value")
                 };
+                url = "Savekho";
                 break;
             default:
                 break;
         }
-        debugger;
-        return "";
         $.ajax({
             type: "POST",
-            url: "../Process/Save",
-            data: { Obj: v_obj, Val: v_val },
+            url: "../Process/" + url,
+            data: data,
             success: function (result) {
+                debugger;
+                switch (v_obj) {
+                    case "khos":
+                        f_dmkho_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), false);
+                        break;
+                    default:
+                        break;
+                }
             },
             error: function (result) {
             }
@@ -782,7 +821,7 @@ function f_save_data(v_obj) {
     }
 }
 
-function f_set_ma(v_obj, v_val) {
+function f_set_val(v_id, v_obj, v_val) {
     try {
         var resultval = "";
         var data = { Obj: v_obj, Val: v_val };
@@ -792,20 +831,18 @@ function f_set_ma(v_obj, v_val) {
             data: data,
             success: function (result) {
                 resultval = result;
-                debugger;
-                ms_sval("page_duoc_khaibaokho_ma", "value", result);
+                ms_sval(v_id, "value", result);
             },
-            //else {
-            //    f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
-            //}
             error: function (result) {
-                resultval = "";
+                ms_sval(v_id, "value", "");
             }
         });
         return resultval;        
     }
     catch (ex) {
-        return "";
+        ms_sval(v_id, "value", "");
     }
 }
+
+
 

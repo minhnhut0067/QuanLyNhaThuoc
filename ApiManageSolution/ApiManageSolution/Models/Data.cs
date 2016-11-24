@@ -63,34 +63,34 @@ namespace ApiManageSolution.Models
             public string obj { get; set; }
             public string val { get; set; }
             public string result { get; set; }
-            public static CreateVal CreateMa(string v_obj)
-            {
-                try
-                {
-                    string sql = "";
-                    if (v_obj != "")
-                    {
-                        sql = "select ";
-                        switch (v_obj)
-                        {
-                            case "khos":
-                                sql += "'KHO'||lpad(max(to_number(replace(ma,'KHO',''))) + 1,4,'0') as val from dmkho";
-                                break;
-                            default:
-                                break;
-                        }
-                        return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? new CreateVal { obj = "", val = "", result = dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["val"].ToString() } : null;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return null;
-                }
-            }
+            //public static CreateVal CreateMa(string v_obj)
+            //{
+            //    try
+            //    {
+            //        string sql = "";
+            //        if (v_obj != "")
+            //        {
+            //            sql = "select ";
+            //            switch (v_obj)
+            //            {
+            //                case "khos":
+            //                    sql += "'KHO'||lpad(max(to_number(replace(ma,'KHO',''))) + 1,4,'0') as val from dmkho";
+            //                    break;
+            //                default:
+            //                    break;
+            //            }
+            //            return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? new CreateVal { obj = "", val = "", result = dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["val"].ToString() } : null;
+            //        }
+            //        else
+            //        {
+            //            return null;
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        return null;
+            //    }
+            //}
         }
 
         public class Users
@@ -240,6 +240,75 @@ namespace ApiManageSolution.Models
                     return null;
                 }
 
+            }
+            public static string Getid()
+            {
+                try
+                {
+                    string sql = "select max(id) + 1 as id from dmkho";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static string Getma()
+            {
+                try
+                {
+                    string sql = "select 'KHO'||lpad(max(to_number(replace(ma,'KHO',''))) + 1,4,'0') as ma from dmkho";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static IEnumerable<Khos> Upd(Khos data)
+            {
+                try
+                {
+                    string sql = "";
+                    var irec = 0;
+                    if (data.id == null)
+                    {
+                        data.id = Getid();
+                    }
+                    if (data.ghichu == "\n")
+                    {
+                        data.ghichu = "";
+                    }
+                    sql = @"UPDATE dmkho " +
+                        "SET " +
+                        "ma='" + data.ma + "'" +
+                        ",ten='" + data.ten + "'" +
+                        ",id_nhomkho=" + data.id_nhomkho +
+                        ",ngayud=now() " +
+                        "WHERE id =" + data.id;
+                    irec = dbHelper.ExecuteQuery(sql);
+                    if (irec == 0)
+                    {
+                        sql = @"INSERT INTO dmkho(id,ma,ten,id_nhomkho) " +
+                            "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "'," + data.id_nhomkho + ") ";
+                        irec = dbHelper.ExecuteQuery(sql);
+                    }
+                    if (irec == 1)
+                    {
+                        return GetAll("\nWHERE a.id=" + data.id);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
             }
         }
 

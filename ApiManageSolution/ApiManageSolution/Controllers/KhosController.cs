@@ -34,10 +34,15 @@ namespace ApiManageSolution.Controllers
         }
 
         // POST api/login
-        public Data.Users Post([FromBody]Data.Khos value)
+        public IEnumerable<Data.Khos> Post([FromBody]Data.Khos data)
         {
             try
             {
+                if(data != null)
+                {
+                    return Data.Khos.Upd(data);
+                }
+
                 //string username = value.username_;
                 //var users = Data.Khos.GetAll();
                 //List<Data.Khos> lts = new List<Data.Khos>();

@@ -4,7 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Medical.Models
@@ -13,7 +16,7 @@ namespace Medical.Models
     {
         //private static string DefaultUrl = "http://localhost:8080";
         private static string DefaultUrl = "http://localhost:48187";
-        //private static string DefaultUrl = "http://www.cybermedisoft.com/apisol";
+        //private static string DefaultUrl = "http://www.cybermedisoft.com/apisol";       
         public static string HttpPostApi(string apiControl, Object obj)
         {
             return HttpPostApi(DefaultUrl, apiControl, obj);
@@ -22,7 +25,7 @@ namespace Medical.Models
         public static string HttpPostApi(string Url, string apiControl, Object obj)//string v_page, string v_action
         {
             try
-            {
+            {               
                 using (var client = new WebClient())
                 {
                     client.Headers[HttpRequestHeader.ContentType] = "application/json";//application/x-www-form-urlencoded

@@ -21,6 +21,17 @@ function f_clear_arr(v_id_arr) {
 
 }
 
+function f_dmkho_show(v_ds, v_bool)
+{
+    ms_sval("page_duoc_khaibaokho_ma","value",ms_gfields(v_ds,0,"ma",""));
+    ms_sval("page_duoc_khaibaokho_ma","selectedvalue",ms_gfields(v_ds,0,"id",""));
+    ms_sval("page_duoc_khaibaokho_ten","value",ms_gfields(v_ds,0,"ten",""));
+    ms_sval("page_duoc_khaibaokho_nhomkho", "value", ms_gfields(v_ds, 0, "nhomkho", ""));
+    ms_sval("page_duoc_khaibaokho_nhomkho", "selectedvalue", ms_gfields(v_ds, 0, "id_nhomkho", ""));
+    ms_sval("page_duoc_khaibaokho_ghichu", "value", ms_gfields(v_ds, 0, "ghichu", ""));
+    enable(v_bool);
+}
+
 function filter_click(v_this) {
     try {
         var aid = v_this.id;
@@ -33,9 +44,6 @@ function filter_click(v_this) {
         var g_filter_limit = 100;
         ms_sval(aid, "value", "");
         switch (aid) {
-            //case "page_duoc_xuatban_cosoyte":
-            //    f_filter_kp_show(aid);
-            //    break;
             case "page_duoc_khaibaokho_nhomkho":
                 ms_filter_hide();
                 f_filter_nhomkho_show(aid);
@@ -201,9 +209,28 @@ function input_keypress(event, v_this) {
     }
     if (keyCode.toString() == "13") {
         switch (v_this.id) {
+            case "page_duoc_khaibaokho_ten":
+                if (ms_gval("page_duoc_khaibaokho_ten", "value", "") != "") {
+                    //khaibaokho_input = "page_duoc_khaibaokho_ma~page_duoc_khaibaokho_ten~page_duoc_khaibaokho_nhomkho~page_duoc_khaibaokho_ghichu";
+                    ms_focus_arr("page_duoc_khaibaokho_nhomkho~page_duoc_khaibaokho_ghichu");
+                }
+                else {
+                    ms_focus_arr("page_duoc_khaibaokho_ten");
+                }
+                break;
             case "page_duoc_khaibaokho_nhomkho":
                 ms_filter_get_selected();
                 ms_filter_hide();
+                if (ms_gval("page_duoc_khaibaokho_nhomkho", "selectedvalue", "") != "") {
+                    //khaibaokho_input = "page_duoc_khaibaokho_ma~page_duoc_khaibaokho_ten~page_duoc_khaibaokho_nhomkho~page_duoc_khaibaokho_ghichu";
+                    ms_focus_arr("page_duoc_khaibaokho_ghichu");
+                }
+                else {
+                    ms_focus_arr("page_duoc_khaibaokho_nhomkho");
+                }
+                break;
+            case "page_duoc_khaibaokho_ghichu":
+                ms_focus_arr("page_duoc_khaibaokho_luu");
                 break;
             case "page_duoc_nhapkho_kho":
                 ms_filter_get_selected();
@@ -214,26 +241,6 @@ function input_keypress(event, v_this) {
                 ms_filter_hide();
                 break;
             case "page_duoc_nhanvien_nhanvien":
-                ms_filter_get_selected();
-                ms_filter_hide();
-                break;
-            default:
-                break;
-        }
-    }
-}
-
-function btn_keypress(event, v_this) {
-    var keyCode;
-    if (typeof (event.keyCode) != "undefined") {
-        keyCode = event.keyCode;
-    }
-    else {
-        keyCode = event.which;
-    }
-    if (keyCode.toString() == "13") {
-        switch (v_this.id) {
-            case "page_duoc_khaibaokho_luu":
                 ms_filter_get_selected();
                 ms_filter_hide();
                 break;
@@ -396,6 +403,13 @@ function input_keyup(event, v_this) {
             }
             break;
         default:
+            switch (keyCode.toString()) {
+                case "32":
+                    break;
+                default:
+                    input_onblur(v_this);
+                    break;
+            }
             break;
     }
 }
@@ -403,6 +417,21 @@ function input_keyup(event, v_this) {
 
 //Onblur-Start
 function input_onblur(v_this) {
+    switch (v_this.id) {
+        case "page_duoc_khaibaokho_ds_themmoi":
+            break;
+        case "page_duoc_khaibaokho_themmoi":
+            break;
+        case "page_duoc_khaibaokho_boqua":
+            break;
+        case "page_duoc_khaibaokho_luu":
+            break;
+        case "page_duoc_khaibaokho_ten":
+            ms_caps(v_this);
+            break;
+        default:
+            break;
+    }
 }
 //Onblur-End
 
@@ -413,14 +442,9 @@ function btn_click(v_this) {
             f_tab_show("danhsach", "thonhtin");
             break;
         case "page_duoc_khaibaokho_themmoi":
-            f_set_ma("khos", "ma");
-            //$.when(f_get_ma("khos", "ma")).done(function (ma) {
-            //    // the code here will be executed when all four ajax requests resolve.
-            //    // a1, a2, a3 and a4 are lists of length 3 containing the response text,
-            //    // status, and jqXHR object for each of the four ajax calls respectively.
-            //    ms_sval("page_duoc_khaibaokho_ma", "value", ma);
-            //    enable(true);
-            //});
+            f_set_val("page_duoc_khaibaokho_ma", "khos", "ma");
+            enable(true);
+            ms_focus_arr("page_duoc_khaibaokho_ten");
             break;
         case "page_duoc_khaibaokho_boqua":
             f_clear_arr(khaibaokho_input);
@@ -430,6 +454,26 @@ function btn_click(v_this) {
             break;
         default:
             break;
+    }
+}
+
+function btn_keypress(event, v_this) {
+    var keyCode;
+    if (typeof (event.keyCode) != "undefined") {
+        keyCode = event.keyCode;
+    }
+    else {
+        keyCode = event.which;
+    }
+    if (keyCode.toString() == "13") {
+        switch (v_this.id) {
+            case "page_duoc_khaibaokho_luu":
+                ms_filter_get_selected();
+                ms_filter_hide();
+                break;
+            default:
+                break;
+        }
     }
 }
 //btn-clck-End
