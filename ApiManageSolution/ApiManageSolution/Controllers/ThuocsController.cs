@@ -23,8 +23,20 @@ namespace ApiManageSolution.Controllers
         }
 
         // POST api/thuocs
-        public void Post([FromBody]string value)
+        public IEnumerable<Data.Thuocs> Post([FromBody]Data.Thuocs data)
         {
+            try
+            {
+                if (data != null)
+                {
+                    return Data.Thuocs.Upd(data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         // PUT api/thuocs/5

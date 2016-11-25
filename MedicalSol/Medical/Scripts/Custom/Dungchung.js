@@ -1,10 +1,5 @@
 ﻿// Jquery
 $(document).ready(function () {
-    //debugger;
-    //$("ul.sub-menu ul.menu-level").each(function () {
-    //    var top = $(this).parent().offset().top;
-    //    $(this).css({ "left": 0, "top": top });
-    //});
     $(".nav-side-menu li").not("ul.sub-menu li").on("click", function () {
         if ($(this).attr("class") == "collapsed") {
             $(".nav-side-menu .menu-list ul.menu-content").children("ul.sub-menu").not($(this).attr("data-target")).removeClass("in");
@@ -14,66 +9,22 @@ $(document).ready(function () {
         else {
             $(this).removeClass("active");
         }
-        //if($(this).attr("class") == "active") {
-        //    $(this).removeClass("active");
-        //}
-        //else {
-        //    $(".nav-side-menu .menu-list ul.menu-content").children("li").removeClass("active");
-        //    $(".nav-side-menu .menu-list ul.menu-content").children("ul.sub-menu").not($(this).attr("data-target")).removeClass("in");
-        //    $(this).addClass("active");                        
-        //}
     });
-    //$("ul.sub-menu li").on("click", function () {
-    //    if($(this).attr("class") == "dropdown open")
-    //    {
-    //        $(this).removeClass("open");
-    //    }
-    //    else
-    //    {
-    //        $(this).addClass("open");
-    //        var left = $(this).width();
-    //        var top = $(this).offset().top
-    //        $($(this).data().target).css({ "left": left, "top": top });
-    //    }
-    //});
     $("ul.sub-menu li").on("mouseover", function () {
         $(this).addClass("open");
         var left = $(this).width();
         var top = $(this).offset().top
         $($(this).data().target).css({ "left": left, "top": top });
-        //if ($(this).attr("class") == "dropdown open") {
-        //    $(this).removeClass("open");
-        //}
-        //else {
-        //    $(this).addClass("open");
-        //    var left = $(this).width();
-        //    var top = $(this).offset().top
-        //    $($(this).data().target).css({ "left": left, "top": top });
-        //}
     });
     $("ul.sub-menu li").on("mouseout", function () {
         $(this).removeClass("open");
-        //if ($(this).attr("class") == "dropdown open") {
-        //    $(this).removeClass("open");
-        //}
-        //else {
-        //    $(this).addClass("open");
-        //    var left = $(this).width();
-        //    var top = $(this).offset().top
-        //    $($(this).data().target).css({ "left": left, "top": top });
-        //}
     });
-
-    //$(".nav-tabs").find("[aria-controls=\"danhsach\"]").on("click", function () {
-    //    if (!$(this).parent().hasClass("active"))
-    //    {
-    //        alert($(this));
-    //    }        
-    //});
 });
 //Javascript
 
 //basic
+var m_grid_ds = null;
+
 function ms_left(v_id) {
     var ax = 0;
     try {
@@ -542,31 +493,36 @@ function ms_cap(v_this) {
 //basic
 
 function f_table_reload(v_obj) {
-    try{
-        var data = { Obj: v_obj};
+    try {
+        var data = { Obj: v_obj };
         $.ajax({
             type: "POST",
-            url: "../Process/Table",
+            url: "../Process/Gridview",
             data: data,
             success: function (result) {
-                switch(v_obj)
-                {
-                    case "khos":
-                        $("#page_duoc_khaibaokho_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaokho", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false));
-                        $('#page_duoc_khaibaokho_gidview').DataTable();
-                        $('#page_duoc_khaibaokho_gidview').parent().css("overflow-x", "scroll");
-                        break;
-                    default:
-                        break;
+                if (result != "") {
+                    switch (v_obj) {
+                        case "khos":
+                            $("#page_duoc_khaibaokho_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaokho", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false));
+                            $('#page_duoc_khaibaokho_gidview').DataTable();
+                            $('#page_duoc_khaibaokho_gidview').parent().css("overflow-x", "scroll");
+                            break;
+                        case "thuocs":
+                            $("#page_duoc_khaibaothuoc_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaothuoc", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
+                            $('#page_duoc_khaibaothuoc_gidview').DataTable();
+                            $('#page_duoc_khaibaothuoc_gidview').parent().css("overflow-x", "scroll");
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                //var ahtml = f_create_table_html(v_obj, result, "page_duoc_khaibaokho", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false);
             },
             error: function (result) {
             }
         });
     }
-    catch(ex)
-    {}
+    catch (ex)
+    { }
 }
 
 function f_create_btn_group(v_id, v_id_arr, v_style_arr, v_name_arr) {
@@ -631,7 +587,7 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
             };
             $.ajax({
                 type: "POST",
-                url: "../Process/Table",
+                url: "../Process/Gridview",
                 data: data,
                 success: function (result) {
                     if (result != "") {
@@ -657,19 +613,21 @@ function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer) {
     try {
         v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds.replace('"', '\"').replace("\'", "'") + "}";
         v_ds = JSON.parse(v_ds);
+        m_grid_ds = v_ds;
         rhtml = "";
         rhtml = "<div id=\"" + v_id + "_wrapper\" class=\"dataTables_wrapper form-inline dt-bootstrap\">";
         rhtml += "<div class=\"col-lg-12 col-sm-12 col-md-12 col-xs-12\"\">";
         rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
         rhtml += "<thead>";
         rhtml += "<tr role=\"row\">";
-        rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-label=\"input\"></th>";
+        rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"input-delete\"></th>";
+        rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"input-details\"></th>";//background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
         for (var i = 0; i < v_col.split('~').length; i++) {
             if (i <= 0) {
-                rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
+                rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
             }
             else {
-                rhtml += "<th class=\"sorting\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column ascending\">" + v_colname.split('~')[i] + "</th>";
+                rhtml += "<th class=\"sorting\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column ascending\">" + v_colname.split('~')[i] + "</th>";
             }
         }
         rhtml += "</tr>";
@@ -685,11 +643,12 @@ function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer) {
         }
         if (v_ds.Rows.length > 0) {
             rhtml += "<tbody>";
-            for (var i = 0; i < v_ds.Rows.length; i++) {
+            for (var i = 0; i < v_ds.Rows.length; i++) {                
                 rhtml += "<tr>";
-                rhtml += "<td style =\"text-align:center;\"><a href=\"#\" onclick=\"f_del_record('" + v_obj + "','" + ms_gfields(v_ds, i, "id", "") + "')\" style = \"color:red; font-size:13px;\"><i class=\"fa fa-trash\" aria-hidden=\"true\" /></a></td>";
+                rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_del_record('" + v_obj + "','" + ms_gfields(v_ds, i, "id", "") + "')\" style = \"color:red; font-size:13px;\"><i class=\"fa fa-trash\" aria-hidden=\"true\" /></a></td>";
+                rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_show_record('" + v_obj + "','" + i + "')\" style = \"color:blue; font-size:13px;\"><i class=\"fa fa-pencil\" aria-hidden=\"true\" /></a></td>";
                 for (var j = 0; j < v_col.split('~').length ; j++) {
-                    rhtml += "<td>" + ms_gfields(v_ds, i, v_col.split('~')[j], "") + "</td>";
+                    rhtml += "<td style=\"witch:auto;\">" + ms_gfields(v_ds, i, v_col.split('~')[j], "") + "</td>";
                 }
                 rhtml += "</tr>";
             }
@@ -830,12 +789,53 @@ function f_save_data(v_obj) {
                     return null;
                 }
                 data = {
+                    id: ms_gval("page_duoc_khaibaokho_ma", "selectedvalue"),
                     ma: ms_gval("page_duoc_khaibaokho_ma", "value"),
                     ten: ms_gval("page_duoc_khaibaokho_ten", "value"),
                     id_nhomkho: ms_gval("page_duoc_khaibaokho_nhomkho", "selectedvalue"),
                     ghichu: ms_gval("page_duoc_khaibaokho_ghichu", "value")
                 };
                 url = "Savekho";
+                break;
+            case "thuocs":
+                if (ms_gval("page_duoc_khaibaothuoc_ten", "value") == "") {
+                    alert("Vui lòng nhập tên thuốc");
+                    ms_focus("page_duoc_khaibaothuoc_ten");
+                    return null;
+                }
+                data = {
+                    //id: ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"),
+                    //ma: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+                    //ten: ms_gval("page_duoc_khaibaothuoc_ten", "value"),
+                    //id_nhomkho: ms_gval("page_duoc_khaibaokho_nhomkho", "selectedvalue"),
+                    //ghichu: ms_gval("page_duoc_khaibaokho_ghichu", "value")
+                        ma: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+                        id: ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"),
+                        ten: ms_gval("page_duoc_khaibaothuoc_ten", "value"),
+                        atc: ms_gval("page_duoc_khaibaothuoc_atccode", "value"),
+                        sodk: ms_gval("page_duoc_khaibaothuoc_sodk", "value"),
+                        ten_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "value"),
+                        id_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "selectedvalue"),
+                        hamluong: ms_gval("page_duoc_khaibaothuoc_hamluong", "value"),
+                        //ms_sval("page_duoc_khaibaothuoc_hamluong", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
+                        dang: ms_gval("page_duoc_khaibaothuoc_dang", "value"),
+                        //ms_sval("page_duoc_khaibaothuoc_dang", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
+                        donvidg: ms_gval("page_duoc_khaibaothuoc_dvt", "value"),
+                        //ms_sval("page_duoc_khaibaothuoc_dvt", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
+                        donvisd: ms_gval("page_duoc_khaibaothuoc_donvisd", "value"),
+                        //ms_sval("page_duoc_khaibaothuoc_donvisd", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
+                        //ten_loaiduoc: ms_gval("page_duoc_khaibaothuoc_nhomduoc", "value"),
+                        id_loaiduoc: ms_gval("page_duoc_khaibaothuoc_nhomduoc", "selectedvalue"),
+                        //ten_hangsx: ms_sval("page_duoc_khaibaothuoc_hangsx", "value"),
+                        id_hangsx: ms_sval("page_duoc_khaibaothuoc_hangsx", "selectedvalue"),
+                        //ten_quocgia: ms_sval("page_duoc_khaibaothuoc_quocgia", "value"),
+                        id_quocgia: ms_sval("page_duoc_khaibaothuoc_quocgia", "selectedvalue"),
+                        tyle1: ms_sval("page_duoc_khaibaothuoc_donggoi1", "value"),
+                        tyle2: ms_sval("page_duoc_khaibaothuoc_donggoi2", "value"),
+                        thanhphan: ms_sval("page_duoc_khaibaothuoc_thanhphan", "value"),
+                        hoatchat: ms_sval("page_duoc_khaibaothuoc_hoatchat", "value")
+                };
+                url = "SaveThuoc";
                 break;
             default:
                 break;
@@ -847,7 +847,8 @@ function f_save_data(v_obj) {
             success: function (result) {
                 switch (v_obj) {
                     case "khos":
-                        f_dmkho_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), false);
+                        f_dmkho_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), 0, false);
+                        ms_enable_arr("page_duoc_khaibaokho_xoa", true);
                         break;
                     default:
                         break;
@@ -882,17 +883,19 @@ function f_set_val(v_id, v_obj, v_val) {
     }
 }
 
-function f_del_record(v_obj, v_id) {
+function f_gridview_del_record(v_obj, v_id) {
     try {
-        var resultval = "";
+        if (v_id == null || v_id == "")
+        {
+            alert("Vui lòng chọn nội dung muốn xóa");
+        }
         var data = { obj: v_obj, key: v_id };
         $.ajax({
             type: "POST",
             url: "../Process/DelRecode",
             data: data,
             success: function (result) {
-                if(result == "True")
-                {
+                if (result == "True") {
                     f_table_reload(v_obj);
                     alert("Xóa dữ liệu thành công !");
                 }
@@ -903,10 +906,31 @@ function f_del_record(v_obj, v_id) {
                 //ms_sval(v_id, "value", "");
             }
         });
-        return resultval;
     }
     catch (ex) {
         aler("Lỗi hệ thống ! Không xóa được dữ liệu")
+    }
+}
+
+function f_gridview_show_record(v_obj, v_index) {
+    try {        
+        var v_ds = m_grid_ds;
+        f_tab_show("danhsach", "thonhtin");
+        switch (v_obj) {
+            case "khos":
+                f_dmkho_show(v_ds, v_index, false)
+                ms_enable_arr("page_duoc_khaibaokho_xoa", true);
+                break;
+            case "thuocs":
+                f_dmthuoc_show(v_ds, v_index, false)
+                ms_enable_arr("page_duoc_khaibaothuoc_xoa", true);
+                break;
+            default:
+                break;
+        }
+    }
+    catch (ex) {
+        alert("Lỗi hệ thống ! Không lấy được dữ liệu")
     }
 }
 

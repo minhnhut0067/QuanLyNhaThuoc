@@ -347,6 +347,32 @@ namespace ApiManageSolution.Models
             public string ten_quocgia { get; set; }
             public string id_duongdung { get; set; }
             public string ten_duongdung { get; set; }
+            public static string Getid()
+            {
+                try
+                {
+                    string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from dmduoc";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static string Getma()
+            {
+                try
+                {
+                    string sql = "select 'KHO'||lpad(case when max(to_number(replace(ma,'KHO',''))) is not null then max(to_number(replace(ma,'KHO',''))) + 1 else 1 end,4,'0') as ma from dmduoc";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
             public static IEnumerable<Thuocs> GetAll()
             {
                 return GetAll("\nWHERE 1=1");
@@ -412,6 +438,53 @@ namespace ApiManageSolution.Models
                     return lts;
                 }
                 catch
+                {
+                    return null;
+                }
+            }
+            public static IEnumerable<Thuocs> Upd(Thuocs data)
+            {
+                try
+                {
+                    var sql = "";
+                    var irec = 0;
+                    if (data.id == null)
+                    {
+                        data.id = Getid();
+                    }
+                    if (data.thanhphan == "\n")
+                    {
+                        data.thanhphan = "";
+                    }
+                    if (data.hoatchat == "\n")
+                    {
+                        data.hoatchat = "";
+                    }
+                    sql = @"UPDATE dmkho " +
+                        "SET " +
+                        "ma='" + data.ma + "'" +
+                        ",ten='" + data.ten + "'" +
+                        ",id_nhomkho=" + data.id_nhomkho +
+                        ",ngayud=now() " +
+                        "WHERE id =" + data.id;
+                    irec = dbHelper.ExecuteQuery(sql);
+                    if (irec == 0)
+                    {
+                        sql = @"INSERT INTO dmkho(id,ma,ten,id_nhomkho) " +
+                            "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "'," + data.id_nhomkho + ") ";
+                        irec = dbHelper.ExecuteQuery(sql);
+                    }
+                    if (irec == 1)
+                    {
+                        return GetAll("\nWHERE a.id=" + data.id);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                catch (Exception ex)
                 {
                     return null;
                 }

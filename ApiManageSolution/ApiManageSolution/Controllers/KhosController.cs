@@ -42,13 +42,6 @@ namespace ApiManageSolution.Controllers
                 {
                     return Data.Khos.Upd(data);
                 }
-
-                //string username = value.username_;
-                //var users = Data.Khos.GetAll();
-                //List<Data.Khos> lts = new List<Data.Khos>();
-                //lts.Add(users.FirstOrDefault(u => u.username_ == value.username_ && u.password_ == SHA1.Encode(value.password_)));
-                ////var user = users.Where(u => u.username_ == value.username_);
-                //return lts[0];
                 return null;
             }
             catch

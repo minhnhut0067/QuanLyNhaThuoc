@@ -1094,6 +1094,20 @@
 /*input[type="text"]:disabled {
     background: #dddddd !important;
 }*/
+.sorting {
+    content: "";
+    font-size:2em;
+}
+
+.sorting_desc {
+    content: "";
+    font-size:2em;
+}
+
+.sorting_desc {
+    content: "";
+    font-size:2em;
+}
 
 .input-group-addon_dis {
     color: #555;
@@ -1168,18 +1182,18 @@
 
 .input-label {
     /*background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;*/
-    background:inherit;
+    background: inherit;
     padding: 6px;
     min-width: 90px;
-    border:0;
-    text-align:left;
+    border: 0;
+    text-align: left;
 }
 
 .input-filter {
     background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
 }
 
-.input-datepicker{
+.input-datepicker {
     background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
 }
 
@@ -1213,9 +1227,45 @@
     background-color: #D0D0D0;
 }
 
-.dataTables_filter{
-    text-align:right;
+.dataTables_filter {
+    text-align: right;
 }
-.dataTables_paginate{
-    text-align:right;
+
+.dataTables_paginate {
+    text-align: right;
 }
+
+/*Loader*/
+.loader {
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid #3498db;
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin-left: 40%;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/*Loader*/
+
+

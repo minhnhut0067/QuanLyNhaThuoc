@@ -144,13 +144,13 @@
                 </div>
             </div>
             <div class="row custom-row">
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" style="margin-bottom:10px;">
+                @*<div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" style="margin-bottom:10px;">
                     <div class="input-group">
                         <script type="text/javascript">
                             document.write(f_create_input("@ViewData["page"]_nguon", "filter", "Nguồn nhập"));
                         </script>
                     </div>
-                </div>
+                </div>*@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6" style="margin-bottom:10px;">
                     <div class="input-group">
                         <script type="text/javascript">
@@ -158,10 +158,17 @@
                         </script>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6" style="margin-bottom:10px;">
                     <div class="input-group">
                         <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_duoc", "filter", "Tên thuốc"));
+                            document.write(f_create_input("@ViewData["page"]_mathuoc", "input", "Mã"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_tenthuoc", "filter", "Tên thuốc"));
                         </script>
                     </div>
                 </div>
@@ -206,7 +213,7 @@
                 </div>
             </div>
             <div class="row custom-row">
-                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                @*<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     <div class="input-group" style="">
                         <span id="@ViewData["page"]_soluong_label" class="input-group-addon input-label">Số lượng</span>
                         <input id="@ViewData["page"]_soluong" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_soluong_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
@@ -215,11 +222,25 @@
                         <span id="@ViewData["page"]_bang_label" class="input-group-addon input-label" style="min-width:20px;">=</span>
                         <input id="@ViewData["page"]_bang" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_bang_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
                     </div>
+                </div>*@
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_soluong", "input", "Số lượng"));
+                        </script>
+                    </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <div class="input-group">
                         <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_ngaysx", "input", "Đơn giá"));
+                            document.write(f_create_input("@ViewData["page"]_dongia", "input", "Đơn giá"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_dongia", "input", "Giá cũ"));
                         </script>
                     </div>
                 </div>

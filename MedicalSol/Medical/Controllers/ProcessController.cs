@@ -92,7 +92,7 @@ namespace Medical.Controllers
         }
 
         [HttpPost]
-        public string Table(Data.Table table)
+        public string Gridview(Data.Table table)
         {
             try
             {
@@ -106,11 +106,14 @@ namespace Medical.Controllers
                             case "khos":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));
                                 break;
+                            case "thuocs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Thuoc>(jo.ToString()));
+                                break;
                             default:
                                 break;
                         }
                     }
-                    Data.AjaxData data = new Data.AjaxData(lts);
+                    //Data.AjaxData data = new Data.AjaxData(lts);
                     return new JavaScriptSerializer().Serialize(lts);
                 }
                 else
@@ -133,6 +136,25 @@ namespace Medical.Controllers
                 foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Khos", data)))
                 {
                     lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));
+                }
+                Data.AjaxData ajaxdata = new Data.AjaxData(lts);
+                return new JavaScriptSerializer().Serialize(ajaxdata);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+        [HttpPost]
+        public string SaveThuoc(Data.Thuoc data)
+        {
+            try
+            {
+                List<Object> lts = new List<Object>();
+                foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Thuocs", data)))
+                {
+                    lts.Add(JsonConvert.DeserializeObject<Data.Thuoc>(jo.ToString()));
                 }
                 Data.AjaxData ajaxdata = new Data.AjaxData(lts);
                 return new JavaScriptSerializer().Serialize(ajaxdata);

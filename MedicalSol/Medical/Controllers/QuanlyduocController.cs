@@ -24,26 +24,29 @@ namespace Medical.Controllers
         {
             //Data.RunAsync().Wait();
             ViewData["page"] = "page_duoc_khaibaokho";
-            return View(Data.Kho.GetAllObj());
-            //return View(Data.Kho.GetallAsync("khos"));
+            //return View(Data.Kho.GetAllObj());
+            return View();
         }
 
         public ActionResult Khaibaothuoc()
         {
             ViewData["page"] = "page_duoc_khaibaothuoc"; 
-            return View(Data.Thuoc.GetAllObj());
+            //return View(Data.Thuoc.GetAllObj());
+            return View();
         }
         #endregion
 
         public ActionResult Nhapkho()        
         {
             ViewData["page"] = "page_duoc_nhapkho";
-            return View(Data.Nhapkho.GetAllObj());
+            //return View(Data.Nhapkho.GetAllObj());
+            return View();
         }
         public ActionResult Xuatban()
         {
             ViewData["page"] = "page_duoc_xuatban";
-            return View(Data.Kho.GetAllObj());
+            //return View(Data.Kho.GetAllObj());
+            return View();
         }        
     }
 }
