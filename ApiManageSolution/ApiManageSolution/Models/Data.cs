@@ -360,7 +360,7 @@ namespace ApiManageSolution.Models
                     return "";
                 }
             }
-            public static string Getma()
+            public static string Getma(string v_ten)
             {
                 try
                 {
@@ -452,28 +452,32 @@ namespace ApiManageSolution.Models
                     {
                         data.id = Getid();
                     }
-                    if (data.thanhphan == "\n")
+                    if (data.thanhphan == null || data.thanhphan == "\n")
                     {
                         data.thanhphan = "";
                     }
-                    if (data.hoatchat == "\n")
+                    if (data.hoatchat == null || data.hoatchat == "\n")
                     {
                         data.hoatchat = "";
                     }
-                    sql = @"UPDATE dmkho " +
-                        "SET " +
-                        "ma='" + data.ma + "'" +
-                        ",ten='" + data.ten + "'" +
-                        ",id_nhomkho=" + data.id_nhomkho +
-                        ",ngayud=now() " +
-                        "WHERE id =" + data.id;
-                    irec = dbHelper.ExecuteQuery(sql);
-                    if (irec == 0)
+                    if(data.ma == null || data.ma == "")
                     {
-                        sql = @"INSERT INTO dmkho(id,ma,ten,id_nhomkho) " +
-                            "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "'," + data.id_nhomkho + ") ";
-                        irec = dbHelper.ExecuteQuery(sql);
+                        data.ma = Getma(data.ten);
                     }
+                    //sql = @"UPDATE dmkho " +
+                    //    "SET " +
+                    //    "ma='" + data.ma + "'" +
+                    //    ",ten='" + data.ten + "'" +
+                    //    ",id_nhomkho=" + data.id_nhomkho +
+                    //    ",ngayud=now() " +
+                    //    "WHERE id =" + data.id;
+                    //irec = dbHelper.ExecuteQuery(sql);
+                    //if (irec == 0)
+                    //{
+                    //    sql = @"INSERT INTO dmkho(id,ma,ten,id_nhomkho) " +
+                    //        "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "'," + data.id_nhomkho + ") ";
+                    //    irec = dbHelper.ExecuteQuery(sql);
+                    //}
                     if (irec == 1)
                     {
                         return GetAll("\nWHERE a.id=" + data.id);

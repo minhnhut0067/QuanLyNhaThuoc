@@ -540,14 +540,14 @@ function f_create_btn_group(v_id, v_id_arr, v_style_arr, v_name_arr) {
     }
 }
 
-function f_create_input(v_id, v_type, v_name) {
+function f_create_input(v_id, v_type, v_name, v_style) {
     try {
         rhtml = "";
         if (v_id != "") {
-            switch (v_type) {
+            switch (v_type) {                
                 case "input":
                     rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
-                    rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
+                    rhtml += "<input id=\"" + v_id + "\" type=\"text\" style = '" + v_style + "' class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
                     break;
                 case "filter":
                     rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
@@ -643,7 +643,7 @@ function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer) {
         }
         if (v_ds.Rows.length > 0) {
             rhtml += "<tbody>";
-            for (var i = 0; i < v_ds.Rows.length; i++) {                
+            for (var i = 0; i < v_ds.Rows.length; i++) {
                 rhtml += "<tr>";
                 rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_del_record('" + v_obj + "','" + ms_gfields(v_ds, i, "id", "") + "')\" style = \"color:red; font-size:13px;\"><i class=\"fa fa-trash\" aria-hidden=\"true\" /></a></td>";
                 rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_show_record('" + v_obj + "','" + i + "')\" style = \"color:blue; font-size:13px;\"><i class=\"fa fa-pencil\" aria-hidden=\"true\" /></a></td>";
@@ -696,43 +696,43 @@ function f_tab_click(v_this, v_obj, v_bool) {
     { }
 }
 
-function f_filter_select(v_obj, v_text) {
+function f_filter_select(v_data) {
     try {
-        var data;
-        switch (v_obj) {
-            case "nhomkhos":
-                data = {
-                    Obj: "nhomkhos",
-                    Col: "ma~ten",
-                    Val: v_text
-                };
-                break;
-            case "lydonxs":
-                data = {
-                    Obj: "lydonxs",
-                    Col: "ma~ten",
-                    Val: v_text
-                };
-                break;
-            case "khos":
-                data = {
-                    Obj: "khos",
-                    Col: "ma~ten",
-                    Val: v_text
-                };
-                break;
-            default:
-                break;
-        }
+        //var data;
+        //switch (v_obj) {
+        //    case "nhomkhos":
+        //        data = {
+        //            Obj: "nhomkhos",
+        //            Col: "ma~ten",
+        //            Val: v_text
+        //        };
+        //        break;
+        //    case "lydonxs":
+        //        data = {
+        //            Obj: "lydonxs",
+        //            Col: "ma~ten",
+        //            Val: v_text
+        //        };
+        //        break;
+        //    case "khos":
+        //        data = {
+        //            Obj: "khos",
+        //            Col: "ma~ten",
+        //            Val: v_text
+        //        };
+        //        break;
+        //    default:
+        //        break;
+        //}
         $.ajax({
             type: "POST",
             url: "../Process/Filter",
-            data: data,
+            data: v_data,
             success: function (result) {
                 if (result == "") {
                     result = "{\"Name\":\"Table\",\"Rows\":[]}";
                 }
-                switch (data.Obj) {
+                switch (v_data.Obj) {
                     case "nhomkhos":
                         f_filter_nhomkho_callback(JSON.parse(result));
                         break;
@@ -809,31 +809,31 @@ function f_save_data(v_obj) {
                     //ten: ms_gval("page_duoc_khaibaothuoc_ten", "value"),
                     //id_nhomkho: ms_gval("page_duoc_khaibaokho_nhomkho", "selectedvalue"),
                     //ghichu: ms_gval("page_duoc_khaibaokho_ghichu", "value")
-                        ma: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
-                        id: ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"),
-                        ten: ms_gval("page_duoc_khaibaothuoc_ten", "value"),
-                        atc: ms_gval("page_duoc_khaibaothuoc_atccode", "value"),
-                        sodk: ms_gval("page_duoc_khaibaothuoc_sodk", "value"),
-                        ten_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "value"),
-                        id_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "selectedvalue"),
-                        hamluong: ms_gval("page_duoc_khaibaothuoc_hamluong", "value"),
-                        //ms_sval("page_duoc_khaibaothuoc_hamluong", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
-                        dang: ms_gval("page_duoc_khaibaothuoc_dang", "value"),
-                        //ms_sval("page_duoc_khaibaothuoc_dang", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
-                        donvidg: ms_gval("page_duoc_khaibaothuoc_dvt", "value"),
-                        //ms_sval("page_duoc_khaibaothuoc_dvt", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
-                        donvisd: ms_gval("page_duoc_khaibaothuoc_donvisd", "value"),
-                        //ms_sval("page_duoc_khaibaothuoc_donvisd", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
-                        //ten_loaiduoc: ms_gval("page_duoc_khaibaothuoc_nhomduoc", "value"),
-                        id_loaiduoc: ms_gval("page_duoc_khaibaothuoc_nhomduoc", "selectedvalue"),
-                        //ten_hangsx: ms_sval("page_duoc_khaibaothuoc_hangsx", "value"),
-                        id_hangsx: ms_sval("page_duoc_khaibaothuoc_hangsx", "selectedvalue"),
-                        //ten_quocgia: ms_sval("page_duoc_khaibaothuoc_quocgia", "value"),
-                        id_quocgia: ms_sval("page_duoc_khaibaothuoc_quocgia", "selectedvalue"),
-                        tyle1: ms_sval("page_duoc_khaibaothuoc_donggoi1", "value"),
-                        tyle2: ms_sval("page_duoc_khaibaothuoc_donggoi2", "value"),
-                        thanhphan: ms_sval("page_duoc_khaibaothuoc_thanhphan", "value"),
-                        hoatchat: ms_sval("page_duoc_khaibaothuoc_hoatchat", "value")
+                    ma: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+                    id: ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"),
+                    ten: ms_gval("page_duoc_khaibaothuoc_ten", "value"),
+                    atc: ms_gval("page_duoc_khaibaothuoc_atccode", "value"),
+                    sodk: ms_gval("page_duoc_khaibaothuoc_sodk", "value"),
+                    ten_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "value"),
+                    id_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "selectedvalue"),
+                    hamluong: ms_gval("page_duoc_khaibaothuoc_hamluong", "value"),
+                    //ms_sval("page_duoc_khaibaothuoc_hamluong", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
+                    dang: ms_gval("page_duoc_khaibaothuoc_dang", "value"),
+                    //ms_sval("page_duoc_khaibaothuoc_dang", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
+                    donvidg: ms_gval("page_duoc_khaibaothuoc_dvt", "value"),
+                    //ms_sval("page_duoc_khaibaothuoc_dvt", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
+                    donvisd: ms_gval("page_duoc_khaibaothuoc_donvisd", "value"),
+                    //ms_sval("page_duoc_khaibaothuoc_donvisd", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
+                    //ten_loaiduoc: ms_gval("page_duoc_khaibaothuoc_nhomduoc", "value"),
+                    id_loaiduoc: ms_gval("page_duoc_khaibaothuoc_nhomduoc", "selectedvalue"),
+                    //ten_hangsx: ms_sval("page_duoc_khaibaothuoc_hangsx", "value"),
+                    id_hangsx: ms_sval("page_duoc_khaibaothuoc_hangsx", "selectedvalue"),
+                    //ten_quocgia: ms_sval("page_duoc_khaibaothuoc_quocgia", "value"),
+                    id_quocgia: ms_sval("page_duoc_khaibaothuoc_quocgia", "selectedvalue"),
+                    tyle1: ms_sval("page_duoc_khaibaothuoc_donggoi1", "value"),
+                    tyle2: ms_sval("page_duoc_khaibaothuoc_donggoi2", "value"),
+                    thanhphan: ms_sval("page_duoc_khaibaothuoc_thanhphan", "value"),
+                    hoatchat: ms_sval("page_duoc_khaibaothuoc_hoatchat", "value")
                 };
                 url = "SaveThuoc";
                 break;
@@ -885,8 +885,7 @@ function f_set_val(v_id, v_obj, v_val) {
 
 function f_gridview_del_record(v_obj, v_id) {
     try {
-        if (v_id == null || v_id == "")
-        {
+        if (v_id == null || v_id == "") {
             alert("Vui lòng chọn nội dung muốn xóa");
         }
         var data = { obj: v_obj, key: v_id };
@@ -913,7 +912,7 @@ function f_gridview_del_record(v_obj, v_id) {
 }
 
 function f_gridview_show_record(v_obj, v_index) {
-    try {        
+    try {
         var v_ds = m_grid_ds;
         f_tab_show("danhsach", "thonhtin");
         switch (v_obj) {
