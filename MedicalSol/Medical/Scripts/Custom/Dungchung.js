@@ -698,32 +698,6 @@ function f_tab_click(v_this, v_obj, v_bool) {
 
 function f_filter_select(v_data) {
     try {
-        //var data;
-        //switch (v_obj) {
-        //    case "nhomkhos":
-        //        data = {
-        //            Obj: "nhomkhos",
-        //            Col: "ma~ten",
-        //            Val: v_text
-        //        };
-        //        break;
-        //    case "lydonxs":
-        //        data = {
-        //            Obj: "lydonxs",
-        //            Col: "ma~ten",
-        //            Val: v_text
-        //        };
-        //        break;
-        //    case "khos":
-        //        data = {
-        //            Obj: "khos",
-        //            Col: "ma~ten",
-        //            Val: v_text
-        //        };
-        //        break;
-        //    default:
-        //        break;
-        //}
         $.ajax({
             type: "POST",
             url: "../Process/Filter",
@@ -745,6 +719,12 @@ function f_filter_select(v_data) {
                     case "nhanviens":
                         f_filter_nhanvien_callback(JSON.parse(result));
                         break;
+                    case "duongdungs":
+                        f_filter_duongdung_callback(JSON.parse(result));
+                        break;
+                    case "dmdangbds":
+                        f_filter_dang_callback(JSON.parse(result));
+                        break; 
                     default:
                         break;
                 }
@@ -760,12 +740,18 @@ function f_filter_select(v_data) {
                     case "lydonxs":
                         f_filter_lydo_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
-                    case "lydonxs":
+                    case "khos":
                         f_filter_kho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
                     case "nhanviens":
                         f_filter_nhanvien_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
+                    case "duongdungs":
+                        f_filter_duongdung_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "dmdangbds":
+                        f_filter_dang_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break; 
                     default:
                         break;
                 }
@@ -918,11 +904,11 @@ function f_gridview_show_record(v_obj, v_index) {
         switch (v_obj) {
             case "khos":
                 f_dmkho_show(v_ds, v_index, false)
-                ms_enable_arr("page_duoc_khaibaokho_xoa", true);
+                ms_enable_arr("page_duoc_khaibaokho_xoa~page_duoc_khaibaokho_sua", true);
                 break;
             case "thuocs":
                 f_dmthuoc_show(v_ds, v_index, false)
-                ms_enable_arr("page_duoc_khaibaothuoc_xoa", true);
+                ms_enable_arr("page_duoc_khaibaothuoc_xoa~page_duoc_khaibaothuoc_sua", true);
                 break;
             default:
                 break;

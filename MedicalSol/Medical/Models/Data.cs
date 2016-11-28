@@ -10,7 +10,7 @@ namespace Medical.Models
     public class Data
     {
         private static string DefaultUrl = "http://localhost:48187/";
-
+        #region Class Dung Chung
         public class User
         {
             [Display(Name = "Id")]
@@ -42,24 +42,6 @@ namespace Medical.Models
                         email = json["email"].ToString();
                         diachi = json["diachi"].ToString();
                     }
-                    //DataSet ds = new DataSet();
-                    //string sql = "";
-                    //sql = @"SELECT iduser, username_, password_, hoten, ngaysinh, diachi, sdt, email, " +
-                    //@"ngay, ngayud, loaiuser " +
-                    //@"FROM users " +
-                    //@"WHERE username_ = '" + _username + "' AND password_ = '" + Helpers.SHA1.Encode(_password) + "';";
-                    //ds = Helpers.dbHelper.getDataSetbySql(sql);
-                    //if (ds != null && ds.Tables[0].Rows.Count > 0)
-                    //{
-                    //    foreach (DataRow dr in ds.Tables[0].Rows)
-                    //    {
-                    //        Id = Int32.Parse(dr["iduser"].ToString());
-                    //        Name = dr["name"].ToString();
-                    //        dob = dr["dob"].ToString();
-                    //        Email = dr["email"].ToString();
-                    //        Address = dr["address"].ToString();
-                    //    }
-                    //}
                 }
                 catch (Exception ex)
                 {
@@ -107,6 +89,198 @@ namespace Medical.Models
 
             }
         }
+
+        public class AjaxData
+        {
+            public string Name { get; set; }
+            public Object Rows { get; set; }
+            public AjaxData()
+            {
+                this.Name = "Table";
+                this.Rows = null;
+            }
+            public AjaxData(Object jarr)
+            {
+                this.Name = "Table";
+                this.Rows = jarr;
+            }
+        }
+
+        public class Filter
+        {
+            public string Obj { get; set; }
+            public string Col { get; set; }
+            public string Val { get; set; }
+        }
+
+        public class CreateVal
+        {
+            public string Obj { get; set; }
+            public string Val { get; set; }
+        }
+
+        public class Save
+        {
+            public string Obj { get; set; }
+            public Object val { get; set; }
+        }
+
+        public class Del
+        {
+            public string obj { get; set; }
+            public string key { get; set; }
+            public string result { get; set; }
+        }
+
+        public class Table
+        {
+            public string Obj { get; set; }
+        }
+
+        public class Lydonx
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static string GetAll()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("lydonxs");
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            public static IEnumerable<Lydonx> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("lydonxs"));
+            }
+            public static IEnumerable<Lydonx> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Lydonx> dslydo = new List<Lydonx>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Lydonx lydo = new Lydonx();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        dslydo.Add(lydo);
+                    }
+                    return dslydo;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Duongdung
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Duongdung> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("lydonxs"));
+            }
+            public static IEnumerable<Duongdung> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Duongdung> lts = new List<Duongdung>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Duongdung lydo = new Duongdung();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        lts.Add(lydo);
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Dangbd
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Dangbd> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("dmdangbds"));
+            }
+            public static IEnumerable<Dangbd> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Dangbd> lts = new List<Dangbd>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Dangbd lydo = new Dangbd();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        lts.Add(lydo);
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Donvi
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Donvi> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("dmdonvis"));
+            }
+            public static IEnumerable<Donvi> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Donvi> lts = new List<Donvi>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Donvi lydo = new Donvi();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        lts.Add(lydo);
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        #endregion        
         public class Kho
         {
             public string id { get; set; }
@@ -208,51 +382,6 @@ namespace Medical.Models
                 }
             }
 
-        }
-
-        public class Lydonx
-        {
-            public string id { get; set; }
-            public string ma { get; set; }
-            public string ten { get; set; }
-            public static string GetAll()
-            {
-                try
-                {
-                    var value = Bridge.HttpGetApi("lydonxs");
-                    return value;
-                }
-                catch (Exception ex)
-                {
-                    return ex.Message;
-                }
-            }
-            public static IEnumerable<Lydonx> GetAllObj()
-            {
-                return GetAllObj(Bridge.HttpGetApi("lydonxs"));
-            }
-            public static IEnumerable<Lydonx> GetAllObj(string value)
-            {
-                try
-                {
-                    //var value = Bridge.HttpGetApi("lydonxs");
-                    List<Lydonx> dslydo = new List<Lydonx>();
-                    var jarr = JArray.Parse(value);
-                    foreach (dynamic item in jarr)
-                    {
-                        Lydonx lydo = new Lydonx();
-                        lydo.id = item.id;
-                        lydo.ma = item.ma;
-                        lydo.ten = item.ten;
-                        dslydo.Add(lydo);
-                    }
-                    return dslydo;
-                }
-                catch (Exception ex)
-                {
-                    return null;
-                }
-            }
         }
 
         public class Nhanvien
@@ -415,53 +544,6 @@ namespace Medical.Models
             {
                 dmkho = _kho;
             }
-        }
-
-        public class AjaxData
-        {
-            public string Name { get; set; }
-            public Object Rows { get; set; }
-            public AjaxData()
-            {
-                this.Name = "Table";
-                this.Rows = null;
-            }
-            public AjaxData(Object jarr)
-            {
-                this.Name = "Table";
-                this.Rows = jarr;
-            }
-        }
-
-        public class Filter
-        {
-            public string Obj { get; set; }
-            public string Col { get; set; }
-            public string Val { get; set; }
-        }
-
-        public class CreateVal
-        {
-            public string Obj { get; set; }
-            public string Val { get; set; }
-        }
-
-        public class Save
-        {
-            public string Obj { get; set; }
-            public Object val { get; set; }
-        }
-
-        public class Del
-        {
-            public string obj { get; set; }
-            public string key { get; set; }
-            public string result { get; set; }
-        }
-
-        public class Table
-        {
-            public string Obj { get; set; }
         }
 
         public class Nhapkhoct

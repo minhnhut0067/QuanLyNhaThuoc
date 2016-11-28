@@ -47,6 +47,12 @@ namespace ApiManageSolution.Models
                             return Lydonxs.GetAll(sqlwhere);
                         case "nhanviens":
                             return Users.GetAll(sqlwhere);
+                        case "duongdungs":
+                            return Duongdungs.GetAll(sqlwhere);
+                        case "dmdangbds":
+                            return Dangbds.GetAll(sqlwhere);
+                        case "dmdangbds":
+                            return Dangbds.GetAll(sqlwhere);
                         default:
                             return null;
                     }
@@ -536,6 +542,129 @@ namespace ApiManageSolution.Models
             }
         }
 
+        public class Duongdungs
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Duongdungs> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Duongdungs> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Duongdungs> lts = new List<Duongdungs>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.ten "
+                    + "\nFROM dmduongdung a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Duongdungs item = new Duongdungs();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Dangbds
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Dangbds> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Dangbds> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Dangbds> lts = new List<Dangbds>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.ten "
+                    + "\nFROM dmdangbd a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Dangbds item = new Dangbds();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Donvis
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Donvis> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Donvis> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Donvis> lts = new List<Donvis>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.ten "
+                    + "\nFROM dmdonvi a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Donvis item = new Donvis();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
         public class Nhapkhocts
         {
             public string id { get; set; }
@@ -630,6 +759,7 @@ namespace ApiManageSolution.Models
 
             }
         }
+
         public class Nhapkhos
         {
             public string id { get; set; }
@@ -737,7 +867,5 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
-
     }
 }

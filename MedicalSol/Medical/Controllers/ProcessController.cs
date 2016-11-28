@@ -36,6 +36,12 @@ namespace Medical.Controllers
                             case "nhanviens":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Nhanvien>(jo.ToString()));
                                 break;
+                            case "duongdungs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Duongdung>(jo.ToString()));
+                                break;
+                            case "dmdangbds":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Duongdung>(jo.ToString()));
+                                break;
                             default:
                                 break;
                         }

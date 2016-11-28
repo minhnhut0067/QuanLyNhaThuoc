@@ -104,7 +104,8 @@ function ms_filter_show_left(v_filter_active_ct, v_left, v_filter_width, v_filte
     aobj.style.display = "block";
     aobj.style.left = aleft.toString() + "px";
     aobj.style.top = atop.toString() + "px";
-    aobj.style.width = awidth.toString() + "px";
+    //aobj.style.width = awidth.toString() + "px";
+    aobj.style.width = awidth < 250 ? "auto" : awidth.toString() + "px";
     aobj.style.height = g_filter_display_height.toString() + "px";
     aobj.style.zIndex = "1000";
     if (g_filter_function != "") {
