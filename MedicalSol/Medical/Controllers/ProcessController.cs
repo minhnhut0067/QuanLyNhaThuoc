@@ -39,8 +39,20 @@ namespace Medical.Controllers
                             case "duongdungs":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Duongdung>(jo.ToString()));
                                 break;
-                            case "dmdangbds":
-                                lts.Add(JsonConvert.DeserializeObject<Data.Duongdung>(jo.ToString()));
+                            case "dangbds":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Dangbd>(jo.ToString()));
+                                break;
+                            case "donvis":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Donvi>(jo.ToString()));
+                                break;
+                            case "nhomduocs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Nhomduoc>(jo.ToString()));
+                                break;
+                            case "hangsxs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Hangsx>(jo.ToString()));
+                                break;
+                            case "quocgias":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Quocgia>(jo.ToString()));
                                 break;
                             default:
                                 break;

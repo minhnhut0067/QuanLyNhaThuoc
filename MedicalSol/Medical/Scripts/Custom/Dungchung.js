@@ -13,8 +13,8 @@ $(document).ready(function () {
     $("ul.sub-menu li").on("mouseover", function () {
         $(this).addClass("open");
         var left = $(this).width();
-        var top = $(this).offset().top
-        $($(this).data().target).css({ "left": left, "top": top });
+        var top = $(this).offset().top - $(window).scrollTop()
+        $($(this).data().target).css({ "left": left, "top": top});
     });
     $("ul.sub-menu li").on("mouseout", function () {
         $(this).removeClass("open");
@@ -722,9 +722,21 @@ function f_filter_select(v_data) {
                     case "duongdungs":
                         f_filter_duongdung_callback(JSON.parse(result));
                         break;
-                    case "dmdangbds":
+                    case "dangbds":
                         f_filter_dang_callback(JSON.parse(result));
-                        break; 
+                        break;
+                    case "donvis":
+                        f_filter_donvi_callback(JSON.parse(result));
+                        break;
+                    case "nhomduocs":
+                        f_filter_nhomduoc_callback(JSON.parse(result));
+                        break;
+                    case "hangsxs":
+                        f_filter_hangsx_callback(JSON.parse(result));
+                        break;
+                    case "quocgias":
+                        f_filter_quocgia_callback(JSON.parse(result));
+                        break;
                     default:
                         break;
                 }
@@ -749,10 +761,22 @@ function f_filter_select(v_data) {
                     case "duongdungs":
                         f_filter_duongdung_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
-                    case "dmdangbds":
+                    case "dangbds":
                         f_filter_dang_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
-                        break; 
-                    default:
+                        break;
+                    case "donvis":
+                        f_filter_donvi_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "nhomduocs":
+                        f_filter_nhomduoc_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "hangsx":
+                        f_filter_hangsx_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "quocgias":
+                        f_filter_quocgia_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    default: 
                         break;
                 }
             }

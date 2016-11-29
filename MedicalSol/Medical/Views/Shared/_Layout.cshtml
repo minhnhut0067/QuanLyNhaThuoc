@@ -27,7 +27,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     <script type="text/javascript" src="~/Scripts/Custom/Filter.js"></script>
-    <script type="text/javascript" src="~/Scripts/Custom/Dungchung.js"></script>    
+    <script type="text/javascript" src="~/Scripts/Custom/Dungchung.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/Custom/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/Scripts/Custom/dataTables.bootstrap.min.js"></script>
@@ -35,27 +35,27 @@
     @*<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>*@
 </head>
 @*<body class="home-bg">*@
-<body>
-    <div class="container-fluid">
+    <body>
+    <div class="container-fluid" style="padding:0">
         <div class="row">
-            <div id="notice" class="alert col-lg-12 col-md-12 col-sm-12 col-xs-12 fade">
+            <div id="notice" class="alert col-lg-12 col-md-12 col-sm-12 col-xs-12 fade" style="position:fixed; top:0; z-index:101">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             @*@Html.Partial("../Partial/_Header")*@
         </div>
-        <div class="row" style="border-bottom:1px solid #cccccc;margin-bottom:15px;background-color:white">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="border-top: 1px solid #ccc;z-index:100;">
-                <div class="row">
-                    @Html.Partial("../Partial/_LeftSidebar")
-                </div>
+        <div class="row" style="border-bottom:1px solid #cccccc;background-color:white;width:100%; margin:0">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index:100;">
+            <div class="row">
+                @Html.Partial("../Partial/_LeftSidebar")
             </div>
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="padding-left: 0; border-left: 1px solid #cccccc; padding-bottom: 15px;">
-                @RenderBody()
-            </div>
-
         </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="padding-left: 0; padding-bottom: 15px; border-left: 1px solid #ccc;">
+        @RenderBody()
     </div>
-    @RenderSection("scripts", required: false)
+
+</div>
+</div>
+@RenderSection("scripts", required: false)
 </body>
 </html>
 <script type="text/javascript">
@@ -65,9 +65,12 @@
             $('#notice').children().last().removeClass("field-validation-error");
             $('#notice').addClass("@ViewData["alert"]");
             $('#notice').children().last().css("font-size", "20px");
-            $('#notice').css("font-size", "20px");
+            $('#notice').css({ "font-size": "20px", "display": "block" });
             $('#notice').addClass("in");
         }
-        setTimeout(function () { $('#notice').removeClass("in"); }, 3000);
+        setTimeout(function () {
+            $('#notice').removeClass("in");
+            $('#notice').css({ "display": "none" });
+        }, 3000);
     });
 </script>

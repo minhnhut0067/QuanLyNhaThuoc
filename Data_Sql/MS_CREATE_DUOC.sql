@@ -3693,4 +3693,4 @@ INSERT INTO dmdonvi(id,ten) VALUES (122,'Que');
 INSERT INTO dmdonvi(id,ten) VALUES (123,'H/1');
 INSERT INTO dmdonvi(id,ten) VALUES (124,'Chloramphenicol');
 
-UPDATE dmdangbd SET ma = 'DON'||lpad(stt,4,'0');
+UPDATE dmdonvi SET ma = 'DON'||lpad(stt,4,'0');

@@ -222,7 +222,7 @@ namespace Medical.Models
             public string ten { get; set; }
             public static IEnumerable<Dangbd> GetAllObj()
             {
-                return GetAllObj(Bridge.HttpGetApi("dmdangbds"));
+                return GetAllObj(Bridge.HttpGetApi("dangbds"));
             }
             public static IEnumerable<Dangbd> GetAllObj(string value)
             {
@@ -267,6 +267,105 @@ namespace Medical.Models
                     foreach (dynamic item in jarr)
                     {
                         Donvi lydo = new Donvi();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        lts.Add(lydo);
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Nhomduoc
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Nhomduoc> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("nhomduocs"));
+            }
+            public static IEnumerable<Nhomduoc> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Nhomduoc> lts = new List<Nhomduoc>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Nhomduoc lydo = new Nhomduoc();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        lts.Add(lydo);
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Hangsx
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Hangsx> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("hangsxs"));
+            }
+            public static IEnumerable<Hangsx> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Hangsx> lts = new List<Hangsx>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Hangsx lydo = new Hangsx();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        lts.Add(lydo);
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Quocgia
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Quocgia> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("quocgias"));
+            }
+            public static IEnumerable<Quocgia> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Quocgia> lts = new List<Quocgia>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Quocgia lydo = new Quocgia();
                         lydo.id = item.id;
                         lydo.ma = item.ma;
                         lydo.ten = item.ten;

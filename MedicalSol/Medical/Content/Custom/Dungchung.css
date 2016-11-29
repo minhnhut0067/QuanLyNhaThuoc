@@ -16,6 +16,7 @@
     font-weight: 200;
     background-color: #fff;
     /*background: rgba(0, 0, 0, 0) linear-gradient(#36aae7, #1fa0e4) repeat scroll 0 0;*/
+    /*position: relative;*/
     position: relative;
     top: 0px;
     width: auto;
@@ -32,6 +33,7 @@
         color: #fff;
         font-weight: bold;
         border-bottom: 1px solid #23282e;
+        text-transform: uppercase;
     }
 
     .nav-side-menu .toggle-btn {

@@ -49,10 +49,16 @@ namespace ApiManageSolution.Models
                             return Users.GetAll(sqlwhere);
                         case "duongdungs":
                             return Duongdungs.GetAll(sqlwhere);
-                        case "dmdangbds":
+                        case "dangbds":
                             return Dangbds.GetAll(sqlwhere);
-                        case "dmdangbds":
-                            return Dangbds.GetAll(sqlwhere);
+                        case "donvis":
+                            return Donvis.GetAll(sqlwhere);
+                        case "nhomduocs":
+                            return Nhomduocs.GetAll(sqlwhere);
+                        case "hangsxs":
+                            return Hangsxs.GetAll(sqlwhere);
+                        case "quocgias":
+                            return Quocgias.GetAll(sqlwhere);
                         default:
                             return null;
                     }
@@ -650,6 +656,129 @@ namespace ApiManageSolution.Models
                         foreach (DataRow dr in ds.Tables[0].Rows)
                         {
                             Donvis item = new Donvis();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Nhomduocs
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Nhomduocs> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Nhomduocs> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Nhomduocs> lts = new List<Nhomduocs>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.ten "
+                    + "\nFROM dmnhomduoc a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Nhomduocs item = new Nhomduocs();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Hangsxs
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Hangsxs> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Hangsxs> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Hangsxs> lts = new List<Hangsxs>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.ten "
+                    + "\nFROM dmhangsx a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Hangsxs item = new Hangsxs();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public class Quocgias
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Quocgias> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Quocgias> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Quocgias> lts = new List<Quocgias>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.ten "
+                    + "\nFROM dmquocgia a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Quocgias item = new Quocgias();
                             item.id = dr["id"].ToString();
                             item.ma = dr["ma"].ToString();
                             item.ten = dr["ten"].ToString();
