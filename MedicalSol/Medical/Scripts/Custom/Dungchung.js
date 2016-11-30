@@ -813,12 +813,12 @@ function f_save_data(v_obj) {
                     ms_focus("page_duoc_khaibaothuoc_ten");
                     return null;
                 }
+                if (ms_gval("page_duoc_khaibaothuoc_nhomduoc", "selectedvalue") == "") {
+                    alert("Vui lòng nhập nhóm thuốc");
+                    ms_focus("page_duoc_khaibaothuoc_nhomduoc");
+                    return null;
+                }
                 data = {
-                    //id: ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"),
-                    //ma: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
-                    //ten: ms_gval("page_duoc_khaibaothuoc_ten", "value"),
-                    //id_nhomkho: ms_gval("page_duoc_khaibaokho_nhomkho", "selectedvalue"),
-                    //ghichu: ms_gval("page_duoc_khaibaokho_ghichu", "value")
                     ma: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
                     id: ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"),
                     ten: ms_gval("page_duoc_khaibaothuoc_ten", "value"),
@@ -827,23 +827,16 @@ function f_save_data(v_obj) {
                     ten_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "value"),
                     id_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "selectedvalue"),
                     hamluong: ms_gval("page_duoc_khaibaothuoc_hamluong", "value"),
-                    //ms_sval("page_duoc_khaibaothuoc_hamluong", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
                     dang: ms_gval("page_duoc_khaibaothuoc_dang", "value"),
-                    //ms_sval("page_duoc_khaibaothuoc_dang", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
                     donvidg: ms_gval("page_duoc_khaibaothuoc_dvt", "value"),
-                    //ms_sval("page_duoc_khaibaothuoc_dvt", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
                     donvisd: ms_gval("page_duoc_khaibaothuoc_donvisd", "value"),
-                    //ms_sval("page_duoc_khaibaothuoc_donvisd", "selectedvalue", ms_gfields(v_ds, v_index, "ma", ""));
-                    //ten_loaiduoc: ms_gval("page_duoc_khaibaothuoc_nhomduoc", "value"),
                     id_loaiduoc: ms_gval("page_duoc_khaibaothuoc_nhomduoc", "selectedvalue"),
-                    //ten_hangsx: ms_sval("page_duoc_khaibaothuoc_hangsx", "value"),
-                    id_hangsx: ms_sval("page_duoc_khaibaothuoc_hangsx", "selectedvalue"),
-                    //ten_quocgia: ms_sval("page_duoc_khaibaothuoc_quocgia", "value"),
-                    id_quocgia: ms_sval("page_duoc_khaibaothuoc_quocgia", "selectedvalue"),
-                    tyle1: ms_sval("page_duoc_khaibaothuoc_donggoi1", "value"),
-                    tyle2: ms_sval("page_duoc_khaibaothuoc_donggoi2", "value"),
-                    thanhphan: ms_sval("page_duoc_khaibaothuoc_thanhphan", "value"),
-                    hoatchat: ms_sval("page_duoc_khaibaothuoc_hoatchat", "value")
+                    id_hangsx: ms_gval("page_duoc_khaibaothuoc_hangsx", "selectedvalue"),
+                    id_quocgia: ms_gval("page_duoc_khaibaothuoc_quocgia", "selectedvalue"),
+                    tyle1: ms_gval("page_duoc_khaibaothuoc_donggoi1", "value"),
+                    tyle2: ms_gval("page_duoc_khaibaothuoc_donggoi2", "value"),
+                    thanhphan: ms_gval("page_duoc_khaibaothuoc_thanhphan", "value"),
+                    hoatchat: ms_gval("page_duoc_khaibaothuoc_hoatchat", "value")
                 };
                 url = "SaveThuoc";
                 break;

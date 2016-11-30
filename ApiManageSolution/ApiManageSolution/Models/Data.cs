@@ -35,6 +35,7 @@ namespace ApiManageSolution.Models
                             }
                         }
                         sqlwhere += " ILIKE '%" + search.val + "%'";
+                        sqlwhere += "\nORDER BY a.ten";
                         sqlwhere += "\nLIMIT 50";
                     }
                     switch (search.obj)
@@ -376,8 +377,7 @@ namespace ApiManageSolution.Models
             {
                 try
                 {
-                    string sql = "select 'KHO'||lpad(case when max(to_number(replace(ma,'KHO',''))) is not null then max(to_number(replace(ma,'KHO',''))) + 1 else 1 end,4,'0') as ma from dmduoc";
-
+                    string sql = "select '" + SHA1.Khongdau(v_ten).Replace(" ", "").ToUpper().Substring(0, 3) + "'||lpad(case when max(to_number(replace(ma,'" + SHA1.Khongdau(v_ten).Replace(" ", "").ToUpper().Substring(0, 3) + "',''))) is not null then max(to_number(replace(ma,'" + SHA1.Khongdau(v_ten).Replace(" ", "").ToUpper().Substring(0, 3) + "',''))) + 1 else 1 end,4,'0')  as ma from dmduoc where ma ilike '" + SHA1.Khongdau(v_ten).Replace(" ", "").ToUpper().Substring(0, 3) + "%'";
                     return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
                 }
                 catch (Exception ex)
@@ -472,24 +472,41 @@ namespace ApiManageSolution.Models
                     {
                         data.hoatchat = "";
                     }
-                    if(data.ma == null || data.ma == "")
+                    if (data.ma == null || data.ma == "")
                     {
                         data.ma = Getma(data.ten);
                     }
-                    //sql = @"UPDATE dmkho " +
-                    //    "SET " +
-                    //    "ma='" + data.ma + "'" +
-                    //    ",ten='" + data.ten + "'" +
-                    //    ",id_nhomkho=" + data.id_nhomkho +
-                    //    ",ngayud=now() " +
-                    //    "WHERE id =" + data.id;
-                    //irec = dbHelper.ExecuteQuery(sql);
-                    //if (irec == 0)
+                    //if (data.tyle1 == null)
                     //{
-                    //    sql = @"INSERT INTO dmkho(id,ma,ten,id_nhomkho) " +
-                    //        "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "'," + data.id_nhomkho + ") ";
-                    //    irec = dbHelper.ExecuteQuery(sql);
+                    //    data.tyle1 = "";
                     //}
+                    //if (data.tyle2 == null)
+                    //{
+                    //    data.tyle2 = "";
+                    //}
+                    sql = @"UPDATE dmduoc " +
+                        "SET " +
+                        "ma='" + data.ma + "'" +
+                        ",id_loaiduoc=" + data.id_loaiduoc + "" +
+                        ",ten='" + data.ten + "'" +
+                        ",dang='" + data.dang == null ? "" : data.dang + "'" +
+                        ",hamluong='" + data.hamluong == null ? "" : data.hamluong + "'" +
+                        ",donvidg='" + data.donvidg == null ? "" : data.donvidg + "'" +
+                        ",donvisd='" + data.donvisd == null ? "" : data.donvisd + "'" +
+                        ",sodk='" + data.sodk == null ? "" : data.sodk + "'" +
+                        ",atc='" + data.atc == null ? "" : data.atc + "'" +
+                        ",id_duongdung=" + data.id_duongdung == null ? "0" : data.id_duongdung + "" +
+                        ",id_hangsx=" + data.id_hangsx == null ? "0" : data.id_hangsx + "" +
+                        ",id_quocgia=" + data.id_quocgia == null ? "0" : data.id_quocgia + "" +
+                        ",ngayud=now() " +
+                        "WHERE id =" + data.id;
+                    irec = dbHelper.ExecuteQuery(sql);
+                    if (irec == 0)
+                    {
+                        sql = @"INSERT INTO dmduoc(id,ma,ten,id_loaiduoc,dang,hamluong,donvidg,donvisd,sodk,atc,id_duongdung,id_hangsx,id_quocgia) " +
+                            "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "'," + data.id_loaiduoc + ",'" + (data.dang == null ? "" : data.dang) + "','" + (data.hamluong == null ? "" : data.hamluong) + "','" + (data.donvidg == null ? "" : data.donvidg) + "','" + (data.donvisd == null ? "" : data.donvisd) + "','" + (data.sodk == null ? "" : data.sodk) + "','" + (data.atc == null ? "" : data.atc) + "'," + (data.id_duongdung == null ? "0" : data.id_duongdung) + "," + (data.id_hangsx == null ? "0" : data.id_hangsx) + "," + (data.id_quocgia == null ? "0" : data.id_quocgia) + ") ";
+                        irec = dbHelper.ExecuteQuery(sql);
+                    }
                     if (irec == 1)
                     {
                         return GetAll("\nWHERE a.id=" + data.id);

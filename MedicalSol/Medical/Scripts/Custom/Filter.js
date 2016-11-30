@@ -244,68 +244,67 @@ function ms_filter_get_selected() {
                     ms_sval(g_filter_selected_ct_delimiter.split('~')[i], "title", ms_gfields(g_filter_ds, g_filter_index, g_filter_selected_field_delimiter.split('~')[i], ""));
                 }
                 //ms_sval("ct_form_page1_tenmau","value",ms_gfields(g_filter_ds,g_filter_index,"tenmau",""));
-                var makt = ms_gfields(g_filter_ds, g_filter_index, "ma", "")
-                if (makt != "") {
-                    ms_sval("ct_form_page1_makythuat", "value", makt);
-                }
-                var gia_dvtp = ms_gfields(g_filter_ds, g_filter_index, "gia", "");
-                if (gia_dvtp != "") {
-                    ms_sval("ct_form_page1_gia", "value", gia_dvtp);
-                }
-                else {
-                    if (ms_gval("ct_form_page1_gia", "value") != "") {
-                        ms_sval("ct_form_page1_gia", "value", "");
-                    }
-                }
-                var username = ms_gfields(g_filter_ds, g_filter_index, "username", "");
-                if (username != "") {
-                    ms_sval("ct_form_page1_nguoiud", "value", username);
-                }
-                else {
-                    if (ms_gval("ct_form_page1_nguoiud", "value") != "") {
-                        ms_sval("ct_form_page1_nguoiud", "value", "Admin");
-                    }
-                }
-                var ngayud = ms_gfields(g_filter_ds, g_filter_index, "ngayud", "");
-                if (ngayud != "") {
-                    ms_sval("ct_form_page1_ngayud", "value", ngayud);
-                }
-                else {
-                    if (ms_gval("ct_form_page1_ngayud", "value") != "") {
-                        ms_sval("ct_form_page1_ngayud", "value", ms_gfields(g_filter_ds, g_filter_index, "today", ""));
-                    }
-                }
-
-                var madvtp = ms_gfields(g_filter_ds, g_filter_index, "ma", "");
-                if (madvtp != "") {
-                    ms_sval("ct_form_page1_madvtp", "value", madvtp);
-                }
-                if (ms_gfields(g_filter_ds, g_filter_index, "madv", "") != "") {
-                    ms_sval("ct_form_page1_ma", "value", ms_gfields(g_filter_ds, g_filter_index, "madv", ""));
-                }
-                var dongia = ms_gfields(g_filter_ds, g_filter_index, "dongia", "");
-                if (dongia != "") {
-                    ms_sval("ct_form_page1_gia", "value", dongia);
-                }
-                var motadata = ms_gfields(g_filter_ds, g_filter_index, "mota", "");
-                if (motadata != "") {
-                    ms_sval("ct_form_page1_mota", "value", motadata);
-                }
-                var ketluandata = ms_gfields(g_filter_ds, g_filter_index, "ketluan", "")
-                if (ketluandata != "") {
-                    ms_sval("ct_form_page1_ketluan", "value", ketluandata);
-                }
-                var maumotadata = ms_gfields(g_filter_ds, g_filter_index, "maumota", "");
-                if (maumotadata != "") {
-                    ms_sval("ct_form_page3_mota", "value", maumotadata);
-                }
-                var mauketluandata = ms_gfields(g_filter_ds, g_filter_index, "mauketluan", "")
-                if (mauketluandata != "") {
-                    ms_sval("ct_form_page3_ketqua", "value", mauketluandata);
-                }
-                m_chuyen = ms_gfields(g_filter_ds, g_filter_index, "chuyen", "");
-                m_duyet = ms_gfields(g_filter_ds, g_filter_index, "duyet", "");
-                m_stt = ms_gfields(g_filter_ds, g_filter_index, "maumt_stt", "");
+                //var makt = ms_gfields(g_filter_ds, g_filter_index, "ma", "")
+                //if (makt != "") {
+                //    ms_sval("ct_form_page1_makythuat", "value", makt);
+                //}
+                //var gia_dvtp = ms_gfields(g_filter_ds, g_filter_index, "gia", "");
+                //if (gia_dvtp != "") {
+                //    ms_sval("ct_form_page1_gia", "value", gia_dvtp);
+                //}
+                //else {
+                //    if (ms_gval("ct_form_page1_gia", "value") != "") {
+                //        ms_sval("ct_form_page1_gia", "value", "");
+                //    }
+                //}
+                //var username = ms_gfields(g_filter_ds, g_filter_index, "username", "");
+                //if (username != "") {
+                //    ms_sval("ct_form_page1_nguoiud", "value", username);
+                //}
+                //else {
+                //    if (ms_gval("ct_form_page1_nguoiud", "value") != "") {
+                //        ms_sval("ct_form_page1_nguoiud", "value", "Admin");
+                //    }
+                //}
+                //var ngayud = ms_gfields(g_filter_ds, g_filter_index, "ngayud", "");
+                //if (ngayud != "") {
+                //    ms_sval("ct_form_page1_ngayud", "value", ngayud);
+                //}
+                //else {
+                //    if (ms_gval("ct_form_page1_ngayud", "value") != "") {
+                //        ms_sval("ct_form_page1_ngayud", "value", ms_gfields(g_filter_ds, g_filter_index, "today", ""));
+                //    }
+                //}
+                //var madvtp = ms_gfields(g_filter_ds, g_filter_index, "ma", "");
+                //if (madvtp != "") {
+                //    ms_sval("ct_form_page1_madvtp", "value", madvtp);
+                //}
+                //if (ms_gfields(g_filter_ds, g_filter_index, "madv", "") != "") {
+                //    ms_sval("ct_form_page1_ma", "value", ms_gfields(g_filter_ds, g_filter_index, "madv", ""));
+                //}
+                //var dongia = ms_gfields(g_filter_ds, g_filter_index, "dongia", "");
+                //if (dongia != "") {
+                //    ms_sval("ct_form_page1_gia", "value", dongia);
+                //}
+                //var motadata = ms_gfields(g_filter_ds, g_filter_index, "mota", "");
+                //if (motadata != "") {
+                //    ms_sval("ct_form_page1_mota", "value", motadata);
+                //}
+                //var ketluandata = ms_gfields(g_filter_ds, g_filter_index, "ketluan", "")
+                //if (ketluandata != "") {
+                //    ms_sval("ct_form_page1_ketluan", "value", ketluandata);
+                //}
+                //var maumotadata = ms_gfields(g_filter_ds, g_filter_index, "maumota", "");
+                //if (maumotadata != "") {
+                //    ms_sval("ct_form_page3_mota", "value", maumotadata);
+                //}
+                //var mauketluandata = ms_gfields(g_filter_ds, g_filter_index, "mauketluan", "")
+                //if (mauketluandata != "") {
+                //    ms_sval("ct_form_page3_ketqua", "value", mauketluandata);
+                //}
+                //m_chuyen = ms_gfields(g_filter_ds, g_filter_index, "chuyen", "");
+                //m_duyet = ms_gfields(g_filter_ds, g_filter_index, "duyet", "");
+                //m_stt = ms_gfields(g_filter_ds, g_filter_index, "maumt_stt", "");
                 g_filter_selected_val = ms_gfields(g_filter_ds, g_filter_index, g_filter_selected_field, "");
                 ms_sval(g_filter_active_ct, "selectedvalue", g_filter_selected_val);
             }
