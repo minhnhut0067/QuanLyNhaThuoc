@@ -45,8 +45,8 @@ namespace Medical.Controllers
                             case "donvis":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Donvi>(jo.ToString()));
                                 break;
-                            case "nhomduocs":
-                                lts.Add(JsonConvert.DeserializeObject<Data.Nhomduoc>(jo.ToString()));
+                            case "loaiduocs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Loaiduoc>(jo.ToString()));
                                 break;
                             case "hangsxs":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Hangsx>(jo.ToString()));

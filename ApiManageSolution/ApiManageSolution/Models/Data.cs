@@ -54,8 +54,8 @@ namespace ApiManageSolution.Models
                             return Dangbds.GetAll(sqlwhere);
                         case "donvis":
                             return Donvis.GetAll(sqlwhere);
-                        case "nhomduocs":
-                            return Nhomduocs.GetAll(sqlwhere);
+                        case "loaiduocs":
+                            return Loaiduocs.GetAll(sqlwhere);
                         case "hangsxs":
                             return Hangsxs.GetAll(sqlwhere);
                         case "quocgias":
@@ -489,15 +489,15 @@ namespace ApiManageSolution.Models
                         "ma='" + data.ma + "'" +
                         ",id_loaiduoc=" + data.id_loaiduoc + "" +
                         ",ten='" + data.ten + "'" +
-                        ",dang='" + data.dang == null ? "" : data.dang + "'" +
-                        ",hamluong='" + data.hamluong == null ? "" : data.hamluong + "'" +
-                        ",donvidg='" + data.donvidg == null ? "" : data.donvidg + "'" +
-                        ",donvisd='" + data.donvisd == null ? "" : data.donvisd + "'" +
-                        ",sodk='" + data.sodk == null ? "" : data.sodk + "'" +
-                        ",atc='" + data.atc == null ? "" : data.atc + "'" +
-                        ",id_duongdung=" + data.id_duongdung == null ? "0" : data.id_duongdung + "" +
-                        ",id_hangsx=" + data.id_hangsx == null ? "0" : data.id_hangsx + "" +
-                        ",id_quocgia=" + data.id_quocgia == null ? "0" : data.id_quocgia + "" +
+                        ",dang='" + (data.dang == null ? "" : data.dang) + "'" +
+                        ",hamluong='" + (data.hamluong == null ? "" : data.hamluong) + "'" +
+                        ",donvidg='" + (data.donvidg == null ? "" : data.donvidg) + "'" +
+                        ",donvisd='" + (data.donvisd == null ? "" : data.donvisd) + "'" +
+                        ",sodk='" + (data.sodk == null ? "" : data.sodk) + "'" +
+                        ",atc='" + (data.atc == null ? "" : data.atc) + "'" +
+                        ",id_duongdung=" + (data.id_duongdung == null ? "0" : data.id_duongdung) + "" +
+                        ",id_hangsx=" + (data.id_hangsx == null ? "0" : data.id_hangsx) + "" +
+                        ",id_quocgia=" + (data.id_quocgia == null ? "0" : data.id_quocgia) + "" +
                         ",ngayud=now() " +
                         "WHERE id =" + data.id;
                     irec = dbHelper.ExecuteQuery(sql);
@@ -520,6 +520,31 @@ namespace ApiManageSolution.Models
                 catch (Exception ex)
                 {
                     return null;
+                }
+            }
+            public static bool Del(Del data)
+            {
+                try
+                {
+                    if (data.obj != null && data.obj != "")
+                    {
+                        var sql = "";
+                        var irec = 0;
+                        sql = "delete dmduoc where id =" + data.key;
+                        irec = dbHelper.ExecuteQuery(sql);
+                        if (irec == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
                 }
             }
         }
@@ -688,24 +713,24 @@ namespace ApiManageSolution.Models
             }
         }
 
-        public class Nhomduocs
+        public class Loaiduocs
         {
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static IEnumerable<Nhomduocs> GetAll()
+            public static IEnumerable<Loaiduocs> GetAll()
             {
                 return GetAll("\nWHERE 1=1");
             }
-            public static IEnumerable<Nhomduocs> GetAll(string v_where)
+            public static IEnumerable<Loaiduocs> GetAll(string v_where)
             {
                 try
                 {
                     DataSet ds = new DataSet();
-                    List<Nhomduocs> lts = new List<Nhomduocs>();
+                    List<Loaiduocs> lts = new List<Loaiduocs>();
                     string sql = "";
                     sql = "SELECT a.id,a.ma,a.ten "
-                    + "\nFROM dmnhomduoc a" + v_where;
+                    + "\nFROM dmloaiduoc a" + v_where;
                     //+ "\nLIMIT 50";
 
                     ds = dbHelper.getDataSetbySql(sql);
@@ -713,7 +738,7 @@ namespace ApiManageSolution.Models
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
                         {
-                            Nhomduocs item = new Nhomduocs();
+                            Loaiduocs item = new Loaiduocs();
                             item.id = dr["id"].ToString();
                             item.ma = dr["ma"].ToString();
                             item.ten = dr["ten"].ToString();

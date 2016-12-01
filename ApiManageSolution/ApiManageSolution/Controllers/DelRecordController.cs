@@ -32,6 +32,9 @@ namespace ApiManageSolution.Controllers
                     case "khos":
                         data.result = Data.Khos.Del(data);
                         break;
+                    case "thuocs":
+                        data.result = Data.Thuocs.Del(data);
+                        break;
                     default:
                         break;
                 }
