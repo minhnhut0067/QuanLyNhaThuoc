@@ -494,7 +494,7 @@ function ms_cap(v_this) {
 
 function f_table_reload(v_obj) {
     try {
-        var data = { Obj: v_obj };
+        var data = { obj: v_obj, col: "", val: "" };
         $.ajax({
             type: "POST",
             url: "../Process/Gridview",

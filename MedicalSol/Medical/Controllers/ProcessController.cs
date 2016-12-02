@@ -13,14 +13,14 @@ namespace Medical.Controllers
     public class ProcessController : Controller
     {
         [HttpPost]
-        public string Filter(Data.Filter filter)
+        public string Filter(Data.Filter data)
         {
             try
             {
-                if (filter.Obj != "")
+                if (data.Obj != "")
                 {
                     List<Object> lts = new List<Object>();
-                    foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Search", filter)))
+                    foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Search", data)))
                     {
                         switch (filter.Obj)
                         {
@@ -58,8 +58,8 @@ namespace Medical.Controllers
                                 break;
                         }
                     }
-                    Data.AjaxData data = new Data.AjaxData(lts);
-                    return new JavaScriptSerializer().Serialize(data);
+                    Data.AjaxData result = new Data.AjaxData(lts);
+                    return new JavaScriptSerializer().Serialize(result);
                 }
                 else
                 {
@@ -110,16 +110,16 @@ namespace Medical.Controllers
         }
 
         [HttpPost]
-        public string Gridview(Data.Table table)
+        public string Gridview(Data.Table data)
         {
             try
             {
-                if (table.Obj != "")
+                if (data.Obj != "")
                 {
                     List<Object> lts = new List<Object>();
-                    foreach (JObject jo in JArray.Parse(Bridge.HttpGetApi(table.Obj)))
+                    foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Search", data)))
                     {
-                        switch (table.Obj)
+                        switch (data.Obj)
                         {
                             case "khos":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));

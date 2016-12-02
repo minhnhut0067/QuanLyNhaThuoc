@@ -9,7 +9,6 @@ namespace ApiManageSolution.Models
     public class Data
     {
         dbHelper dbh = new dbHelper();
-
         public class Search
         {
             public string obj { get; set; }
@@ -21,7 +20,7 @@ namespace ApiManageSolution.Models
                 try
                 {
                     string sqlwhere = "";
-                    if (search.col.Split('~').Length > 0)
+                    if (search.col != null && search.col.Split('~').Length > 0)
                     {
                         foreach (var item in search.col.Split('~'))
                         {
@@ -40,6 +39,7 @@ namespace ApiManageSolution.Models
                     }
                     switch (search.obj)
                     {
+                        #region Nhà Thốc
                         case "nhomkhos":
                             return Nhomkhos.GetAll(sqlwhere);
                         case "khos":
@@ -60,6 +60,11 @@ namespace ApiManageSolution.Models
                             return Hangsxs.GetAll(sqlwhere);
                         case "quocgias":
                             return Quocgias.GetAll(sqlwhere);
+                        #endregion
+                        #region Nhân sự
+                        case "phongbans":
+                            return Phongbans.GetAll(sqlwhere);
+                        #endregion
                         default:
                             return null;
                     }
@@ -70,21 +75,18 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class CreateVal
         {
             public string obj { get; set; }
             public string val { get; set; }
             public string result { get; set; }
         }
-
         public class Del
         {
             public string obj { get; set; }
             public string key { get; set; }
             public bool result { get; set; }
         }
-
         public class Users
         {
             public string iduser { get; set; }
@@ -139,7 +141,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Khos
         {
             public string id { get; set; }
@@ -283,7 +284,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Nhomkhos
         {
             public string id { get; set; }
@@ -328,7 +328,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Thuocs
         {
             public string id { get; set; }
@@ -548,7 +547,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Lydonxs
         {
             public string id { get; set; }
@@ -589,7 +587,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Duongdungs
         {
             public string id { get; set; }
@@ -630,7 +627,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Dangbds
         {
             public string id { get; set; }
@@ -671,7 +667,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Donvis
         {
             public string id { get; set; }
@@ -712,7 +707,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Loaiduocs
         {
             public string id { get; set; }
@@ -753,7 +747,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Hangsxs
         {
             public string id { get; set; }
@@ -794,7 +787,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Quocgias
         {
             public string id { get; set; }
@@ -835,7 +827,6 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-
         public class Nhapkhocts
         {
             public string id { get; set; }
@@ -930,7 +921,6 @@ namespace ApiManageSolution.Models
 
             }
         }
-
         public class Nhapkhos
         {
             public string id { get; set; }
@@ -965,7 +955,6 @@ namespace ApiManageSolution.Models
             public string userten { get; set; }
             public string ngayud { get; set; }
             public IEnumerable<Nhapkhocts> nhapkhocts { get; set; }
-
             public static IEnumerable<Nhapkhos> GetAll()
             {
                 return GetAll("\nWHERE 1=1");
@@ -1038,5 +1027,147 @@ namespace ApiManageSolution.Models
                 }
             }
         }
+        #region Nhân sự
+        public class Phongbans
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public string ghichu { get; set; }
+            public static string Getid()
+            {
+                try
+                {
+                    string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from dmphongban";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static string Getma()
+            {
+                try
+                {
+                    string sql = "select 'PHB'||lpad(case when max(to_number(replace(ma,'PHB',''))) is not null then max(to_number(replace(ma,'PHB',''))) + 1 else 1 end,4,'0') as ma from dmphongban";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static IEnumerable<Phongbans> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Phongbans> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Phongbans> lts = new List<Phongbans>();
+                    string sql = "";
+                    sql = "SELECT a.id, a.ma, a.ten, a.ghichu"
+                    + "\nFROM dmphongban a"
+                    + v_where;
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Phongbans item = new Phongbans();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            item.ghichu = dr["ghichu"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+
+            }
+            public static IEnumerable<Phongbans> Upd(Phongbans data)
+            {
+                try
+                {
+                    var sql = "";
+                    var irec = 0;
+                    if (data.ghichu == "\n")
+                    {
+                        data.ghichu = "";
+                    }
+                    if (data.id == null || data.id == "")
+                    {
+                        data.id = Getid();
+                    }
+                    if (data.ma == null || data.ma == "")
+                    {
+                        data.ma = Getma();
+                    }
+                    sql = @"UPDATE dmphongban " +
+                        "SET " +
+                        "ma='" + data.ma + "'" +
+                        ",ten='" + data.ten + "'" +
+                        ",ghichu='" + data.ghichu + "'" +
+                        ",ngayud=now() " +
+                        "WHERE id =" + data.id;
+                    irec = dbHelper.ExecuteQuery(sql);
+                    if (irec == 0)
+                    {
+                        sql = @"INSERT INTO dmphongban(id, ma, ten, ghichu) " +
+                            "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "','" + data.ghichu + "') ";
+                        irec = dbHelper.ExecuteQuery(sql);
+                    }
+                    if (irec == 1)
+                    {
+                        return GetAll("\nWHERE a.ma='" + data.ma + "'");
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            public static bool Del(Del data)
+            {
+                try
+                {
+                    if (data.obj != null && data.obj != "")
+                    {
+                        var sql = "";
+                        var irec = 0;
+                        sql = "delete dmphongban where id =" + data.key;
+                        irec = dbHelper.ExecuteQuery(sql);
+                        if (irec == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+        #endregion
     }
 }

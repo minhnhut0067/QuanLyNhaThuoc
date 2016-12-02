@@ -22,7 +22,6 @@ namespace Medical.Models
                 return null;
             }
         }
-
         public static string ConvertObjectToJsonString(object obj)
         {
             try
