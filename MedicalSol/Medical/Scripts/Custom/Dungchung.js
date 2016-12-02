@@ -14,7 +14,7 @@ $(document).ready(function () {
         $(this).addClass("open");
         var left = $(this).width();
         var top = $(this).offset().top - $(window).scrollTop()
-        $($(this).data().target).css({ "left": left, "top": top});
+        $($(this).data().target).css({ "left": left, "top": top });
     });
     $("ul.sub-menu li").on("mouseout", function () {
         $(this).removeClass("open");
@@ -494,7 +494,7 @@ function ms_cap(v_this) {
 
 function f_table_reload(v_obj) {
     try {
-        var data = { Obj: v_obj };
+        var data = { obj: v_obj, col: "", val: "" };
         $.ajax({
             type: "POST",
             url: "../Process/Gridview",
@@ -511,6 +511,16 @@ function f_table_reload(v_obj) {
                             $("#page_duoc_khaibaothuoc_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaothuoc", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
                             $('#page_duoc_khaibaothuoc_gidview').DataTable();
                             $('#page_duoc_khaibaothuoc_gidview').parent().css("overflow-x", "scroll");
+                            break;
+                        case "nhapkhos":
+                            $("#page_duoc_nhapkho_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaothuoc", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
+                            $('#page_duoc_nhapkho_gidview').DataTable();
+                            $('#page_duoc_nhapkho_gidview').parent().css("overflow-x", "scroll");
+                            break;
+                        case "nhapkhocts":
+                            $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhos", "[]", "page_duoc_khaibaothuoc_ct", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
+                            $('#page_duoc_nhapkho_ct_gidview').DataTable();
+                            $('#page_duoc_nhapkho_ct_gidview').parent().css("overflow-x", "scroll");
                             break;
                         default:
                             break;
@@ -544,7 +554,7 @@ function f_create_input(v_id, v_type, v_name, v_style) {
     try {
         rhtml = "";
         if (v_id != "") {
-            switch (v_type) {                
+            switch (v_type) {
                 case "input":
                     rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
                     rhtml += "<input id=\"" + v_id + "\" type=\"text\" style = '" + v_style + "' class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
@@ -611,6 +621,7 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
 
 function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer) {
     try {
+        debugger;
         v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds.replace('"', '\"').replace("\'", "'") + "}";
         v_ds = JSON.parse(v_ds);
         m_grid_ds = v_ds;
@@ -728,8 +739,8 @@ function f_filter_select(v_data) {
                     case "donvis":
                         f_filter_donvi_callback(JSON.parse(result));
                         break;
-                    case "nhomduocs":
-                        f_filter_nhomduoc_callback(JSON.parse(result));
+                    case "loaiduocs":
+                        f_filter_loaiduoc_callback(JSON.parse(result));
                         break;
                     case "hangsxs":
                         f_filter_hangsx_callback(JSON.parse(result));
@@ -740,9 +751,6 @@ function f_filter_select(v_data) {
                     default:
                         break;
                 }
-                //else {
-                //    f_filter_nhomkho_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
-                //}
             },
             error: function (result) {
                 switch (data.Obj) {
@@ -767,8 +775,8 @@ function f_filter_select(v_data) {
                     case "donvis":
                         f_filter_donvi_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
-                    case "nhomduocs":
-                        f_filter_nhomduoc_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                    case "loaiduocs":
+                        f_filter_loaiduoc_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
                     case "hangsx":
                         f_filter_hangsx_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
@@ -776,7 +784,7 @@ function f_filter_select(v_data) {
                     case "quocgias":
                         f_filter_quocgia_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
-                    default: 
+                    default:
                         break;
                 }
             }
@@ -787,71 +795,21 @@ function f_filter_select(v_data) {
     }
 }
 
-function f_save_data(v_obj) {
+function f_save_data(v_url, v_data) {
     try {
-        var data;
-        var url = "";
-        switch (v_obj) {
-            case "khos":
-                if (ms_gval("page_duoc_khaibaokho_ten", "value") == "") {
-                    alert("Vui lòng nhập tên kho");
-                    ms_focus("page_duoc_khaibaokho_ten");
-                    return null;
-                }
-                data = {
-                    id: ms_gval("page_duoc_khaibaokho_ma", "selectedvalue"),
-                    ma: ms_gval("page_duoc_khaibaokho_ma", "value"),
-                    ten: ms_gval("page_duoc_khaibaokho_ten", "value"),
-                    id_nhomkho: ms_gval("page_duoc_khaibaokho_nhomkho", "selectedvalue"),
-                    ghichu: ms_gval("page_duoc_khaibaokho_ghichu", "value")
-                };
-                url = "Savekho";
-                break;
-            case "thuocs":
-                if (ms_gval("page_duoc_khaibaothuoc_ten", "value") == "") {
-                    alert("Vui lòng nhập tên thuốc");
-                    ms_focus("page_duoc_khaibaothuoc_ten");
-                    return null;
-                }
-                if (ms_gval("page_duoc_khaibaothuoc_nhomduoc", "selectedvalue") == "") {
-                    alert("Vui lòng nhập nhóm thuốc");
-                    ms_focus("page_duoc_khaibaothuoc_nhomduoc");
-                    return null;
-                }
-                data = {
-                    ma: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
-                    id: ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"),
-                    ten: ms_gval("page_duoc_khaibaothuoc_ten", "value"),
-                    atc: ms_gval("page_duoc_khaibaothuoc_atccode", "value"),
-                    sodk: ms_gval("page_duoc_khaibaothuoc_sodk", "value"),
-                    ten_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "value"),
-                    id_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "selectedvalue"),
-                    hamluong: ms_gval("page_duoc_khaibaothuoc_hamluong", "value"),
-                    dang: ms_gval("page_duoc_khaibaothuoc_dang", "value"),
-                    donvidg: ms_gval("page_duoc_khaibaothuoc_dvt", "value"),
-                    donvisd: ms_gval("page_duoc_khaibaothuoc_donvisd", "value"),
-                    id_loaiduoc: ms_gval("page_duoc_khaibaothuoc_nhomduoc", "selectedvalue"),
-                    id_hangsx: ms_gval("page_duoc_khaibaothuoc_hangsx", "selectedvalue"),
-                    id_quocgia: ms_gval("page_duoc_khaibaothuoc_quocgia", "selectedvalue"),
-                    tyle1: ms_gval("page_duoc_khaibaothuoc_donggoi1", "value"),
-                    tyle2: ms_gval("page_duoc_khaibaothuoc_donggoi2", "value"),
-                    thanhphan: ms_gval("page_duoc_khaibaothuoc_thanhphan", "value"),
-                    hoatchat: ms_gval("page_duoc_khaibaothuoc_hoatchat", "value")
-                };
-                url = "SaveThuoc";
-                break;
-            default:
-                break;
-        }
         $.ajax({
             type: "POST",
-            url: "../Process/" + url,
-            data: data,
+            url: "../Process/" + v_url,
+            data: v_data,
             success: function (result) {
-                switch (v_obj) {
-                    case "khos":
+                switch (v_url) {
+                    case "Savekho":
                         f_dmkho_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), 0, false);
                         ms_enable_arr("page_duoc_khaibaokho_xoa", true);
+                        break;
+                    case "SaveThuoc":
+                        f_dmthuoc_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), 0, false);
+                        ms_enable_arr("page_duoc_khaibaothuoc_xoa", true);
                         break;
                     default:
                         break;
@@ -862,6 +820,7 @@ function f_save_data(v_obj) {
         });
     }
     catch (ex) {
+        alert(ex);
     }
 }
 

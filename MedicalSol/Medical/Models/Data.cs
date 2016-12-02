@@ -89,7 +89,6 @@ namespace Medical.Models
 
             }
         }
-
         public class AjaxData
         {
             public string Name { get; set; }
@@ -105,38 +104,32 @@ namespace Medical.Models
                 this.Rows = jarr;
             }
         }
-
         public class Filter
         {
             public string Obj { get; set; }
             public string Col { get; set; }
             public string Val { get; set; }
         }
-
         public class CreateVal
         {
             public string Obj { get; set; }
             public string Val { get; set; }
         }
-
         public class Save
         {
             public string Obj { get; set; }
             public Object val { get; set; }
         }
-
         public class Del
         {
             public string obj { get; set; }
             public string key { get; set; }
             public string result { get; set; }
         }
-
         public class Table
         {
             public string Obj { get; set; }
         }
-
         public class Lydonx
         {
             public string id { get; set; }
@@ -181,7 +174,6 @@ namespace Medical.Models
                 }
             }
         }
-
         public class Duongdung
         {
             public string id { get; set; }
@@ -214,7 +206,6 @@ namespace Medical.Models
                 }
             }
         }
-
         public class Dangbd
         {
             public string id { get; set; }
@@ -247,7 +238,6 @@ namespace Medical.Models
                 }
             }
         }
-
         public class Donvi
         {
             public string id { get; set; }
@@ -280,26 +270,25 @@ namespace Medical.Models
                 }
             }
         }
-
-        public class Nhomduoc
+        public class Loaiduoc
         {
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static IEnumerable<Nhomduoc> GetAllObj()
+            public static IEnumerable<Loaiduoc> GetAllObj()
             {
-                return GetAllObj(Bridge.HttpGetApi("nhomduocs"));
+                return GetAllObj(Bridge.HttpGetApi("loaiduocs"));
             }
-            public static IEnumerable<Nhomduoc> GetAllObj(string value)
+            public static IEnumerable<Loaiduoc> GetAllObj(string value)
             {
                 try
                 {
                     //var value = Bridge.HttpGetApi("lydonxs");
-                    List<Nhomduoc> lts = new List<Nhomduoc>();
+                    List<Loaiduoc> lts = new List<Loaiduoc>();
                     var jarr = JArray.Parse(value);
                     foreach (dynamic item in jarr)
                     {
-                        Nhomduoc lydo = new Nhomduoc();
+                        Loaiduoc lydo = new Loaiduoc();
                         lydo.id = item.id;
                         lydo.ma = item.ma;
                         lydo.ten = item.ten;
@@ -313,7 +302,6 @@ namespace Medical.Models
                 }
             }
         }
-
         public class Hangsx
         {
             public string id { get; set; }
@@ -346,7 +334,6 @@ namespace Medical.Models
                 }
             }
         }
-
         public class Quocgia
         {
             public string id { get; set; }
@@ -379,7 +366,59 @@ namespace Medical.Models
                 }
             }
         }
-        #endregion        
+        public class Nhanvien
+        {
+            public string iduser { get; set; }
+            public string username_ { get; set; }
+            public string password_ { get; set; }
+            public string hoten { get; set; }
+            public string ngaysinh { get; set; }
+            public string diachi { get; set; }
+            public string sdt { get; set; }
+            public string email { get; set; }
+            public string ngay { get; set; }
+            public string ngayud { get; set; }
+            public string loaiuser { get; set; }
+            public static string GetAll()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("lydonxs");
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            public static IEnumerable<Nhanvien> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("nhanviens"));
+            }
+            public static IEnumerable<Nhanvien> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("nhanviens");
+                    List<Nhanvien> ds = new List<Nhanvien>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Nhanvien obj = new Nhanvien();
+                        obj.iduser = item.iduser;
+                        obj.hoten = item.hoten;
+                        ds.Add(obj);
+                    }
+                    return ds;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        #endregion
+        #region Class Duoc
         public class Kho
         {
             public string id { get; set; }
@@ -432,7 +471,6 @@ namespace Medical.Models
                 }
             }
         }
-
         public class NhomKho
         {
             public string id { get; set; }
@@ -482,59 +520,6 @@ namespace Medical.Models
             }
 
         }
-
-        public class Nhanvien
-        {
-            public string iduser { get; set; }
-            public string username_ { get; set; }
-            public string password_ { get; set; }
-            public string hoten { get; set; }
-            public string ngaysinh { get; set; }
-            public string diachi { get; set; }
-            public string sdt { get; set; }
-            public string email { get; set; }
-            public string ngay { get; set; }
-            public string ngayud { get; set; }
-            public string loaiuser { get; set; }
-            public static string GetAll()
-            {
-                try
-                {
-                    var value = Bridge.HttpGetApi("lydonxs");
-                    return value;
-                }
-                catch (Exception ex)
-                {
-                    return ex.Message;
-                }
-            }
-            public static IEnumerable<Nhanvien> GetAllObj()
-            {
-                return GetAllObj(Bridge.HttpGetApi("nhanviens"));
-            }
-            public static IEnumerable<Nhanvien> GetAllObj(string value)
-            {
-                try
-                {
-                    //var value = Bridge.HttpGetApi("nhanviens");
-                    List<Nhanvien> ds = new List<Nhanvien>();
-                    var jarr = JArray.Parse(value);
-                    foreach (dynamic item in jarr)
-                    {
-                        Nhanvien obj = new Nhanvien();
-                        obj.iduser = item.iduser;
-                        obj.hoten = item.hoten;
-                        ds.Add(obj);
-                    }
-                    return ds;
-                }
-                catch (Exception ex)
-                {
-                    return null;
-                }
-            }
-        }
-
         public class Thuoc
         {
             public string id { get; set; }
@@ -631,7 +616,6 @@ namespace Medical.Models
                 }
             }
         }
-
         public class XuatBan
         {
             public IEnumerable<Kho> dmkho { get; set; }
@@ -644,7 +628,6 @@ namespace Medical.Models
                 dmkho = _kho;
             }
         }
-
         public class Nhapkhoct
         {
             public string id { get; set; }
@@ -740,7 +723,6 @@ namespace Medical.Models
                 }
             }
         }
-
         public class Nhapkho
         {
             public string id { get; set; }
@@ -843,5 +825,6 @@ namespace Medical.Models
                 }
             }
         }
+        #endregion
     }
 }

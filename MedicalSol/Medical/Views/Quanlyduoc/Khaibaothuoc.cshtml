@@ -78,7 +78,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <div class="input-group" style="">
                         <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_dvt", "filter", "Đơn vị tính", ""));
+                            document.write(f_create_input("@ViewData["page"]_dvt", "filter", "Đơn vị ĐG", ""));
                         </script>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <div class="input-group">
                         <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_nhomduoc", "filter", "Nhóm thuốc", ""));
+                            document.write(f_create_input("@ViewData["page"]_loaiduoc", "filter", "Loại", ""));
                         </script>
                     </div>
                 </div>
@@ -113,14 +113,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row custom-row">
-                @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <div class="input-group" style="">
-                        <span id="@ViewData["page"]_donggoi1_label" class="input-group-addon input-label">Đóng gói</span>
-                        <input id="@ViewData["page"]_donggoi1" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_dongoi1_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
-                        <span id="@ViewData["page"]_donggoi1_label" class="input-group-addon input-label" style="min-width: 0px;text-align: right;padding-right: 0">Viên</span>
-                    </div>
-                </div>*@
+            @*<div class="row custom-row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <div class="input-group" style="">
                         <span id="@ViewData["page"]_donggoi1_label" class="input-group-addon input-label">Một vỉ</span>
@@ -135,7 +128,7 @@
                         <span id="@ViewData["page"]_donggoi2_label" class="input-group-addon input-label" style="min-width: 0px;text-align: right;padding-right: 0">Vỉ</span>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="row custom-row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="input-group" style="">
@@ -172,7 +165,7 @@
             <div class="row custom-row custom-btn-group" style="margin-top:0">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:left">
                     <script type="text/javascript">
-                        document.write(f_create_btn_group("@ViewData["page"]_ds", "themmoi", "primary~primary", "Thêm thuốc"));//success~primary~info~warning~danger~default
+                        document.write(f_create_btn_group("@ViewData["page"]_ds", "themmoi", "primary~primary", "Thêm thuốc"));
                     </script>
                 </div>
             </div>
@@ -189,8 +182,6 @@
 <script type="text/javascript">
     jQuery(document).ready(function () {
         f_table_reload("thuocs");
-        $('#page_duoc_khaibaothuoc_gidview').DataTable();
-        $('#page_duoc_khaibaothuoc_gidview').parent().css("overflow-x", "scroll");
         khaibaothuoc_enable(false);
     });
 </script>

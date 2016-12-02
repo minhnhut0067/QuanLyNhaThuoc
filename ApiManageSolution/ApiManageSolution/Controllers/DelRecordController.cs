@@ -29,8 +29,11 @@ namespace ApiManageSolution.Controllers
             {
                 switch (data.obj)
                 {
-                    case "khos":
-                        data.result = Data.Khos.Del(data);
+                    case "phongbans":
+                        data.result = Data.Phongbans.Del(data);
+                        break;
+                    case "thuocs":
+                        data.result = Data.Thuocs.Del(data);
                         break;
                     default:
                         break;
