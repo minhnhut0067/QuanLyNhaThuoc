@@ -15,5 +15,11 @@ namespace HRM.Controllers
             ViewData["page"] = "page_nhansu_khaibaophongban"; 
             return View();
         }
+
+        public ActionResult Nhanvien()
+        {
+            ViewData["page"] = "page_nhansu_khaibaonhanvien";
+            return View();
+        }
     }
 }

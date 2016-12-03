@@ -1,21 +1,21 @@
 ﻿@model HRM.Models.Data.Phongban
 @{
-    ViewData["title"] = "Index";
+    ViewData["title"] = "Phòng ban";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/Custom/Trangchu.css" rel="stylesheet" />
 <div class="container-fluid">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation"><a href="#thonhtin" aria-controls="thonhtin" role="tab" data-toggle="tab" onclick="f_tab_click(this, 'phongbans', false)">Thông tin Kho</a></li>
-        <li role="presentation" class="active"><a href="#danhsach" aria-controls="danhsach" role="tab" data-toggle="tab" onclick="f_tab_click(this, 'phongbans', true)">Danh sách Kho</a></li>
+        <li role="presentation"><a href="#thonhtin" aria-controls="thonhtin" role="tab" data-toggle="tab" onclick="f_tab_click(this, 'phongbans', false)">Chi tiết</a></li>
+        <li role="presentation" class="active"><a href="#danhsach" aria-controls="danhsach" role="tab" data-toggle="tab" onclick="f_tab_click(this, 'phongbans', true)">Danh sách</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade" id="thonhtin">
             <div class="row custom-row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="container-fluid custom-title">Thông tin kho</div>
+                    <div class="container-fluid custom-title">Thông tin phòng ban</div>
                 </div>
             </div>
             <div class="row custom-row">
@@ -54,13 +54,13 @@
         <div role="tabpanel" class="tab-pane fade in active" id="danhsach">
             <div class="row custom-row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="container-fluid custom-title">Danh sách kho</div>
+                    <div class="container-fluid custom-title">Danh sách phòng ban</div>
                 </div>
             </div>
             <div class="row custom-row custom-btn-group" style="margin-top:0">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:left">
                     <script type="text/javascript">
-                        document.write(f_create_btn_group("@ViewData["page"]_ds", "themmoi", "primary~primary", "Thêm kho"));//success~primary~info~warning~danger~default
+                        document.write(f_create_btn_group("@ViewData["page"]_ds", "themmoi", "primary~primary", "Thêm phòng ban"));//success~primary~info~warning~danger~default
                     </script>
                 </div>
             </div>

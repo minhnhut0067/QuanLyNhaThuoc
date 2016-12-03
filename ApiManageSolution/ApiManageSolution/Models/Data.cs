@@ -46,7 +46,7 @@ namespace ApiManageSolution.Models
                             return Khos.GetAll(sqlwhere);
                         case "lydonxs":
                             return Lydonxs.GetAll(sqlwhere);
-                        case "nhanviens":
+                        case "users":
                             return Users.GetAll(sqlwhere);
                         case "duongdungs":
                             return Duongdungs.GetAll(sqlwhere);
@@ -60,10 +60,14 @@ namespace ApiManageSolution.Models
                             return Hangsxs.GetAll(sqlwhere);
                         case "quocgias":
                             return Quocgias.GetAll(sqlwhere);
+                        case "dmphais":
+                            return Dmphais.GetAll(sqlwhere);
                         #endregion
                         #region Nhân sự
                         case "phongbans":
                             return Phongbans.GetAll(sqlwhere);
+                        case "nhanviens":
+                            return Nhanviens.GetAll(sqlwhere);
                         #endregion
                         default:
                             return null;
@@ -138,6 +142,139 @@ namespace ApiManageSolution.Models
                 catch
                 {
                     return null;
+                }
+            }
+        }
+        public class Dmphais
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static string Getid()
+            {
+                try
+                {
+                    string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from dmphai";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static string Getma()
+            {
+                try
+                {
+                    string sql = "select 'PHA'||lpad(case when max(to_number(replace(ma,'PHA',''))) is not null then max(to_number(replace(ma,'PHA',''))) + 1 else 1 end,4,'0') as ma from dmkho";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static IEnumerable<Dmphais> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Dmphais> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Dmphais> lts = new List<Dmphais>();
+                    string sql = "";
+                    sql = "SELECT a.id, a.ma, a.ten"
+                    + "\nFROM dmphai a"
+                    + v_where;
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Dmphais item = new Dmphais();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+
+            }
+            public static IEnumerable<Dmphais> Upd(Dmphais data)
+            {
+                try
+                {
+                    var sql = "";
+                    var irec = 0;
+                    if (data.id == null)
+                    {
+                        data.id = Getid();
+                    }
+                    if (data.ma == null)
+                    {
+                        data.ma = Getma();
+                    }
+                    sql = @"UPDATE dmphai " +
+                        "SET " +
+                        "ma='" + data.ma + "'" +
+                        ",ten='" + data.ten + "'" +
+                        ",ngayud=now() " +
+                        "WHERE id =" + data.id;
+                    irec = dbHelper.ExecuteQuery(sql);
+                    if (irec == 0)
+                    {
+                        sql = @"INSERT INTO dmkho(id,ma,ten) " +
+                            "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "') ";
+                        irec = dbHelper.ExecuteQuery(sql);
+                    }
+                    if (irec == 1)
+                    {
+                        return GetAll("\nWHERE a.id=" + data.id);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            public static bool Del(Del data)
+            {
+                try
+                {
+                    if (data.obj != null && data.obj != "")
+                    {
+                        var sql = "";
+                        var irec = 0;
+                        sql = "delete dmkho where id =" + data.key;
+                        irec = dbHelper.ExecuteQuery(sql);
+                        if (irec == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
                 }
             }
         }
@@ -1130,6 +1267,151 @@ namespace ApiManageSolution.Models
                     if (irec == 1)
                     {
                         return GetAll("\nWHERE a.ma='" + data.ma + "'");
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            public static bool Del(Del data)
+            {
+                try
+                {
+                    if (data.obj != null && data.obj != "")
+                    {
+                        var sql = "";
+                        var irec = 0;
+                        sql = "delete dmphongban where id =" + data.key;
+                        irec = dbHelper.ExecuteQuery(sql);
+                        if (irec == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+        public class Nhanviens
+        {
+            public string id { get; set; }
+            public string hoten { get; set; }
+            public string ngaysinh { get; set; }
+            public string namsinh { get; set; }
+            public string diachi { get; set; }
+            public string sdt { get; set; }
+            public string email { get; set; }
+            public string capbac { get; set; }
+            public string mucluong { get; set; }
+            public string idphai { get; set; }
+            public string tenphai { get; set; }
+            public string idphongban { get; set; }
+            public string tenphongban { get; set; }
+            public static string Getid()
+            {
+                try
+                {
+                    string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from nhanvien";
+
+                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static IEnumerable<Nhanviens> GetAll()
+            {
+                return GetAll("\nWHERE 1=1");
+            }
+            public static IEnumerable<Nhanviens> GetAll(string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Nhanviens> lts = new List<Nhanviens>();
+                    string sql = "";
+                    sql = "SELECT a.id, a.hoten, a.hoten, a.ngaysinh, a.namsinh, a.idphai. b.ten as tenphai, a.diachi"
+                    + "\n, a.sdt, a.email, a.idphongban, c.tem as tenphongban, a.capbac, a.mucluong"
+                    + "\nFROM nhanvien a"
+                    + v_where;
+                    ds = dbHelper.getDataSetbySql(sql);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Nhanviens item = new Nhanviens();
+                            item.id = dr["id"].ToString();
+                            item.hoten = dr["hoten"].ToString();
+                            item.ngaysinh = dr["ngaysinh"].ToString();
+                            item.namsinh = dr["namsinh"].ToString();
+                            item.diachi = dr["diachi"].ToString();
+                            item.sdt = dr["sdt"].ToString();
+                            item.email = dr["email"].ToString();
+                            item.capbac = dr["capbac"].ToString();
+                            item.mucluong = dr["mucluong"].ToString();
+                            item.idphai = dr["idphai"].ToString();
+                            item.tenphai = dr["tenphai"].ToString();
+                            item.idphongban = dr["idphongban"].ToString();
+                            item.tenphongban = dr["tenphongban"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+
+            }
+            public static IEnumerable<Nhanviens> Upd(Nhanviens data)
+            {
+                try
+                {
+                    var sql = "";
+                    var irec = 0;
+                    if (data.id == null || data.id == "")
+                    {
+                        data.id = Getid();
+                    }
+                    sql = @"UPDATE nhanvien " +
+                        "SET " +
+                        "hoten='" + data.hoten + "'" +
+                        ",ngaysinh='" + data.ngaysinh + "'" +
+                        ",namsinh='" + data.namsinh + "'" +
+                        ",diachi='" + data.diachi + "'" +
+                        ",sdt='" + data.sdt + "'" +
+                        ",email='" + data.email + "'" +
+                        ",capbac='" + data.capbac + "'" +
+                        ",mucluong='" + data.mucluong + "'" +
+                        ",idphai=" + data.idphai +
+                        ",idphongban=" + data.idphongban +
+                        ",ngayud=now() " +
+                        "WHERE id =" + data.id;
+                    irec = dbHelper.ExecuteQuery(sql);
+                    if (irec == 0)
+                    {
+                        sql = @"INSERT INTO nhanvien(id, hoten, ngaysinh, namsinh,diachi,sdt,email,capbac, mucluong,idphai,idphongban) " +
+                            "VALUES(" + data.id + ",'" + data.hoten + "','" + data.ngaysinh + "','" + data.namsinh + "','" + data.diachi + "','" + data.sdt + "','" + data.email + "','" + data.capbac + "','" + data.mucluong + "'," + data.idphai + "," + data.idphongban+ ") ";
+                        irec = dbHelper.ExecuteQuery(sql);
+                    }
+                    if (irec == 1)
+                    {
+                        return GetAll("\nWHERE a.id=" + data.id);
                     }
                     else
                     {

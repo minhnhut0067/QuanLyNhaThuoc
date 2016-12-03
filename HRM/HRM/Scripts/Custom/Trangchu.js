@@ -10,19 +10,19 @@
 var strdatafilter = "";
 var filter_ds = null;
 var khaibaophongban_input = "page_nhansu_khaibaophongban_ma~page_nhansu_khaibaophongban_ten~page_nhansu_khaibaophongban_ghichu";
-var khaibaothuoc_input = "page_duoc_khaibaothuoc_ma~page_duoc_khaibaothuoc_ten~page_duoc_khaibaothuoc_sodk~page_duoc_khaibaothuoc_atccode~page_duoc_khaibaothuoc_hamluong~page_duoc_khaibaothuoc_duongdung~page_duoc_khaibaothuoc_dang~page_duoc_khaibaothuoc_dvt~page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat";
+var khaibaonhanvien_input = "page_nhansu_khaibaonhanvien_id~page_nhansu_khaibaonhanvien_hoten~page_nhansu_khaibaonhanvien_phai~page_nhansu_khaibaonhanvien_ngaysinh~page_nhansu_khaibaonhanvien_namsinh~page_nhansu_khaibaonhanvien_sdt~page_nhansu_khaibaonhanvien_email~page_nhansu_khaibaonhanvien_diachi~page_nhansu_khaibaonhanvien_phongban~page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong";
 //Filter-End
 
-function f_filter_lydo_show(v_id_active) {
+function f_filter_phai_show(v_id_active) {
     strdatafilter = ms_gval(v_id_active + "_val", "value", "");
-    ms_filter_show(v_id_active, "0", "f_filter_lydo", "1", "id", v_id_active, "ten", "f_filter_lydo_selected");
+    ms_filter_show(v_id_active, "0", "f_filter_phai", "1", "id", v_id_active, "ten", "f_filter_phai_selected");
 }
 
-function f_filter_lydo() {
+function f_filter_phai() {
     var atext = ms_gval(g_filter_active_ct, "value", "");
     if (atext != null) {
         var data = {
-            Obj: "lydonxs",
+            Obj: "dmphais",
             Col: "ma~ten",
             Val: atext
         };
@@ -31,11 +31,11 @@ function f_filter_lydo() {
     }
 }
 
-function f_filter_lydo_callback(v_ds) {//res
+function f_filter_phai_callback(v_ds) {//res
 
     if (ms_gobj(g_filter_active_ct) != null) {
         if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_lydo();
+            f_filter_phai();
             return;
         }
     }
@@ -43,20 +43,20 @@ function f_filter_lydo_callback(v_ds) {//res
     //g_filter_cur_val = "";
 }
 
-function f_filter_lydo_selected() {
+function f_filter_phai_selected() {
 }
 
 
-function f_filter_kho_show(v_id_active) {
+function f_filter_phongban_show(v_id_active) {
     strdatafilter = ms_gval(v_id_active + "_val", "value", "");
-    ms_filter_show(v_id_active, "0", "f_filter_kho", "1", "id", v_id_active, "ten", "f_filter_kho_selected");
+    ms_filter_show(v_id_active, "0", "f_filter_phongban", "1", "id", v_id_active, "ten", "f_filter_phongban_selected");
 }
 
-function f_filter_kho() {
+function f_filter_phongban() {
     var atext = ms_gval(g_filter_active_ct, "value", "");
     if (atext != null) {
         var data = {
-            Obj: "khos",
+            Obj: "phongbans",
             Col: "ma~ten",
             Val: atext
         };
@@ -65,11 +65,11 @@ function f_filter_kho() {
     }
 }
 
-function f_filter_kho_callback(v_ds) {//res
+function f_filter_phongban_callback(v_ds) {//res
 
     if (ms_gobj(g_filter_active_ct) != null) {
         if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_kho();
+            f_filter_phongban();
             return;
         }
     }
@@ -77,238 +77,7 @@ function f_filter_kho_callback(v_ds) {//res
     //g_filter_cur_val = "";
 }
 
-function f_filter_kho_selected() {
-}
-
-
-function f_filter_nhanvien_show(v_id_active) {
-    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
-    ms_filter_show(v_id_active, "0", "f_filter_nhanvien", "1", "id", v_id_active, "ten", "f_filter_nhanvien_selected");
-}
-
-function f_filter_nhanvien() {
-    var atext = ms_gval(g_filter_active_ct, "value", "");
-    if (atext != null) {
-        var data = {
-            Obj: "nhanviens",
-            Col: "id~hoten",
-            Val: atext
-        };
-        g_filter_cur_val = atext;
-        f_filter_select(data);
-    }
-}
-
-function f_filter_nhanvien_callback(v_ds) {//res
-
-    if (ms_gobj(g_filter_active_ct) != null) {
-        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_nhanvien();
-            return;
-        }
-    }
-    ms_filter_load(v_ds, "iduser~hoten", "Mã~Tên");
-    //g_filter_cur_val = "";
-}
-
-function f_filter_nhanvien_selected() {
-}
-
-
-function f_filter_duongdung_show(v_id_active) {
-    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
-    ms_filter_show(v_id_active, "0", "f_filter_duongdung", "1", "id", v_id_active, "ten", "f_filter_duongdung_selected");
-}
-
-function f_filter_duongdung() {
-    var atext = ms_gval(g_filter_active_ct, "value", "");
-    if (atext != null) {
-        var data = {
-            Obj: "duongdungs",
-            Col: "ma~ten",
-            Val: atext
-        };
-        g_filter_cur_val = atext;
-        f_filter_select(data);
-    }
-}
-
-function f_filter_duongdung_callback(v_ds) {//res
-
-    if (ms_gobj(g_filter_active_ct) != null) {
-        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_duongdung();
-            return;
-        }
-    }
-    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
-}
-
-function f_filter_duongdung_selected() {
-}
-
-
-function f_filter_dang_show(v_id_active) {
-    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
-    ms_filter_show(v_id_active, "0", "f_filter_dang", "1", "id", v_id_active, "ten", "f_filter_dang_selected");
-}
-
-function f_filter_dang() {
-    var atext = ms_gval(g_filter_active_ct, "value", "");
-    if (atext != null) {
-        var data = {
-            Obj: "dangbds",
-            Col: "ma~ten",
-            Val: atext
-        };
-        g_filter_cur_val = atext;
-        f_filter_select(data);
-    }
-}
-
-function f_filter_dang_callback(v_ds) {//res
-
-    if (ms_gobj(g_filter_active_ct) != null) {
-        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_dang();
-            return;
-        }
-    }
-    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
-}
-
-function f_filter_dang_selected() {
-}
-
-
-function f_filter_donvi_show(v_id_active) {
-    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
-    ms_filter_show(v_id_active, "0", "f_filter_donvi", "1", "id", v_id_active, "ten", "f_filter_donvi_selected");
-}
-
-function f_filter_donvi() {
-    var atext = ms_gval(g_filter_active_ct, "value", "");
-    if (atext != null) {
-        var data = {
-            Obj: "donvis",
-            Col: "ma~ten",
-            Val: atext
-        };
-        g_filter_cur_val = atext;
-        f_filter_select(data);
-    }
-}
-
-function f_filter_donvi_callback(v_ds) {//res
-
-    if (ms_gobj(g_filter_active_ct) != null) {
-        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_donvi();
-            return;
-        }
-    }
-    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
-}
-
-function f_filter_donvi_selected() {
-}
-
-
-function f_filter_loaiduoc_show(v_id_active) {
-    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
-    ms_filter_show(v_id_active, "0", "f_filter_loaiduoc", "1", "id", v_id_active, "ten", "f_filter_loaiduoc_selected");
-}
-
-function f_filter_loaiduoc() {
-    var atext = ms_gval(g_filter_active_ct, "value", "");
-    if (atext != null) {
-        var data = {
-            Obj: "loaiduocs",
-            Col: "ma~ten",
-            Val: atext
-        };
-        g_filter_cur_val = atext;
-        f_filter_select(data);
-    }
-}
-
-function f_filter_loaiduoc_callback(v_ds) {//res
-
-    if (ms_gobj(g_filter_active_ct) != null) {
-        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_donvi();
-            return;
-        }
-    }
-    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
-}
-
-function f_filter_loaiduoc_selected() {
-}
-
-
-function f_filter_hangsx_show(v_id_active) {
-    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
-    ms_filter_show(v_id_active, "0", "f_filter_hangsx", "1", "id", v_id_active, "ten", "f_filter_hangsx_selected");
-}
-
-function f_filter_hangsx() {
-    var atext = ms_gval(g_filter_active_ct, "value", "");
-    if (atext != null) {
-        var data = {
-            Obj: "hangsxs",
-            Col: "ma~ten",
-            Val: atext
-        };
-        g_filter_cur_val = atext;
-        f_filter_select(data);
-    }
-}
-
-function f_filter_hangsx_callback(v_ds) {//ress
-    if (ms_gobj(g_filter_active_ct) != null) {
-        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_hangsx();
-            return;
-        }
-    }
-    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
-}
-
-function f_filter_hangsx_selected() {
-}
-
-
-function f_filter_quocgia_show(v_id_active) {
-    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
-    ms_filter_show(v_id_active, "0", "f_filter_quocgia", "1", "id", v_id_active, "ten", "f_filter_quocgia_selected");
-}
-
-function f_filter_quocgia() {
-    var atext = ms_gval(g_filter_active_ct, "value", "");
-    if (atext != null) {
-        var data = {
-            Obj: "quocgias",
-            Col: "ma~ten",
-            Val: atext
-        };
-        g_filter_cur_val = atext;
-        f_filter_select(data);
-    }
-}
-
-function f_filter_quocgia_callback(v_ds) {//res
-
-    if (ms_gobj(g_filter_active_ct) != null) {
-        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
-            f_filter_quocgia();
-            return;
-        }
-    }
-    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
-}
-
-function f_filter_quocgia_selected() {
+function f_filter_phongban_selected() {
 }
 
 
@@ -325,44 +94,13 @@ function filter_click(v_this) {
         ms_sval(aid, "value", "");
         switch (aid) {
                 //khaibaothuoc
-            case "page_duoc_khaibaothuoc_duongdung":
+            case "page_nhansu_khaibaonhanvien_phai":
                 ms_filter_hide();
-                f_filter_duongdung_show(aid);
+                f_filter_phai_show(aid);
                 break;
-            case "page_duoc_khaibaothuoc_dang":
+            case "page_nhansu_khaibaonhanvien_phongban":
                 ms_filter_hide();
-                f_filter_dang_show(aid);
-                break;
-
-            case "page_duoc_khaibaothuoc_dvt":
-            case "page_duoc_khaibaothuoc_donvisd":
-                ms_filter_hide();
-                f_filter_donvi_show(aid);
-                break;
-                //nhapkho
-            case "page_duoc_nhapkho_lydo":
-                ms_filter_hide();
-                f_filter_lydo_show(aid);
-                break;
-            case "page_duoc_nhapkho_kho":
-                ms_filter_hide();
-                f_filter_kho_show(aid);
-                break;
-            case "page_duoc_nhapkho_nhanvien":
-                ms_filter_hide();
-                f_filter_nhanvien_show(aid);
-                break;
-            case "page_duoc_khaibaothuoc_loaiduoc":
-                ms_filter_hide();
-                f_filter_loaiduoc_show(aid);
-                break;
-            case "page_duoc_khaibaothuoc_hangsx":
-                ms_filter_hide();
-                f_filter_hangsx_show(aid);
-                break;
-            case "page_duoc_khaibaothuoc_quocgia":
-                ms_filter_hide();
-                f_filter_quocgia_show(aid);
+                f_filter_phongban_show(aid);
                 break;
             default:
                 alert(aid);
@@ -387,8 +125,8 @@ function input_keyup(event, v_this) {
         keyCode = event.which;
     }
     var aid_active = "";
-    switch (v_this.id) {       
-        case "page_duoc_khaibaothuoc_duongdung":
+    switch (v_this.id) {                      
+        case "page_nhansu_khaibaonhanvien_phai":
             aid_active = v_this.id;
             switch (keyCode.toString()) {
                 case "38"://Up
@@ -396,7 +134,7 @@ function input_keyup(event, v_this) {
                         ms_filter_up();
                     }
                     else {
-                        f_filter_duongdung_show(aid_active);
+                        f_filter_phai_show(aid_active);
                     }
                     break;
                 case "40"://Down
@@ -404,7 +142,7 @@ function input_keyup(event, v_this) {
                         ms_filter_down();
                     }
                     else {
-                        f_filter_duongdung_show(aid_active);
+                        f_filter_phai_show(aid_active);
                     }
                     break;
                 case "27"://ESC
@@ -419,11 +157,11 @@ function input_keyup(event, v_this) {
                     break;
                 case "32"://Space
                 default:
-                    f_filter_duongdung_show(aid_active);
+                    f_filter_phai_show(aid_active);
                     break;
             }
             break;
-        case "page_duoc_khaibaothuoc_dang":
+        case "page_nhansu_khaibaonhanvien_phongban":
             aid_active = v_this.id;
             switch (keyCode.toString()) {
                 case "38"://Up
@@ -431,7 +169,7 @@ function input_keyup(event, v_this) {
                         ms_filter_up();
                     }
                     else {
-                        f_filter_dang_show(aid_active);
+                        f_filter_phongban_show(aid_active);
                     }
                     break;
                 case "40"://Down
@@ -439,7 +177,7 @@ function input_keyup(event, v_this) {
                         ms_filter_down();
                     }
                     else {
-                        f_filter_dang_show(aid_active);
+                        f_filter_phongban_show(aid_active);
                     }
                     break;
                 case "27"://ESC
@@ -454,257 +192,10 @@ function input_keyup(event, v_this) {
                     break;
                 case "32"://Space
                 default:
-                    f_filter_dang_show(aid_active);
+                    f_filter_phongban_show(aid_active);
                     break;
             }
-            break;
-
-        case "page_duoc_khaibaothuoc_dvt":
-        case "page_duoc_khaibaothuoc_donvisd":
-            aid_active = v_this.id;
-            switch (keyCode.toString()) {
-                case "38"://Up
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_up();
-                    }
-                    else {
-                        f_filter_donvi_show(aid_active);
-                    }
-                    break;
-                case "40"://Down
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_down();
-                    }
-                    else {
-                        f_filter_donvi_show(aid_active);
-                    }
-                    break;
-                case "27"://ESC
-                    ms_filter_hide();
-                    break;
-                case "37"://Left
-                case "39"://Right
-                    break;
-                case "13"://Enter
-                    ms_filter_get_selected();
-                    ms_filter_hide();
-                    break;
-                case "32"://Space
-                default:
-                    f_filter_donvi_show(aid_active);
-                    break;
-            }
-            break;
-        case "page_duoc_khaibaothuoc_loaiduoc":
-            aid_active = v_this.id;
-            switch (keyCode.toString()) {
-                case "38"://Up
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_up();
-                    }
-                    else {
-                        f_filter_loaiduoc_show(aid_active);
-                    }
-                    break;
-                case "40"://Down
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_down();
-                    }
-                    else {
-                        f_filter_loaiduoc_show(aid_active);
-                    }
-                    break;
-                case "27"://ESC
-                    ms_filter_hide();
-                    break;
-                case "37"://Left
-                case "39"://Right
-                    break;
-                case "13"://Enter
-                    ms_filter_get_selected();
-                    ms_filter_hide();
-                    break;
-                case "32"://Space
-                default:
-                    f_filter_loaiduoc_show(aid_active);
-                    break;
-            }
-            break;
-        case "page_duoc_khaibaothuoc_hangsx":
-            aid_active = v_this.id;
-            switch (keyCode.toString()) {
-                case "38"://Up
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_up();
-                    }
-                    else {
-                        f_filter_hangsx_show(aid_active);
-                    }
-                    break;
-                case "40"://Down
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_down();
-                    }
-                    else {
-                        f_filter_hangsx_show(aid_active);
-                    }
-                    break;
-                case "27"://ESC
-                    ms_filter_hide();
-                    break;
-                case "37"://Left
-                case "39"://Right
-                    break;
-                case "13"://Enter
-                    ms_filter_get_selected();
-                    ms_filter_hide();
-                    break;
-                case "32"://Space
-                default:
-                    f_filter_hangsx_show(aid_active);
-                    break;
-            }
-            break;
-        case "page_duoc_khaibaothuoc_quocgia":
-            aid_active = v_this.id;
-            switch (keyCode.toString()) {
-                case "38"://Up
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_up();
-                    }
-                    else {
-                        f_filter_quocgia_show(aid_active);
-                    }
-                    break;
-                case "40"://Down
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_down();
-                    }
-                    else {
-                        f_filter_quocgia_show(aid_active);
-                    }
-                    break;
-                case "27"://ESC
-                    ms_filter_hide();
-                    break;
-                case "37"://Left
-                case "39"://Right
-                    break;
-                case "13"://Enter
-                    ms_filter_get_selected();
-                    ms_filter_hide();
-                    break;
-                case "32"://Space
-                default:
-                    f_filter_quocgia_show(aid_active);
-                    break;
-            }
-            break;
-        case "page_duoc_nhapkho_lydo":
-            aid_active = v_this.id;
-            switch (keyCode.toString()) {
-                case "38"://Up
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_up();
-                    }
-                    else {
-                        f_filter_lydo_show(aid_active);
-                    }
-                    break;
-                case "40"://Down
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_down();
-                    }
-                    else {
-                        f_filter_lydo_show(aid_active);
-                    }
-                    break;
-                case "27"://ESC
-                    ms_filter_hide();
-                    break;
-                case "37"://Left
-                case "39"://Right
-                    break;
-                case "13"://Enter
-                    ms_filter_get_selected();
-                    ms_filter_hide();
-                    break;
-                case "32"://Space
-                default:
-                    f_filter_lydo_show(aid_active);
-                    break;
-            }
-            break;
-        case "page_duoc_nhapkho_kho":
-            aid_active = v_this.id;
-            switch (keyCode.toString()) {
-                case "38"://Up
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_up();
-                    }
-                    else {
-                        f_filter_kho_show(aid_active);
-                    }
-                    break;
-                case "40"://Down
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_down();
-                    }
-                    else {
-                        f_filter_kho_show(aid_active);
-                    }
-                    break;
-                case "27"://ESC
-                    ms_filter_hide();
-                    break;
-                case "37"://Left
-                case "39"://Right
-                    break;
-                case "13"://Enter
-                    ms_filter_get_selected();
-                    ms_filter_hide();
-                    break;
-                case "32"://Space
-                default:
-                    f_filter_kho_show(aid_active);
-                    break;
-            }
-            break;
-        case "page_duoc_nhapkho_nhanvien":
-            aid_active = v_this.id;
-            switch (keyCode.toString()) {
-                case "38"://Up
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_up();
-                    }
-                    else {
-                        f_filter_nhanvien_show(aid_active);
-                    }
-                    break;
-                case "40"://Down
-                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
-                        ms_filter_down();
-                    }
-                    else {
-                        f_filter_nhanvien_show(aid_active);
-                    }
-                    break;
-                case "27"://ESC
-                    ms_filter_hide();
-                    break;
-                case "37"://Left
-                case "39"://Right
-                    break;
-                case "13"://Enter
-                    ms_filter_get_selected();
-                    ms_filter_hide();
-                    break;
-                case "32"://Space
-                default:
-                    f_filter_nhanvien_show(aid_active);
-                    break;
-            }
-            break;
+            break;      
         default:
             break;
     }
@@ -734,107 +225,62 @@ function input_keypress(event, v_this) {
                 ms_focus_arr("page_nhansu_khaibaophongban_luu");
                 break;
                 //khaibaothuoc
-            case "page_duoc_khaibaothuoc_ten":
+            case "page_nhansu_khaibaonhanvien_hoten":
                 input_onblur(v_this);
-                if (ms_gval("page_duoc_khaibaothuoc_ten", "value", "") != "") {
-                    ms_focus_arr("page_duoc_khaibaothuoc_sodk~page_duoc_khaibaothuoc_atccode~page_duoc_khaibaothuoc_hamluong~page_duoc_khaibaothuoc_duongdung~page_duoc_khaibaothuoc_dang~page_duoc_khaibaothuoc_dvt~page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
+                if (ms_gval("page_nhansu_khaibaonhanvien_hoten", "value", "") != "") {
+                    ms_focus_arr("page_nhansu_khaibaonhanvien_phai~page_nhansu_khaibaonhanvien_ngaysinh~page_nhansu_khaibaonhanvien_namsinh~page_nhansu_khaibaonhanvien_sdt~page_nhansu_khaibaonhanvien_email~page_nhansu_khaibaonhanvien_diachi~page_nhansu_khaibaonhanvien_phongban~page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong");
                 }
                 else {
-                    ms_focus_arr("page_duoc_khaibaothuoc_ten");
+                    ms_focus_arr("page_nhansu_khaibaonhanvien_hoten");
                 }
                 break;
-            case "page_duoc_khaibaothuoc_sodk":
-                ms_focus_arr("page_duoc_khaibaothuoc_atccode~page_duoc_khaibaothuoc_hamluong~page_duoc_khaibaothuoc_duongdung~page_duoc_khaibaothuoc_dang~page_duoc_khaibaothuoc_dvt~page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
-                break;
-            case "page_duoc_khaibaothuoc_atccode":
-                ms_focus_arr("page_duoc_khaibaothuoc_hamluong~page_duoc_khaibaothuoc_duongdung~page_duoc_khaibaothuoc_dang~page_duoc_khaibaothuoc_dvt~page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
-                break;
-            case "page_duoc_khaibaothuoc_hamluong":
-                ms_focus_arr("page_duoc_khaibaothuoc_duongdung~page_duoc_khaibaothuoc_dang~page_duoc_khaibaothuoc_dvt~page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
-                break;
-            case "page_duoc_khaibaothuoc_duongdung":
-                if (ms_gval("page_duoc_khaibaothuoc_duongdung", "selectedvalue", "") != "") {
-                    ms_focus_arr("page_duoc_khaibaothuoc_dang~page_duoc_khaibaothuoc_dvt~page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
+            case "page_nhansu_khaibaonhanvien_phai":
+                if (ms_gval("page_nhansu_khaibaonhanvien_phai", "selectedvalue", "") != "") {
+                    ms_focus_arr("page_nhansu_khaibaonhanvien_ngaysinh~page_nhansu_khaibaonhanvien_namsinh~page_nhansu_khaibaonhanvien_sdt~page_nhansu_khaibaonhanvien_email~page_nhansu_khaibaonhanvien_diachi~page_nhansu_khaibaonhanvien_phongban~page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong");
                 }
                 else {
-                    ms_focus_arr("page_duoc_khaibaothuoc_duongdung");
+                    ms_focus_arr("page_nhansu_khaibaonhanvien_phai");
                 }
                 break;
-            case "page_duoc_khaibaothuoc_dang":
-                if (ms_gval("page_duoc_khaibaothuoc_dang", "selectedvalue", "") != "") {
-                    ms_focus_arr("page_duoc_khaibaothuoc_dvt~page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
+            case "page_nhansu_khaibaonhanvien_ngaysinh":
+                ms_focus_arr("page_nhansu_khaibaonhanvien_namsinh~page_nhansu_khaibaonhanvien_sdt~page_nhansu_khaibaonhanvien_email~page_nhansu_khaibaonhanvien_diachi~page_nhansu_khaibaonhanvien_phongban~page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong");
+                break;
+            case "page_nhansu_khaibaonhanvien_namsinh":
+                if (ms_gval("page_nhansu_khaibaonhanvien_namsinh", "value", "") != "") {
+                    ms_focus_arr("page_nhansu_khaibaonhanvien_sdt~page_nhansu_khaibaonhanvien_email~page_nhansu_khaibaonhanvien_diachi~page_nhansu_khaibaonhanvien_phongban~page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong");
                 }
                 else {
-                    ms_focus_arr("page_duoc_khaibaothuoc_dang");
+                    if (ms_gval("page_nhansu_khaibaonhanvien_ngaysinh", "value", "") != "") {
+                        ms_focus_arr("page_nhansu_khaibaonhanvien_sdt~page_nhansu_khaibaonhanvien_email~page_nhansu_khaibaonhanvien_diachi~page_nhansu_khaibaonhanvien_phongban~page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong");
+                    }
+                    else {
+                        ms_focus_arr("page_nhansu_khaibaonhanvien_namsinh");
+                    }
                 }
                 break;
-            case "page_duoc_khaibaothuoc_dvt":
-                if (ms_gval("page_duoc_khaibaothuoc_dvt", "selectedvalue", "") != "") {
-                    ms_focus_arr("page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
+            case "page_nhansu_khaibaonhanvien_sdt":
+                ms_focus_arr("page_nhansu_khaibaonhanvien_email~page_nhansu_khaibaonhanvien_diachi~page_nhansu_khaibaonhanvien_phongban~page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong");
+                break;
+            case "page_nhansu_khaibaonhanvien_email":
+                ms_focus_arr("page_nhansu_khaibaonhanvien_diachi~page_nhansu_khaibaonhanvien_phongban~page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong");
+                break;
+            case "page_nhansu_khaibaonhanvien_diachi":
+                ms_focus_arr("page_nhansu_khaibaonhanvien_phongban~page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong");
+                break;
+            case "page_nhansu_khaibaonhanvien_phongban":
+                if (ms_gval("page_nhansu_khaibaonhanvien_phongban", "selectedvalue", "") != "") {
+                    ms_focus_arr("page_nhansu_khaibaonhanvien_capbac~page_nhansu_khaibaonhanvien_mucluong");
                 }
                 else {
-                    ms_focus_arr("page_duoc_khaibaothuoc_dvt");
+                    ms_focus_arr("page_nhansu_khaibaonhanvien_phongban");
                 }
                 break;
-            case "page_duoc_khaibaothuoc_donvisd":
-                if (ms_gval("page_duoc_khaibaothuoc_donvisd", "selectedvalue", "") != "") {
-                    ms_focus_arr("page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
-                }
-                else {
-                    ms_focus_arr("page_duoc_khaibaothuoc_donvisd");
-                }
+            case "page_nhansu_khaibaonhanvien_capbac":
+                ms_focus_arr("page_nhansu_khaibaonhanvien_mucluong");
                 break;
-            case "page_duoc_khaibaothuoc_loaiduoc":
-                if (ms_gval("page_duoc_khaibaothuoc_loaiduoc", "selectedvalue", "") != "") {
-                    ms_focus_arr("page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
-                }
-                else {
-                    ms_focus_arr("page_duoc_khaibaothuoc_loaiduoc");
-                }
+            case "page_nhansu_khaibaonhanvien_mucluong":
+                ms_focus_arr("page_nhansu_khaibaonhanvien_luu");
                 break;
-            case "page_duoc_khaibaothuoc_hangsx":
-                if (ms_gval("page_duoc_khaibaothuoc_hangsx", "selectedvalue", "") != "") {
-                    ms_focus_arr("page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
-                }
-                else {
-                    ms_focus_arr("page_duoc_khaibaothuoc_hangsx");
-                }
-                break;
-            case "page_duoc_khaibaothuoc_quocgia":
-                if (ms_gval("page_duoc_khaibaothuoc_quocgia", "selectedvalue", "") != "") {
-                    ms_focus_arr("page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat");
-                }
-                else {
-                    ms_focus_arr("page_duoc_khaibaothuoc_quocgia");
-                }
-                break;
-            case "page_duoc_khaibaothuoc_thanhphan":
-                ms_focus_arr("page_duoc_khaibaothuoc_hoatchat");
-                //if (ms_gval("page_duoc_khaibaothuoc_thanhphan", "value", "") != "") {
-                //    ms_focus_arr("page_duoc_khaibaothuoc_hoatchat");
-                //}
-                //else {
-                //    ms_focus_arr("page_duoc_khaibaothuoc_thanhphan");
-                //}
-                break;
-            case "page_duoc_khaibaothuoc_hoatchat":
-                ms_focus_arr("page_duoc_khaibaothuoc_luu");
-                //if (ms_gval("page_duoc_khaibaothuoc_hoatchat", "value", "") != "") {
-                //}
-                //else {
-                //    ms_focus_arr("page_duoc_khaibaothuoc_hoatchat");
-                //}
-                break;
-                //nhapkho
-            case "page_duoc_nhapkho_kho":
-                ms_filter_get_selected();
-                ms_filter_hide();
-                break;
-            case "page_duoc_nhapkho_lydo":
-                ms_filter_get_selected();
-                ms_filter_hide();
-                break;
-                //var khaibaothuoc_input = "page_duoc_khaibaothuoc_ma~page_duoc_khaibaothuoc_ten~page_duoc_khaibaothuoc_sodk~page_duoc_khaibaothuoc_atccode~page_duoc_khaibaothuoc_hamluong~page_duoc_khaibaothuoc_duongdung~page_duoc_khaibaothuoc_dang~page_duoc_khaibaothuoc_dvt~page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat";
             default:
                 break;
         }
@@ -847,7 +293,7 @@ function input_onblur(v_this) {
             ms_caps(v_this);
             break;
             //dmthuoc
-        case "page_duoc_khaibaothuoc_ten":
+        case "page_nhansu_khaibaonhanvien_ten":
             ms_caps(v_this);
             break;
         default:
@@ -891,36 +337,36 @@ function btn_click(v_this) {
         case "page_nhansu_khaibaophongban_ketthuc":
             window.location.href = "../Trangchu/index";
             break;
-            //dmthuoc
-        case "page_duoc_khaibaothuoc_ds_themmoi":
+            //nhanvien
+        case "page_nhansu_khaibaonhanvien_ds_themmoi":
             f_tab_show("danhsach", "thonhtin");
             f_clear_arr("thuocs");
-            ms_enable_arr("page_duoc_khaibaothuoc_sua", false);
+            ms_enable_arr("page_nhansu_khaibaonhanvien_sua", false);
             break;
-        case "page_duoc_khaibaothuoc_themmoi":
-            f_clear_arr("thuocs");
-            khaibaothuoc_enable(true);
-            ms_enable_arr("page_duoc_khaibaothuoc_xoa", false);
-            ms_focus_arr("page_duoc_khaibaothuoc_ten");
+        case "page_nhansu_khaibaonhanvien_themmoi":
+            f_clear_arr("nhanviens");
+            khaibaonhanvien_enable(true);
+            ms_enable_arr("page_nhansu_khaibaonhanvien_xoa", false);
+            ms_focus_arr("page_nhansu_khaibaonhanvien_hoten");
             break;
-        case "page_duoc_khaibaothuoc_sua":
-            khaibaothuoc_enable(true);
-            ms_enable_arr("page_duoc_khaibaothuoc_xoa", false);
+        case "page_nhansu_khaibaonhanvien_sua":
+            khaibaonhanvien_enable(true);
+            ms_enable_arr("page_nhansu_khaibaonhanvien_xoa", false);
             break;
-        case "page_duoc_khaibaothuoc_xoa":
-            f_gridview_del_record("thuocs", ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"));
-            f_clear_arr("thuocs");
-            ms_enable_arr("page_duoc_khaibaothuoc_sua", false);
+        case "page_nhansu_khaibaonhanvien_xoa":
+            f_gridview_del_record("thuocs", ms_gval("page_nhansu_khaibaonhanvien_ma", "selectedvalue"));
+            f_clear_arr("nhanviens");
+            ms_enable_arr("page_nhansu_khaibaonhanvien_sua", false);
             break;
-        case "page_duoc_khaibaothuoc_luu":
-            f_save_thuoc();
+        case "page_nhansu_khaibaonhanvien_luu":
+            f_save_nhanvien();
             break;
-        case "page_duoc_khaibaothuoc_boqua":
-            f_clear_arr("thuocs");
-            ms_enable_arr("page_duoc_khaibaothuoc_sua", false);
+        case "page_nhansu_khaibaonhanvien_boqua":
+            f_clear_arr("nhanviens");
+            ms_enable_arr("page_nhansu_khaibaonhanvien_sua", false);
             break;
-        case "page_duoc_khaibaothuoc_ketthuc":
-            window.location.href = "../Trangchu/index";
+        case "page_nhansu_khaibaonhanvien_ketthuc":
+            window.location.href = "../Trangchu/Nhanvien";
             break;
         default:
             break;
@@ -957,12 +403,12 @@ function khaibaophongban_enable(v_bool) {
     ms_enable_arr("page_nhansu_khaibaophongban_ma", false);
 }
 
-function khaibaothuoc_enable(v_bool) {
-    ms_enable_arr(khaibaothuoc_input + "~page_duoc_khaibaothuoc_luu", v_bool);
-    ms_enable_arr("page_duoc_khaibaothuoc_boqua~page_duoc_khaibaothuoc_sua~page_duoc_khaibaothuoc_xoa", v_bool);
-    ms_enable_arr("page_duoc_khaibaothuoc_themmoi", !v_bool);
+function khaibaonhanvien_enable(v_bool) {
+    ms_enable_arr(khaibaonhanvien_input + "~page_nhansu_khaibaonhanvien_luu", v_bool);
+    ms_enable_arr("page_nhansu_khaibaonhanvien_boqua~page_nhansu_khaibaonhanvien_sua~page_nhansu_khaibaonhanvien_xoa", v_bool);
+    ms_enable_arr("page_nhansu_khaibaonhanvien_themmoi", !v_bool);
 
-    ms_enable_arr("page_duoc_khaibaothuoc_ma", false);
+    ms_enable_arr("page_nhansu_khaibaonhanvien_id", false);
 }
 //Enable-End
 
@@ -990,37 +436,37 @@ function f_save_phongban() {
     }
 }
 
-function f_save_thuoc() {
+function f_save_nhanvien() {
     try {
         var data;
         var url = "";
-        if (ms_gval("page_duoc_khaibaothuoc_ten", "value") == "") {
+        if (ms_gval("page_nhansu_khaibaonhanvien_ten", "value") == "") {
             alert("Vui lòng nhập tên thuốc");
-            ms_focus("page_duoc_khaibaothuoc_ten");
+            ms_focus("page_nhansu_khaibaonhanvien_ten");
             return null;
         }
-        if (ms_gval("page_duoc_khaibaothuoc_loaiduoc", "selectedvalue") == "") {
+        if (ms_gval("page_nhansu_khaibaonhanvien_loaiduoc", "selectedvalue") == "") {
             alert("Vui lòng nhập nhóm thuốc");
-            ms_focus("page_duoc_khaibaothuoc_loaiduoc");
+            ms_focus("page_nhansu_khaibaonhanvien_loaiduoc");
             return null;
         }
         data = {
-            ma: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
-            id: ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"),
-            ten: ms_gval("page_duoc_khaibaothuoc_ten", "value"),
-            atc: ms_gval("page_duoc_khaibaothuoc_atccode", "value"),
-            sodk: ms_gval("page_duoc_khaibaothuoc_sodk", "value"),
-            ten_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "value"),
-            id_duongdung: ms_gval("page_duoc_khaibaothuoc_duongdung", "selectedvalue"),
-            hamluong: ms_gval("page_duoc_khaibaothuoc_hamluong", "value"),
-            dang: ms_gval("page_duoc_khaibaothuoc_dang", "value"),
-            donvidg: ms_gval("page_duoc_khaibaothuoc_dvt", "value"),
-            donvisd: ms_gval("page_duoc_khaibaothuoc_donvisd", "value"),
-            id_loaiduoc: ms_gval("page_duoc_khaibaothuoc_loaiduoc", "selectedvalue"),
-            id_hangsx: ms_gval("page_duoc_khaibaothuoc_hangsx", "selectedvalue"),
-            id_quocgia: ms_gval("page_duoc_khaibaothuoc_quocgia", "selectedvalue"),
-            thanhphan: ms_gval("page_duoc_khaibaothuoc_thanhphan", "value"),
-            hoatchat: ms_gval("page_duoc_khaibaothuoc_hoatchat", "value")
+            ma: ms_gval("page_nhansu_khaibaonhanvien_ma", "value"),
+            id: ms_gval("page_nhansu_khaibaonhanvien_ma", "selectedvalue"),
+            ten: ms_gval("page_nhansu_khaibaonhanvien_ten", "value"),
+            atc: ms_gval("page_nhansu_khaibaonhanvien_atccode", "value"),
+            sodk: ms_gval("page_nhansu_khaibaonhanvien_sodk", "value"),
+            ten_duongdung: ms_gval("page_nhansu_khaibaonhanvien_duongdung", "value"),
+            id_duongdung: ms_gval("page_nhansu_khaibaonhanvien_duongdung", "selectedvalue"),
+            hamluong: ms_gval("page_nhansu_khaibaonhanvien_hamluong", "value"),
+            dang: ms_gval("page_nhansu_khaibaonhanvien_dang", "value"),
+            donvidg: ms_gval("page_nhansu_khaibaonhanvien_dvt", "value"),
+            donvisd: ms_gval("page_nhansu_khaibaonhanvien_donvisd", "value"),
+            id_loaiduoc: ms_gval("page_nhansu_khaibaonhanvien_loaiduoc", "selectedvalue"),
+            id_hangsx: ms_gval("page_nhansu_khaibaonhanvien_hangsx", "selectedvalue"),
+            id_quocgia: ms_gval("page_nhansu_khaibaonhanvien_quocgia", "selectedvalue"),
+            thanhphan: ms_gval("page_nhansu_khaibaonhanvien_thanhphan", "value"),
+            hoatchat: ms_gval("page_nhansu_khaibaonhanvien_hoatchat", "value")
         };
         url = "SaveThuoc";
         f_save_data(url, data);
@@ -1039,8 +485,8 @@ function f_clear_arr(v_obj) {
             case "phongbans":
                 f_dmphongban_show(null, 0, false);
                 break;
-            case "thuocs":
-                f_dmthuoc_show(null, 0, false);
+            case "nhanviens":
+                f_nhanvien_show(null, 0, false);
                 break;
             default:
                 break;
@@ -1058,28 +504,22 @@ function f_dmphongban_show(v_ds, v_index, v_bool) {
     khaibaophongban_enable(v_bool);
 }
 
-function f_dmthuoc_show(v_ds, v_index, v_bool) {
-    ms_sval("page_duoc_khaibaothuoc_ma", "value", ms_gfields(v_ds, v_index, "ma", ""));
-    ms_sval("page_duoc_khaibaothuoc_ma", "selectedvalue", ms_gfields(v_ds, v_index, "id", ""));
-    ms_sval("page_duoc_khaibaothuoc_ten", "value", ms_gfields(v_ds, v_index, "ten", ""));
-    ms_sval("page_duoc_khaibaothuoc_atccode", "value", ms_gfields(v_ds, v_index, "atc", ""));
-    ms_sval("page_duoc_khaibaothuoc_sodk", "value", ms_gfields(v_ds, v_index, "sodk", ""));
-    ms_sval("page_duoc_khaibaothuoc_duongdung", "value", ms_gfields(v_ds, v_index, "ten_duongdung", ""));
-    ms_sval("page_duoc_khaibaothuoc_duongdung", "selectedvalue", ms_gfields(v_ds, v_index, "id_duongdung", ""));
-    ms_sval("page_duoc_khaibaothuoc_hamluong", "value", ms_gfields(v_ds, v_index, "hamluong", ""));
-    ms_sval("page_duoc_khaibaothuoc_dang", "value", ms_gfields(v_ds, v_index, "dang", ""));
-    ms_sval("page_duoc_khaibaothuoc_dvt", "value", ms_gfields(v_ds, v_index, "donvidg", ""));
-    ms_sval("page_duoc_khaibaothuoc_donvisd", "value", ms_gfields(v_ds, v_index, "donvisd", ""));
-    ms_sval("page_duoc_khaibaothuoc_loaiduoc", "value", ms_gfields(v_ds, v_index, "ten_loaiduoc", ""));
-    ms_sval("page_duoc_khaibaothuoc_loaiduoc", "selectedvalue", ms_gfields(v_ds, v_index, "id_loaiduoc", ""));
-    ms_sval("page_duoc_khaibaothuoc_hangsx", "value", ms_gfields(v_ds, v_index, "ten_hangsx", ""));
-    ms_sval("page_duoc_khaibaothuoc_hangsx", "selectedvalue", ms_gfields(v_ds, v_index, "id_hangsx", ""));
-    ms_sval("page_duoc_khaibaothuoc_quocgia", "value", ms_gfields(v_ds, v_index, "ten_quocgia", ""));
-    ms_sval("page_duoc_khaibaothuoc_quocgia", "selectedvalue", ms_gfields(v_ds, v_index, "id_quocgia", ""));
-    ms_sval("page_duoc_khaibaothuoc_donggoi1", "value", ms_gfields(v_ds, v_index, "tyle1", ""));
-    ms_sval("page_duoc_khaibaothuoc_donggoi2", "value", ms_gfields(v_ds, v_index, "tyle2", ""));
-    ms_sval("page_duoc_khaibaothuoc_thanhphan", "value", ms_gfields(v_ds, v_index, "thanhphan", ""));
-    ms_sval("page_duoc_khaibaothuoc_hoatchat", "value", ms_gfields(v_ds, v_index, "hoatchat", ""));
-    khaibaothuoc_enable(v_bool);
+function f_nhanvien_show(v_ds, v_index, v_bool) {
+    ms_sval("page_nhansu_khaibaonhanvien_id", "value", ms_gfields(v_ds, v_index, "id", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_id", "selectedvalue", ms_gfields(v_ds, v_index, "id", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_hoten", "value", ms_gfields(v_ds, v_index, "hoten", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_phai", "value", ms_gfields(v_ds, v_index, "tenphai", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_phai", "selectedvalue", ms_gfields(v_ds, v_index, "idphai", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_ngaysinh", "value", ms_gfields(v_ds, v_index, "ngaysinh", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_namsinh", "value", ms_gfields(v_ds, v_index, "namsinh", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_sdt", "value", ms_gfields(v_ds, v_index, "sdt", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_email", "value", ms_gfields(v_ds, v_index, "email", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_diachi", "value", ms_gfields(v_ds, v_index, "diachi", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_phongban", "value", ms_gfields(v_ds, v_index, "tenphongban", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_phongban", "selectedvalue", ms_gfields(v_ds, v_index, "idphongban", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_capbac", "value", ms_gfields(v_ds, v_index, "ten_loaiduoc", ""));
+    ms_sval("page_nhansu_khaibaonhanvien_mucluong", "selectedvalue", ms_gfields(v_ds, v_index, "id_loaiduoc", ""));
+
+    khaibaonhanvien_enable(v_bool);
 }
 //Show-End

@@ -27,6 +27,9 @@ namespace HRM.Controllers
                             case "phongbans":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Phongban>(jo.ToString()));
                                 break;
+                            case "dmphais":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Dmphai>(jo.ToString()));
+                                break;
                             case "nhanviens":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Nhanvien>(jo.ToString()));
                                 break;

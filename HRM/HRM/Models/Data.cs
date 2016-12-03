@@ -171,6 +171,50 @@ namespace HRM.Models
                 }
             }
         }
+        public class Dmphai
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static string GetAll()
+            {
+                try
+                {
+                    var value = Bridge.HttpGetApi("phongbans");
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            public static IEnumerable<Dmphai> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("dmphais"));
+            }
+            public static IEnumerable<Dmphai> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("khos");
+                    List<Dmphai> lts = new List<Dmphai>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Dmphai obj = new Dmphai();
+                        obj.id = item.id;
+                        obj.ma = item.ma;
+                        obj.ten = item.ten;
+                        lts.Add(obj);
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
         public class Nhanvien
         {
             public string iduser { get; set; }

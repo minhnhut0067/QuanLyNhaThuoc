@@ -170,6 +170,7 @@
     <Compile Include="Controllers\KhosController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\LydonxsController.cs" />
+    <Compile Include="Controllers\NhanviensController.cs" />
     <Compile Include="Controllers\NhapkhosController.cs" />
     <Compile Include="Controllers\NhomKhosController.cs" />
     <Compile Include="Controllers\SearchController.cs" />

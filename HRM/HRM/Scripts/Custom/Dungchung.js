@@ -507,6 +507,11 @@ function f_table_reload(v_obj) {
                             $('#page_nhansu_khaibaophongban_gidview').DataTable();
                             $('#page_nhansu_khaibaophongban_gidview').parent().css("overflow-x", "scroll");
                             break;
+                        case "nhanviens":
+                            $("#page_nhansu_khaibaonhanvien_ds").html(f_create_table_html(v_obj, result, "page_nhansu_khaibaonhanvien", "ID~Họ tên~Ngày sinh~Năm sinh~SĐT~E-mail~Địa chỉ~Cấp bậc~Mức hưởng", "id~hoten~ngaysinh~namsinh~sdt~email~diachi~capbac~mucluong", false));
+                            $('#page_nhansu_khaibaonhanvien_gidview').DataTable();
+                            $('#page_nhansu_khaibaonhanvien_gidview').parent().css("overflow-x", "scroll");
+                            break;
                         default:
                             break;
                     }
@@ -703,7 +708,10 @@ function f_filter_select(v_data) {
                 }
                 switch (v_data.Obj) {
                     case "phongbans":
-                        f_filter_kho_callback(JSON.parse(result));
+                        f_filter_phongban_callback(JSON.parse(result));
+                        break;
+                    case "dmphais":
+                        f_filter_phai_callback(JSON.parse(result));
                         break;
                     default:
                         break;
