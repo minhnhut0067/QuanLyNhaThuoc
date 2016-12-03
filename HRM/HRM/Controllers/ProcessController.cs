@@ -149,7 +149,7 @@ namespace HRM.Controllers
             try
             {
                 List<Object> lts = new List<Object>();
-                foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Thuocs", data)))
+                foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("nhanviens", data)))
                 {
                     lts.Add(JsonConvert.DeserializeObject<Data.Nhanvien>(jo.ToString()));
                 }

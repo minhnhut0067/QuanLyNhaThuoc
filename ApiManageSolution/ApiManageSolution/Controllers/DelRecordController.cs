@@ -32,8 +32,8 @@ namespace ApiManageSolution.Controllers
                     case "phongbans":
                         data.result = Data.Phongbans.Del(data);
                         break;
-                    case "thuocs":
-                        data.result = Data.Thuocs.Del(data);
+                    case "nhanviens":
+                        data.result = Data.Nhanviens.Del(data);
                         break;
                     default:
                         break;

@@ -32,9 +32,12 @@ namespace ApiManageSolution.Controllers
                     case "khos":
                         data.result = Data.Khos.Getma();
                         break;
-                    //case "thuocs":
-                    //    data.result = Data.Thuocs.Getma();
-                    //    break;
+                    case "phongbans":
+                        data.result = Data.Phongbans.Getma();
+                        break;
+                    case "nhanviens":
+                        data.result = Data.Nhanviens.Getid();
+                        break;
                     default:
                         break;
                 }

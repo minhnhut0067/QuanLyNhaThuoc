@@ -1,0 +1,25 @@
+﻿<div class="nav-side-menu">
+    <div class="brand">Tên cơ sở</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li data-toggle="collapse" data-target="#manage" class="collapsed">
+                <a href="#"><i class="fa fa-life-ring fa-lg"></i> Thông tin quản lý <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="manage">
+                <li class="dropdown" data-target="#quan-ly-thanh-vien">
+                    Quản Lý Khoa Phòng
+                    <ul id="quan-ly-thanh-vien" class="dropdown-menu menu-level">
+                        <li onclick="window.location.href = '@Url.Action("index","trangchu")'">Khai báo khoa phòng</li>
+                    </ul>
+                </li>
+                <li class="dropdown" data-target="#quan-ly-dich-vu">
+                    Quản Lý Nhân Sự
+                    <ul id="quan-ly-dich-vu" class="dropdown-menu menu-level">
+                        <li onclick="window.location.href = '@Url.Action("nhanvien","trangchu")'">Khai báo nhân sự</li>
+                    </ul>
+                </li>
+            </ul>
+        </ul>
+    </div>
+</div>

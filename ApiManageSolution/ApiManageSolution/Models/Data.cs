@@ -1324,7 +1324,7 @@ namespace ApiManageSolution.Models
             {
                 try
                 {
-                    string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from nhanvien";
+                    string sql = "select to_char(now(),'yymmddhh24mi')||lpad(case when count(id) > 0 then to_char(max(to_number(right(id,5))) + 1) else '1' end ,5,'0') as id from nhanvien";
 
                     return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
                 }
@@ -1344,9 +1344,11 @@ namespace ApiManageSolution.Models
                     DataSet ds = new DataSet();
                     List<Nhanviens> lts = new List<Nhanviens>();
                     string sql = "";
-                    sql = "SELECT a.id, a.hoten, a.hoten, a.ngaysinh, a.namsinh, a.idphai. b.ten as tenphai, a.diachi"
-                    + "\n, a.sdt, a.email, a.idphongban, c.tem as tenphongban, a.capbac, a.mucluong"
+                    sql = "SELECT a.id, a.hoten, a.ngaysinh, a.namsinh, a.idphai, b.ten as tenphai, a.diachi"
+                    + "\n, a.sdt, a.email, a.idphongban, c.ten as tenphongban, a.capbac, case when length(a.mucluong)> 6 then to_char(to_number(a.mucluong),'999,999,999,999,999,999.00') else a.mucluong end as mucluong"
                     + "\nFROM nhanvien a"
+                    + "\nLEFT JOIN dmphai b on b.id = a.idphai"
+                    + "\nLEFT JOIN dmphongban c on c.id = a.idphongban"
                     + v_where;
                     ds = dbHelper.getDataSetbySql(sql);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -1432,7 +1434,7 @@ namespace ApiManageSolution.Models
                     {
                         var sql = "";
                         var irec = 0;
-                        sql = "delete dmphongban where id =" + data.key;
+                        sql = "delete nhanvien where id =" + data.key;
                         irec = dbHelper.ExecuteQuery(sql);
                         if (irec == 1)
                             return true;

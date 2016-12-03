@@ -141,20 +141,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\Custom\dataTables.bootstrap.min.css" />
     <Content Include="Content\Custom\Dungchung.css" />
-    <Content Include="Content\Custom\Khambenh.css" />
     <Content Include="Content\Custom\Trangchu.css" />
+    <Content Include="Content\Custom\Khambenh.css" />
     <Content Include="Content\Custom\User.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\cm_toolbar_bg.gif" />
     <Content Include="Content\Images\home_background1.jpg" />
     <Content Include="Content\Images\home_background2.jpg" />
-    <Content Include="Content\Images\icon_medical.png" />
+    <Content Include="Content\Images\icon_medica_oldl.png" />
     <Content Include="Content\Images\icon_user.gif" />
     <Content Include="Content\Images\Jqueryui\ui-bg_glass_45_0078ae_1x400.png" />
     <Content Include="Content\Images\Jqueryui\ui-bg_glass_55_f8da4e_1x400.png" />
@@ -170,6 +174,7 @@
     <Content Include="Content\Images\Jqueryui\ui-icons_f5e175_256x240.png" />
     <Content Include="Content\Images\Jqueryui\ui-icons_f7a50d_256x240.png" />
     <Content Include="Content\Images\Jqueryui\ui-icons_fcd113_256x240.png" />
+    <Content Include="Content\Images\logo.png" />
     <Content Include="Content\JqueryUI\jquery-ui.css" />
     <Content Include="Content\JqueryUI\jquery-ui.min.css" />
     <Content Include="Content\JqueryUI\jquery-ui.structure.css" />
@@ -225,10 +230,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
@@ -236,6 +237,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\HRM.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\Custom\dataTables.bootstrap.min.js" />
     <Content Include="Scripts\Custom\Dungchung.js" />

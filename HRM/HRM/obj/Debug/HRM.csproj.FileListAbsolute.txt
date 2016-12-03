@@ -58,3 +58,5 @@ E:\Source\QuanLyNhaThuoc\HRM\HRM\bin\System.Web.WebPages.Deployment.xml
 E:\Source\QuanLyNhaThuoc\HRM\HRM\bin\System.Web.WebPages.Razor.xml
 E:\Source\QuanLyNhaThuoc\HRM\HRM\obj\Debug\HRM.dll
 E:\Source\QuanLyNhaThuoc\HRM\HRM\obj\Debug\HRM.pdb
+D:\nhut\project\QuanLyNhaThuoc\HRM\HRM\bin\EntityFramework.SqlServer.dll
+D:\nhut\project\QuanLyNhaThuoc\HRM\HRM\bin\EntityFramework.SqlServer.xml

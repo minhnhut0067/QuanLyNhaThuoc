@@ -217,22 +217,24 @@ namespace HRM.Models
         }
         public class Nhanvien
         {
-            public string iduser { get; set; }
-            public string username_ { get; set; }
-            public string password_ { get; set; }
+            public string id { get; set; }
             public string hoten { get; set; }
             public string ngaysinh { get; set; }
+            public string namsinh { get; set; }
             public string diachi { get; set; }
             public string sdt { get; set; }
             public string email { get; set; }
-            public string ngay { get; set; }
-            public string ngayud { get; set; }
-            public string loaiuser { get; set; }
+            public string capbac { get; set; }
+            public string mucluong { get; set; }
+            public string idphai { get; set; }
+            public string tenphai { get; set; }
+            public string idphongban { get; set; }
+            public string tenphongban { get; set; }
             public static string GetAll()
             {
                 try
                 {
-                    var value = Bridge.HttpGetApi("lydonxs");
+                    var value = Bridge.HttpGetApi("nhanviens");
                     return value;
                 }
                 catch (Exception ex)
@@ -254,8 +256,19 @@ namespace HRM.Models
                     foreach (dynamic item in jarr)
                     {
                         Nhanvien obj = new Nhanvien();
-                        obj.iduser = item.iduser;
+                        obj.id = item.id;
                         obj.hoten = item.hoten;
+                        obj.ngaysinh = item.ngaysinh;
+                        obj.namsinh = item.namsinh;
+                        obj.diachi = item.diachi;
+                        obj.sdt = item.ssdt;
+                        obj.email = item.email;
+                        obj.capbac = item.capbac;
+                        obj.mucluong = item.mucluong;
+                        obj.idphai = item.idphai;
+                        obj.tenphai = item.tenphai;
+                        obj.idphongban = item.idphongban;
+                        obj.tenphongban = item.tenphongban;
                         ds.Add(obj);
                     }
                     return ds;

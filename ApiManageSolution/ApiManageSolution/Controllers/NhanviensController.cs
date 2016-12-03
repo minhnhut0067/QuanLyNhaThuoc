@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiManageSolution.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -22,8 +23,13 @@ namespace ApiManageSolution.Controllers
         }
 
         // POST api/nhanviens
-        public void Post([FromBody]string value)
+        public IEnumerable<Data.Nhanviens> Post([FromBody]Data.Nhanviens data)
         {
+            if (data != null)
+            {
+                return Data.Nhanviens.Upd(data);
+            }
+            return null;
         }
 
         // PUT api/nhanviens/5

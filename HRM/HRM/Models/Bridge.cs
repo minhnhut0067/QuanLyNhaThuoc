@@ -11,9 +11,8 @@ namespace HRM.Models
 {
     public class Bridge
     {
-        //private static string DefaultUrl = "http://localhost:8080";
-        private static string DefaultUrl = "http://localhost:48187";
-        //private static string DefaultUrl = "http://www.cybermedisoft.com/apisol";       
+        //private static string DefaultUrl = "http://localhost:48187";
+        private static string DefaultUrl = "http://www.cybermedisoft.com/msapi";       
         public static string HttpPostApi(string apiControl, Object obj)
         {
             return HttpPostApi(DefaultUrl, apiControl, obj);
