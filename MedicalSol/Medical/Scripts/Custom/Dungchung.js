@@ -513,12 +513,12 @@ function f_table_reload(v_obj) {
                             $('#page_duoc_khaibaothuoc_gidview').parent().css("overflow-x", "scroll");
                             break;
                         case "nhapkhos":
-                            $("#page_duoc_nhapkho_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaothuoc", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
+                            $("#page_duoc_nhapkho_ds").html(f_create_table_html(v_obj, result, "page_duoc_nhapkho", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
                             $('#page_duoc_nhapkho_gidview').DataTable();
                             $('#page_duoc_nhapkho_gidview').parent().css("overflow-x", "scroll");
                             break;
                         case "nhapkhocts":
-                            $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhos", "[]", "page_duoc_khaibaothuoc_ct", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
+                            $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhos", "[]", "page_duoc_nhapkho_ct", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
                             $('#page_duoc_nhapkho_ct_gidview').DataTable();
                             $('#page_duoc_nhapkho_ct_gidview').parent().css("overflow-x", "scroll");
                             break;

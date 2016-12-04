@@ -9,8 +9,8 @@ namespace ApiManageSolution.Models
 {
     public class dbHelper
     {
-        //private static string ConnectionStringDefault = "Server=localhost;Port=5435;Database=ms_root;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
-        private static string ConnectionStringDefault = "Server=172.168.1.244;Port=5434;Database=ms_root;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
+        private static string ConnectionStringDefault = "Server=localhost;Port=5435;Database=ms_root;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
+        //private static string ConnectionStringDefault = "Server=172.168.1.244;Port=5434;Database=ms_root;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
         public static DataSet getDataSetbySql(string SqlQuery)
         {
             try

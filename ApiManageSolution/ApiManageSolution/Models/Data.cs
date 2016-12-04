@@ -62,6 +62,8 @@ namespace ApiManageSolution.Models
                             return Quocgias.GetAll(sqlwhere);
                         case "dmphais":
                             return Dmphais.GetAll(sqlwhere);
+                        case "nhapkhos":
+                            return Nhapkhos.GetAll(sqlwhere);
                         #endregion
                         #region Nhân sự
                         case "phongbans":

@@ -22,7 +22,7 @@ namespace Medical.Controllers
                     List<Object> lts = new List<Object>();
                     foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Search", data)))
                     {
-                        switch (filter.Obj)
+                        switch (data.Obj)
                         {
                             case "nhomkhos":
                                 lts.Add(JsonConvert.DeserializeObject<Data.NhomKho>(jo.ToString()));
@@ -126,6 +126,9 @@ namespace Medical.Controllers
                                 break;
                             case "thuocs":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Thuoc>(jo.ToString()));
+                                break;
+                            case "nhapkhos":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Nhapkho>(jo.ToString()));
                                 break;
                             default:
                                 break;
