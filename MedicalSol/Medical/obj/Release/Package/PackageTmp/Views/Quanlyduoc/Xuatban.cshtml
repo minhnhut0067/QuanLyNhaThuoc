@@ -1,0 +1,202 @@
+﻿@using Newtonsoft.Json;
+@model IEnumerable<Medical.Models.Data.Kho>
+@{
+    ViewData["title"] = "Xuất Bán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Custom/Duoc.css" rel="stylesheet" />
+<div class="container-fluid">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#thonhtin" aria-controls="thonhtin" role="tab" data-toggle="tab">Thông tin phiếu xuất</a></li>
+        <li role="presentation"><a href="#danhsach" aria-controls="danhsach" role="tab" data-toggle="tab">Danh sách phiếu xuất</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="thonhtin">
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="container-fluid custom-title">Thông tin phiếu xuất</div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="margin-bottom:10px;">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_khacvanglai", "checkbox", "Khách vãng lai", ""));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_hoten", "input", "Họ tên(*)", "text-transform: capitalize;"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_dienthoai", "input", "SĐT", ""));
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_namsinh", "datepicker", "Ngày sinh", ""));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon input-label" id="@ViewData["page"]_namsinh_label" style="">Năm sinh</span>
+                        <input style="text-align:center; background-color:#fff" id="@ViewData["page"]_namsinh" type="text" class="form-control input-sm" disabled placeholder="" aria-describedby="@ViewData["page"]_namsinh_label" value="">
+                        <span class="input-group-addon input-label" id="@ViewData["page"]_tuoi_label" style="min-width:2px;text-align:right">tuổi</span>
+                        <input style="text-align:center; background-color:#fff" id="@ViewData["page"]_tuoi" type="text" class="form-control input-sm" disabled placeholder="" aria-describedby="@ViewData["page"]_tuoi_label" value="0">
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_diachi", "input", "Địa chỉ", "text-transform: capitalize;"));
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_bavsikham", "input", "Bác sĩ khám", "text-transform: capitalize;"));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="input-group" style="">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_cosoyte", "filter", "Cở sở y tế", ""));
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon input-label" id="@ViewData["page"]_chandoan_label" style="min-width:90px;">Chẩn đoán</span>
+                        <input id="@ViewData["page"]_chandoan_ma" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_chandoan_label" style="width:15%">
+                        <input id="@ViewData["page"]_chandoan_ten" type="text" class="form-control input-sm" placeholder="" aria-describedby="" style="width:85%">
+                        <a href="#" class="input-group-addon input-filter" id="@ViewData["page"]_chandoan_filter"><i class="fa fa-sort-desc"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <script type="text/javascript">
+                            document.write("xuatkhocts", f_create_table_html('@Html.Raw(JsonConvert.SerializeObject(Model).Replace("'", "\\'"))', "@ViewData["page"]", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false));
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_kho", "filter", "Kho", ""));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_bietduoc", "filter", "Biệt dược", ""));
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-bottom:10px;">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_hoatchat", "input", "Hoạt chất", ""));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_dvt", "input", "Đơn vị cấp", ""));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_gia", "input", "Giá", ""));
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon input-label" id="@ViewData["page"]_soluong_label" style="min-width:90px;">Số lượng</span>
+                        <input id="@ViewData["page"]_soluong" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_soluong_label">
+                        <span class="input-group-addon input-label" id="@ViewData["page"]_uongmoingay_label" style="min-width:90px;">Uống mỗi ngày</span>
+                        <input id="@ViewData["page"]_uongmoingay" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_uongmoingay_label">
+                        <span class="input-group-addon input-label" id="@ViewData["page"]_uongmoilan_label" style="min-width:90px;"> lần, mỗi lần</span>
+                        <input id="@ViewData["page"]_uongmoilan" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_uongmoilan_label">
+                        <span class="input-group-addon input-label" id="@ViewData["page"]_cachngay_label" style="min-width:20px;">Cách</span>
+                        <input id="@ViewData["page"]_cachngay" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_cachngay_label">
+                        <span class="input-group-addon input-label" id="@ViewData["page"]_cachngay_label" style="min-width:20px;">ngày</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                    <div class="input-group">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_dungkhi", "input", "Dùng khi", ""));
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                    <div class="input-group" style="margin-left:-15px;">
+                        <script type="text/javascript">
+                            document.write(f_create_input("@ViewData["page"]_cachdung", "input", "Cách dùng", ""));
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-row custom-btn-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:right">
+                    <script type="text/javascript">
+                        document.write(f_create_btn_group("@ViewData["page"]", "themmoi~luu~boqua~sua~xoa~ketthuc", "primary~primary~primary~primary~primary~primary", "Thêm mới~Lưu~Bỏ Qua~Sữa~Xóa~Kết Thúc"));//success~primary~info~warning~danger~default
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="danhsach">
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="container-fluid custom-title">Danh sách phiếu xuất</div>
+                </div>
+            </div>
+            <div class="row custom-row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <script type="text/javascript">
+                            document.write("xuatkhos", f_create_table_html('@Html.Raw(JsonConvert.SerializeObject(Model).Replace("'", "\\'"))', "@ViewData["page"]", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false));
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/Custom/Duoc.js"></script>

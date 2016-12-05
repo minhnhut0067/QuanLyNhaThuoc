@@ -79,7 +79,6 @@ D:\nhut\project\QuanLyNhaThuoc\MedicalSol\Medical\bin\System.Web.Razor.xml
 D:\nhut\project\QuanLyNhaThuoc\MedicalSol\Medical\bin\System.Web.WebPages.xml
 D:\nhut\project\QuanLyNhaThuoc\MedicalSol\Medical\bin\System.Web.WebPages.Deployment.xml
 D:\nhut\project\QuanLyNhaThuoc\MedicalSol\Medical\bin\System.Web.WebPages.Razor.xml
-D:\nhut\project\QuanLyNhaThuoc\MedicalSol\Medical\obj\Debug\Medical.csprojResolveAssemblyReference.cache
 D:\nhut\project\QuanLyNhaThuoc\MedicalSol\Medical\obj\Debug\Medical.dll
 D:\nhut\project\QuanLyNhaThuoc\MedicalSol\Medical\obj\Debug\Medical.pdb
 E:\Source\QuanLyNhaThuoc\MedicalSol\Medical\bin\Medical.dll.config
@@ -108,3 +107,4 @@ E:\Source\QuanLyNhaThuoc\MedicalSol\Medical\bin\System.Web.WebPages.Razor.xml
 E:\Source\QuanLyNhaThuoc\MedicalSol\Medical\obj\Debug\Medical.csprojResolveAssemblyReference.cache
 E:\Source\QuanLyNhaThuoc\MedicalSol\Medical\obj\Debug\Medical.dll
 E:\Source\QuanLyNhaThuoc\MedicalSol\Medical\obj\Debug\Medical.pdb
+D:\nhut\project\QuanLyNhaThuoc\MedicalSol\Medical\obj\Debug\Medical.csprojResolveAssemblyReference.cache

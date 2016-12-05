@@ -1,0 +1,48 @@
+﻿@model Medical.Models.Data.User
+@{
+    ViewData["title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutNoBg.cshtml";
+}
+@Styles.Render("~/Content/user")
+<div class="container login-forn">
+    <div class="row" id="pwd-container">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <section class="login-form">
+                <form method="post" action="@Url.Action("Register")" role="register">
+                    <img src="" class="img-responsive" alt="Logo here" />
+                    <input type="text" id="Name" name="Name" placeholder="Họ tên" required class="form-control input-sm" value="" />
+                    <input type="text" id="UserName" name="UserName" placeholder="Tên đăng nhập" required class="form-control input-sm" value="" />
+                    <input type="password" class="form-control input-sm" id="Password" name="Password" placeholder="Mật khẩu" required="" />
+                    <input type="password" class="form-control input-sm" id="RewritePassword" name="RewritePassword" placeholder="Nhập lại mật khẩu" required="" />
+                    @*<input id="RememberMe" type="checkbox" value="true" name="RememberMe" data-val="true">
+                        <input type="hidden" value="false" name="RememberMe">
+                        <label for="RememberMe">Nhớ mật khẩu</label>*@
+                    <div class="pwstrength_viewport_progress"></div>
+                    <input type="text" id="DoB" name="DoB" placeholder="Ngày sinh" required class="form-control input-sm" value="" />
+                    <textarea id="Address" name="Address" placeholder="Địa chỉ" required class="form-control input-sm"></textarea>
+                    <input type="tel" id="Phone" name="Phone" placeholder="Điện thoại" required class="form-control input-sm" value="" />
+                    <input type="email" id="Email" name="Email" placeholder="Email" required class="form-control input-sm" value="" />
+                    <span class="alert-danger">* Vui lòng nhập đúng Email để chúng tôi có thẻ liên lạc xác nhận</span>
+                    <br />
+                    <input id="Agree" type="checkbox" value="true" name="Agree" data-val="true" required>
+                    <input type="hidden" value="false" name="Agree">
+                    <label for="Agree">&nbsp;Xác nhận đồng ý với quy định sử dụng chường trình</label>
+                    <button type="submit" name="go" class="btn btn-sm btn-primary btn-block" style="">Đăng ký</button>
+                    @*<div class="btn-group" style="width:100%;">
+                            <button type="submit" name="go" class="btn btn-lg btn-primary btn-block" style="width:50%;">Register</button>
+                            <button type="button" name="Login" onclick="window.location.href= '@Url.Action("Login")'" style="width: 50%; margin-top: 16px" class="btn btn-lg btn-primary btn-block">Login</button>
+                        </div>*@
+                    <div style="font-size: 12px;">
+                        <a href="@Url.Action("Login")">Đăng nhập</a> or <a href="#">Quên mật khẩu</a>
+                    </div>
+                </form>
+                <div class="form-links">
+                    <a href="#">www.abc.com</a>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/Custom/User.js"></script>

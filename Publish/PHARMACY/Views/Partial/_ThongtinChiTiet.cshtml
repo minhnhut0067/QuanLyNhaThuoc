@@ -1,0 +1,146 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="row">
+                <div class="container-fluid title-sm">@ViewData["title"]</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right:0px;">
+                    <div class=" input-group">
+                        <input id="@ViewData["page"]_quocgia" type="text" class="form-control input-sm" placeholder="Tên quốc gia" aria-describedby="@ViewData["page"]_quocgia_label">
+                        <a href="#" class="input-group-addon" id="@ViewData["page"]_quocgia_calendar"><i class="fa fa-sort-desc"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="input-group">
+                        <input id="@ViewData["page"]_dantoc" type="text" class="form-control input-sm" placeholder="Tên dân tộc" aria-describedby="@ViewData["page"]_dantoc_label">
+                        <a href="#" class="input-group-addon" id="@ViewData["page"]_dantoc_calendar"><i class="fa fa-sort-desc"></i></a>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right:0px;">
+                    <div class="input-group">
+                        <input id="@ViewData["page"]_nghenghiep" type="text" class="form-control input-sm" placeholder="Tên nghề nghiệp" aria-describedby="@ViewData["page"]_nghenghiep_label">
+                        <a href="#" class="input-group-addon" id="@ViewData["page"]_nghenghiep_calendar"><i class="fa fa-sort-desc"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="input-group">
+                        <input id="@ViewData["page"]_nhommau" type="text" class="form-control input-sm" placeholder="Tên nhóm máu" aria-describedby="@ViewData["page"]_nhommau_label">
+                        <a href="#" class="input-group-addon" id="@ViewData["page"]_nhommau_calendar"><i class="fa fa-sort-desc"></i></a>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_cmnd_label" style="min-width:90px;">CMND</span>
+                        <input id="@ViewData["page"]_cmnd" type="text" class="form-control input-sm" placeholder="Số CMND" aria-describedby="@ViewData["page"]_cmnd_label">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_bhxh_label" style="min-width:90px;">BHXH</span>
+                        <input id="@ViewData["page"]_bhxh" type="text" class="form-control input-sm" placeholder="Mã BHXH" aria-describedby="@ViewData["page"]_bhxh_label">
+                        @*<a href="#" class="input-group-addon" id="@ViewData["page"]_bhxh_calendar"><i class="fa fa-sort-desc"></i></a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="row">
+                <div class="container-fluid title-sm">Liên lạc</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="">
+                    <div class="row input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_dtnha_label" style="min-width: 90px;">ĐTN</span>
+                        <input id="@ViewData["page"]_dtnha" type="text" class="form-control input-sm" placeholder="ĐT nhà" aria-describedby="@ViewData["page"]_dtnha_label">
+                        @*<a href="#" class="input-group-addon" id="@ViewData["page"]_bhxh_calendar"><i class="fa fa-sort-desc"></i></a>*@
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_dtcq_label" style="min-width: 90px;">ĐTCQ</span>
+                        <input id="@ViewData["page"]_dtcq" type="text" class="form-control input-sm" placeholder="ĐT cơ quan" aria-describedby="@ViewData["page"]_dtcq_label">
+                        @*<a href="#" class="input-group-addon" id="@ViewData["page"]_bhxh_calendar"><i class="fa fa-sort-desc"></i></a>*@
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_dtdd_label" style="min-width: 90px;">ĐTDĐ</span>
+                        <input id="@ViewData["page"]_dtdd" type="text" class="form-control input-sm" placeholder="ĐT di động" aria-describedby="@ViewData["page"]_dtdd_label">
+                        @*<a href="#" class="input-group-addon" id="@ViewData["page"]_bhxh_calendar"><i class="fa fa-sort-desc"></i></a>*@
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_email_label" style="min-width: 90px;">E-mail</span>
+                        <input id="@ViewData["page"]_email" type="text" class="form-control input-sm" placeholder="gmail,yahoo" aria-describedby="@ViewData["page"]_email_label">
+                        @*<a href="#" class="input-group-addon" id="@ViewData["page"]_bhxh_calendar"><i class="fa fa-sort-desc"></i></a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="row">
+                <div class="container-fluid title-sm">Người Thân</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_qh_hoten_label" style="min-width:90px;">Họ tên</span>
+                        <input id="@ViewData["page"]_qh_hoten" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_qh_hoten_label">
+                        @*<a href="#" class="input-group-addon" id="@ViewData["page"]_bhxh_calendar"><i class="fa fa-sort-desc"></i></a>*@
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_qh_diachi_label" style="min-width:90px;">Địa chỉ</span>
+                        <input id="@ViewData["page"]_qh_diachi" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_qh_diachi_label">
+                        @*<a href="#" class="input-group-addon" id="@ViewData["page"]_bhxh_calendar"><i class="fa fa-sort-desc"></i></a>*@
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_qh_sdt_label" style="min-width:90px;">SĐT</span>
+                        <input id="@ViewData["page"]_qh_sdt" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_qh_sdt_label">
+                        @*<a href="#" class="input-group-addon" id="@ViewData["page"]_bhxh_calendar"><i class="fa fa-sort-desc"></i></a>*@
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="@ViewData["page"]_qh_label" style="min-width:90px;">Quan hệ</span>
+                        <input id="@ViewData["page"]_qh" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_qh_label">
+                        <a href="#" class="input-group-addon" id="@ViewData["page"]_bhxh_calendar"><i class="fa fa-sort-desc"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

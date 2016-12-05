@@ -1,0 +1,140 @@
+﻿<div class="container-fluid">    
+    <div class="row">
+        <div class="container-fluid title">@ViewData["title"]</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <img id="@ViewData["page"]_icon_img" class="img-thumbnail img-responsive" src="~/Content/Images/icon_user.gif" alt="Management Solution" />
+                        </div>
+                    </div>
+                    <div class="container-fluid" role="group" aria-label="...">
+                        <div class="row">
+                            <button id="@ViewData["page"]_connect" type="button" class="btn btn-default btn-sm col-lg-6 col-md-6 col-sm-6 col-xs-6">Connect</button>
+                            <button id="@ViewData["page"]_snap" type="button" class="btn btn-default btn-sm col-lg-6 col-md-6 col-sm-6 col-xs-6">Snap</button>
+                            <button id="@ViewData["page"]_again" type="button" class="btn btn-default btn-sm col-lg-6 col-md-6 col-sm-6 col-xs-6">Again</button>
+                            <button id="@ViewData["page"]_upload" type="button" class="btn btn-default btn-sm col-lg-6 col-md-6 col-sm-6 col-xs-6">Upload</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="@ViewData["page"]_qrcode_label" style="min-width:90px;">
+                                    QR-Code
+                                    <input id="@ViewData["page"]_qrcode_chk" type="checkbox" aria-label="checkbox QR code">
+                                </span>
+                                <input id="@ViewData["page"]_qrcode" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_qrcode_label">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group row">
+                                <span class="input-group-addon" id="@ViewData["page"]_chuyenvien_label" style="min-width:90px;">
+                                    Chuyển viện
+                                    <input id="@ViewData["page"]_chuyenvien_chk" type="checkbox" aria-label="checkbox chuyển viện">
+                                </span>
+                                <input id="@ViewData["page"]_chuyenvien_bvtuyentruoc" type="text" class="form-control input-sm" placeholder="Bệnh viện tuyến trước" aria-describedby="...">
+                                <a href="#" class="input-group-addon" id="@ViewData["page"]_chuyenvien_bvtuyentruoc_filter"><i class="fa fa-sort-desc"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="@ViewData["page"]_chuyenvien_mabntuyentruoc_label" style="min-width:90px;">Mã</span>
+                                <input id="@ViewData["page"]_chuyenvien_mabntruyentruoc" type="text" class="form-control input-sm" placeholder="Mã BN tuyến trước" aria-describedby="@ViewData["page"]_chuyenvien_mabntuyentruoc_label">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="@ViewData["page"]_mabn_label" style="min-width:90px;">Mã BN</span>
+                                <input id="@ViewData["page"]_mabn" type="text" class="form-control input-sm" placeholder="Mã bệnh nhân" aria-describedby="@ViewData["page"]_mabn_label">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group row">
+                                <span class="input-group-addon" id="@ViewData["page"]_hoten_label" style="min-width:90px;">Họ tên</span>
+                                <input id="@ViewData["page"]_hoten" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_hoten_label">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="@ViewData["page"]_gioitinh_label" style="min-width:90px;">Giới tính</span>
+                                <input id="@ViewData["page"]_gioitinh" type="text" class="form-control input-sm" placeholder="Giớt tính" aria-describedby="@ViewData["page"]_gioitinh_label">
+                                <a href="#" class="input-group-addon" id="@ViewData["page"]_gioitinh_filter"><i class="fa fa-sort-desc"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="@ViewData["page"]_ngaysinh_label" style="min-width:90px;">Ngày sinh</span>
+                                <input id="@ViewData["page"]_ngaysinh" type="text" class="form-control input-sm" placeholder="dd/mm/yyyy" aria-describedby="@ViewData["page"]_ngaysinh_label">
+                                <a href="#" class="input-group-addon" id="@ViewData["page"]_ngaysinh_calendar"><i class="fa fa-calendar"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group row">
+                                <span class="input-group-addon" id="@ViewData["page"]_namsinh_label" style="min-width:90px;">Năm sinh</span>
+                                <input id="@ViewData["page"]_namsinh" type="text" class="form-control input-sm" placeholder="Năm sinh" aria-describedby="@ViewData["page"]_namsinh_label">
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div class="input-group">
+                                <input style="text-align:center; background-color:#fff" id="@ViewData["page"]_tuoi" type="text" class="form-control input-sm" disabled placeholder="" aria-describedby="@ViewData["page"]_tuoi_label" value="0">
+                                <span class="input-group-addon" id="@ViewData["page"]_tuoi_label" style="min-width:90px;">tuổi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <div class="input-group" style="margin-right:-15px;">
+                                <span class="input-group-addon" id="@ViewData["page"]_diachi_label" style="min-width:90px;">Địa chỉ</span>
+                                <input id="@ViewData["page"]_diahchi" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_diachi_label">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="@ViewData["page"]_viettatdiachi_label" style="min-width:90px;">Nhập nhanh</span>
+                                <input id="@ViewData["page"]_viettatdiachi" type="text" class="form-control input-sm" placeholder="Ex:hc12tc" aria-describedby="@ViewData["page"]_viettatdiachi_label">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="@ViewData["page"]_tinh_label" style="min-width:90px;">Tỉnh(TP)</span>
+                                <input id="@ViewData["page"]_tinh" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_tinh_label">
+                                <a href="#" class="input-group-addon" id="@ViewData["page"]_tinh_filter"><i class="fa fa-sort-desc"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="row">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="@ViewData["page"]_huyen_label" style="min-width:90px;">Huyện(Quận)</span>
+                                    <input id="@ViewData["page"]_huyen" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_huyen_label">
+                                    <a href="#" class="input-group-addon" id="@ViewData["page"]_quan_filter"><i class="fa fa-sort-desc"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="@ViewData["page"]_xa_label" style="min-width:90px;">Xã(Phường)</span>
+                                <input id="@ViewData["page"]_xa" type="text" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_xa_label">
+                                <a href="#" class="input-group-addon" id="@ViewData["page"]_xa_filter"><i class="fa fa-sort-desc"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

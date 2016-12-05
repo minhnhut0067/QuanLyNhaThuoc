@@ -1,0 +1,53 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid title">@ViewData["title"]</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_ngaydk_label" style="min-width:90px;">Ngày</span>
+                <input id="@ViewData["page"]_ngaydk" type="text" class="form-control input-sm" placeholder="dd/mm/yyyy" aria-describedby="@ViewData["page"]_ngaydk_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_ngaydk_calendar"><i class="fa fa-calendar"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row input-group">
+                    <span class="input-group-addon" id="@ViewData["page"]_giodk_label" style="min-width:90px;">Giờ</span>
+                    <input id="@ViewData["page"]_giodk" type="text" class="form-control input-sm" placeholder="hh24:mi" aria-describedby="@ViewData["page"]_giodk_label">
+                    <a href="#" class="input-group-addon" id="@ViewData["page"]_giodk_calendar"><i class="fa fa-clock-o"></i></a>
+                </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="padding-right:0">
+            <div class="input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_khoaphong_label" style="min-width:90px;">Khoa/Phòng</span>
+                <input id="@ViewData["page"]_khoaphong" type="text" class="form-control input-sm" placeholder="Tên khoa phòng" aria-describedby="@ViewData["page"]_khoaphong_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_khoaphong_filter"><i class="fa fa-sort-desc"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="padding-right:0px;">
+            <div class="input-group" style="width:100%">
+                @*<span class="input-group-addon" id="@ViewData["page"]_sokham_label" style="min-width:90px;">Mã số khám</span>*@
+                <input id="@ViewData["page"]_sokham" type="text" class="form-control input-sm" placeholder="Số khám" aria-describedby="@ViewData["page"]_sokham_label">
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+            <div class="input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_bacsi_label" style="min-width:90px;">Bác sĩ khám</span>
+                <input id="@ViewData["page"]_bacsi" type="text" class="form-control input-sm" placeholder="Họ tên bác sĩ" aria-describedby="@ViewData["page"]_bacsi_label">
+                <a href="#" class="input-group-addon" id="@ViewData["page"]_bacsi_filter"><i class="fa fa-sort-desc"></i></a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="input-group">
+                <span class="input-group-addon" id="@ViewData["page"]_lydokham_label" style="min-width:90px;">Lý do</span>
+                <input id="@ViewData["page"]_lydokham" type="text" class="form-control input-sm" placeholder="Ex : Cảm, ho, sốt, ..." aria-describedby="@ViewData["page"]_lydokham_label">
+            </div>
+        </div>
+    </div>
+</div>

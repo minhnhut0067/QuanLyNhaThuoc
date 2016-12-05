@@ -1,0 +1,45 @@
+﻿@model Medical.Models.Data.User.Login
+@{
+    ViewData["title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutNoBg.cshtml";
+}
+<link href="~/Content/Custom/User.css" rel="stylesheet" />
+<div class="container login-forn">
+    <div class="row" id="pwd-container">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <section class="login-form">
+                <form method="post" action="@Url.Action("Login")" role="login">
+                    <img src="~/Content/Images/logo.png" class="img-responsive" alt="Logo here" style="margin-left: 38%;width: 24%;margin-bottom: 0;" />
+                    <input type="text" id="UserName" name="username_" placeholder="Tên đăng nhập" required class="form-control input-lg" value="" />
+                    @*<input type="password" class="form-control input-lg" id="Password" name="password_" placeholder="Mật khẩu" required="" />*@
+                    <div class="input-group">
+                        <input type="password" class="form-control input-lg" id="Password" name="password_" placeholder="Mật khẩu" required="" style="margin-top:0px;" />
+                        <a href="#" class="input-group-addon" id="PasswordShow"><i class="fa fa-eye"></i></a>
+                    </div>
+                    <input id="RememberMe" type="checkbox" value="true" name="rememberme" data-val="true">
+                    <input type="hidden" value="false" name="RememberMe">
+                    <label for="RememberMe">Nhớ mật khẩu</label>
+                    @*<div class="pwstrength_viewport_progress"></div>*@
+                    <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Đăng nhập</button>
+                    <div style="font-size: 12px;">
+                        <a href="@Url.Action("Register")">Đăng ký</a> or <a href="#">Quên mật khẩu</a>
+                    </div>
+                </form>
+                <div class="form-links">
+                    <a href="#">www.abc.com</a>
+                </div>
+            </section>
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $("#PasswordShow").click(function () {
+            $("#Password").attr("type") == "password" ? $("#Password").attr("type", "text") : $("#Password").attr("type", "password");
+        })
+    });
+</script>
+@*@Scripts.Render("~/bundles/user")*@
