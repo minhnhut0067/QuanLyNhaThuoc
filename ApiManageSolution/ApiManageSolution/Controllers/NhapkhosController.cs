@@ -13,7 +13,7 @@ namespace ApiManageSolution.Controllers
         // GET api/nhapkhos
         public IEnumerable<Data.Nhapkhos> Get()
         {
-            return Data.Nhapkhos.GetAll();
+            return Data.Nhapkhos.Get("");
         }
 
         // GET api/nhapkhos/5

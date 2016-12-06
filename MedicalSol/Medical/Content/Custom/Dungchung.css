@@ -1,6 +1,6 @@
 ﻿/*trangchu-start*/
 .home-bg {
-    background: url("../Images/home_background1.jpg") no-repeat center center fixed;
+    background: url("../Images/home_background5.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -25,7 +25,8 @@
 }
 
     .nav-side-menu .brand {
-        background: rgba(0, 0, 0, 0) linear-gradient(#36aae7, #1fa0e4) repeat scroll 0 0;
+        /*background: rgba(0, 0, 0, 0) linear-gradient(#36aae7, #1fa0e4) repeat scroll 0 0;*/
+        background: #2191c0 url("../jqueryui/images/ui-bg_gloss-wave_75_2191c0_500x100.png") repeat-x scroll 84% 50%;
         line-height: 50px;
         display: block;
         text-align: center;
@@ -41,7 +42,12 @@
     }
 
     .nav-side-menu:only-child {
-        background: rgba(0, 0, 0, 0) linear-gradient(#36aae7, #1fa0e4) repeat scroll 0 0;
+        /*background: rgba(0, 0, 0, 0) linear-gradient(#36aae7, #1fa0e4) repeat scroll 0 0;*/
+        /*background: #0078ae url("../jqueryui/images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50%;*/
+    }
+    .menu-list > ul.menu-content > li
+    {
+        background: #0078ae url("../jqueryui/images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50%;
     }
 
     .nav-side-menu ul,
@@ -73,6 +79,7 @@
         border-top: 1px solid #1682ba;
         box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset;
         font-weight: bold;
+
     }
 
         .nav-side-menu li a {
@@ -1229,6 +1236,11 @@
 .custom-btn {
     min-width: 90px;
     margin: 0px 3px;
+    background: #2191c0 url("../JqueryUI/images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50%;
+    color:#fff;
+}
+.custom-btn:hover {
+    background: #2191c0 url("../JqueryUI/images/ui-bg_glass_75_79c9ec_1x400.png") repeat-x scroll 50% 50%;
 }
 
 .custom-btn_dis {
@@ -1238,6 +1250,14 @@
     background-color: #D0D0D0;
 }
 
+.dataTable > thead > tr{
+    background: #2191c0 url("../jqueryui/images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50%;
+    color:#fff;
+}
+.dataTable > tbody > tr:hover{
+    background: #6eac2c url("../jqueryui/images/ui-bg_gloss-wave_50_6eac2c_500x100.png") repeat-x scroll 50% 50%;
+    color:#fff;
+}
 .dataTables_filter {
     text-align: right;
 }

@@ -13,7 +13,7 @@ namespace ApiManageSolution.Controllers
         // GET api/thuocs
         public IEnumerable<Data.Thuocs> Get()
         {
-            return Data.Thuocs.GetAll();
+            return Data.Thuocs.Get("");
         }
 
         // GET api/thuocs/5

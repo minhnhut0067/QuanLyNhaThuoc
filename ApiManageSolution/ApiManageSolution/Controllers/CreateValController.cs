@@ -26,22 +26,8 @@ namespace ApiManageSolution.Controllers
         public Data.CreateVal Post([FromBody]Data.CreateVal data)
         {
             try
-            {
-                switch(data.obj)
-                {
-                    case "khos":
-                        data.result = Data.Khos.Getma();
-                        break;
-                    case "phongbans":
-                        data.result = Data.Phongbans.Getma();
-                        break;
-                    case "nhanviens":
-                        data.result = Data.Nhanviens.Getid();
-                        break;
-                    default:
-                        break;
-                }
-                return data;
+            {                                
+                return Data.CreateVal.Create(data);
             }
             catch(Exception ex)
             {

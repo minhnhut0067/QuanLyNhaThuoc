@@ -13,7 +13,7 @@ namespace ApiManageSolution.Controllers
         // GET api/login
         public IEnumerable<Data.Khos> Get()
         {
-            return Data.Khos.GetAll();
+            return Data.Khos.Get("");
         }
 
         // GET api/login/5

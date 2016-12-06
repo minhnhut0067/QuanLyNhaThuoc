@@ -109,11 +109,13 @@ namespace Medical.Models
             public string Obj { get; set; }
             public string Col { get; set; }
             public string Val { get; set; }
+            public string Userid { get; set; }
         }
         public class CreateVal
         {
             public string Obj { get; set; }
             public string Val { get; set; }
+            public string Userid { get; set; }
         }
         public class Save
         {
@@ -125,10 +127,12 @@ namespace Medical.Models
             public string obj { get; set; }
             public string key { get; set; }
             public string result { get; set; }
+            public string Userid { get; set; }
         }
         public class Table
         {
             public string Obj { get; set; }
+            public string Userid { get; set; }
         }
         public class Lydonx
         {
@@ -428,6 +432,7 @@ namespace Medical.Models
             public string stt { get; set; }
             public string ten { get; set; }
             public string ghichu { get; set; }
+            public string userid { get; set; }
             public static string GetAll()
             {
                 try

@@ -8,68 +8,77 @@ namespace ApiManageSolution.Models
 {
     public class Data
     {
+        private static string ConnectionString = "Server=localhost;Port=5435;Database=ms_null;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
         dbHelper dbh = new dbHelper();
         public class Search
         {
             public string obj { get; set; }
             public string col { get; set; }
             public string val { get; set; }
+            public string userid { get; set; }
 
-            public static IEnumerable<Object> Filter(Search search)
+            public static IEnumerable<Object> Filter(Search data)
             {
                 try
                 {
-                    string sqlwhere = "";
-                    if (search.col != null && search.col.Split('~').Length > 0)
+                    string v_where = "";
+                    string v_conn = "";
+                    if (data.userid != null)
                     {
-                        foreach (var item in search.col.Split('~'))
+                        v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                    }
+                    if (data.col != null && data.col.Split('~').Length > 0)
+                    {
+                        foreach (var item in data.col.Split('~'))
                         {
-                            if (sqlwhere == "")
+                            if (v_where == "")
                             {
-                                sqlwhere += "\nWHERE a." + item + "";
+                                v_where += "\nWHERE a." + item + "";
                             }
                             else
                             {
-                                sqlwhere += "||a." + item + "";
+                                v_where += "||a." + item + "";
                             }
                         }
-                        sqlwhere += " ILIKE '%" + search.val + "%'";
-                        sqlwhere += "\nORDER BY a.ten";
-                        sqlwhere += "\nLIMIT 50";
+                        v_where += " ILIKE '%" + data.val + "%'";
+                        v_where += "\nORDER BY a.ten";
+                        v_where += "\nLIMIT 50";
                     }
-                    switch (search.obj)
+                    switch (data.obj)
                     {
                         #region Nhà Thốc
                         case "nhomkhos":
-                            return Nhomkhos.GetAll(sqlwhere);
+                            return Nhomkhos.Get(v_conn, v_where);
                         case "khos":
-                            return Khos.GetAll(sqlwhere);
+                            return Khos.Get(v_conn, v_where);
                         case "lydonxs":
-                            return Lydonxs.GetAll(sqlwhere);
+                            return Lydonxs.Get(v_conn, v_where);
                         case "users":
-                            return Users.GetAll(sqlwhere);
+                            return Users.Get(v_conn, v_where);
                         case "duongdungs":
-                            return Duongdungs.GetAll(sqlwhere);
+                            return Duongdungs.Get(v_conn, v_where);
                         case "dangbds":
-                            return Dangbds.GetAll(sqlwhere);
+                            return Dangbds.Get(v_conn, v_where);
                         case "donvis":
-                            return Donvis.GetAll(sqlwhere);
+                            return Donvis.Get(v_conn, v_where);
                         case "loaiduocs":
-                            return Loaiduocs.GetAll(sqlwhere);
+                            return Loaiduocs.Get(v_conn, v_where);
                         case "hangsxs":
-                            return Hangsxs.GetAll(sqlwhere);
+                            return Hangsxs.Get(v_conn, v_where);
                         case "quocgias":
-                            return Quocgias.GetAll(sqlwhere);
+                            return Quocgias.Get(v_conn, v_where);
                         case "dmphais":
-                            return Dmphais.GetAll(sqlwhere);
+                            return Dmphais.Get(v_conn, v_where);
                         case "nhapkhos":
-                            return Nhapkhos.GetAll(sqlwhere);
+                            return Nhapkhos.Get(v_conn, v_where);
+                        case "thuocs":
+                            return Thuocs.Get(v_conn, v_where);
                         #endregion
                         #region Nhân sự
                         case "phongbans":
-                            return Phongbans.GetAll(sqlwhere);
+                            return Phongbans.Get(v_conn, v_where);
                         case "nhanviens":
-                            return Nhanviens.GetAll(sqlwhere);
+                            return Nhanviens.Get(v_conn, v_where);
                         #endregion
                         default:
                             return null;
@@ -86,12 +95,44 @@ namespace ApiManageSolution.Models
             public string obj { get; set; }
             public string val { get; set; }
             public string result { get; set; }
+            public string userid { get; set; }
+            public static CreateVal Create(CreateVal data)
+            {
+                try
+                {
+                    string v_conn = "";
+                    if(data.userid != null)
+                    {
+                        v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                    }
+                    switch (data.obj)
+                    {
+                        case "khos":
+                            data.result =Khos.Getma(v_conn);
+                            break;
+                        case "phongbans":
+                            data.result = Phongbans.Getma(v_conn);
+                            break;
+                        case "nhanviens":
+                            data.result = Nhanviens.Getid(v_conn);
+                            break;
+                        default:
+                            break;
+                    }
+                    return data;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
         }
         public class Del
         {
             public string obj { get; set; }
             public string key { get; set; }
             public bool result { get; set; }
+            public string userid { get; set; }
         }
         public class Users
         {
@@ -106,11 +147,11 @@ namespace ApiManageSolution.Models
             public string ngay { get; set; }
             public string ngayud { get; set; }
             public string loaiuser { get; set; }
-            public static IEnumerable<Users> GetAll()
+            public static IEnumerable<Users> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Users> GetAll(string v_where)
+            public static IEnumerable<Users> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -119,7 +160,7 @@ namespace ApiManageSolution.Models
                     string sql = "";
                     sql = "SELECT a.id, a.username_, a.password_, a.hoten, a.ngaysinh, a.diachi, a.sdt, a.email, a.ngay, a.ngayud, a.loaiuser " +
                     "\nFROM users a" + v_where;
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -152,37 +193,38 @@ namespace ApiManageSolution.Models
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static string Getid()
+            public string userid { get; set; }
+            public static string Getid(string v_conn)
             {
                 try
                 {
                     string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from dmphai";
 
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["id"].ToString() : "";
                 }
                 catch (Exception ex)
                 {
                     return "";
                 }
             }
-            public static string Getma()
+            public static string Getma(string v_conn)
             {
                 try
                 {
                     string sql = "select 'PHA'||lpad(case when max(to_number(replace(ma,'PHA',''))) is not null then max(to_number(replace(ma,'PHA',''))) + 1 else 1 end,4,'0') as ma from dmkho";
 
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["ma"].ToString() : "";
                 }
                 catch (Exception ex)
                 {
                     return "";
                 }
             }
-            public static IEnumerable<Dmphais> GetAll()
+            public static IEnumerable<Dmphais> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Dmphais> GetAll(string v_where)
+            public static IEnumerable<Dmphais> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -192,7 +234,7 @@ namespace ApiManageSolution.Models
                     sql = "SELECT a.id, a.ma, a.ten"
                     + "\nFROM dmphai a"
                     + v_where;
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -214,17 +256,26 @@ namespace ApiManageSolution.Models
             }
             public static IEnumerable<Dmphais> Upd(Dmphais data)
             {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Upd(v_conn, data);
+            }
+            public static IEnumerable<Dmphais> Upd(string v_conn, Dmphais data)
+            {
                 try
                 {
                     var sql = "";
                     var irec = 0;
                     if (data.id == null)
                     {
-                        data.id = Getid();
+                        data.id = Getid(v_conn);
                     }
                     if (data.ma == null)
                     {
-                        data.ma = Getma();
+                        data.ma = Getma(v_conn);
                     }
                     sql = @"UPDATE dmphai " +
                         "SET " +
@@ -232,16 +283,16 @@ namespace ApiManageSolution.Models
                         ",ten='" + data.ten + "'" +
                         ",ngayud=now() " +
                         "WHERE id =" + data.id;
-                    irec = dbHelper.ExecuteQuery(sql);
+                    irec = dbHelper.ExecuteQuery(sql, v_conn);
                     if (irec == 0)
                     {
                         sql = @"INSERT INTO dmkho(id,ma,ten) " +
                             "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "') ";
-                        irec = dbHelper.ExecuteQuery(sql);
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                     }
                     if (irec == 1)
                     {
-                        return GetAll("\nWHERE a.id=" + data.id);
+                        return Get(v_conn, "\nWHERE a.id=" + data.id);
                     }
                     else
                     {
@@ -256,6 +307,15 @@ namespace ApiManageSolution.Models
             }
             public static bool Del(Del data)
             {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Del(v_conn, data);
+            }
+            public static bool Del(string v_conn, Del data)
+            {
                 try
                 {
                     if (data.obj != null && data.obj != "")
@@ -263,7 +323,7 @@ namespace ApiManageSolution.Models
                         var sql = "";
                         var irec = 0;
                         sql = "delete dmkho where id =" + data.key;
-                        irec = dbHelper.ExecuteQuery(sql);
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                         if (irec == 1)
                             return true;
                         else
@@ -289,37 +349,38 @@ namespace ApiManageSolution.Models
             public string stt { get; set; }
             public string ten { get; set; }
             public string ghichu { get; set; }
-            public static string Getid()
+            public string userid { get; set; }
+            public static string Getid(string v_conn)
             {
                 try
                 {
                     string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from dmkho";
 
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["id"].ToString() : "";
                 }
                 catch (Exception ex)
                 {
                     return "";
                 }
             }
-            public static string Getma()
+            public static string Getma(string v_conn)
             {
                 try
                 {
                     string sql = "select 'KHO'||lpad(case when max(to_number(replace(ma,'KHO',''))) is not null then max(to_number(replace(ma,'KHO',''))) + 1 else 1 end,4,'0') as ma from dmkho";
 
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["ma"].ToString() : "";
                 }
                 catch (Exception ex)
                 {
                     return "";
                 }
             }
-            public static IEnumerable<Khos> GetAll()
+            public static IEnumerable<Khos> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Khos> GetAll(string v_where)
+            public static IEnumerable<Khos> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -330,7 +391,7 @@ namespace ApiManageSolution.Models
                     + "\nFROM dmkho a"
                     + "\nLEFT JOIN dmnhomkho b on b.id = a.id_nhomkho"
                     + v_where;
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -356,13 +417,22 @@ namespace ApiManageSolution.Models
             }
             public static IEnumerable<Khos> Upd(Khos data)
             {
+                string v_conn = "";
+                if(data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }                    
+                return Upd(v_conn, data);
+            }
+            public static IEnumerable<Khos> Upd(string v_conn, Khos data)
+            {
                 try
                 {
                     var sql = "";
                     var irec = 0;
                     if (data.id == null)
                     {
-                        data.id = Getid();
+                        data.id = Getid(v_conn);
                     }
                     if (data.ghichu == "\n")
                     {
@@ -375,16 +445,16 @@ namespace ApiManageSolution.Models
                         ",id_nhomkho=" + data.id_nhomkho +
                         ",ngayud=now() " +
                         "WHERE id =" + data.id;
-                    irec = dbHelper.ExecuteQuery(sql);
+                    irec = dbHelper.ExecuteQuery(sql, v_conn);
                     if (irec == 0)
                     {
                         sql = @"INSERT INTO dmkho(id,ma,ten,id_nhomkho) " +
                             "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "'," + data.id_nhomkho + ") ";
-                        irec = dbHelper.ExecuteQuery(sql);
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                     }
                     if (irec == 1)
                     {
-                        return GetAll("\nWHERE a.id=" + data.id);
+                        return Get(v_conn, "\nWHERE a.id=" + data.id);
                     }
                     else
                     {
@@ -399,6 +469,15 @@ namespace ApiManageSolution.Models
             }
             public static bool Del(Del data)
             {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Del(v_conn, data);
+            }
+            public static bool Del(string v_conn, Del data)
+            {
                 try
                 {
                     if (data.obj != null && data.obj != "")
@@ -406,7 +485,7 @@ namespace ApiManageSolution.Models
                         var sql = "";
                         var irec = 0;
                         sql = "delete dmkho where id =" + data.key;
-                        irec = dbHelper.ExecuteQuery(sql);
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                         if (irec == 1)
                             return true;
                         else
@@ -430,11 +509,11 @@ namespace ApiManageSolution.Models
             public string stt { get; set; }
             public string ten { get; set; }
             public string userid { get; set; }
-            public static IEnumerable<Nhomkhos> GetAll()
+            public static IEnumerable<Nhomkhos> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Nhomkhos> GetAll(string v_where)
+            public static IEnumerable<Nhomkhos> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -445,7 +524,7 @@ namespace ApiManageSolution.Models
                     + "\nFROM dmnhomkho a" + v_where;
                     //+ "\nLIMIT 50";
 
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -498,55 +577,55 @@ namespace ApiManageSolution.Models
             public string ten_quocgia { get; set; }
             public string id_duongdung { get; set; }
             public string ten_duongdung { get; set; }
-            public static string Getid()
+            public static string Getid(string v_conn)
             {
                 try
                 {
                     string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from dmduoc";
 
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["id"].ToString() : "";
                 }
                 catch (Exception ex)
                 {
                     return "";
                 }
             }
-            public static string Getma(string v_ten)
+            public static string Getma(string v_conn, string v_ten)
             {
                 try
                 {
                     string sql = "select '" + SHA1.Khongdau(v_ten).Replace(" ", "").ToUpper().Substring(0, 3) + "'||lpad(case when max(to_number(replace(ma,'" + SHA1.Khongdau(v_ten).Replace(" ", "").ToUpper().Substring(0, 3) + "',''))) is not null then max(to_number(replace(ma,'" + SHA1.Khongdau(v_ten).Replace(" ", "").ToUpper().Substring(0, 3) + "',''))) + 1 else 1 end,4,'0')  as ma from dmduoc where ma ilike '" + SHA1.Khongdau(v_ten).Replace(" ", "").ToUpper().Substring(0, 3) + "%'";
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["ma"].ToString() : "";
                 }
                 catch (Exception ex)
                 {
                     return "";
                 }
             }
-            public static IEnumerable<Thuocs> GetAll()
+            public static IEnumerable<Thuocs> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Thuocs> GetAll(string v_where)
+            public static IEnumerable<Thuocs> Get(string v_conn, string v_where)
             {
                 try
                 {
                     DataSet ds = new DataSet();
                     List<Thuocs> lts = new List<Thuocs>();
                     string sql = "";
-                    sql = "SELECT a.id, a.stt, a.ma, a.ten, a.dang, a.hamluong, a.donvidg, a.donvisd, " +
-                    "\na.hoatchat, a.thanhphan, a.tyle1, a.tyle2, a.tinhtrang, a.atc, a.route, " +
-                    "\na.generic, a.userid, a.stt_40, a.sodk, " +
-                    "\nto_char(a.ngay, 'dd/mm/yyyy hh24:mi') as ngay, to_char(a.ngayud, 'dd/mm/yyyy hh24:mi') as ngayud, a.id_loaiduoc, b.ten as ten_loaiduoc," +
-                    "\na.id_hangsx, c.ten as ten_hangsx, a.id_quocgia, d.ten as ten_quocgia, a.id_duongdung, e.ten as ten_duongdung" +
-                    "\nFROM dmduoc a" +
-                    "\nLEFT JOIN dmloaiduoc b ON b.id = a.id_loaiduoc" +
-                    "\nLEFT JOIN dmhangsx c ON c.id = a.id_hangsx" +
-                    "\nLEFT JOIN dmquocgia d ON d.id = a.id_quocgia" +
-                    "\nLEFT JOIN dmduongdung e ON e.id = a.id_duongdung" + v_where;
+                    sql = @"SELECT a.id, a.stt, a.ma, a.ten, a.dang, a.hamluong, a.donvidg, a.donvisd, 
+                    a.hoatchat, a.thanhphan, a.tyle1, a.tyle2, a.tinhtrang, a.atc, a.route, 
+                    a.generic, a.userid, a.stt_40, a.sodk, 
+                    to_char(a.ngay, 'dd/mm/yyyy hh24:mi') as ngay, to_char(a.ngayud, 'dd/mm/yyyy hh24:mi') as ngayud, a.idloaiduoc as id_loaiduoc, b.ten as ten_loaiduoc,
+                    a.idhangsx as id_hangsx, c.ten as ten_hangsx, a.idquocgia as id_quocgia, d.ten as ten_quocgia, a.idduongdung as id_duongdung, e.ten as ten_duongdung
+                    FROM dmduoc a
+                    LEFT JOIN dmloaiduoc b ON b.id = a.idloaiduoc
+                    LEFT JOIN dmhangsx@root c ON c.id = a.idhangsx
+                    LEFT JOIN dmquocgia@root d ON d.id = a.idquocgia
+                    LEFT JOIN dmduongdung@root e ON e.id = a.idduongdung " + v_where;
                     //"\nAND A.ID IN (4819,4817,4820,4434,4818,4154) LIMIT 500";
                     //+ "\nLIMIT 1500";
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -594,13 +673,22 @@ namespace ApiManageSolution.Models
             }
             public static IEnumerable<Thuocs> Upd(Thuocs data)
             {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Upd(v_conn, data);
+            }
+            public static IEnumerable<Thuocs> Upd(string v_conn, Thuocs data)
+            {
                 try
                 {
                     var sql = "";
                     var irec = 0;
                     if (data.id == null)
                     {
-                        data.id = Getid();
+                        data.id = Getid(v_conn);
                     }
                     if (data.thanhphan == null || data.thanhphan == "\n")
                     {
@@ -612,16 +700,8 @@ namespace ApiManageSolution.Models
                     }
                     if (data.ma == null || data.ma == "")
                     {
-                        data.ma = Getma(data.ten);
+                        data.ma = Getma(v_conn, data.ten);
                     }
-                    //if (data.tyle1 == null)
-                    //{
-                    //    data.tyle1 = "";
-                    //}
-                    //if (data.tyle2 == null)
-                    //{
-                    //    data.tyle2 = "";
-                    //}
                     sql = @"UPDATE dmduoc " +
                         "SET " +
                         "ma='" + data.ma + "'" +
@@ -638,16 +718,16 @@ namespace ApiManageSolution.Models
                         ",id_quocgia=" + (data.id_quocgia == null ? "0" : data.id_quocgia) + "" +
                         ",ngayud=now() " +
                         "WHERE id =" + data.id;
-                    irec = dbHelper.ExecuteQuery(sql);
+                    irec = dbHelper.ExecuteQuery(sql, v_conn);
                     if (irec == 0)
                     {
                         sql = @"INSERT INTO dmduoc(id,ma,ten,id_loaiduoc,dang,hamluong,donvidg,donvisd,sodk,atc,id_duongdung,id_hangsx,id_quocgia) " +
                             "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "'," + data.id_loaiduoc + ",'" + (data.dang == null ? "" : data.dang) + "','" + (data.hamluong == null ? "" : data.hamluong) + "','" + (data.donvidg == null ? "" : data.donvidg) + "','" + (data.donvisd == null ? "" : data.donvisd) + "','" + (data.sodk == null ? "" : data.sodk) + "','" + (data.atc == null ? "" : data.atc) + "'," + (data.id_duongdung == null ? "0" : data.id_duongdung) + "," + (data.id_hangsx == null ? "0" : data.id_hangsx) + "," + (data.id_quocgia == null ? "0" : data.id_quocgia) + ") ";
-                        irec = dbHelper.ExecuteQuery(sql);
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                     }
                     if (irec == 1)
                     {
-                        return GetAll("\nWHERE a.id=" + data.id);
+                        return Get(v_conn, "\nWHERE a.id=" + data.id);
                     }
                     else
                     {
@@ -662,6 +742,15 @@ namespace ApiManageSolution.Models
             }
             public static bool Del(Del data)
             {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Del(v_conn, data);
+            }
+            public static bool Del(string v_conn, Del data)
+            {
                 try
                 {
                     if (data.obj != null && data.obj != "")
@@ -669,7 +758,7 @@ namespace ApiManageSolution.Models
                         var sql = "";
                         var irec = 0;
                         sql = "delete dmduoc where id =" + data.key;
-                        irec = dbHelper.ExecuteQuery(sql);
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                         if (irec == 1)
                             return true;
                         else
@@ -691,11 +780,11 @@ namespace ApiManageSolution.Models
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static IEnumerable<Lydonxs> GetAll()
+            public static IEnumerable<Lydonxs> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Lydonxs> GetAll(string v_where)
+            public static IEnumerable<Lydonxs> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -706,7 +795,7 @@ namespace ApiManageSolution.Models
                     + "\nFROM dmlydonx a" + v_where;
                     //+ "\nLIMIT 50";
 
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -731,11 +820,11 @@ namespace ApiManageSolution.Models
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static IEnumerable<Duongdungs> GetAll()
+            public static IEnumerable<Duongdungs> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Duongdungs> GetAll(string v_where)
+            public static IEnumerable<Duongdungs> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -746,7 +835,7 @@ namespace ApiManageSolution.Models
                     + "\nFROM dmduongdung a" + v_where;
                     //+ "\nLIMIT 50";
 
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -771,11 +860,11 @@ namespace ApiManageSolution.Models
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static IEnumerable<Dangbds> GetAll()
+            public static IEnumerable<Dangbds> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Dangbds> GetAll(string v_where)
+            public static IEnumerable<Dangbds> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -786,7 +875,7 @@ namespace ApiManageSolution.Models
                     + "\nFROM dmdangbd a" + v_where;
                     //+ "\nLIMIT 50";
 
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -811,11 +900,11 @@ namespace ApiManageSolution.Models
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static IEnumerable<Donvis> GetAll()
+            public static IEnumerable<Donvis> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Donvis> GetAll(string v_where)
+            public static IEnumerable<Donvis> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -826,7 +915,7 @@ namespace ApiManageSolution.Models
                     + "\nFROM dmdonvi a" + v_where;
                     //+ "\nLIMIT 50";
 
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -851,11 +940,11 @@ namespace ApiManageSolution.Models
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static IEnumerable<Loaiduocs> GetAll()
+            public static IEnumerable<Loaiduocs> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Loaiduocs> GetAll(string v_where)
+            public static IEnumerable<Loaiduocs> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -866,7 +955,7 @@ namespace ApiManageSolution.Models
                     + "\nFROM dmloaiduoc a" + v_where;
                     //+ "\nLIMIT 50";
 
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -891,11 +980,11 @@ namespace ApiManageSolution.Models
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static IEnumerable<Hangsxs> GetAll()
+            public static IEnumerable<Hangsxs> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Hangsxs> GetAll(string v_where)
+            public static IEnumerable<Hangsxs> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -906,7 +995,7 @@ namespace ApiManageSolution.Models
                     + "\nFROM dmhangsx a" + v_where;
                     //+ "\nLIMIT 50";
 
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -931,11 +1020,11 @@ namespace ApiManageSolution.Models
             public string id { get; set; }
             public string ma { get; set; }
             public string ten { get; set; }
-            public static IEnumerable<Quocgias> GetAll()
+            public static IEnumerable<Quocgias> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Quocgias> GetAll(string v_where)
+            public static IEnumerable<Quocgias> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -946,7 +1035,7 @@ namespace ApiManageSolution.Models
                     + "\nFROM dmquocgia a" + v_where;
                     //+ "\nLIMIT 50";
 
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -996,11 +1085,11 @@ namespace ApiManageSolution.Models
             public string userten { get; set; }
             public string ngayud { get; set; }
             public string soluongyeucau { get; set; }
-            public static IEnumerable<Nhapkhocts> GetAll()
+            public static IEnumerable<Nhapkhocts> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Nhapkhocts> GetAll(string v_where)
+            public static IEnumerable<Nhapkhocts> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -1014,7 +1103,7 @@ namespace ApiManageSolution.Models
                     "\nLEFT JOIN dmnguon c ON c.id = a.idnguon" +
                     "\nLEFT JOIN users d ON c.id = a.userid"
                     + v_where;
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -1094,11 +1183,11 @@ namespace ApiManageSolution.Models
             public string userten { get; set; }
             public string ngayud { get; set; }
             public IEnumerable<Nhapkhocts> nhapkhocts { get; set; }
-            public static IEnumerable<Nhapkhos> GetAll()
+            public static IEnumerable<Nhapkhos> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Nhapkhos> GetAll(string v_where)
+            public static IEnumerable<Nhapkhos> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -1117,7 +1206,7 @@ namespace ApiManageSolution.Models
 
                     //+ "\nLIMIT 50";
 
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -1154,7 +1243,7 @@ namespace ApiManageSolution.Models
                             item.userid = dr["userid"].ToString();
                             item.userid = dr["userten"].ToString();
                             item.userid = dr["ngayud"].ToString();
-                            item.nhapkhocts = Nhapkhocts.GetAll("\nWHERE idnhapkho =" + dr["id"].ToString());
+                            item.nhapkhocts = Nhapkhocts.Get(v_conn, "\nWHERE idnhapkho =" + dr["id"].ToString());
                             lts.Add(item);
                         }
                     }
@@ -1173,37 +1262,38 @@ namespace ApiManageSolution.Models
             public string ma { get; set; }
             public string ten { get; set; }
             public string ghichu { get; set; }
-            public static string Getid()
+            public string userid { get; set; }
+            public static string Getid(string v_conn)
             {
                 try
                 {
                     string sql = "select case when max(id) is not null then max(id) + 1 else 1 end as id from dmphongban";
 
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["id"].ToString() : "";
                 }
                 catch (Exception ex)
                 {
                     return "";
                 }
             }
-            public static string Getma()
+            public static string Getma(string v_conn)
             {
                 try
                 {
                     string sql = "select 'PHB'||lpad(case when max(to_number(replace(ma,'PHB',''))) is not null then max(to_number(replace(ma,'PHB',''))) + 1 else 1 end,4,'0') as ma from dmphongban";
 
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["ma"].ToString() : "";
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["ma"].ToString() : "";
                 }
                 catch (Exception ex)
                 {
                     return "";
                 }
             }
-            public static IEnumerable<Phongbans> GetAll()
+            public static IEnumerable<Phongbans> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Phongbans> GetAll(string v_where)
+            public static IEnumerable<Phongbans> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -1213,7 +1303,7 @@ namespace ApiManageSolution.Models
                     sql = "SELECT a.id, a.ma, a.ten, a.ghichu"
                     + "\nFROM dmphongban a"
                     + v_where;
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -1236,6 +1326,15 @@ namespace ApiManageSolution.Models
             }
             public static IEnumerable<Phongbans> Upd(Phongbans data)
             {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Upd(v_conn, data);
+            }
+            public static IEnumerable<Phongbans> Upd(string v_conn, Phongbans data)
+            {
                 try
                 {
                     var sql = "";
@@ -1246,11 +1345,11 @@ namespace ApiManageSolution.Models
                     }
                     if (data.id == null || data.id == "")
                     {
-                        data.id = Getid();
+                        data.id = Getid(v_conn);
                     }
                     if (data.ma == null || data.ma == "")
                     {
-                        data.ma = Getma();
+                        data.ma = Getma(v_conn);
                     }
                     sql = @"UPDATE dmphongban " +
                         "SET " +
@@ -1259,16 +1358,16 @@ namespace ApiManageSolution.Models
                         ",ghichu='" + data.ghichu + "'" +
                         ",ngayud=now() " +
                         "WHERE id =" + data.id;
-                    irec = dbHelper.ExecuteQuery(sql);
+                    irec = dbHelper.ExecuteQuery(sql, v_conn);
                     if (irec == 0)
                     {
                         sql = @"INSERT INTO dmphongban(id, ma, ten, ghichu) " +
                             "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "','" + data.ghichu + "') ";
-                        irec = dbHelper.ExecuteQuery(sql);
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                     }
                     if (irec == 1)
                     {
-                        return GetAll("\nWHERE a.ma='" + data.ma + "'");
+                        return Get(v_conn, "\nWHERE a.ma='" + data.ma + "'");
                     }
                     else
                     {
@@ -1283,6 +1382,15 @@ namespace ApiManageSolution.Models
             }
             public static bool Del(Del data)
             {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Del(v_conn, data);
+            }
+            public static bool Del(string v_conn, Del data)
+            {
                 try
                 {
                     if (data.obj != null && data.obj != "")
@@ -1290,7 +1398,7 @@ namespace ApiManageSolution.Models
                         var sql = "";
                         var irec = 0;
                         sql = "delete dmphongban where id =" + data.key;
-                        irec = dbHelper.ExecuteQuery(sql);
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                         if (irec == 1)
                             return true;
                         else
@@ -1322,24 +1430,25 @@ namespace ApiManageSolution.Models
             public string tenphai { get; set; }
             public string idphongban { get; set; }
             public string tenphongban { get; set; }
-            public static string Getid()
+            public string userid { get; set; }
+            public static string Getid(string v_conn)
             {
                 try
                 {
                     string sql = "select to_char(now(),'yymmddhh24mi')||lpad(case when count(id) > 0 then to_char(max(to_number(right(id,5))) + 1) else '1' end ,5,'0') as id from nhanvien";
 
-                    return dbHelper.getDataSetbySql(sql) != null && dbHelper.getDataSetbySql(sql).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql).Tables[0].Rows[0]["id"].ToString() : "";
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["id"].ToString() : "";
                 }
                 catch (Exception ex)
                 {
                     return "";
                 }
             }
-            public static IEnumerable<Nhanviens> GetAll()
+            public static IEnumerable<Nhanviens> Get(string v_where)
             {
-                return GetAll("\nWHERE 1=1");
+                return Get("", v_where);
             }
-            public static IEnumerable<Nhanviens> GetAll(string v_where)
+            public static IEnumerable<Nhanviens> Get(string v_conn, string v_where)
             {
                 try
                 {
@@ -1352,7 +1461,7 @@ namespace ApiManageSolution.Models
                     + "\nLEFT JOIN dmphai b on b.id = a.idphai"
                     + "\nLEFT JOIN dmphongban c on c.id = a.idphongban"
                     + v_where;
-                    ds = dbHelper.getDataSetbySql(sql);
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
@@ -1384,13 +1493,22 @@ namespace ApiManageSolution.Models
             }
             public static IEnumerable<Nhanviens> Upd(Nhanviens data)
             {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Upd(v_conn, data);
+            }
+            public static IEnumerable<Nhanviens> Upd(string v_conn, Nhanviens data)
+            {
                 try
                 {
                     var sql = "";
                     var irec = 0;
                     if (data.id == null || data.id == "")
                     {
-                        data.id = Getid();
+                        data.id = Getid(v_conn);
                     }
                     sql = @"UPDATE nhanvien " +
                         "SET " +
@@ -1406,16 +1524,16 @@ namespace ApiManageSolution.Models
                         ",idphongban=" + data.idphongban +
                         ",ngayud=now() " +
                         "WHERE id =" + data.id;
-                    irec = dbHelper.ExecuteQuery(sql);
+                    irec = dbHelper.ExecuteQuery(sql, v_conn);
                     if (irec == 0)
                     {
                         sql = @"INSERT INTO nhanvien(id, hoten, ngaysinh, namsinh,diachi,sdt,email,capbac, mucluong,idphai,idphongban) " +
-                            "VALUES(" + data.id + ",'" + data.hoten + "','" + data.ngaysinh + "','" + data.namsinh + "','" + data.diachi + "','" + data.sdt + "','" + data.email + "','" + data.capbac + "','" + data.mucluong + "'," + data.idphai + "," + data.idphongban+ ") ";
-                        irec = dbHelper.ExecuteQuery(sql);
+                            "VALUES(" + data.id + ",'" + data.hoten + "','" + data.ngaysinh + "','" + data.namsinh + "','" + data.diachi + "','" + data.sdt + "','" + data.email + "','" + data.capbac + "','" + data.mucluong + "'," + data.idphai + "," + data.idphongban + ") ";
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                     }
                     if (irec == 1)
                     {
-                        return GetAll("\nWHERE a.id=" + data.id);
+                        return Get(v_conn, "\nWHERE a.id=" + data.id);
                     }
                     else
                     {
@@ -1430,6 +1548,15 @@ namespace ApiManageSolution.Models
             }
             public static bool Del(Del data)
             {
+                string v_conn = "";
+                if(data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Del(v_conn, data);
+            }
+            public static bool Del(string v_conn, Del data)
+            {
                 try
                 {
                     if (data.obj != null && data.obj != "")
@@ -1437,7 +1564,7 @@ namespace ApiManageSolution.Models
                         var sql = "";
                         var irec = 0;
                         sql = "delete nhanvien where id =" + data.key;
-                        irec = dbHelper.ExecuteQuery(sql);
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
                         if (irec == 1)
                             return true;
                         else

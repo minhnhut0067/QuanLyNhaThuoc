@@ -13,7 +13,7 @@ namespace ApiManageSolution.Controllers
         // GET api/lydonxs
         public IEnumerable<Data.Lydonxs> Get()
         {
-            return Data.Lydonxs.GetAll();
+            return Data.Lydonxs.Get("");
         }
 
         // GET api/lydonxs/5
