@@ -23,22 +23,22 @@ namespace ApiManageSolution.Controllers
         }
 
         // POST api/delrecord
-        public Data.Del Post([FromBody]Data.Del data)
+        public Data.DelRecord Post([FromBody]Data.DelRecord data)
         {
             try
             {
-                switch (data.obj)
-                {
-                    case "phongbans":
-                        data.result = Data.Phongbans.Del(data);
-                        break;
-                    case "nhanviens":
-                        data.result = Data.Nhanviens.Del(data);
-                        break;
-                    default:
-                        break;
-                }
-                return data;
+                //switch (data.obj)
+                //{
+                //    case "phongbans":
+                //        data.result = Data.Phongbans.Del(data);
+                //        break;
+                //    case "nhanviens":
+                //        data.result = Data.Nhanviens.Del(data);
+                //        break;
+                //    default:
+                //        break;
+                //}
+                return Data.DelRecord.Del(data);
             }
             catch(Exception ex)
             { return null; }

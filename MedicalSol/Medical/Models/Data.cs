@@ -119,7 +119,7 @@ namespace Medical.Models
         }
         public class Save
         {
-            public string Obj { get; set; }
+            public string obj { get; set; }
             public Object val { get; set; }
         }
         public class Del
@@ -127,12 +127,13 @@ namespace Medical.Models
             public string obj { get; set; }
             public string key { get; set; }
             public string result { get; set; }
-            public string Userid { get; set; }
+            public string userid { get; set; }
         }
         public class Table
         {
-            public string Obj { get; set; }
-            public string Userid { get; set; }
+            public string obj { get; set; }
+            public string request { get; set; }
+            public string userid { get; set; }
         }
         public class Lydonx
         {

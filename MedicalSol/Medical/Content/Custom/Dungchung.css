@@ -1092,6 +1092,35 @@
     font-weight: bold;
 }
 
+.ms_hcell{
+    background: #2191c0 url("../JqueryUI/images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50%;
+    color:#fff;
+}
+
+.ms_toolbar{
+    background: #2191c0 url("../JqueryUI/images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50%;
+    color:#fff;
+}
+
+.ms_tb{
+    background: #2191c0 url("../JqueryUI/images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50%;
+    color:#fff;
+}
+
+.ms_tb:hover {
+    background: #2191c0 url("../JqueryUI/images/ui-bg_glass_75_79c9ec_1x400.png") repeat-x scroll 50% 50%;
+    color:#000;
+}
+
+/*.custom-btn {
+    min-width: 90px;
+    margin: 0px 3px;
+    background: #2191c0 url("../JqueryUI/images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50%;
+    color:#fff;
+}
+.custom-btn:hover {
+    background: #2191c0 url("../JqueryUI/images/ui-bg_glass_75_79c9ec_1x400.png") repeat-x scroll 50% 50%;
+}*/
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -1100,9 +1129,6 @@
 
 /*Grid -Start*/
 
-/*input[type="text"]:disabled {
-    background: #dddddd !important;
-}*/
 .sorting {
     content: "";
     font-size:2em;
@@ -1133,11 +1159,6 @@
     white-space: nowrap;
     width: 1%;
 }
-
-/*.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:first-child > .btn-group:not(:first-child) > .btn, .input-group-btn:first-child > .btn:not(:first-child), .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group > .btn, .input-group-btn:last-child > .dropdown-toggle {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-}*/
 
 .input-group .form-control_dis, .input-group-addon_dis, .input-group-btn_dis {
     display: table-cell;

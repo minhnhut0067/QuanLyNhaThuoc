@@ -21,6 +21,7 @@ $(document).ready(function () {
     });
 
     $("a.input-datepicker").on("click", function () {
+        ms_filter_hide();
         var id = $(this)[0].id.replace("_datepicker", "");
         $("#" + id).datepicker("show");
     });
@@ -337,17 +338,19 @@ function ms_gdelimiter(v_delimiter_text, v_delimiter, v_index, v_default) {
 
 function ms_grid_click(v_this, v_dg) {
     try {
-        ms_gobj(ms_gval(v_dg, "lang", "?")).style.color = "#505050";
-        ms_gobj(ms_gval(v_dg, "lang", "?")).style.backgroundColor = "Transparent";
+        ms_gobj(ms_gval(v_dg, "lang", "?")).style.color = "#000";
+        ms_gobj(ms_gval(v_dg, "lang", "?")).style.backgroundColor = "#fff";
+        ms_gobj(ms_gval(v_dg, "lang", "?")).style.background = "Transparent";
 
         ms_sval(ms_gval(v_dg, "lang", "?") + '_rh', "className", "ms_rcell_c");
     }
     catch (ex) {
     }
     try {
-        v_this.style.color = "#000";
+        v_this.style.color = "#915608";
         //v_this.style.fontWeight = 0;
-        v_this.style.backgroundColor = "#ccffff";
+        //v_this.style.backgroundColor = "#fff";
+        v_this.style.background = "#f8da4e url(\"../Content/jqueryui/images/ui-bg_glass_55_f8da4e_1x400.png\") repeat-x scroll 50% 50%";
         ms_sval(v_dg, "lang", v_this.id);
         ms_sval(v_this.id + '_rh', "className", "ms_rcell_c_sel");
     }
@@ -360,12 +363,16 @@ function ms_grid_over(v_this, v_dg) {
         if (ms_gval(v_dg, "lang", "") == v_this.id) {
             //v_this.style.fontWeight = 700;
             v_this.style.color = "#FF0000";
-            v_this.style.backgroundColor = "#ccffff";
+            //v_this.style.backgroundColor = "#ccffff";
+            v_this.style.background = "#6eac2c url(\"../Content/jqueryui/images/ui-bg_gloss-wave_50_6eac2c_500x100.png\") repeat-x scroll 50% 50%";
         }
         else {
             v_this.style.fontWeight = 0;
-            v_this.style.backgroundColor = "#ccffff";
+            //v_this.style.backgroundColor = "#fff";
+            v_this.style.background = "#6eac2c url(\"../Content/jqueryui/images/ui-bg_gloss-wave_50_6eac2c_500x100.png\") repeat-x scroll 50% 50%";
+            v_this.style.color = "#fff";
             ms_sval(v_this.id + '_rh', "className", "ms_rcell_c_sel");
+
         }
     }
     catch (ex) {
@@ -375,15 +382,15 @@ function ms_grid_over(v_this, v_dg) {
 function ms_grid_out(v_this, v_dg) {
     try {
         if (ms_gval(v_dg, "lang", "") == v_this.id) {
-            v_this.style.color = "#000";
-            //v_this.style.fontWeight = 700;
-            v_this.style.backgroundColor = "#ccffff";
+            v_this.style.color = "#915608";
+            //v_this.style.backgroundColor = "#fff";
+            v_this.style.background = "#f8da4e url(\"../Content/jqueryui/images/ui-bg_glass_55_f8da4e_1x400.png\") repeat-x scroll 50% 50%";
             ms_sval(v_this.id + '_rh', "className", "ms_rcell_c_sel");
         }
         else {
-            v_this.style.color = "#505050";
-            //v_this.style.fontWeight = 0;
-            v_this.style.backgroundColor = "Transparent";
+            v_this.style.color = "#000";
+            v_this.style.background = "Transparent";
+            v_this.style.backgroundColor = "#fff";
             ms_sval(v_this.id + '_rh', "className", "ms_rcell_c");
         }
     }
@@ -499,11 +506,30 @@ function ms_cap(v_this) {
     }
 }
 
+function ms_lpad(str, max, char) {
+    try {
+        str = str.toString();
+        return str.length < max ? ms_lpad(char + str, max) : str;
+    }
+    catch (ex)
+    { return ex; }
+}
+
 //basic
 
 function f_table_reload(v_obj) {
     try {
-        var data = { obj: v_obj, col: "", val: "" };
+        var data = null;
+        switch(v_obj)
+        {
+            case "nhapkhos":
+                var v_dk = ms_gval("page_duoc_nhapkho_lydo", "selectedvalue", "") + "~" + ms_gval("page_duoc_nhapkho_kho", "selectedvalue", "") + "~" + ms_gval("page_duoc_nhapkho_nhanvien", "selectedvalue", "") + "~" + ms_gval("page_duoc_nhapkho_tn", "value", "") + "~" + ms_gval("page_duoc_nhapkho_dn", "value", "");
+                data = { obj: v_obj, request: v_dk };
+                break;
+            default:
+                data = { obj: v_obj, col: "", val: "" };
+                break;
+        }
         $.ajax({
             type: "POST",
             url: "../Process/Gridview",
@@ -524,8 +550,8 @@ function f_table_reload(v_obj) {
                         case "nhapkhos":
                             $("#page_duoc_nhapkho_ds").html(f_create_table_html(v_obj, result, "page_duoc_nhapkho_ds", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
                             $('#page_duoc_nhapkho_ds_gidview').DataTable();
-                            $('#page_duoc_nhapkho_ds_gidview').parent().css("overflow-x", "scroll");                            
-                            break;
+                            $('#page_duoc_nhapkho_ds_gidview').parent().css("overflow-x", "scroll");
+
                             if ($("#page_duoc_nhapkho_ct_idnhapkho_hidden").val() != "") {
                                 $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhos", "[]", "page_duoc_nhapkho_ct", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
                                 $('#page_duoc_nhapkho_ct_gidview').DataTable();
@@ -536,7 +562,8 @@ function f_table_reload(v_obj) {
                                 $('#page_duoc_nhapkho_ct_gidview').DataTable();
                                 $('#page_duoc_nhapkho_ct_gidview').parent().css("overflow-x", "scroll");
                             }
-                        case "nhapkhocts":                            
+                            break;
+                        case "nhapkhocts":
                             break;
                         default:
                             break;
@@ -657,10 +684,10 @@ function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer) {
         }
         for (var i = 0; i < v_col.split('~').length; i++) {
             if (i <= 0) {
-                rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
+                rhtml += "<th class=\"sorting_asc\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;vertical-align: middle;\" aria-sort=\"ascending\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column descending\">" + v_colname.split('~')[i] + "</th>";
             }
             else {
-                rhtml += "<th class=\"sorting\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column ascending\">" + v_colname.split('~')[i] + "</th>";
+                rhtml += "<th class=\"sorting\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;vertical-align: middle;\" aria-label=\"" + v_colname.split('~')[i] + ": activate to sort column ascending\">" + v_colname.split('~')[i] + "</th>";
             }
         }
         rhtml += "</tr>";
@@ -828,11 +855,11 @@ function f_save_data(v_url, v_data) {
                 switch (v_url) {
                     case "Savekho":
                         f_dmkho_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), 0, false);
-                        ms_enable_arr("page_duoc_khaibaokho_xoa", true);
+                        ms_enable_arr("page_duoc_khaibaokho_sua~page_duoc_khaibaokho_xoa", true);
                         break;
                     case "SaveThuoc":
                         f_dmthuoc_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), 0, false);
-                        ms_enable_arr("page_duoc_khaibaothuoc_xoa", true);
+                        ms_enable_arr("page_duoc_khaibaothuoc_sua~page_duoc_khaibaothuoc_xoa", true);
                         break;
                     default:
                         break;

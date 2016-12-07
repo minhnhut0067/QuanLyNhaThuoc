@@ -8,8 +8,8 @@
 <div class="container-fluid">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation"><a href="#chitiet" aria-controls="chitiet" role="tab" data-toggle="tab">Chi tiết phiếu</a></li>
-        <li role="presentation" class="active"><a href="#danhsach" aria-controls="danhsach" role="tab" data-toggle="tab">Danh sách phiếu nhập</a></li>
+        <li role="presentation"><a href="#chitiet" aria-controls="chitiet" role="tab" data-toggle="tab" onclick="f_tab_click(this, 'nhapkhos', false)">Chi tiết phiếu</a></li>
+        <li role="presentation" class="active"><a href="#danhsach" aria-controls="danhsach" role="tab" data-toggle="tab" onclick="f_tab_click(this, 'nhapkhos', true)">Danh sách phiếu nhập</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
@@ -138,7 +138,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px;padding: 0 30px;">
                     <div class="row">
                         <div class="row" id="@ViewData["page"]_ct_ds">
                             <div class="loader"></div>
@@ -252,7 +252,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6" style="margin-bottom:10px;">
                     <div class="input-group">
                         <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_ct_CK", "input", "Chiết khấu", ""));
+                            document.write(f_create_input("@ViewData["page"]_ct_ck", "input", "Chiết khấu", ""));
                         </script>
                     </div>
                 </div>
@@ -357,9 +357,12 @@
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        f_table_reload("nhapkhos");
         $("#page_duoc_nhapkho_tn").datepicker({ dateFormat: 'dd/mm/yy' });
         $("#page_duoc_nhapkho_dn").datepicker({ dateFormat: 'dd/mm/yy' });
+        var date = new Date();
+        $("#page_duoc_nhapkho_tn").val(ms_lpad(date.getDate(),2,'0') + "/" + ms_lpad(date.getMonth(),2,'0') + "/" + date.getFullYear());
+        $("#page_duoc_nhapkho_dn").val(ms_lpad(date.getDate(), 2, '0') + "/" + ms_lpad(date.getMonth(), 2, '0') + "/" + date.getFullYear());
+        f_table_reload("nhapkhos");        
     });
 </script>
 <script type="text/javascript" src="~/Scripts/Custom/Duoc.js"></script>

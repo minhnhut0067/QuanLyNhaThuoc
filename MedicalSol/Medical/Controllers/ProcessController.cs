@@ -104,9 +104,9 @@ namespace Medical.Controllers
             {
                 if (data.obj != null && data.key != null)
                 {
-                    if (data.Userid == null)
+                    if (data.userid == null)
                     {
-                        data.Userid = @Session["User_Id"].ToString();
+                        data.userid = @Session["User_Id"].ToString();
                     }
                     return JObject.Parse(Bridge.HttpPostApi("DelRecord", data))["result"].Value<string>();
                 }
@@ -126,16 +126,16 @@ namespace Medical.Controllers
         {
             try
             {
-                if(data.Userid == null)
+                if (data.userid == null)
                 {
-                    data.Userid = @Session["User_Id"].ToString();
+                    data.userid = @Session["User_Id"].ToString();
                 }
-                if (data.Obj != "")
+                if (data.obj != "")
                 {
                     List<Object> lts = new List<Object>();
                     foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Search", data)))
                     {
-                        switch (data.Obj)
+                        switch (data.obj)
                         {
                             case "khos":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Kho>(jo.ToString()));

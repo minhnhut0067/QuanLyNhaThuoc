@@ -15,6 +15,7 @@ namespace ApiManageSolution.Models
             public string obj { get; set; }
             public string col { get; set; }
             public string val { get; set; }
+            public string request { get; set; }
             public string userid { get; set; }
 
             public static IEnumerable<Object> Filter(Search data)
@@ -27,6 +28,7 @@ namespace ApiManageSolution.Models
                     {
                         v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
                     }
+                    //Filter loc
                     if (data.col != null && data.col.Split('~').Length > 0)
                     {
                         foreach (var item in data.col.Split('~'))
@@ -52,24 +54,48 @@ namespace ApiManageSolution.Models
                         case "khos":
                             return Khos.Get(v_conn, v_where);
                         case "lydonxs":
-                            return Lydonxs.Get(v_conn, v_where);
+                            return Lydonxs.Get("", v_where);
                         case "users":
                             return Users.Get(v_conn, v_where);
                         case "duongdungs":
-                            return Duongdungs.Get(v_conn, v_where);
+                            return Duongdungs.Get("", v_where);
                         case "dangbds":
-                            return Dangbds.Get(v_conn, v_where);
+                            return Dangbds.Get("", v_where);
                         case "donvis":
-                            return Donvis.Get(v_conn, v_where);
+                            return Donvis.Get("", v_where);
                         case "loaiduocs":
                             return Loaiduocs.Get(v_conn, v_where);
                         case "hangsxs":
-                            return Hangsxs.Get(v_conn, v_where);
+                            return Hangsxs.Get("", v_where);
                         case "quocgias":
-                            return Quocgias.Get(v_conn, v_where);
+                            return Quocgias.Get("", v_where);
                         case "dmphais":
-                            return Dmphais.Get(v_conn, v_where);
+                            return Dmphais.Get("", v_where);
                         case "nhapkhos":
+                            if (data.request != null && data.request != "")
+                            {
+                                v_where = "\nWHERE 1=1";
+                                if (data.request.Split('~')[0] != "")
+                                {
+                                    v_where += "\nAND a.idlydonx=" + data.request.Split('~')[0];
+                                }
+                                if (data.request.Split('~')[1] != "")
+                                {
+                                    v_where += "\nAND a.idkho=" + data.request.Split('~')[1];
+                                }
+                                if (data.request.Split('~')[2] != "")
+                                {
+                                    v_where += "\nAND a.userid=" + data.request.Split('~')[2];
+                                }
+                                if (data.request.Split('~')[3] != "")
+                                {
+                                    v_where += "\nAND to_char(a.ngay,'yyyymmdd') >= to_char(to_date('" + data.request.Split('~')[3] + "','dd/mm/yyyy'),'yyyymmdd')";
+                                }
+                                if (data.request.Split('~')[4] != "")
+                                {
+                                    v_where += "\nAND to_char(a.ngay,'yyyymmdd') <= to_char(to_date('" + data.request.Split('~')[4] + "','dd/mm/yyyy'),'yyyymmdd')";
+                                }
+                            }
                             return Nhapkhos.Get(v_conn, v_where);
                         case "thuocs":
                             return Thuocs.Get(v_conn, v_where);
@@ -101,14 +127,14 @@ namespace ApiManageSolution.Models
                 try
                 {
                     string v_conn = "";
-                    if(data.userid != null)
+                    if (data.userid != null)
                     {
                         v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
                     }
                     switch (data.obj)
                     {
                         case "khos":
-                            data.result =Khos.Getma(v_conn);
+                            data.result = Khos.Getma(v_conn);
                             break;
                         case "phongbans":
                             data.result = Phongbans.Getma(v_conn);
@@ -127,12 +153,40 @@ namespace ApiManageSolution.Models
                 }
             }
         }
-        public class Del
+        public class DelRecord
         {
             public string obj { get; set; }
             public string key { get; set; }
             public bool result { get; set; }
             public string userid { get; set; }
+            public static DelRecord Del(DelRecord data)
+            {
+                try
+                {
+                    switch (data.obj)
+                    {
+                        case "khos":
+                            data.result = Khos.Del(data);
+                            break;
+                        case "thuocs":
+                            data.result = Thuocs.Del(data);
+                            break;
+                        case "phongbans":
+                            data.result = Phongbans.Del(data);
+                            break;
+                        case "nhanviens":
+                            data.result = Nhanviens.Del(data);
+                            break;
+                        default:
+                            break;
+                    }
+                    return data;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
         }
         public class Users
         {
@@ -305,7 +359,7 @@ namespace ApiManageSolution.Models
                     return null;
                 }
             }
-            public static bool Del(Del data)
+            public static bool Del(DelRecord data)
             {
                 string v_conn = "";
                 if (data.userid != null)
@@ -314,7 +368,7 @@ namespace ApiManageSolution.Models
                 }
                 return Del(v_conn, data);
             }
-            public static bool Del(string v_conn, Del data)
+            public static bool Del(string v_conn, DelRecord data)
             {
                 try
                 {
@@ -418,10 +472,10 @@ namespace ApiManageSolution.Models
             public static IEnumerable<Khos> Upd(Khos data)
             {
                 string v_conn = "";
-                if(data.userid != null)
+                if (data.userid != null)
                 {
                     v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
-                }                    
+                }
                 return Upd(v_conn, data);
             }
             public static IEnumerable<Khos> Upd(string v_conn, Khos data)
@@ -467,7 +521,7 @@ namespace ApiManageSolution.Models
                     return null;
                 }
             }
-            public static bool Del(Del data)
+            public static bool Del(DelRecord data)
             {
                 string v_conn = "";
                 if (data.userid != null)
@@ -476,7 +530,7 @@ namespace ApiManageSolution.Models
                 }
                 return Del(v_conn, data);
             }
-            public static bool Del(string v_conn, Del data)
+            public static bool Del(string v_conn, DelRecord data)
             {
                 try
                 {
@@ -705,7 +759,7 @@ namespace ApiManageSolution.Models
                     sql = @"UPDATE dmduoc " +
                         "SET " +
                         "ma='" + data.ma + "'" +
-                        ",id_loaiduoc=" + data.id_loaiduoc + "" +
+                        ",idloaiduoc=" + data.id_loaiduoc + "" +
                         ",ten='" + data.ten + "'" +
                         ",dang='" + (data.dang == null ? "" : data.dang) + "'" +
                         ",hamluong='" + (data.hamluong == null ? "" : data.hamluong) + "'" +
@@ -713,15 +767,15 @@ namespace ApiManageSolution.Models
                         ",donvisd='" + (data.donvisd == null ? "" : data.donvisd) + "'" +
                         ",sodk='" + (data.sodk == null ? "" : data.sodk) + "'" +
                         ",atc='" + (data.atc == null ? "" : data.atc) + "'" +
-                        ",id_duongdung=" + (data.id_duongdung == null ? "0" : data.id_duongdung) + "" +
-                        ",id_hangsx=" + (data.id_hangsx == null ? "0" : data.id_hangsx) + "" +
-                        ",id_quocgia=" + (data.id_quocgia == null ? "0" : data.id_quocgia) + "" +
+                        ",idduongdung=" + (data.id_duongdung == null ? "0" : data.id_duongdung) + "" +
+                        ",idhangsx=" + (data.id_hangsx == null ? "0" : data.id_hangsx) + "" +
+                        ",idquocgia=" + (data.id_quocgia == null ? "0" : data.id_quocgia) + "" +
                         ",ngayud=now() " +
                         "WHERE id =" + data.id;
                     irec = dbHelper.ExecuteQuery(sql, v_conn);
                     if (irec == 0)
                     {
-                        sql = @"INSERT INTO dmduoc(id,ma,ten,id_loaiduoc,dang,hamluong,donvidg,donvisd,sodk,atc,id_duongdung,id_hangsx,id_quocgia) " +
+                        sql = @"INSERT INTO dmduoc(id,ma,ten,idloaiduoc,dang,hamluong,donvidg,donvisd,sodk,atc,idduongdung,idhangsx,idquocgia) " +
                             "VALUES(" + data.id + ",'" + data.ma + "','" + data.ten + "'," + data.id_loaiduoc + ",'" + (data.dang == null ? "" : data.dang) + "','" + (data.hamluong == null ? "" : data.hamluong) + "','" + (data.donvidg == null ? "" : data.donvidg) + "','" + (data.donvisd == null ? "" : data.donvisd) + "','" + (data.sodk == null ? "" : data.sodk) + "','" + (data.atc == null ? "" : data.atc) + "'," + (data.id_duongdung == null ? "0" : data.id_duongdung) + "," + (data.id_hangsx == null ? "0" : data.id_hangsx) + "," + (data.id_quocgia == null ? "0" : data.id_quocgia) + ") ";
                         irec = dbHelper.ExecuteQuery(sql, v_conn);
                     }
@@ -740,7 +794,7 @@ namespace ApiManageSolution.Models
                     return null;
                 }
             }
-            public static bool Del(Del data)
+            public static bool Del(DelRecord data)
             {
                 string v_conn = "";
                 if (data.userid != null)
@@ -749,7 +803,7 @@ namespace ApiManageSolution.Models
                 }
                 return Del(v_conn, data);
             }
-            public static bool Del(string v_conn, Del data)
+            public static bool Del(string v_conn, DelRecord data)
             {
                 try
                 {
@@ -1198,10 +1252,10 @@ namespace ApiManageSolution.Models
                     "\n, to_char(a.ngaytk,'dd/mm/yyyy') as ngaytk, a.ngayhd, a.ngaykk, ngaynhan, a.sophieu, a.chietkhau, a.chiphivc, a.miengiam1, a.miengiam2, miengiam3 " +
                     "\n, a.miengiam4, a.miengiam5, a.vat, a.sotien, a.sotienhd, a.nguoinhan, nguoigiao, a.noinhan, a.ghichu, a.tinhtrang, a.userid, e.hoten as userten, to_char(a.ngayud,'dd/mm/yyyy hh24:mi') as ngayud " +
                     "\nFROM nhapkho a " +
-                    "\nLEFT JOIN dmlydonx b ON b.id = a.idlydonx " +
-                    "\nLEFT JOIN dmnhacc c ON c.id = a.idnhacc " +
+                    "\nLEFT JOIN dmlydonx@root b ON b.id = a.idlydonx " +
+                    "\nLEFT JOIN dmnhacc@root c ON c.id = a.idnhacc " +
                     "\nLEFT JOIN dmkho d ON d.id = a.idkho " +
-                    "\nLEFT JOIN users e ON e.id = a.userid "
+                    "\nLEFT JOIN users@root e ON e.id = a.userid "
                     + v_where;
 
                     //+ "\nLIMIT 50";
@@ -1380,7 +1434,7 @@ namespace ApiManageSolution.Models
                     return null;
                 }
             }
-            public static bool Del(Del data)
+            public static bool Del(DelRecord data)
             {
                 string v_conn = "";
                 if (data.userid != null)
@@ -1389,7 +1443,7 @@ namespace ApiManageSolution.Models
                 }
                 return Del(v_conn, data);
             }
-            public static bool Del(string v_conn, Del data)
+            public static bool Del(string v_conn, DelRecord data)
             {
                 try
                 {
@@ -1546,16 +1600,16 @@ namespace ApiManageSolution.Models
                     return null;
                 }
             }
-            public static bool Del(Del data)
+            public static bool Del(DelRecord data)
             {
                 string v_conn = "";
-                if(data.userid != null)
+                if (data.userid != null)
                 {
                     v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
                 }
                 return Del(v_conn, data);
             }
-            public static bool Del(string v_conn, Del data)
+            public static bool Del(string v_conn, DelRecord data)
             {
                 try
                 {

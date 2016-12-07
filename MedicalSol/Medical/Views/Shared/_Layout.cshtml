@@ -33,7 +33,7 @@
 <body class="home-bg">
 @*<body>*@
     <div class="container-fluid" style="padding:0">
-        <div class="row">
+        <div class="row" style="margin:0;">
             <div id="notice" class="alert col-lg-12 col-md-12 col-sm-12 col-xs-12 fade" style="position:fixed; top:0; z-index:101">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
@@ -49,11 +49,11 @@
                 @RenderBody()
             </div>
         </div>
-        <div class="row" style="background-color:#fff; min-height:100px;">
+        @*<div class="row" style="background-color:#fff; min-height:100px;">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="">
                 <span>Cpyright†Thi đầu bò</span>
             </div>
-        </div>
+        </div>*@
     </div>
     @RenderSection("scripts", required: false)
 </body>

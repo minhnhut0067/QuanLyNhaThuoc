@@ -26,6 +26,10 @@ namespace ApiManageSolution.Models
         public static DataSet getDataSetbySql(string SqlQuery, string connstr)
         {            
             DataSet ds = new DataSet();
+            if(connstr=="" || connstr == null)
+            {
+                connstr = ConnectionStringDefault;
+            }
             try
             {
                 using (NpgsqlConnection conn = new NpgsqlConnection(connstr))

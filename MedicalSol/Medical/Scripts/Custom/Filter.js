@@ -23,6 +23,7 @@ function ms_create_filter() {
         ms_satt(g_filter_display_ct, "class", "ms_form_dg");
         ms_sval(g_filter_display_ct, "className", "ms_form_dg");
         ms_gobj(g_filter_display_ct).style.display = "none";
+        ms_sval(g_filter_display_ct, "onMouseover", "alert('OK')");
     }
 }
 function ms_filter_hide() {
