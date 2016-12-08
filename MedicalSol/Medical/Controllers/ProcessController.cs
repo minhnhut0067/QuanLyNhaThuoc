@@ -55,8 +55,17 @@ namespace Medical.Controllers
                             case "hangsxs":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Hangsx>(jo.ToString()));
                                 break;
+                            case "nhaccs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Nhacc>(jo.ToString()));
+                                break;
+                            case "dmhcs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Dmhc>(jo.ToString()));
+                                break;
                             case "quocgias":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Quocgia>(jo.ToString()));
+                                break;
+                            case "thuocs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Thuoc>(jo.ToString()));
                                 break;
                             default:
                                 break;
@@ -200,6 +209,29 @@ namespace Medical.Controllers
                 foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Thuocs", data)))
                 {
                     lts.Add(JsonConvert.DeserializeObject<Data.Thuoc>(jo.ToString()));
+                }
+                Data.AjaxData ajaxdata = new Data.AjaxData(lts);
+                return new JavaScriptSerializer().Serialize(ajaxdata);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+        [HttpPost]
+        public string SaveNhapkho(Data.NhapAll data)
+        {
+            try
+            {
+                if (data.userid == null)
+                {
+                    data.userid = @Session["User_Id"].ToString();
+                }
+                List<Object> lts = new List<Object>();
+                foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("nhapkhos", data)))
+                {
+                    lts.Add(JsonConvert.DeserializeObject<Data.Nhapkho>(jo.ToString()));
                 }
                 Data.AjaxData ajaxdata = new Data.AjaxData(lts);
                 return new JavaScriptSerializer().Serialize(ajaxdata);

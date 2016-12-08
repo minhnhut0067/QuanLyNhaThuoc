@@ -22,8 +22,11 @@ $(document).ready(function () {
 
     $("a.input-datepicker").on("click", function () {
         ms_filter_hide();
-        var id = $(this)[0].id.replace("_datepicker", "");
-        $("#" + id).datepicker("show");
+        if($(this).hasClass("input-datepicker"))
+        {
+            var id = $(this)[0].id.replace("_datepicker", "");
+            $("#" + id).datepicker("show");
+        }
     });
     //$(".ui-datepicker-calendar > tbody > tr > td").on("click", function () {
     //    debugger;
@@ -432,8 +435,12 @@ function ms_enable(v_id, v_bool) {
     try {
         ms_gobj(v_id).disabled = !v_bool;
         ms_sval(v_id, "className", ms_gval(v_id, "className", "").replace("_dis", "") + (ms_gobj(v_id).disabled ? "_dis" : ""));
+
         ms_sval(v_id + "_filter", "className", ms_gval(v_id + "_filter", "className", "").replace("_dis", "") + (ms_gobj(v_id).disabled ? "_dis" : ""));
         ms_sval(v_id + "_filter", "onClick", "return false;")
+
+        ms_sval(v_id + "_datepicker", "className", ms_gval(v_id + "_datepicker", "className", "").replace("_dis", "") + (ms_gobj(v_id).disabled ? "_dis" : ""));
+        ms_sval(v_id + "_datepicker", "onClick", "return false;")
         return true;
     }
     catch (ex) {
@@ -614,7 +621,7 @@ function f_create_input(v_id, v_type, v_name, v_style) {
                 case "datepicker":
                     rhtml = "<div class=\"input-group date\">";
                     rhtml += "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_input_label\" style=\"\">" + v_name + "</span>";
-                    rhtml += "<input type=\"text\" class=\"form-control input-sm\" id=\"" + v_id + "\" placeholder=\"" + v_name + "\"/>";
+                    rhtml += "<input type=\"text\" class=\"form-control input-sm\" id=\"" + v_id + "\" placeholder=\"" + v_name + "\"onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\"/>";
                     rhtml += "<a class=\"input-group-addon input-datepicker\" id=\"" + v_id + "_datepicker\" href=\"#\"><i class=\"fa fa-calendar\"></i></a>";
                     rhtml += "</div>";
                     break;
@@ -795,8 +802,17 @@ function f_filter_select(v_data) {
                     case "hangsxs":
                         f_filter_hangsx_callback(JSON.parse(result));
                         break;
+                    case "nhaccs":
+                        f_filter_nhacc_callback(JSON.parse(result));
+                        break;
+                    case "dmhcs":
+                        f_filter_hoatchat_callback(JSON.parse(result));
+                        break;
                     case "quocgias":
                         f_filter_quocgia_callback(JSON.parse(result));
+                        break;
+                    case "thuocs":
+                        f_filter_thuoc_callback(JSON.parse(result));
                         break;
                     default:
                         break;
@@ -828,11 +844,20 @@ function f_filter_select(v_data) {
                     case "loaiduocs":
                         f_filter_loaiduoc_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
-                    case "hangsx":
+                    case "hangsxs":
                         f_filter_hangsx_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "nhaccs":
+                        f_filter_nhacc_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "dmhcs":
+                        f_filter_nhacc_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
                     case "quocgias":
                         f_filter_quocgia_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "thuocs":
+                        f_filter_thuoc_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
                     default:
                         break;
@@ -860,6 +885,10 @@ function f_save_data(v_url, v_data) {
                     case "SaveThuoc":
                         f_dmthuoc_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), 0, false);
                         ms_enable_arr("page_duoc_khaibaothuoc_sua~page_duoc_khaibaothuoc_xoa", true);
+                        break;
+                    case "SaveNhapkho":
+                        f_ctnhapkho_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), 0, false);
+                        ms_enable_arr("page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_xoa", true);
                         break;
                     default:
                         break;

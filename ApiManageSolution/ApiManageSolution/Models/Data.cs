@@ -67,6 +67,10 @@ namespace ApiManageSolution.Models
                             return Loaiduocs.Get(v_conn, v_where);
                         case "hangsxs":
                             return Hangsxs.Get("", v_where);
+                        case "nhaccs":
+                            return Nhaccs.Get("", v_where);
+                        case "dmhcs":
+                            return Dmhcs.Get("", v_where);
                         case "quocgias":
                             return Quocgias.Get("", v_where);
                         case "dmphais":
@@ -1069,6 +1073,86 @@ namespace ApiManageSolution.Models
                 }
             }
         }
+        public class Nhaccs
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Nhaccs> Get(string v_where)
+            {
+                return Get("", v_where);
+            }
+            public static IEnumerable<Nhaccs> Get(string v_conn, string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Nhaccs> lts = new List<Nhaccs>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.ten "
+                    + "\nFROM dmnhacc a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Nhaccs item = new Nhaccs();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+        public class Dmhcs
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Dmhcs> Get(string v_where)
+            {
+                return Get("", v_where);
+            }
+            public static IEnumerable<Dmhcs> Get(string v_conn, string v_where)
+            {
+                try
+                {
+                    DataSet ds = new DataSet();
+                    List<Dmhcs> lts = new List<Dmhcs>();
+                    string sql = "";
+                    sql = "SELECT a.id,a.ma,a.ten "
+                    + "\nFROM dmhc a" + v_where;
+                    //+ "\nLIMIT 50";
+
+                    ds = dbHelper.getDataSetbySql(sql, v_conn);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Dmhcs item = new Dmhcs();
+                            item.id = dr["id"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.ten = dr["ten"].ToString();
+                            lts.Add(item);
+                        }
+                    }
+                    return lts;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
         public class Quocgias
         {
             public string id { get; set; }
@@ -1122,7 +1206,6 @@ namespace ApiManageSolution.Models
             public string ngaysx { get; set; }
             public string handung { get; set; }
             public string baohanh { get; set; }
-            public string numeric { get; set; }
             public string vat { get; set; }
             public string chietkhau { get; set; }
             public string soluongdg { get; set; }
@@ -1154,8 +1237,8 @@ namespace ApiManageSolution.Models
                     "\n, a.soluongdg, a.soluongsd, a.soluongn, a.soluongx, a.dongia, a.dongiavat, a.sotien, a.sotienvat, a.ghichu, a.tinhtrang, a.userid, d.hoten as userten, a.ngayud, a.soluongyeucau" +
                     "\nFROM nhapkhoct a" +
                     "\nLEFT JOIN dmduoc b ON b.id = a.idduoc" +
-                    "\nLEFT JOIN dmnguon c ON c.id = a.idnguon" +
-                    "\nLEFT JOIN users d ON c.id = a.userid"
+                    "\nLEFT JOIN dmnguon@root c ON c.id = a.idnguon" +
+                    "\nLEFT JOIN users@root d ON c.id = a.userid"
                     + v_where;
                     ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -1174,7 +1257,6 @@ namespace ApiManageSolution.Models
                             item.ngaysx = dr["ngaysx"].ToString();
                             item.handung = dr["handung"].ToString();
                             item.baohanh = dr["baohanh"].ToString();
-                            item.numeric = dr["numeric"].ToString();
                             item.vat = dr["vat"].ToString();
                             item.chietkhau = dr["chietkhau"].ToString();
                             item.soluongdg = dr["soluongdg"].ToString();
@@ -1201,6 +1283,122 @@ namespace ApiManageSolution.Models
                     return null;
                 }
 
+            }
+            public static string Getid(string v_conn)
+            {
+                try
+                {
+                    string sql = "select to_char(now(),'yymmddhh24mi')||lpad(case when count(id) > 0 then to_char(max(to_number(right(id,5))) + 1) else '1' end ,5,'0') as id from nhapkhoct";
+
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["id"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static IEnumerable<Nhapkhocts> Upd(NhapAlls data)
+            {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Upd(v_conn, data);
+            }
+            public static IEnumerable<Nhapkhocts> Upd(string v_conn, NhapAlls data)
+            {
+                try
+                {
+                    var sql = "";
+                    var irec = 0;
+                    string v_id = Getid(v_conn);
+                    if (data.dongia != null)
+                    {
+                        data.dongiavat = (decimal.Parse(data.dongia) + decimal.Parse(data.dongia) * decimal.Parse(data.vat) / 100).ToString();
+                    }
+                    string v_sotien = (data.dongia == null && data.soluongn == null ? 0 : decimal.Parse(data.soluongn) * decimal.Parse(data.dongia)).ToString();
+                    string v_sotienvat = (data.dongiavat == null && data.soluongn == null ? 0 : decimal.Parse(data.soluongn) * decimal.Parse(data.dongiavat)).ToString();
+                    sql = @"UPDATE nhapkhoct " +
+                        "SET " +
+                        "idnhapkho=" + data.idnhapkho + "" +
+                        ",idduoc=" + data.idduoc + "" +
+                        ",idnguon='" + (data.idnguon == null ? "" : data.idnguon) + "'" +
+                        ",mavach='" + (data.mavach == null ? "" : data.mavach) + "'" +
+                        ",losx='" + (data.losx == null ? "" : data.losx) + "'" +
+                        ",ngaysx='" + (data.ngaysx == null ? "" : data.ngaysx) + "'" +
+                        ",handung='" + (data.handung == null ? "" : data.handung) + "'" +
+                        ",baohanh='" + (data.baohanh == null ? "" : data.baohanh) + "'" +
+                        ",vat=" + (data.vat == null ? "0" : data.vat) + "" +
+                        ",chietkhau=" + (data.chietkhau == null ? "0" : data.chietkhau) + "" +
+                        ",soluongdg=" + (data.soluongdg == null ? "0" : data.soluongdg) + "" +
+                        ",soluongsd=" + (data.soluongsd == null ? "0" : data.soluongsd) + "" +
+                        ",soluongn=" + (data.soluongn == null ? "0" : data.soluongn) + "" +
+                        ",dongia=" + (data.dongia == null ? 0 : decimal.Parse(data.dongia)) + "" +
+                        ",dongiavat=" + data.dongiavat + "" +
+                        ",sotien=" + v_sotien + "" +
+                        ",sotienvat=" + v_sotienvat + "" +
+                        ",ghichu=" + (data.ghichu == null ? "" : data.ghichu) + "" +
+                        ",ngayud=now() " +
+                        "WHERE id =" + v_id;
+                    irec = dbHelper.ExecuteQuery(sql, v_conn);
+                    if (irec == 0)
+                    {
+                        sql = @"INSERT INTO nhapkhoct(id, idnhapkho, idduoc, idnguon, mavach, losx, ngaysx, handung, baohanh, vat, chietkhau, soluongdg" +
+                            ", soluongsd, soluongn, dongia, dongiavat, sotien, sotienvat, ghichu) " +
+                            "VALUES(" + v_id + "," + data.idnhapkho + "," + data.idduoc + "," + (data.idnguon == null ? 0 : decimal.Parse(data.idnguon)) + ",'" + data.mavach + "','" + data.losx + "','"
+                            + data.ngaysx + "','" + data.handung + "'," + (data.baohanh == null ? 0 : decimal.Parse(data.baohanh)) + "," + data.vat + "," + data.chietkhau + "," + data.soluongdg + "" +
+                            "," + data.soluongsd + "," + data.soluongn + "," + data.dongia + "," + data.dongiavat + "," + v_sotien + "," + v_sotienvat + ",'" + data.ghichu + "') ";
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
+                    }
+                    if (irec == 1)
+                    {
+                        return Get(v_conn, "\nWHERE a.id=" + v_id);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            public static bool Del(DelRecord data)
+            {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Del(v_conn, data);
+            }
+            public static bool Del(string v_conn, DelRecord data)
+            {
+                try
+                {
+                    if (data.obj != null && data.obj != "")
+                    {
+                        var sql = "";
+                        var irec = 0;
+                        sql = "delete nhapkhoct where id =" + data.key;
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
+                        if (irec == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
         public class Nhapkhos
@@ -1304,6 +1502,198 @@ namespace ApiManageSolution.Models
                     return lts;
                 }
                 catch
+                {
+                    return null;
+                }
+            }
+            public static string Getid(string v_conn)
+            {
+                try
+                {
+                    string sql = "select to_char(now(),'yymmddhh24mi')||lpad(case when count(id) > 0 then to_char(max(to_number(right(id,5))) + 1) else '1' end ,5,'0') as id from nhapkho";
+
+                    return dbHelper.getDataSetbySql(sql, v_conn) != null && dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows.Count > 0 ? dbHelper.getDataSetbySql(sql, v_conn).Tables[0].Rows[0]["id"].ToString() : "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+            public static IEnumerable<Nhapkhos> Upd(NhapAlls data)
+            {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Upd(v_conn, data);
+            }
+            public static IEnumerable<Nhapkhos> Upd(string v_conn, NhapAlls data)
+            {
+                try
+                {
+                    var sql = "";
+                    var irec = 0;
+                    if (data.idnhapkho == null)
+                    {
+                        data.idnhapkho = Getid(v_conn);
+                    }
+
+                    sql = @"UPDATE nhapkho " +
+                        "SET " +
+                        "id=" + data.idnhapkho + "" +
+                        ",idlydonx=" + data.idlydonx + "" +
+                        ",idnhacc=" + data.idnhacc + "" +
+                        ",idkho=" + data.idkho + "" +
+                        ",ngay='" + (data.ngay == null ? "now()" : "to_date('" + data.ngay + "','dd/mm/yyyy')") + "'" +
+                        ",ngaytk='" + (data.ngaytk == null ? "now()" : "to_date('" + data.ngaytk + "','dd/mm/yyyy')") + "'" +
+                        ",ngayhd='" + (data.ngayhd == null ? "" : data.ngayhd) + "'" +
+                        ",ngaykk='" + (data.ngaykk == null ? "" : data.ngaykk) + "'" +
+                        ",ngaynhan='" + (data.ngaynhan == null ? "" : data.ngaynhan) + "'" +
+                        ",sophieu='" + (data.sophieu == null ? "0" : data.sophieu) + "'" +
+                        ",chietkhau=" + (data.chietkhau == null ? "0" : data.chietkhau) + "" +
+                        ",chiphivc=" + (data.chiphivc == null ? "0" : data.chiphivc) + "" +
+                        ",vat=" + (data.vat == null ? "0" : data.vat) + "" +
+                        //",sotien=" + (data.sotien == null ? "0" : data.sotien) + "" +
+                        //",sotienhd=" + (data.sotienhd == null ? "0" : data.sotienhd) + "" +
+                        ",nguoinhan=" + (data.nguoinhan == null ? "0" : data.nguoinhan) + "" +
+                        ",nguoigiao=" + (data.nguoigiao == null ? "0" : data.nguoigiao) + "" +
+                        ",ngayud=now() " +
+                        "WHERE id =" + data.idnhapkho;
+                    irec = dbHelper.ExecuteQuery(sql, v_conn);
+                    if (irec == 0)
+                    {
+                        sql = @"INSERT INTO nhapkho(id, idlydonx, idnhacc, idkho, ngay, ngaytk, ngayhd, ngaykk, ngaynhan, sophieu, chietkhau, chiphivc" +
+                            ", vat, nguoinhan, nguoigiao) " +
+                            "VALUES(" + data.idnhapkho + "," + data.idlydonx + "," + data.idnhacc + "," + data.idkho + "," + (data.ngay == null ? "now()" : "to_date('" + data.ngay + "','dd/mm/yyyy')") + "," + (data.ngaytk == null ? "now()" : "to_date('" + data.ngaytk + "','dd/mm/yyyy')") + "" +
+                            ",'" + data.ngayhd + "','" + data.ngaykk + "','" + data.ngaynhan + "','" + data.sophieu + "'," + data.chietkhau + "," + (data.chiphivc == null ? 0 : decimal.Parse(data.chiphivc)) + "" +
+                        "," + data.vat + ",'" + data.nguoinhan + "','" + data.nguoigiao + "') ";
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
+                    }
+                    if (irec == 1)
+                    {
+                        IEnumerable<Nhapkhocts> lts = Nhapkhocts.Upd(data);
+                        return Get(v_conn, "\nWHERE a.id=" + data.idnhapkho);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            public static bool Del(DelRecord data)
+            {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Del(v_conn, data);
+            }
+            public static bool Del(string v_conn, DelRecord data)
+            {
+                try
+                {
+                    if (data.obj != null && data.obj != "")
+                    {
+                        var sql = "";
+                        var irec = 0;
+                        sql = "delete nhapkhoct where idnhapkho =" + data.key;
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
+                        sql = "delete nhapkho where id =" + data.key;
+                        irec = dbHelper.ExecuteQuery(sql, v_conn);
+                        if (irec == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+        public class NhapAlls
+        {
+            public string idnhapkho { get; set; }
+            public string idlydonx { get; set; }
+            public string idnhacc { get; set; }
+            public string idkho { get; set; }
+            public string ngay { get; set; }
+            public string ngaytk { get; set; }
+            public string ngayhd { get; set; }
+            public string sohd { get; set; }
+            public string ngaykk { get; set; }
+            public string ngaynhan { get; set; }
+            public string sophieu { get; set; }
+            public string chietkhau { get; set; }
+            public string chiphivc { get; set; }
+            public string miengiam1 { get; set; }
+            public string miengiam2 { get; set; }
+            public string miengiam3 { get; set; }
+            public string miengiam4 { get; set; }
+            public string miengiam5 { get; set; }
+            public string nguoinhan { get; set; }
+            public string nguoigiao { get; set; }
+            public string noinhan { get; set; }
+            public string ghichu { get; set; }
+            public string tinhtrang { get; set; }
+            public string userid { get; set; }
+            public string idduoc { get; set; }
+            public string idnguon { get; set; }
+            public string mavach { get; set; }
+            public string losx { get; set; }
+            public string ngaysx { get; set; }
+            public string handung { get; set; }
+            public string baohanh { get; set; }
+            public string vat { get; set; }
+            public string soluongdg { get; set; }
+            public string soluongsd { get; set; }
+            public string soluongn { get; set; }
+            public string soluongx { get; set; }
+            public string dongia { get; set; }
+            public string dongiavat { get; set; }
+            public static IEnumerable<Nhapkhos> Upd(NhapAlls data)
+            {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Upd(v_conn, data);
+            }
+            public static IEnumerable<Nhapkhos> Upd(string v_conn, NhapAlls data)
+            {
+                try
+                {
+                    //var sql = "";
+                    //var irec = 0;
+                    return Nhapkhos.Upd(data);
+                    //if (data.idnhapkho == null)
+                    //{
+                    //    IEnumerable<Nhapkhos> dsnhapkho = Nhapkhos.Upd(data);
+                    //}
+                    //if (irec == 1)
+                    //{
+                    //    return Nhapkhos.Get(v_conn, "\nWHERE a.id=" + data.idnhapkho);
+                    //}
+                    //else
+                    //{
+                    //    return null;
+                    //}
+
+                }
+                catch (Exception ex)
                 {
                     return null;
                 }
