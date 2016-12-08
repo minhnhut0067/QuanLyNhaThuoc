@@ -339,6 +339,70 @@ namespace Medical.Models
                 }
             }
         }
+        public class Nhacc
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Nhacc> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("hangsxs"));
+            }
+            public static IEnumerable<Nhacc> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Nhacc> lts = new List<Nhacc>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Nhacc lydo = new Nhacc();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        lts.Add(lydo);
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        public class Dmhc
+        {
+            public string id { get; set; }
+            public string ma { get; set; }
+            public string ten { get; set; }
+            public static IEnumerable<Dmhc> GetAllObj()
+            {
+                return GetAllObj(Bridge.HttpGetApi("dmhcs"));
+            }
+            public static IEnumerable<Dmhc> GetAllObj(string value)
+            {
+                try
+                {
+                    //var value = Bridge.HttpGetApi("lydonxs");
+                    List<Dmhc> lts = new List<Dmhc>();
+                    var jarr = JArray.Parse(value);
+                    foreach (dynamic item in jarr)
+                    {
+                        Dmhc lydo = new Dmhc();
+                        lydo.id = item.id;
+                        lydo.ma = item.ma;
+                        lydo.ten = item.ten;
+                        lts.Add(lydo);
+                    }
+                    return lts;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
         public class Quocgia
         {
             public string id { get; set; }
@@ -634,6 +698,47 @@ namespace Medical.Models
                 dmkho = _kho;
             }
         }
+        public class NhapAll
+        {
+            public string idnhapkho { get; set; }
+            public string idlydonx { get; set; }
+            public string idnhacc { get; set; }
+            public string idkho { get; set; }
+            public string ngay { get; set; }
+            public string ngaytk { get; set; }
+            public string ngayhd { get; set; }
+            public string sohd { get; set; }
+            public string ngaykk { get; set; }
+            public string ngaynhan { get; set; }
+            public string sophieu { get; set; }
+            public string chietkhau { get; set; }
+            public string chiphivc { get; set; }
+            public string miengiam1 { get; set; }
+            public string miengiam2 { get; set; }
+            public string miengiam3 { get; set; }
+            public string miengiam4 { get; set; }
+            public string miengiam5 { get; set; }
+            public string nguoinhan { get; set; }
+            public string nguoigiao { get; set; }
+            public string noinhan { get; set; }
+            public string ghichu { get; set; }
+            public string tinhtrang { get; set; }
+            public string userid { get; set; }
+            public string idduoc { get; set; }
+            public string idnguon { get; set; }
+            public string mavach { get; set; }
+            public string losx { get; set; }
+            public string ngaysx { get; set; }
+            public string handung { get; set; }
+            public string baohanh { get; set; }
+            public string vat { get; set; }
+            public string soluongdg { get; set; }
+            public string soluongsd { get; set; }
+            public string soluongn { get; set; }
+            public string soluongx { get; set; }
+            public string dongia { get; set; }
+            public string dongiavat { get; set; }
+        }
         public class Nhapkhoct
         {
             public string id { get; set; }
@@ -647,7 +752,6 @@ namespace Medical.Models
             public string ngaysx { get; set; }
             public string handung { get; set; }
             public string baohanh { get; set; }
-            public string numeric { get; set; }
             public string vat { get; set; }
             public string chietkhau { get; set; }
             public string soluongdg { get; set; }
@@ -702,7 +806,6 @@ namespace Medical.Models
                         obj.ngaysx = item.ngaysx;
                         obj.handung = item.handung;
                         obj.baohanh = item.baohanh;
-                        obj.numeric = item.numeric;
                         obj.vat = item.vat;
                         obj.chietkhau = item.chietkhau;
                         obj.soluongdg = item.soluongdg;

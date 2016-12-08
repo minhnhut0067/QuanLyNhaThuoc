@@ -12,7 +12,7 @@ var filter_ds = null;
 var khaibaokho_input = "page_duoc_khaibaokho_ma~page_duoc_khaibaokho_ten~page_duoc_khaibaokho_nhomkho~page_duoc_khaibaokho_ghichu";
 var khaibaothuoc_input = "page_duoc_khaibaothuoc_ma~page_duoc_khaibaothuoc_ten~page_duoc_khaibaothuoc_sodk~page_duoc_khaibaothuoc_atccode~page_duoc_khaibaothuoc_hamluong~page_duoc_khaibaothuoc_duongdung~page_duoc_khaibaothuoc_dang~page_duoc_khaibaothuoc_dvt~page_duoc_khaibaothuoc_donvisd~page_duoc_khaibaothuoc_loaiduoc~page_duoc_khaibaothuoc_hangsx~page_duoc_khaibaothuoc_quocgia~page_duoc_khaibaothuoc_thanhphan~page_duoc_khaibaothuoc_hoatchat";
 var dsnhapkho_input = "page_duoc_nhapkho_lydo~page_duoc_nhapkho_kho~page_duoc_nhapkho_tn~page_duoc_nhapkho_dn~page_duoc_nhapkho_nhanvien";
-var ctnhapkho_input = "page_duoc_nhapkho_ct_ngay~page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat";
+var ctnhapkho_input = "page_duoc_nhapkho_ct_ngay~page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat";
 //Filter-End
 
 function f_filter_nhomkho_show(v_id_active) {
@@ -316,6 +316,72 @@ function f_filter_hangsx_selected() {
 }
 
 
+function f_filter_nhacc_show(v_id_active) {
+    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
+    ms_filter_show(v_id_active, "0", "f_filter_nhacc", "1", "id", v_id_active, "ten", "f_filter_nhacc_selected");
+}
+
+function f_filter_nhacc() {
+    var atext = ms_gval(g_filter_active_ct, "value", "");
+    if (atext != null) {
+        var data = {
+            Obj: "nhaccs",
+            Col: "ma~ten",
+            Val: atext
+        };
+        g_filter_cur_val = atext;
+        f_filter_select(data);
+    }
+}
+
+function f_filter_nhacc_callback(v_ds) {//res
+
+    if (ms_gobj(g_filter_active_ct) != null) {
+        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
+            f_filter_nhacc();
+            return;
+        }
+    }
+    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
+    //g_filter_cur_val = "";
+}
+
+function f_filter_nhacc_selected() {
+}
+
+
+function f_filter_hoatchat_show(v_id_active) {
+    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
+    ms_filter_show(v_id_active, "0", "f_filter_hoatchat", "1", "id", v_id_active, "ten", "f_filter_hoatchat_selected");
+}
+
+function f_filter_hoatchat() {
+    var atext = ms_gval(g_filter_active_ct, "value", "");
+    if (atext != null) {
+        var data = {
+            Obj: "dmhcs",
+            Col: "ma~ten",
+            Val: atext
+        };
+        g_filter_cur_val = atext;
+        f_filter_select(data);
+    }
+}
+
+function f_filter_hoatchat_callback(v_ds) {//ress
+    if (ms_gobj(g_filter_active_ct) != null) {
+        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
+            f_filter_hoatchat();
+            return;
+        }
+    }
+    ms_filter_load(v_ds, "ma~ten", "Mã~Tên");
+}
+
+function f_filter_hoatchat_selected() {
+}
+
+
 function f_filter_quocgia_show(v_id_active) {
     strdatafilter = ms_gval(v_id_active + "_val", "value", "");
     ms_filter_show(v_id_active, "0", "f_filter_quocgia", "1", "id", v_id_active, "ten", "f_filter_quocgia_selected");
@@ -349,6 +415,39 @@ function f_filter_quocgia_selected() {
 }
 
 
+function f_filter_thuoc_show(v_id_active) {
+    strdatafilter = ms_gval(v_id_active + "_val", "value", "");
+    ms_filter_show(v_id_active, "0", "f_filter_thuoc", "1", "id", v_id_active, "ten", "f_filter_thuoc_selected");
+}
+
+function f_filter_thuoc() {
+    var atext = ms_gval(g_filter_active_ct, "value", "");
+    if (atext != null) {
+        var data = {
+            Obj: "thuocs",
+            Col: "sodk~ma~ten",
+            Val: atext
+        };
+        g_filter_cur_val = atext;
+        f_filter_select(data);
+    }
+}
+
+function f_filter_thuoc_callback(v_ds) {//res
+
+    if (ms_gobj(g_filter_active_ct) != null) {
+        if (g_filter_cur_val != ms_gobj(g_filter_active_ct).value) {
+            f_filter_thuoc();
+            return;
+        }
+    }
+    ms_filter_load(v_ds, "sodk~ma~ten", "Số ĐK~Mã~Tên");
+}
+
+function f_filter_thuoc_selected() {
+}
+
+
 function filter_click(v_this) {
     try {
         var aid = v_this.id;
@@ -375,17 +474,19 @@ function filter_click(v_this) {
                 ms_filter_hide();
                 f_filter_dang_show(aid);
                 break;
-
+            case "page_duoc_nhapkho_ct_donvisd":
             case "page_duoc_khaibaothuoc_dvt":
             case "page_duoc_khaibaothuoc_donvisd":
                 ms_filter_hide();
                 f_filter_donvi_show(aid);
                 break;
-                //nhapkho
+                //nhapkho                
+            case "page_duoc_nhapkho_ct_lydo":
             case "page_duoc_nhapkho_lydo":
                 ms_filter_hide();
                 f_filter_lydo_show(aid);
                 break;
+            case "page_duoc_nhapkho_ct_kho":
             case "page_duoc_nhapkho_kho":
                 ms_filter_hide();
                 f_filter_kho_show(aid);
@@ -398,6 +499,7 @@ function filter_click(v_this) {
                 ms_filter_hide();
                 f_filter_loaiduoc_show(aid);
                 break;
+            case "page_duoc_nhapkho_ct_hangsx":
             case "page_duoc_khaibaothuoc_hangsx":
                 ms_filter_hide();
                 f_filter_hangsx_show(aid);
@@ -405,6 +507,18 @@ function filter_click(v_this) {
             case "page_duoc_khaibaothuoc_quocgia":
                 ms_filter_hide();
                 f_filter_quocgia_show(aid);
+                break;
+            case "page_duoc_nhapkho_ct_nhacc":
+                ms_filter_hide();
+                f_filter_nhacc_show(aid);
+                break;
+            case "page_duoc_nhapkho_ct_hoatchat":
+                ms_filter_hide();
+                f_filter_hoatchat_show(aid);
+                break;
+            case "page_duoc_nhapkho_ct_tenthuoc":
+                ms_filter_hide();
+                f_filter_thuoc_show(aid);
                 break;
             default:
                 alert(aid);
@@ -534,8 +648,8 @@ function input_keyup(event, v_this) {
                     f_filter_dang_show(aid_active);
                     break;
             }
-            break;
-
+            break;            
+        case "page_duoc_nhapkho_ct_donvisd":
         case "page_duoc_khaibaothuoc_dvt":
         case "page_duoc_khaibaothuoc_donvisd":
             aid_active = v_this.id;
@@ -607,6 +721,7 @@ function input_keyup(event, v_this) {
                     break;
             }
             break;
+        case "page_duoc_nhapkho_ct_hangsx":
         case "page_duoc_khaibaothuoc_hangsx":
             aid_active = v_this.id;
             switch (keyCode.toString()) {
@@ -677,6 +792,7 @@ function input_keyup(event, v_this) {
                     break;
             }
             break;
+        case "page_duoc_nhapkho_ct_lydo":
         case "page_duoc_nhapkho_lydo":
             aid_active = v_this.id;
             switch (keyCode.toString()) {
@@ -712,6 +828,7 @@ function input_keyup(event, v_this) {
                     break;
             }
             break;
+        case "page_duoc_nhapkho_ct_kho":
         case "page_duoc_nhapkho_kho":
             aid_active = v_this.id;
             switch (keyCode.toString()) {
@@ -779,6 +896,111 @@ function input_keyup(event, v_this) {
                 case "32"://Space
                 default:
                     f_filter_nhanvien_show(aid_active);
+                    break;
+            }
+            break;
+        case "page_duoc_nhapkho_ct_nhacc":
+            aid_active = v_this.id;
+            switch (keyCode.toString()) {
+                case "38"://Up
+                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_up();
+                    }
+                    else {
+                        f_filter_nhacc_show(aid_active);
+                    }
+                    break;
+                case "40"://Down
+                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_down();
+                    }
+                    else {
+                        f_filter_nhacc_show(aid_active);
+                    }
+                    break;
+                case "27"://ESC
+                    ms_filter_hide();
+                    break;
+                case "37"://Left
+                case "39"://Right
+                    break;
+                case "13"://Enter
+                    ms_filter_get_selected();
+                    ms_filter_hide();
+                    break;
+                case "32"://Space
+                default:
+                    f_filter_nhacc_show(aid_active);
+                    break;
+            }
+            break;
+        case "page_duoc_nhapkho_ct_tenthuoc":
+            aid_active = v_this.id;
+            switch (keyCode.toString()) {
+                case "38"://Up
+                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_up();
+                    }
+                    else {
+                        f_filter_thuoc_show(aid_active);
+                    }
+                    break;
+                case "40"://Down
+                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_down();
+                    }
+                    else {
+                        f_filter_thuoc_show(aid_active);
+                    }
+                    break;
+                case "27"://ESC
+                    ms_filter_hide();
+                    break;
+                case "37"://Left
+                case "39"://Right
+                    break;
+                case "13"://Enter
+                    ms_filter_get_selected();
+                    ms_filter_hide();
+                    break;
+                case "32"://Space
+                default:
+                    f_filter_thuoc_show(aid_active);
+                    break;
+            }
+            break;
+        case "page_duoc_nhapkho_ct_hoatchat":
+            aid_active = v_this.id;
+            switch (keyCode.toString()) {
+                case "38"://Up
+                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_up();
+                    }
+                    else {
+                        f_filter_hoatchat_show(aid_active);
+                    }
+                    break;
+                case "40"://Down
+                    if (ms_gobj(g_filter_display_ct) != null && ms_gobj(g_filter_display_ct).style.display == 'block') {
+                        ms_filter_down();
+                    }
+                    else {
+                        f_filter_hoatchat_show(aid_active);
+                    }
+                    break;
+                case "27"://ESC
+                    ms_filter_hide();
+                    break;
+                case "37"://Left
+                case "39"://Right
+                    break;
+                case "13"://Enter
+                    ms_filter_get_selected();
+                    ms_filter_hide();
+                    break;
+                case "32"://Space
+                default:
+                    f_filter_hoatchat_show(aid_active);
                     break;
             }
             break;
@@ -911,6 +1133,143 @@ function input_keypress(event, v_this) {
             case "page_duoc_nhapkho_nhanvien":
                 ms_focus_arr("page_duoc_nhapkho_tim");
                 break;
+            case "page_duoc_nhapkho_ct_ngay":
+                ms_focus_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_lydo":
+                if (ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue", "") != "") {
+                    ms_focus_arr("page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                }
+                else {
+                    ms_focus_arr("page_duoc_nhapkho_ct_lydo");
+                }
+                break;
+            case "page_duoc_nhapkho_ct_ngayhd":
+                ms_focus_arr("page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_sohd":
+                ms_focus_arr("page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_kho":
+                if (ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue", "") != "") {
+                    ms_focus_arr("page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                }
+                else {
+                    ms_focus_arr("page_duoc_nhapkho_ct_kho");
+                }
+                break;
+            case "page_duoc_nhapkho_ct_nhacc":
+                if (ms_gval("page_duoc_nhapkho_ct_nhacc", "selectedvalue", "") != "") {
+                    ms_focus_arr("page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                }
+                else {
+                    ms_focus_arr("page_duoc_nhapkho_ct_nhacc");
+                }                
+                break;
+            case "page_duoc_nhapkho_ct_ngayn":
+                ms_focus_arr("page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_sophieu":
+                ms_focus_arr("page_duoc_nhapkho_ct_ngaykn~page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_ngaykn":
+                ms_focus_arr("page_duoc_nhapkho_ct_sokn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_sokn":
+                ms_focus_arr("page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_nguoigiao":
+                ms_focus_arr("page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_ghichu":
+                ms_focus_arr("page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_sodk":
+                ms_focus_arr("page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_ma":
+                ms_focus_arr("page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_tenthuoc":
+                if (ms_gval("page_duoc_nhapkho_ct_tenthuoc", "selectedvalue", "") != "") {
+                    ms_focus_arr("page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                }
+                else {
+                    ms_focus_arr("page_duoc_nhapkho_ct_tenthuoc");
+                }
+                break;
+            case "page_duoc_nhapkho_ct_donvisd":
+                if (ms_gval("page_duoc_nhapkho_ct_donvisd", "selectedvalue", "") != "") {
+                    ms_focus_arr("page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                }
+                else {
+                    ms_focus_arr("page_duoc_nhapkho_ct_donvisd");
+                }
+                break;
+            case "page_duoc_nhapkho_ct_hoatchat":
+                ms_focus_arr("page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_hangsx":
+                if (ms_gval("page_duoc_nhapkho_ct_hangsx", "selectedvalue", "") != "") {
+                    ms_focus_arr("page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                }
+                else {
+                    ms_focus_arr("page_duoc_nhapkho_ct_hangsx");
+                }
+                break;                
+                break;
+            case "page_duoc_nhapkho_ct_losx":
+                ms_focus_arr("page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_ngaysx":
+                ms_focus_arr("page_duoc_nhapkho_ct_handung~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_handung":
+                ms_focus_arr("page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_soluong":
+                if (ms_gval("page_duoc_nhapkho_ct_soluong", "value", "") != "") {
+                    //ms_sval("page_duoc_nhapkho_ct_soluong", "value", Number((0).toFixed(5)));
+                    ms_focus_arr("page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                }
+                else {
+                    ms_focus_arr("page_duoc_nhapkho_ct_soluong");
+                }
+                break;
+            case "page_duoc_nhapkho_ct_nhan":
+                if (ms_gval("page_duoc_nhapkho_ct_nhan", "value", "") != "") {
+                    if (ms_gval("page_duoc_nhapkho_ct_nhan", "value", "") == "0")
+                    {
+                        ms_sval("page_duoc_nhapkho_ct_nhan", "value", "1");
+                    }
+                    ms_sval("page_duoc_nhapkho_ct_bang", "value", ms_gval("page_duoc_nhapkho_ct_soluong", "value", "") * ms_gval("page_duoc_nhapkho_ct_nhan", "value", ""));
+                    ms_focus_arr("page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                }
+                else
+                {
+                    ms_sval("page_duoc_nhapkho_ct_nhan", "value", "1");
+                    ms_sval("page_duoc_nhapkho_ct_bang", "value", ms_gval("page_duoc_nhapkho_ct_soluong", "value", "") * 1);
+                    ms_focus_arr("page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                }
+                break;
+            //case "page_duoc_nhapkho_ct_bang":
+            //    ms_focus_arr("page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+            //    break;
+            case "page_duoc_nhapkho_ct_dongia":
+                ms_focus_arr("page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_thanhtienvat");
+                break;
+            case "page_duoc_nhapkho_ct_ck":
+                if (ms_gval("page_duoc_nhapkho_ct_ck", "value", "") == "") {
+                    ms_sval("page_duoc_nhapkho_ct_ck", "value", "0");
+                }
+                ms_focus_arr("page_duoc_nhapkho_ct_vat");
+                break;
+            case "page_duoc_nhapkho_ct_vat":
+                if (ms_gval("page_duoc_nhapkho_ct_vat", "value", "") == "") {
+                    ms_sval("page_duoc_nhapkho_ct_vat", "value", "0");
+                }
+                ms_focus_arr("page_duoc_nhapkho_ct_luu");
+                break;
             default:
                 break;
         }
@@ -998,6 +1357,7 @@ function btn_click(v_this) {
         case "page_duoc_khaibaothuoc_ketthuc":
             window.location.href = "../Trangchu/index";
             break;
+            //nhapkho
         case "page_duoc_nhapkho_tim":
             f_table_reload("nhapkhos");
             break;
@@ -1005,6 +1365,31 @@ function btn_click(v_this) {
             f_tab_show("danhsach", "chitiet");
             f_clear_arr("nhapkhos");
             ms_enable_arr("page_duoc_nhapkho_ct_sua", false);
+            break;
+        case "page_duoc_nhapkho_ct_themmoi":
+            f_clear_arr("nhapkhos");
+            ctnhapkho_enable(true);
+            ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", false);
+            ms_focus_arr("page_duoc_nhapkho_ct_lydo");
+            break;
+        case "page_duoc_nhapkho_ct_sua":
+            khaibaothuoc_enable(true);
+            ms_enable_arr("page_duoc_nhapkho_ct_xoa", false);
+            break;
+        case "page_duoc_nhapkho_ct_xoa":
+            f_gridview_del_record("nhapkhos", ms_gval("page_duoc_nhapkho_ct_idnhapkho", "value"));
+            f_clear_arr("nhapkhos");
+            ms_enable_arr("page_duoc_nhapkho_ct_sua", false);
+            break;
+        case "page_duoc_nhapkho_ct_luu":
+            f_save_nhapkho();
+            break;
+        case "page_duoc_nhapkho_ct_boqua":
+            f_clear_arr("nhapkhos");
+            ms_enable_arr("page_duoc_nhapkho_ct_sua", false);
+            break;
+        case "page_duoc_nhapkho_ct_ketthuc":
+            window.location.href = "../Trangchu/index";
             break;
         default:
             break;
@@ -1029,6 +1414,10 @@ function btn_keypress(event, v_this) {
                 ms_filter_get_selected();
                 ms_filter_hide();
                 break;
+            case "page_duoc_nhapkho_ct_luu":
+                ms_filter_get_selected();
+                ms_filter_hide();
+                break;
             case "page_duoc_nhapkho_tim":
                 ms_filter_get_selected();
                 ms_filter_hide();
@@ -1040,32 +1429,6 @@ function btn_keypress(event, v_this) {
     }
 }
 //btn-End
-
-//Enable-Start
-function khaibaokho_enable(v_bool) {
-    ms_enable_arr(khaibaokho_input + "~page_duoc_khaibaokho_luu", v_bool);
-    ms_enable_arr("page_duoc_khaibaokho_boqua~page_duoc_khaibaokho_sua~page_duoc_khaibaokho_xoa", v_bool);
-    ms_enable_arr("page_duoc_khaibaokho_themmoi", !v_bool);
-
-    ms_enable_arr("page_duoc_khaibaokho_ma", false);
-}
-
-function khaibaothuoc_enable(v_bool) {
-    ms_enable_arr(khaibaothuoc_input + "~page_duoc_khaibaothuoc_luu", v_bool);
-    ms_enable_arr("page_duoc_khaibaothuoc_boqua~page_duoc_khaibaothuoc_sua~page_duoc_khaibaothuoc_xoa", v_bool);
-    ms_enable_arr("page_duoc_khaibaothuoc_themmoi", !v_bool);
-
-    ms_enable_arr("page_duoc_khaibaothuoc_ma", false);
-}
-
-function nhapkho_enable(v_bool) {
-    ms_enable_arr(ctnhapkho_input + "~page_duoc_nhapkho_ct_luu", v_bool);
-    ms_enable_arr("page_duoc_nhapkho_ct_boqua~page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_xoa", v_bool);
-    ms_enable_arr("page_duoc_nhapkho_ct_themmoi", !v_bool);
-
-    ms_enable_arr("page_duoc_nhapkho_ct_sotien~page_duoc_nhapkho_ct_sotientruck~page_duoc_nhapkho_ct_sotientruckcongvat~page_duoc_nhapkho_ct_dongiacu", false);
-}
-//Enable-End
 
 //Action-Start
 function f_save_kho() {
@@ -1132,6 +1495,71 @@ function f_save_thuoc() {
         alert("SaveThuoc Error");
     }
 }
+
+function f_save_nhapkho() {
+    try {
+        var data;
+        var url = "";
+        if (ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue") == "") {
+            alert("Vui lòng chọn lý do nhập");
+            ms_focus("page_duoc_nhapkho_ct_lydo");
+            return null;
+        }
+        if (ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue") == "") {
+            alert("Vui lòng chọn kho nhập");
+            ms_focus("page_duoc_nhapkho_ct_kho");
+            return null;
+        }
+        data = {
+            id: ms_gval("page_duoc_nhapkho_ct_id_hidden", "value"),
+            idnhapkho: ms_gval("page_duoc_nhapkho_ct_idnhapkho_hidden", "value"),
+            idlydonx: ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue"),
+            idnhacc: ms_gval("page_duoc_nhapkho_ct_nhacc", "selectedvalue"),
+            idkho: ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue"),
+            ngay: ms_gval("page_duoc_nhapkho_ct_ngay", "value"),
+            //ngaytk: ms_gval("page_duoc_nhapkho_ct_nhacc", "value"),
+            ngayhd: ms_gval("page_duoc_nhapkho_ct_ngayhd", "value"),
+            sohod: ms_gval("page_duoc_nhapkho_ct_sohd", "value"),            
+            ngaynhan: ms_gval("page_duoc_nhapkho_ct_ngayn", "value"),
+            sophieu: ms_gval("page_duoc_nhapkho_ct_sophieu", "value"),
+            ngaykk: ms_gval("page_duoc_nhapkho_ct_ngaykk", "value"),
+            sokk: ms_gval("page_duoc_nhapkho_ct_sokk", "value"),            
+            //chiphivc: ms_gval("page_duoc_nhapkho_ct_sohd", "value"),
+            //miengiam1: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            //miengiam2: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            //miengiam3: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            //miengiam4: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            //miengiam5: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            //nguoinhan: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            nguoigiao: ms_gval("page_duoc_nhapkho_ct_nguoigiao", "value"),
+            //noinhan: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            ghichu: ms_gval("page_duoc_nhapkho_ct_ghichu", "value"),
+            //tinhtrang: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            //userid: ms_gval("page_duoc_khaibaothuoc_ma", "selectedvalue"),
+            idduoc: ms_gval("page_duoc_nhapkho_ct_tenthuoc", "selectedvalue"),
+            //idnguon: ms_gval("page_duoc_nhapkho_ct_nguon", "selectedvalue"),
+            //mavach: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            losx: ms_gval("page_duoc_nhapkho_ct_losx", "value"),
+            ngaysx: ms_gval("page_duoc_nhapkho_ct_ngaysx", "value"),
+            handung: ms_gval("page_duoc_nhapkho_ct_handung", "value"),
+            //baohanh: ms_gval("page_duoc_khaibaothuoc_ma", "value"),
+            soluongsd: ms_gval("page_duoc_nhapkho_ct_soluong", "value"),
+            soluongdg: ms_gval("page_duoc_nhapkho_ct_nhan", "value"),
+            soluongn: ms_gval("page_duoc_nhapkho_ct_bang", "value"),
+            dongia: ms_gval("page_duoc_nhapkho_ct_dongia", "value"),
+            chietkhau: ms_gval("page_duoc_nhapkho_ct_ck", "value"),
+            vat: ms_gval("page_duoc_nhapkho_ct_vat", "value"),
+            //soluongx: ms_gval("page_duoc_khaibaothuoc_ma", "value"),            
+            //dongiavat: ms_gval("page_duoc_khaibaothuoc_ma", "value")
+        };
+        url = "SaveNhapkho";
+        f_save_data(url, data);
+
+    }
+    catch (ex) {
+        alert("SaveNhapkho Error");
+    }
+}
 //Action-End
 
 //Show-Start
@@ -1145,7 +1573,7 @@ function f_clear_arr(v_obj) {
                 f_dmthuoc_show(null, 0, false);
                 break;
             case "nhapkhos":
-                f_nhapkho_show(null, 0, false);
+                f_ctnhapkho_show(null, 0, false);
                 break;
             default:
                 break;
@@ -1194,7 +1622,9 @@ function f_dmthuoc_show(v_ds, v_index, v_bool) {
     khaibaothuoc_enable(v_bool);
 }
 
-function f_nhapkho_show(v_ds, v_index, v_bool) {
+function f_ctnhapkho_show(v_ds, v_index, v_bool) {
+    var date = new Date();
+    var defaultdate = ms_lpad(date.getDate(), 2, '0') + "/" + ms_lpad(date.getMonth(), 2, '0') + "/" + date.getFullYear();
     ms_sval("page_duoc_nhapkho_ct_ngay", "value", ms_gfields(v_ds, v_index, "ngay", ""));
     ms_sval("page_duoc_nhapkho_ct_lydo", "value", ms_gfields(v_ds, v_index, "tenlydonx", ""));
     ms_sval("page_duoc_nhapkho_ct_lydo", "selectedvalue", ms_gfields(v_ds, v_index, "idlydonx", ""));
@@ -1210,6 +1640,18 @@ function f_nhapkho_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_sokn", "value", ms_gfields(v_ds, v_index, "spkn", ""));
     ms_sval("page_duoc_nhapkho_ct_nguoigiao", "value", ms_gfields(v_ds, v_index, "nguoigiao", ""));
     ms_sval("page_duoc_nhapkho_ct_ghichu", "value", ms_gfields(v_ds, v_index, "ghichu", ""));
+    if (ms_gval("page_duoc_nhapkho_ct_ngay", "value", "") == "") {
+        ms_sval("page_duoc_nhapkho_ct_ngay", "value", defaultdate);
+    }
+    if (ms_gval("page_duoc_nhapkho_ct_ngayhd", "value", "") == "") {
+        ms_sval("page_duoc_nhapkho_ct_ngayhd", "value", defaultdate);
+    }
+    if (ms_gval("page_duoc_nhapkho_ct_ngayn", "value", "") == "") {
+        ms_sval("page_duoc_nhapkho_ct_ngayn", "value", defaultdate);
+    }
+    if (ms_gval("page_duoc_nhapkho_ct_ngaykn", "value", "") == "") {
+        ms_sval("page_duoc_nhapkho_ct_ngaykn", "value", defaultdate);
+    }
     //ms_sval("page_duoc_nhapkho_ct_sodk", "value", ms_gfields(v_ds, v_index, "ma", ""));
     //ms_sval("page_duoc_nhapkho_ct_ma", "value", ms_gfields(v_ds, v_index, "ma", ""));
     //ms_sval("page_duoc_nhapkho_ct_tenthuoc", "value", ms_gfields(v_ds, v_index, "ma", ""));
@@ -1227,6 +1669,31 @@ function f_nhapkho_show(v_ds, v_index, v_bool) {
     //ms_sval("page_duoc_nhapkho_ct_thanhtienck", "value", ms_gfields(v_ds, v_index, "ma", ""));
     //ms_sval("page_duoc_nhapkho_ct_vat", "value", ms_gfields(v_ds, v_index, "ma", ""));
     //ms_sval("page_duoc_nhapkho_ct_thanhtienvat", "value", ms_gfields(v_ds, v_index, "ma", ""));
-    nhapkho_enable(v_bool);
+    ctnhapkho_enable(v_bool);
 }
 //Show-End
+//Enable-Start
+function khaibaokho_enable(v_bool) {
+    ms_enable_arr(khaibaokho_input + "~page_duoc_khaibaokho_luu", v_bool);
+    ms_enable_arr("page_duoc_khaibaokho_boqua~page_duoc_khaibaokho_sua~page_duoc_khaibaokho_xoa", v_bool);
+    ms_enable_arr("page_duoc_khaibaokho_themmoi", !v_bool);
+
+    ms_enable_arr("page_duoc_khaibaokho_ma", false);
+}
+
+function khaibaothuoc_enable(v_bool) {
+    ms_enable_arr(khaibaothuoc_input + "~page_duoc_khaibaothuoc_luu", v_bool);
+    ms_enable_arr("page_duoc_khaibaothuoc_boqua~page_duoc_khaibaothuoc_sua~page_duoc_khaibaothuoc_xoa", v_bool);
+    ms_enable_arr("page_duoc_khaibaothuoc_themmoi", !v_bool);
+
+    ms_enable_arr("page_duoc_khaibaothuoc_ma", false);
+}
+
+function ctnhapkho_enable(v_bool) {
+    ms_enable_arr(ctnhapkho_input + "~page_duoc_nhapkho_ct_luu", v_bool);
+    ms_enable_arr("page_duoc_nhapkho_ct_boqua~page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_xoa", v_bool);
+    ms_enable_arr("page_duoc_nhapkho_ct_themmoi", !v_bool);
+
+    ms_enable_arr("page_duoc_nhapkho_ct_sotien~page_duoc_nhapkho_ct_sotientruck~page_duoc_nhapkho_ct_sotientruckcongvat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_thanhtienvat", false);
+}
+//Enable-End

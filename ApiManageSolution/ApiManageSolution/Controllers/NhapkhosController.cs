@@ -23,8 +23,16 @@ namespace ApiManageSolution.Controllers
         }
 
         // POST api/nhapkhos
-        public void Post([FromBody]string value)
+        public IEnumerable<Data.Nhapkhos> Post([FromBody]Data.NhapAlls data)
         {
+            try
+            {
+                return Data.NhapAlls.Upd(data);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         // PUT api/nhapkhos/5

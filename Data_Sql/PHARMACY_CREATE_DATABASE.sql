@@ -10,13 +10,13 @@ SUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION;
 DROP DATABASE ms_root;
 CREATE DATABASE ms_root WITH OWNER = msolution ENCODING = 'UTF8'
 -- TABLESPACE = pg_default LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252'
-TABLESPACE = pg_default LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252'
+TABLESPACE = pg_default LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8'
 CONNECTION LIMIT = -1;
 
 DROP DATABASE ms_9999999999;
 CREATE DATABASE ms_9999999999 WITH OWNER = msolution ENCODING = 'UTF8'
 -- TABLESPACE = pg_default LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252'
-TABLESPACE = pg_default LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252'
+TABLESPACE = pg_default LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8'
 CONNECTION LIMIT = -1;
 
 CREATE public database link root connect to msolution identified by 'msolution' using libpq 'host=localhost port=5435 dbname=ms_root';
