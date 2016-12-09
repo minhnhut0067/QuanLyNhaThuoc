@@ -737,7 +737,8 @@ namespace Medical.Models
             public string soluongn { get; set; }
             public string soluongx { get; set; }
             public string dongia { get; set; }
-            public string dongiavat { get; set; }
+            public string dongiadg { get; set; }
+            public string sotienhd { get; set; }
         }
         public class Nhapkhoct
         {
@@ -759,9 +760,13 @@ namespace Medical.Models
             public string soluongn { get; set; }
             public string soluongx { get; set; }
             public string dongia { get; set; }
+            public string dongiadg { get; set; }
             public string dongiavat { get; set; }
+            public string dongiadgvat { get; set; }
             public string sotien { get; set; }
+            public string sotiendg { get; set; }
             public string sotienvat { get; set; }
+            public string sotiendgvat { get; set; }
             public string ghichu { get; set; }
             public string tinhtrang { get; set; }
             public string userid { get; set; }
@@ -813,9 +818,13 @@ namespace Medical.Models
                         obj.soluongn = item.soluongn;
                         obj.soluongx = item.soluongx;
                         obj.dongia = item.dongia;
+                        obj.dongiadg = item.dongiadg;
                         obj.dongiavat = item.dongiavat;
+                        obj.dongiadgvat = item.dongiadgvat;
                         obj.sotien = item.sotien;
+                        obj.sotiendg = item.sotiendg;
                         obj.sotienvat = item.sotienvat;
+                        obj.sotiendgvat = item.sotiendgvat;
                         obj.ghichu = item.ghichu;
                         obj.tinhtrang = item.tinhtrang;
                         obj.userid = item.userid;
@@ -856,6 +865,7 @@ namespace Medical.Models
             public string miengiam5 { get; set; }
             public string vat { get; set; }
             public string sotien { get; set; }
+            public string sotiendg { get; set; }
             public string sotienhd { get; set; }
             public string nguoinhan { get; set; }
             public string nguoigiao { get; set; }
@@ -914,6 +924,7 @@ namespace Medical.Models
                         obj.miengiam5 = item.miengiam5;
                         obj.vat = item.vat;
                         obj.sotien = item.sotien;
+                        obj.sotiendg = item.sotiendg;
                         obj.sotienhd = item.sotienhd;
                         obj.nguoinhan = item.nguoinhan;
                         obj.nguoigiao = item.nguoigiao;

@@ -29,7 +29,6 @@ $(document).ready(function () {
         }
     });
     //$(".ui-datepicker-calendar > tbody > tr > td").on("click", function () {
-    //    debugger;
     //});
 });
 //Javascript
@@ -555,22 +554,9 @@ function f_table_reload(v_obj) {
                             $('#page_duoc_khaibaothuoc_gidview').parent().css("overflow-x", "scroll");
                             break;
                         case "nhapkhos":
-                            $("#page_duoc_nhapkho_ds").html(f_create_table_html(v_obj, result, "page_duoc_nhapkho_ds", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
+                            $("#page_duoc_nhapkho_ds").html(f_create_table_html(v_obj, result, "page_duoc_nhapkho_ds", "Phiếu~Ngày~Tên kho~Nhà Cung cấp~Số tiền~Số tiền HĐ~Người giao~VAT", "tenlydonx~ngay~tenkho~tennhacc~sotien~sotienhd~nguoigiao~vat", false));
                             $('#page_duoc_nhapkho_ds_gidview').DataTable();
                             $('#page_duoc_nhapkho_ds_gidview').parent().css("overflow-x", "scroll");
-
-                            if ($("#page_duoc_nhapkho_ct_idnhapkho_hidden").val() != "") {
-                                $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhos", "[]", "page_duoc_nhapkho_ct", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
-                                $('#page_duoc_nhapkho_ct_gidview').DataTable();
-                                $('#page_duoc_nhapkho_ct_gidview').parent().css("overflow-x", "scroll");
-                            }
-                            else {
-                                $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhos", "[]", "page_duoc_nhapkho_ct", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
-                                $('#page_duoc_nhapkho_ct_gidview').DataTable();
-                                $('#page_duoc_nhapkho_ct_gidview').parent().css("overflow-x", "scroll");
-                            }
-                            break;
-                        case "nhapkhocts":
                             break;
                         default:
                             break;
@@ -611,7 +597,7 @@ function f_create_input(v_id, v_type, v_name, v_style) {
                     break;
                 case "filter":
                     rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
-                    rhtml += "<input id=\"" + v_id + "\" type=\"text\" class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
+                    rhtml += "<input id=\"" + v_id + "\" type=\"text\" style = '" + v_style + "' class=\"form-control input-sm\" placeholder=\"\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\">";
                     rhtml += "<a href=\"#\" class=\"input-group-addon input-filter\" id=\"" + v_id + "_filter\" onclick=\"filter_click(this);\"><i class=\"fa fa-sort-desc\"></i></a>";
                     break;
                 case "textarea":
@@ -971,6 +957,10 @@ function f_gridview_show_record(v_obj, v_index) {
             case "thuocs":
                 f_dmthuoc_show(v_ds, v_index, false)
                 ms_enable_arr("page_duoc_khaibaothuoc_xoa~page_duoc_khaibaothuoc_sua", true);
+                break;
+            case "nhapkhos":
+                f_ctnhapkho_show(v_ds, v_index, false)
+                ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", true);
                 break;
             default:
                 break;

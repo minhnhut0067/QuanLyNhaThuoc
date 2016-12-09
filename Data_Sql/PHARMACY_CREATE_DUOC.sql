@@ -1525,62 +1525,6 @@ INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,idduongdung,idlo
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,idduongdung,idloaiduoc,idhangsx,idquocgia) VALUES(3393,140,'ZOL002','Zolmed 150mg, H/1','','','Viên','Fluconazol','',1001,50109,734,229);
 INSERT INTO dmduoc(id,stt,ma,ten,tyle1,tyle2,dang,hoatchat,sodk,idduongdung,idloaiduoc,idhangsx,idquocgia) VALUES(4061,219,'ZYM001','Zymafluor D 500, H/90','','','Viên','','',1001,50067,943,55);
 
-DROP TABLE IF EXISTS nhapkho;
-CREATE TABLE nhapkho
-(
-  id numeric(25,0) NOT NULL DEFAULT 0,
-  idlydonx numeric(5,0) DEFAULT 0, -- dmlydonx.id
-  idnhacc numeric(10,0) DEFAULT 0, -- dmnhacc.id
-  idkho numeric(14,0) DEFAULT 0, -- dmkho.id
-  ngay timestamp without time zone DEFAULT now(), -- ngay nhap kho
-  ngaytk timestamp without time zone DEFAULT now(), -- ngay ton kho
-  ngayhd character varying(16) DEFAULT ''::character varying, -- ngay hoa don
-  ngaykk character varying(16) DEFAULT ''::character varying, -- ngay kiem ke
-  ngaynhan character varying(16) DEFAULT ''::character varying, -- ngay nhan
-  sophieu character varying(28) DEFAULT ''::character varying,
-  chietkhau numeric(18,5) DEFAULT 0, -- chiet khau so tien
-  chiphivc numeric(18,5) DEFAULT 0, -- chi phi van chuyen
-  miengiam1 numeric(18,5) DEFAULT 0,
-  miengiam2 numeric(18,5) DEFAULT 0,
-  miengiam3 numeric(18,5) DEFAULT 0,
-  miengiam4 numeric(18,5) DEFAULT 0,
-  miengiam5 numeric(18,5) DEFAULT 0,
-  vat numeric(18,5) DEFAULT 0, -- vat: tong so tien
-  sotien numeric(18,5) DEFAULT 0, -- so tien: tong cong truoc thue
-  sotienhd numeric(18,5) DEFAULT 0, -- so tien hoa don: sotienhd = sotien + vat + chiphivc - chietkhau
-  nguoinhan character varying(255) DEFAULT ''::character varying,
-  nguoigiao character varying(255) DEFAULT ''::character varying,
-  noinhan character varying(255) DEFAULT ''::character varying,
-  ghichu character varying(255) DEFAULT ''::character varying,
-  tinhtrang character varying(10) DEFAULT '0000000000'::character varying,
-  userid numeric(15,0) DEFAULT 0,
-  ngayud timestamp without time zone DEFAULT now(),
-  CONSTRAINT nhapkho_pkey PRIMARY KEY (id),
-  CONSTRAINT fk_nhapkho_id_kho FOREIGN KEY (idkho)
-      REFERENCES dmkho (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE RESTRICT
-)
-WITH (
-  OIDS=TRUE
-);
-ALTER TABLE nhapkho
-  OWNER TO msolution;
-COMMENT ON TABLE nhapkho
-  IS 'nhap kho = {ton dau, mua moi, chuyen kho}';
-COMMENT ON COLUMN nhapkho.idlydonx IS 'dmlydonx.id';
-COMMENT ON COLUMN nhapkho.idnhacc IS 'dmnhacc.id';
-COMMENT ON COLUMN nhapkho.idkho IS 'dmkho.id';
-COMMENT ON COLUMN nhapkho.ngay IS 'ngay nhap kho';
-COMMENT ON COLUMN nhapkho.ngaytk IS 'ngay ton kho';
-COMMENT ON COLUMN nhapkho.ngayhd IS 'ngay hoa don';
-COMMENT ON COLUMN nhapkho.ngaykk IS 'ngay kiem ke';
-COMMENT ON COLUMN nhapkho.ngaynhan IS 'ngay nhan';
-COMMENT ON COLUMN nhapkho.chietkhau IS 'chiet khau so tien';
-COMMENT ON COLUMN nhapkho.chiphivc IS 'chi phi van chuyen';
-COMMENT ON COLUMN nhapkho.vat IS 'vat: tong so tien';
-COMMENT ON COLUMN nhapkho.sotien IS 'so tien: tong cong truoc thue';
-COMMENT ON COLUMN nhapkho.sotienhd IS 'so tien hoa don: sotienhd = sotien + vat + chiphivc - chietkhau';
-
 
 DROP TABLE IF EXISTS nhapkhoct;
 CREATE TABLE nhapkhoct
@@ -1600,10 +1544,14 @@ CREATE TABLE nhapkhoct
   soluongsd numeric(18,5) DEFAULT 0, -- so luong su dung
   soluongn numeric(18,5) DEFAULT 0, -- soluongn = soluongdg*soluongsd
   soluongx numeric(18,5) DEFAULT 0, -- sum(cm_khoxuatct.soluong, xuatthuocxk.soluong)
-  dongia numeric(18,5) DEFAULT 0, -- don gia
+  dongia numeric(18,5) DEFAULT 0, -- don gia  
+  dongiadg numeric(18,5) DEFAULT 0, -- don gia
   dongiavat numeric(18,5) DEFAULT 0, -- don gia vat
+  dongiadgvat numeric(18,5) DEFAULT 0, -- don gia vat
   sotien numeric(18,5) DEFAULT 0, -- so tien
+  sotiendg numeric(18,5) DEFAULT 0, -- so tien
   sotienvat numeric(18,5) DEFAULT 0, -- so tien vat
+  sotiendgvat numeric(18,5) DEFAULT 0, -- so tien vat
   ghichu character varying(255) DEFAULT ''::character varying,
   tinhtrang character varying(10) DEFAULT '0000000000'::character varying,
   userid numeric(18,0) DEFAULT 0,
@@ -1642,6 +1590,64 @@ COMMENT ON COLUMN nhapkhoct.dongia IS 'don gia';
 COMMENT ON COLUMN nhapkhoct.dongiavat IS 'don gia vat';
 COMMENT ON COLUMN nhapkhoct.sotien IS 'so tien';
 COMMENT ON COLUMN nhapkhoct.sotienvat IS 'so tien vat';
+
+
+DROP TABLE IF EXISTS nhapkho;
+CREATE TABLE nhapkho
+(
+  id numeric(25,0) NOT NULL DEFAULT 0,
+  idlydonx numeric(5,0) DEFAULT 0, -- dmlydonx.id
+  idnhacc numeric(10,0) DEFAULT 0, -- dmnhacc.id
+  idkho numeric(14,0) DEFAULT 0, -- dmkho.id
+  ngay timestamp without time zone DEFAULT now(), -- ngay nhap kho
+  ngaytk timestamp without time zone DEFAULT now(), -- ngay ton kho
+  ngayhd character varying(16) DEFAULT ''::character varying, -- ngay hoa don
+  ngaykk character varying(16) DEFAULT ''::character varying, -- ngay kiem ke
+  ngaynhan character varying(16) DEFAULT ''::character varying, -- ngay nhan
+  sophieu character varying(28) DEFAULT ''::character varying,
+  chietkhau numeric(18,5) DEFAULT 0, -- chiet khau so tien
+  chiphivc numeric(18,5) DEFAULT 0, -- chi phi van chuyen
+  miengiam1 numeric(18,5) DEFAULT 0,
+  miengiam2 numeric(18,5) DEFAULT 0,
+  miengiam3 numeric(18,5) DEFAULT 0,
+  miengiam4 numeric(18,5) DEFAULT 0,
+  miengiam5 numeric(18,5) DEFAULT 0,
+  vat numeric(18,5) DEFAULT 0, -- vat: tong so tien
+  sotien numeric(18,5) DEFAULT 0, -- so tien: tong cong truoc thue
+  sotiendg numeric(18,5) DEFAULT 0, -- so tien: tong cong truoc thue
+  sotienhd numeric(18,5) DEFAULT 0, -- so tien hoa don: sotienhd = sotien + vat + chiphivc - chietkhau
+  nguoinhan character varying(255) DEFAULT ''::character varying,
+  nguoigiao character varying(255) DEFAULT ''::character varying,
+  noinhan character varying(255) DEFAULT ''::character varying,
+  ghichu character varying(255) DEFAULT ''::character varying,
+  tinhtrang character varying(10) DEFAULT '0000000000'::character varying,
+  userid numeric(15,0) DEFAULT 0,
+  ngayud timestamp without time zone DEFAULT now(),
+  CONSTRAINT nhapkho_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_nhapkho_id_kho FOREIGN KEY (idkho)
+      REFERENCES dmkho (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE RESTRICT
+)
+WITH (
+  OIDS=TRUE
+);
+ALTER TABLE nhapkho
+  OWNER TO msolution;
+COMMENT ON TABLE nhapkho
+  IS 'nhap kho = {ton dau, mua moi, chuyen kho}';
+COMMENT ON COLUMN nhapkho.idlydonx IS 'dmlydonx.id';
+COMMENT ON COLUMN nhapkho.idnhacc IS 'dmnhacc.id';
+COMMENT ON COLUMN nhapkho.idkho IS 'dmkho.id';
+COMMENT ON COLUMN nhapkho.ngay IS 'ngay nhap kho';
+COMMENT ON COLUMN nhapkho.ngaytk IS 'ngay ton kho';
+COMMENT ON COLUMN nhapkho.ngayhd IS 'ngay hoa don';
+COMMENT ON COLUMN nhapkho.ngaykk IS 'ngay kiem ke';
+COMMENT ON COLUMN nhapkho.ngaynhan IS 'ngay nhan';
+COMMENT ON COLUMN nhapkho.chietkhau IS 'chiet khau so tien';
+COMMENT ON COLUMN nhapkho.chiphivc IS 'chi phi van chuyen';
+COMMENT ON COLUMN nhapkho.vat IS 'vat: tong so tien';
+COMMENT ON COLUMN nhapkho.sotien IS 'so tien: tong cong truoc thue';
+COMMENT ON COLUMN nhapkho.sotienhd IS 'so tien hoa don: sotienhd = sotien + vat + chiphivc - chietkhau';
 
 
 DROP TABLE IF EXISTS btdkh;
