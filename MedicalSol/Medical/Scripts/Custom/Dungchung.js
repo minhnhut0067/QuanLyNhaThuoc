@@ -22,8 +22,7 @@ $(document).ready(function () {
 
     $("a.input-datepicker").on("click", function () {
         ms_filter_hide();
-        if($(this).hasClass("input-datepicker"))
-        {
+        if ($(this).hasClass("input-datepicker")) {
             var id = $(this)[0].id.replace("_datepicker", "");
             $("#" + id).datepicker("show");
         }
@@ -526,8 +525,7 @@ function ms_lpad(str, max, char) {
 function f_table_reload(v_obj) {
     try {
         var data = null;
-        switch(v_obj)
-        {
+        switch (v_obj) {
             case "nhapkhos":
                 var v_dk = ms_gval("page_duoc_nhapkho_lydo", "selectedvalue", "") + "~" + ms_gval("page_duoc_nhapkho_kho", "selectedvalue", "") + "~" + ms_gval("page_duoc_nhapkho_nhanvien", "selectedvalue", "") + "~" + ms_gval("page_duoc_nhapkho_tn", "value", "") + "~" + ms_gval("page_duoc_nhapkho_dn", "value", "");
                 data = { obj: v_obj, request: v_dk };
@@ -544,17 +542,17 @@ function f_table_reload(v_obj) {
                 if (result != "") {
                     switch (v_obj) {
                         case "khos":
-                            $("#page_duoc_khaibaokho_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaokho", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false));
+                            $("#page_duoc_khaibaokho_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaokho", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false, "delete~edit"));
                             $('#page_duoc_khaibaokho_gidview').DataTable();
                             $('#page_duoc_khaibaokho_gidview').parent().css("overflow-x", "scroll");
                             break;
                         case "thuocs":
-                            $("#page_duoc_khaibaothuoc_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaothuoc", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false));
+                            $("#page_duoc_khaibaothuoc_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaothuoc", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false, "delete~edit"));
                             $('#page_duoc_khaibaothuoc_gidview').DataTable();
                             $('#page_duoc_khaibaothuoc_gidview').parent().css("overflow-x", "scroll");
                             break;
                         case "nhapkhos":
-                            $("#page_duoc_nhapkho_ds").html(f_create_table_html(v_obj, result, "page_duoc_nhapkho_ds", "Phiếu~Ngày~Tên kho~Nhà Cung cấp~Số tiền~Số tiền HĐ~Người giao~VAT", "tenlydonx~ngay~tenkho~tennhacc~sotien~sotienhd~nguoigiao~vat", false));
+                            $("#page_duoc_nhapkho_ds").html(f_create_table_html(v_obj, result, "page_duoc_nhapkho_ds", "Phiếu~Ngày~Tên kho~Nhà Cung cấp~Số tiền~Số tiền HĐ~Người giao~VAT", "tenlydonx~ngay~tenkho~tennhacc~sotien~sotienhd~nguoigiao~vat", false, "delete~edit"));
                             $('#page_duoc_nhapkho_ds_gidview').DataTable();
                             $('#page_duoc_nhapkho_ds_gidview').parent().css("overflow-x", "scroll");
                             break;
@@ -603,10 +601,9 @@ function f_create_input(v_id, v_type, v_name, v_style) {
                 case "textarea":
                     if (v_name.split('~').length > 1) {
                         rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name.split('~')[0] + "</span>";
-                        rhtml += "<textarea class=\"form-control\" rows=\"" + v_name.split('~')[1]+ "\" id=\"" + v_id + "\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\"></textarea>";
+                        rhtml += "<textarea class=\"form-control\" rows=\"" + v_name.split('~')[1] + "\" id=\"" + v_id + "\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\"></textarea>";
                     }
-                    else
-                    {
+                    else {
                         rhtml = "<span class=\"input-group-addon input-label\" id=\"" + v_id + "_label\" style=\"\">" + v_name + "</span>";
                         rhtml += "<textarea class=\"form-control\" rows=\"3\" id=\"" + v_id + "\" aria-describedby=\"" + v_id + "_label\" onkeypress=\"input_keypress(event,this);\" onblur=\"input_onblur(this);\" onkeyup=\"input_keyup(event, this);\"></textarea>";
                     }
@@ -649,7 +646,7 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
                 data: data,
                 success: function (result) {
                     if (result != "") {
-                        rhtml = f_create_table_html(v_obj, JSON.parse(result), v_id, v_colname, v_col, v_footer);
+                        rhtml = f_create_table_html(v_obj, JSON.parse(result), v_id, v_colname, v_col, v_footer, "delete~edit");
                     }
                     else {
                         rhtml = "";
@@ -667,7 +664,7 @@ function f_create_table(v_obj, v_id, v_colname, v_col, v_footer) {
     }
 }
 
-function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer) {
+function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer, v_btn) {
     try {
         v_ds = "{\"Name\":\"Table\",\"Rows\":" + v_ds.replace('"', '\"').replace("\'", "'") + "}";
         v_ds = JSON.parse(v_ds);
@@ -704,10 +701,21 @@ function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer) {
         if (v_ds.Rows.length > 0) {
             rhtml += "<tbody>";
             for (var i = 0; i < v_ds.Rows.length; i++) {
-                rhtml += "<tr>";
-
-                rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_del_record('" + v_obj + "','" + ms_gfields(v_ds, i, "id", "") + "')\" style = \"color:red; font-size:13px;\"><i class=\"fa fa-trash\" aria-hidden=\"true\" /></a></td>";
-                rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_show_record('" + v_obj + "','" + i + "')\" style = \"color:blue; font-size:13px;\"><i class=\"fa fa-pencil\" aria-hidden=\"true\" /></a></td>";
+                rhtml += "<tr onclick =\"f_gridview_row_click('" + v_obj + "','" + i + "')\">";
+                if (v_btn != null && v_btn != "") {
+                    for (var j = 0; j < v_btn.split('~').length; j++) {
+                        switch (v_btn.split('~')[j]) {
+                            case "delete":
+                                rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_del_record('" + v_obj + "','" + ms_gfields(v_ds, i, "id", "") + "')\" style = \"color:red; font-size:13px;\"><i class=\"fa fa-trash\" aria-hidden=\"true\" /></a></td>";                                
+                                break;
+                            case "edit":
+                                rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_show_record('" + v_obj + "','" + i + "')\" style = \"color:blue; font-size:13px;\"><i class=\"fa fa-pencil\" aria-hidden=\"true\" /></a></td>";
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
                 for (var j = 0; j < v_col.split('~').length ; j++) {
                     rhtml += "<td style=\"witch:auto;\">" + ms_gfields(v_ds, i, v_col.split('~')[j], "") + "</td>";
                 }
@@ -764,48 +772,55 @@ function f_filter_select(v_data) {
             url: "../Process/Filter",
             data: v_data,
             success: function (result) {
-                if (result == "") {
-                    result = "{\"Name\":\"Table\",\"Rows\":[]}";
+                var v_ds = null
+                try {
+                    v_ds = JSON.parse(result);
                 }
+                catch (ex) {
+                    v_ds = JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}");
+                }
+                //if (result == "") {
+                //    result = "{\"Name\":\"Table\",\"Rows\":[]}";
+                //}
                 switch (v_data.Obj) {
                     case "nhomkhos":
-                        f_filter_nhomkho_callback(JSON.parse(result));
+                        f_filter_nhomkho_callback(v_ds);
                         break;
                     case "lydonxs":
-                        f_filter_lydo_callback(JSON.parse(result));
+                        f_filter_lydo_callback(v_ds);
                         break;
                     case "khos":
-                        f_filter_kho_callback(JSON.parse(result));
+                        f_filter_kho_callback(v_ds);
                         break;
                     case "nhanviens":
-                        f_filter_nhanvien_callback(JSON.parse(result));
+                        f_filter_nhanvien_callback(v_ds);
                         break;
                     case "duongdungs":
-                        f_filter_duongdung_callback(JSON.parse(result));
+                        f_filter_duongdung_callback(v_ds);
                         break;
                     case "dangbds":
-                        f_filter_dang_callback(JSON.parse(result));
+                        f_filter_dang_callback(v_ds);
                         break;
                     case "donvis":
-                        f_filter_donvi_callback(JSON.parse(result));
+                        f_filter_donvi_callback(v_ds);
                         break;
                     case "loaiduocs":
-                        f_filter_loaiduoc_callback(JSON.parse(result));
+                        f_filter_loaiduoc_callback(v_ds);
                         break;
                     case "hangsxs":
-                        f_filter_hangsx_callback(JSON.parse(result));
+                        f_filter_hangsx_callback(v_ds);
                         break;
                     case "nhaccs":
-                        f_filter_nhacc_callback(JSON.parse(result));
+                        f_filter_nhacc_callback(v_ds);
                         break;
                     case "dmhcs":
-                        f_filter_hoatchat_callback(JSON.parse(result));
+                        f_filter_hoatchat_callback(v_ds);
                         break;
                     case "quocgias":
-                        f_filter_quocgia_callback(JSON.parse(result));
+                        f_filter_quocgia_callback(v_ds);
                         break;
                     case "thuocs":
-                        f_filter_thuoc_callback(JSON.parse(result));
+                        f_filter_thuoc_callback(v_ds);
                         break;
                     default:
                         break;
@@ -881,7 +896,8 @@ function f_save_data(v_url, v_data) {
                         break;
                     case "SaveNhapkho":
                         f_ctnhapkho_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), 0, false);
-                        ms_enable_arr("page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_xoa", true);
+                        f_clear_arr("nhapkhocts_thuoc");
+                        ms_focus_arr("page_duoc_nhapkho_ct_sodk");
                         break;
                     default:
                         break;
@@ -947,19 +963,22 @@ function f_gridview_del_record(v_obj, v_id) {
 
 function f_gridview_show_record(v_obj, v_index) {
     try {
-        var v_ds = m_grid_ds;
         f_tab_show("danhsach", "thonhtin");
         switch (v_obj) {
             case "khos":
-                f_dmkho_show(v_ds, v_index, false)
+                f_dmkho_show(m_grid_ds, v_index, false)
                 ms_enable_arr("page_duoc_khaibaokho_xoa~page_duoc_khaibaokho_sua", true);
                 break;
             case "thuocs":
-                f_dmthuoc_show(v_ds, v_index, false)
+                f_dmthuoc_show(m_grid_ds, v_index, false)
                 ms_enable_arr("page_duoc_khaibaothuoc_xoa~page_duoc_khaibaothuoc_sua", true);
                 break;
             case "nhapkhos":
-                f_ctnhapkho_show(v_ds, v_index, false)
+                f_ctnhapkho_show(m_grid_ds, v_index, false)
+                ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", true);
+                break;
+            case "nhapkhocts":
+                f_ctnhapkho_showthuoc(m_grid_ds, v_index, false)
                 ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", true);
                 break;
             default:
@@ -967,6 +986,22 @@ function f_gridview_show_record(v_obj, v_index) {
         }
     }
     catch (ex) {
+        alert("Lỗi hệ thống ! Không lấy được dữ liệu")
+    }
+}
+
+function f_gridview_row_click(v_obj, v_index) {
+    try{
+        switch (v_obj) {
+            case "nhapkhocts":
+                f_ctnhapkho_duoc_show(m_grid_ds, v_index, false);                
+                break;
+            default:
+                break;
+        }
+    }
+    catch(ex)
+    {
         alert("Lỗi hệ thống ! Không lấy được dữ liệu")
     }
 }

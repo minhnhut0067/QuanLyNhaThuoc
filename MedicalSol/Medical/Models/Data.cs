@@ -700,6 +700,7 @@ namespace Medical.Models
         }
         public class NhapAll
         {
+            public string id { get; set; }
             public string idnhapkho { get; set; }
             public string idlydonx { get; set; }
             public string idnhacc { get; set; }
@@ -744,10 +745,17 @@ namespace Medical.Models
         {
             public string id { get; set; }
             public string idnhapkho { get; set; }
-            public string idduoc { get; set; }
-            public string tenduoc { get; set; }
             public string idnguon { get; set; }
             public string tennguon { get; set; }
+            public string idduoc { get; set; }
+            public string tenduoc { get; set; }
+            public string ma { get; set; }
+            public string sodk { get; set; }
+            public string hoatchat { get; set; }
+            public string donvidg { get; set; }
+            public string donvisd { get; set; }
+            public string idhangsx { get; set; }
+            public string tenhangsx { get; set; }
             public string mavach { get; set; }
             public string losx { get; set; }
             public string ngaysx { get; set; }
@@ -802,10 +810,17 @@ namespace Medical.Models
                         Nhapkhoct obj = new Nhapkhoct();
                         obj.id = item.id;
                         obj.idnhapkho = item.idnhapkho;
-                        obj.idduoc = item.idduoc;
-                        obj.tenduoc = item.tenduoc;
                         obj.idnguon = item.idnguon;
                         obj.tennguon = item.tennguon;
+                        obj.idduoc = item.idduoc;
+                        obj.tenduoc = item.tenduoc;
+                        obj.ma = item.ma;
+                        obj.sodk = item.sodk;
+                        obj.hoatchat = item.hoatchat;
+                        obj.donvidg = item.donvidg;
+                        obj.donvisd = item.donvisd;
+                        obj.idhangsx = item.idhangsx;
+                        obj.tenhangsx = item.tenhangsx;
                         obj.mavach = item.mavach;
                         obj.losx = item.losx;
                         obj.ngaysx = item.ngaysx;
@@ -853,6 +868,7 @@ namespace Medical.Models
             public string ngay { get; set; }
             public string ngaytk { get; set; }
             public string ngayhd { get; set; }
+            public string sohd { get; set; }
             public string ngaykk { get; set; }
             public string ngaynhan { get; set; }
             public string sophieu { get; set; }
@@ -912,6 +928,7 @@ namespace Medical.Models
                         obj.ngay = item.ngay;
                         obj.ngaytk = item.ngaytk;
                         obj.ngayhd = item.ngayhd;
+                        obj.sohd = item.sohd;
                         obj.ngaykk = item.ngaykk;
                         obj.ngaynhan = item.ngaynhan;
                         obj.sophieu = item.sophieu;

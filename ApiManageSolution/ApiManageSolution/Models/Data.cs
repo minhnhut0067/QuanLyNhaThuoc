@@ -1197,16 +1197,17 @@ namespace ApiManageSolution.Models
         {
             public string id { get; set; }
             public string idnhapkho { get; set; }
-            public string idduoc { get; set; }
-            public string tenduoc { get; set; }
             public string idnguon { get; set; }
             public string tennguon { get; set; }
+            public string idduoc { get; set; }
+            public string tenduoc { get; set; }            
             public string ma { get; set; }
             public string sodk { get; set; }
             public string hoatchat { get; set; }
             public string donvidg { get; set; }
             public string donvisd { get; set; }
             public string idhangsx { get; set; }
+            public string tenhangsx { get; set; }
             public string mavach { get; set; }
             public string losx { get; set; }
             public string ngaysx { get; set; }
@@ -1243,13 +1244,16 @@ namespace ApiManageSolution.Models
                     DataSet ds = new DataSet();
                     List<Nhapkhocts> lts = new List<Nhapkhocts>();
                     string sql = "";
-                    sql = "SELECT a.id, a.idnhapkho, a.idduoc, b.ten as tenduoc, a.idnguon, c.ten as tennguon, a.mavach, a.losx, a.ngaysx, a.handung, a.baohanh, a.vat, a.chietkhau" +
-                    "\n, a.soluongdg, a.soluongsd, a.soluongn, a.soluongx, a.dongia, a.dongiadg, a.dongiavat, a.dongiadgvat, a.sotien, a.sotiendg, a.sotiendg, a.sotienvat, a.sotiendgvat, a.ghichu, a.tinhtrang, a.userid, d.hoten as userten, a.ngayud, a.soluongyeucau" +
+                    sql = "SELECT a.id, a.idnhapkho, a.idnguon, c.ten as tennguon, a.idduoc, b.ten as tenduoc, b.ma, b.sodk, b.hoatchat, b.donvidg" +
+                    "\n, case when b.donvisd = '' then b.dang else b.donvisd end as donvisd,b.idhangsx,e.ten as tenhangsx, a.mavach, a.losx, a.ngaysx, a.handung, a.baohanh, a.vat, a.chietkhau" +
+                    "\n, a.soluongdg, a.soluongsd, a.soluongn, a.soluongx, a.dongia, a.dongiadg, a.dongiavat, a.dongiadgvat, a.sotien, a.sotiendg, a.sotiendg, a.sotienvat, a.sotiendgvat" +
+                    "\n, a.ghichu, a.tinhtrang, a.userid, d.hoten as userten, a.ngayud, a.soluongyeucau" +
                     "\nFROM nhapkhoct a" +
                     "\nLEFT JOIN dmduoc b ON b.id = a.idduoc" +
                     "\nLEFT JOIN dmnguon@root c ON c.id = a.idnguon" +
-                    "\nLEFT JOIN users@root d ON c.id = a.userid"
-                    + v_where;
+                    "\nLEFT JOIN users@root d ON c.id = a.userid" +
+                    "\nLEFT JOIN dmhangsx@root e ON e.id = b.idhangsx" + 
+                    v_where;
                     ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
                     {
@@ -1258,10 +1262,17 @@ namespace ApiManageSolution.Models
                             Nhapkhocts item = new Nhapkhocts();
                             item.id = dr["id"].ToString();
                             item.idnhapkho = dr["idnhapkho"].ToString();
-                            item.idduoc = dr["idduoc"].ToString();
-                            item.tenduoc = dr["tenduoc"].ToString();
                             item.idnguon = dr["idnguon"].ToString();
                             item.tennguon = dr["tennguon"].ToString();
+                            item.idduoc = dr["idduoc"].ToString();
+                            item.tenduoc = dr["tenduoc"].ToString();
+                            item.ma = dr["ma"].ToString();
+                            item.sodk = dr["sodk"].ToString();
+                            item.hoatchat = dr["hoatchat"].ToString();
+                            item.donvidg = dr["donvidg"].ToString();
+                            item.donvisd = dr["donvisd"].ToString();
+                            item.idhangsx = dr["idhangsx"].ToString();
+                            item.tenhangsx = dr["tenhangsx"].ToString();
                             item.mavach = dr["mavach"].ToString();
                             item.losx = dr["losx"].ToString();
                             item.ngaysx = dr["ngaysx"].ToString();
@@ -1326,7 +1337,11 @@ namespace ApiManageSolution.Models
                 {
                     var sql = "";
                     var irec = 0;
-                    var v_id = Getid(v_conn);
+                    var v_id = data.id != null ? "" : data.id;
+                    if (v_id == null||v_id == "")
+                    {
+                        v_id = Getid(v_conn);
+                    }
                     var v_dongiavat = (decimal.Parse(data.dongia) + decimal.Parse(data.dongia) * decimal.Parse(data.vat) / 100).ToString();
                     var v_dongiadgvat = (decimal.Parse(data.dongiadg) + decimal.Parse(data.dongiadg) * decimal.Parse(data.vat) / 100).ToString();
                     var v_sotien = (data.dongia == null && data.soluongn == null ? 0 : decimal.Parse(data.soluongn) * decimal.Parse(data.dongia)).ToString();
@@ -1432,6 +1447,7 @@ namespace ApiManageSolution.Models
             public string ngay { get; set; }
             public string ngaytk { get; set; }
             public string ngayhd { get; set; }
+            public string sohd { get; set; }
             public string ngaykk { get; set; }
             public string ngaynhan { get; set; }
             public string sophieu { get; set; }
@@ -1467,7 +1483,7 @@ namespace ApiManageSolution.Models
                     List<Nhapkhos> lts = new List<Nhapkhos>();
                     string sql = "";
                     sql = @"SELECT a.id, a.idlydonx, b.ten as tenlydonx, a.idnhacc, c.ten as tennhacc, a.idkho, d.ten as tenkho, to_char(a.ngay,'dd/mm/yyyy') as ngay " +
-                    "\n, to_char(a.ngaytk,'dd/mm/yyyy') as ngaytk, a.ngayhd, a.ngaykk, ngaynhan, a.sophieu, a.chietkhau, a.chiphivc, a.miengiam1, a.miengiam2, miengiam3 " +
+                    "\n, to_char(a.ngaytk,'dd/mm/yyyy') as ngaytk, a.ngayhd, a.sohd, a.ngaykk, ngaynhan, a.sophieu, a.chietkhau, a.chiphivc, a.miengiam1, a.miengiam2, miengiam3 " +
                     "\n, a.miengiam4, a.miengiam5, a.vat, a.sotien, a.sotiendg, a.sotienhd, a.nguoinhan, nguoigiao, a.noinhan, a.ghichu, a.tinhtrang, a.userid, e.hoten as userten, to_char(a.ngayud,'dd/mm/yyyy hh24:mi') as ngayud " +
                     "\nFROM nhapkho a " +
                     "\nLEFT JOIN dmlydonx@root b ON b.id = a.idlydonx " +
@@ -1494,6 +1510,7 @@ namespace ApiManageSolution.Models
                             item.ngay = dr["ngay"].ToString();
                             item.ngaytk = dr["ngaytk"].ToString();
                             item.ngayhd = dr["ngayhd"].ToString();
+                            item.sohd = dr["sohd"].ToString();
                             item.ngaykk = dr["ngaykk"].ToString();
                             item.ngaynhan = dr["ngaynhan"].ToString();
                             item.sophieu = dr["sophieu"].ToString();
@@ -1562,31 +1579,32 @@ namespace ApiManageSolution.Models
 
                     sql = @"UPDATE nhapkho " +
                         "SET " +
-                        "id=" + data.idnhapkho + "" +
-                        ",idlydonx=" + data.idlydonx + "" +
+                        //"id=" + data.idnhapkho + "" +
+                        "idlydonx=" + data.idlydonx + "" +
                         ",idnhacc=" + data.idnhacc + "" +
                         ",idkho=" + data.idkho + "" +
                         ",ngay='" + (data.ngay == null ? "now()" : "to_date('" + data.ngay + "','dd/mm/yyyy')") + "'" +
                         ",ngaytk='" + (data.ngaytk == null ? "now()" : "to_date('" + data.ngaytk + "','dd/mm/yyyy')") + "'" +
                         ",ngayhd='" + (data.ngayhd == null ? "" : data.ngayhd) + "'" +
+                        ",sohd='" + (data.sohd == null ? "" : data.sohd) + "'" +
                         ",ngaykk='" + (data.ngaykk == null ? "" : data.ngaykk) + "'" +
                         ",ngaynhan='" + (data.ngaynhan == null ? "" : data.ngaynhan) + "'" +
                         ",sophieu='" + (data.sophieu == null ? "0" : data.sophieu) + "'" +
                         ",chietkhau=" + (data.chietkhau == null ? "0" : data.chietkhau) + "" +
                         ",chiphivc=" + (data.chiphivc == null ? "0" : data.chiphivc) + "" +
                         ",vat=" + (data.vat == null ? "0" : data.vat) + "" +
-                        ",nguoinhan=" + (data.nguoinhan == null ? "" : data.nguoinhan) + "" +
-                        ",nguoigiao=" + (data.nguoigiao == null ? "" : data.nguoigiao) + "" +
+                        ",nguoinhan='" + (data.nguoinhan == null ? "" : data.nguoinhan) + "'" +
+                        ",nguoigiao='" + (data.nguoigiao == null ? "" : data.nguoigiao) + "'" +
                         ",sotienhd=" + (data.sotienhd == null ? "0" : data.sotienhd) + "" +
                         ",ngayud=now() " +
                         "WHERE id =" + data.idnhapkho;
                     irec = dbHelper.ExecuteQuery(sql, v_conn);
                     if (irec == 0)
                     {
-                        sql = @"INSERT INTO nhapkho(id, idlydonx, idnhacc, idkho, ngay, ngaytk, ngayhd, ngaykk, ngaynhan, sophieu, chietkhau, chiphivc" +
+                        sql = @"INSERT INTO nhapkho(id, idlydonx, idnhacc, idkho, ngay, ngaytk, ngayhd, sohd, ngaykk, ngaynhan, sophieu, chietkhau, chiphivc" +
                             ", vat, nguoinhan, nguoigiao, sotienhd) " +
                             "VALUES(" + data.idnhapkho + "," + data.idlydonx + "," + data.idnhacc + "," + data.idkho + "," + (data.ngay == null ? "now()" : "to_date('" + data.ngay + "','dd/mm/yyyy')") + "," + (data.ngaytk == null ? "now()" : "to_date('" + data.ngaytk + "','dd/mm/yyyy')") + "" +
-                            ",'" + data.ngayhd + "','" + data.ngaykk + "','" + data.ngaynhan + "','" + data.sophieu + "'," + data.chietkhau + "," + (data.chiphivc == null ? 0 : decimal.Parse(data.chiphivc)) + "" +
+                            ",'" + data.ngayhd + "','" + data.sohd + "','" + data.ngaykk + "','" + data.ngaynhan + "','" + data.sophieu + "'," + data.chietkhau + "," + (data.chiphivc == null ? 0 : decimal.Parse(data.chiphivc)) + "" +
                             "," + data.vat + ",'" + data.nguoinhan + "','" + data.nguoigiao + "', " + (data.sotienhd == null ? "0" : data.sotienhd) + ") ";
                         irec = dbHelper.ExecuteQuery(sql, v_conn);
                     }
@@ -1652,6 +1670,7 @@ namespace ApiManageSolution.Models
         }
         public class NhapAlls
         {
+            public string id { get; set; }
             public string idnhapkho { get; set; }
             public string idlydonx { get; set; }
             public string idnhacc { get; set; }
@@ -1704,22 +1723,7 @@ namespace ApiManageSolution.Models
             {
                 try
                 {
-                    //var sql = "";
-                    //var irec = 0;
                     return Nhapkhos.Upd(data);
-                    //if (data.idnhapkho == null)
-                    //{
-                    //    IEnumerable<Nhapkhos> dsnhapkho = Nhapkhos.Upd(data);
-                    //}
-                    //if (irec == 1)
-                    //{
-                    //    return Nhapkhos.Get(v_conn, "\nWHERE a.id=" + data.idnhapkho);
-                    //}
-                    //else
-                    //{
-                    //    return null;
-                    //}
-
                 }
                 catch (Exception ex)
                 {

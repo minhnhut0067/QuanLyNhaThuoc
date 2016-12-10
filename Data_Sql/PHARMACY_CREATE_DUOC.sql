@@ -1537,6 +1537,7 @@ CREATE TABLE nhapkho
   ngay timestamp without time zone DEFAULT now(), -- ngay nhap kho
   ngaytk timestamp without time zone DEFAULT now(), -- ngay ton kho
   ngayhd character varying(16) DEFAULT ''::character varying, -- ngay hoa don
+  sohd character varying(28) DEFAULT ''::character varying,
   ngaykk character varying(16) DEFAULT ''::character varying, -- ngay kiem ke
   ngaynhan character varying(16) DEFAULT ''::character varying, -- ngay nhan
   sophieu character varying(28) DEFAULT ''::character varying,
@@ -1576,6 +1577,7 @@ COMMENT ON COLUMN nhapkho.idkho IS 'dmkho.id';
 COMMENT ON COLUMN nhapkho.ngay IS 'ngay nhap kho';
 COMMENT ON COLUMN nhapkho.ngaytk IS 'ngay ton kho';
 COMMENT ON COLUMN nhapkho.ngayhd IS 'ngay hoa don';
+COMMENT ON COLUMN nhapkho.sohd IS 'so hoa don';
 COMMENT ON COLUMN nhapkho.ngaykk IS 'ngay kiem ke';
 COMMENT ON COLUMN nhapkho.ngaynhan IS 'ngay nhan';
 COMMENT ON COLUMN nhapkho.chietkhau IS 'chiet khau so tien';
