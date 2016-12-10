@@ -1201,6 +1201,12 @@ namespace ApiManageSolution.Models
             public string tenduoc { get; set; }
             public string idnguon { get; set; }
             public string tennguon { get; set; }
+            public string ma { get; set; }
+            public string sodk { get; set; }
+            public string hoatchat { get; set; }
+            public string donvidg { get; set; }
+            public string donvisd { get; set; }
+            public string idhangsx { get; set; }
             public string mavach { get; set; }
             public string losx { get; set; }
             public string ngaysx { get; set; }
@@ -1587,6 +1593,13 @@ namespace ApiManageSolution.Models
                     if (irec == 1)
                     {
                         IEnumerable<Nhapkhocts> lts = Nhapkhocts.Upd(data);
+                        if (lts != null && lts.Count() > 0)
+                        {
+                            sql = "update nhapkho a set a.sotien = b.sotien, a.sotiendg = b.sotiendg" +
+                            "\nfrom (select idnhapkho, sum(sotien) as sotien, sum(sotiendg) as sotiendg from nhapkhoct where idnhapkho =" + data.idnhapkho + " group by idnhapkho) b " +
+                            "\nwhere a.id =b.idnhapkho";
+                            irec = dbHelper.ExecuteQuery(sql, v_conn);
+                        }
                         return Get(v_conn, "\nWHERE a.id=" + data.idnhapkho);
                     }
                     else

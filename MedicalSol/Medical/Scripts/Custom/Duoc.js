@@ -1639,8 +1639,10 @@ function f_ctnhapkho_show(v_ds, v_index, v_bool) {
     if (ms_gval("page_duoc_nhapkho_ct_ngayn", "value", "") == "") {
         ms_sval("page_duoc_nhapkho_ct_ngayn", "value", defaultdate);
     }
-
-    $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhoct", JSON.stringify(v_ds.Rows[0].nhapkhocts), "page_duoc_nhapkho_ct_ds", "Số ĐK~Mã~Tên thuốc~Đơn vị đóng gói~Đơn vị sử dụng~Ngày SX~Hạn dùng~Đơn giá~Số lượng nhập~Số tiền", "sodk~ma~tenduoc~donvidg~donvisd~ngaysx~handung~dongia~soluongn~sotien", false));
+    if (v_ds != null && v_dsv.Rows.length > 0)
+        $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhoct", JSON.stringify(v_ds.Rows[0].nhapkhocts), "page_duoc_nhapkho_ct_ds", "Số ĐK~Mã~Tên thuốc~Đơn vị đóng gói~Đơn vị sử dụng~Ngày SX~Hạn dùng~Đơn giá~Số lượng nhập~Số tiền", "sodk~ma~tenduoc~donvidg~donvisd~ngaysx~handung~dongia~soluongn~sotien", false));
+    else
+        $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhoct", "[]", "page_duoc_nhapkho_ct_ds", "Số ĐK~Mã~Tên thuốc~Đơn vị đóng gói~Đơn vị sử dụng~Ngày SX~Hạn dùng~Đơn giá~Số lượng nhập~Số tiền", "sodk~ma~tenduoc~donvidg~donvisd~ngaysx~handung~dongia~soluongn~sotien", false));
     $('#page_duoc_nhapkho_ct_ds_gidview').DataTable();
     $('#page_duoc_nhapkho_ct_ds_gidview').parent().css("overflow-x", "scroll");
     //ms_sval("page_duoc_nhapkho_ct_sodk", "value", ms_gfields(v_ds, v_index, "ma", ""));
