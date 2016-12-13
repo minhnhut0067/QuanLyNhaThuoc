@@ -155,6 +155,9 @@ namespace Medical.Controllers
                             case "nhapkhos":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Nhapkho>(jo.ToString()));
                                 break;
+                            case "nhapkhocts":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Nhapkhoct>(jo.ToString()));
+                                break;
                             default:
                                 break;
                         }

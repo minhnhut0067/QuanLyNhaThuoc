@@ -520,6 +520,22 @@ function ms_lpad(str, max, char) {
     { return ex; }
 }
 
+function ms_money(v_val) {
+    try {
+        var DecimalSeparator = Number("1.2").toLocaleString().substr(1, 1);
+
+        var AmountWithCommas = v_val.toLocaleString();
+        var arParts = String(AmountWithCommas).split(DecimalSeparator);
+        var intPart = arParts[0];
+        var decPart = (arParts.length > 1 ? arParts[1] : '');
+        decPart = (decPart + '00').substr(0, 2);
+
+        return intPart + DecimalSeparator + decPart + " VNĐ";
+    }
+    catch (ex) {
+        return "";
+    }
+}
 //basic
 
 function f_table_reload(v_obj) {
@@ -531,7 +547,8 @@ function f_table_reload(v_obj) {
                 data = { obj: v_obj, request: v_dk };
                 break;
             default:
-                data = { obj: v_obj, col: "", val: "" };
+                var v_dk = ms_gval("page_duoc_nhapkho_ct_idnhapkho_hidden", "selectedvalue", "");
+                data = { obj: v_obj, request: v_dk };
                 break;
         }
         $.ajax({
@@ -544,25 +561,29 @@ function f_table_reload(v_obj) {
                         case "khos":
                             $("#page_duoc_khaibaokho_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaokho", "ID~Nhóm~Mã~Tên~Ghi chú", "id~nhomkho~ma~ten~ghichu", false, "delete~edit"));
                             $('#page_duoc_khaibaokho_gidview').DataTable();
-                            $('#page_duoc_khaibaokho_gidview').parent().css("overflow-x", "scroll");
+                            $('#page_duoc_khaibaokho_gidview').parent().css({ "overflow": "scroll" });
                             break;
                         case "thuocs":
                             $("#page_duoc_khaibaothuoc_ds").html(f_create_table_html(v_obj, result, "page_duoc_khaibaothuoc", "Số ĐK~Mã~Tên~Loại~Hàm lượng~Hoạt chât~Dạng~Đường dùng~Đơn vị SD", "sodk~ma~ten~ten_loaiduoc~hamluong~hoatchat~dang~ten_duongdung~donvisd", false, "delete~edit"));
                             $('#page_duoc_khaibaothuoc_gidview').DataTable();
-                            $('#page_duoc_khaibaothuoc_gidview').parent().css("overflow-x", "scroll");
+                            $('#page_duoc_khaibaothuoc_gidview').parent().css({ "overflow": "scroll" });
                             break;
                         case "nhapkhos":
                             $("#page_duoc_nhapkho_ds").html(f_create_table_html(v_obj, result, "page_duoc_nhapkho_ds", "Phiếu~Ngày~Tên kho~Nhà Cung cấp~Số tiền~Số tiền HĐ~Người giao~VAT", "tenlydonx~ngay~tenkho~tennhacc~sotien~sotienhd~nguoigiao~vat", false, "delete~edit"));
                             $('#page_duoc_nhapkho_ds_gidview').DataTable();
-                            $('#page_duoc_nhapkho_ds_gidview').parent().css("overflow-x", "scroll");
+                            $('#page_duoc_nhapkho_ds_gidview').parent().css({ "overflow": "scroll" });
+                            break;
+                        case "nhapkhocts":
+                            $("#page_duoc_nhapkho_ct_ds").html(f_create_table_html("nhapkhocts", result, "page_duoc_nhapkho_ct_ds", "Số ĐK~Mã~Tên thuốc~Đơn vị đóng gói~Đơn vị sử dụng~Ngày SX~Hạn dùng~Đơn giá~Số lượng nhập~Số tiền", "sodk~ma~tenduoc~donvidg~donvisd~ngaysx~handung~dongia~soluongn~sotien", false, "delete"));
+                            $('#page_duoc_nhapkho_ct_ds_gidview').DataTable();
+                            $('#page_duoc_nhapkho_ct_ds_gidview').parent().css({ "max-height": "350px", "overflow": "scroll" });
                             break;
                         default:
                             break;
                     }
                 }
             },
-            error: function (result) {
-            }
+            error: function (result) { }
         });
     }
     catch (ex)
@@ -675,9 +696,13 @@ function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer, v_bt
         rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
         rhtml += "<thead>";
         rhtml += "<tr role=\"row\">";
-        if (v_ds.Rows.length > 0) {
-            rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"input-delete\"></th>";
-            rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"input-details\"></th>";//background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
+        if (v_btn.split('~').length > 0) {
+            var length = v_btn.split('~').length;
+            do {
+                //rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"input-delete\"></th>";
+                rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"input-details\"></th>";//background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
+                length--;
+            } while (length > 0)
         }
         for (var i = 0; i < v_col.split('~').length; i++) {
             if (i <= 0) {
@@ -706,7 +731,7 @@ function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer, v_bt
                     for (var j = 0; j < v_btn.split('~').length; j++) {
                         switch (v_btn.split('~')[j]) {
                             case "delete":
-                                rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_del_record('" + v_obj + "','" + ms_gfields(v_ds, i, "id", "") + "')\" style = \"color:red; font-size:13px;\"><i class=\"fa fa-trash\" aria-hidden=\"true\" /></a></td>";                                
+                                rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_del_record('" + v_obj + "','" + ms_gfields(v_ds, i, "id", "") + "')\" style = \"color:red; font-size:13px;\"><i class=\"fa fa-trash\" aria-hidden=\"true\" /></a></td>";
                                 break;
                             case "edit":
                                 rhtml += "<td style =\"text-align:center;vertical-align: middle;padding:10px;\"><a href=\"#\" onclick=\"f_gridview_show_record('" + v_obj + "','" + i + "')\" style = \"color:blue; font-size:13px;\"><i class=\"fa fa-pencil\" aria-hidden=\"true\" /></a></td>";
@@ -898,6 +923,7 @@ function f_save_data(v_url, v_data) {
                         f_ctnhapkho_show(JSON.parse(result != "" ? result : "{\"Name\":\"Table\",\"Rows\":[]}"), 0, false);
                         f_clear_arr("nhapkhocts_thuoc");
                         ms_focus_arr("page_duoc_nhapkho_ct_sodk");
+                        ms_enable_arr("page_duoc_nhapkho_ct_luu", true);
                         break;
                     default:
                         break;
@@ -947,9 +973,16 @@ function f_gridview_del_record(v_obj, v_id) {
                 if (result == "True") {
                     f_table_reload(v_obj);
                     alert("Xóa dữ liệu thành công !");
+                    switch (v_obj) {
+                        case "nhapkhocts":
+                            f_clear_arr("nhapkhocts_thuoc");
+                            ms_enable_arr("page_duoc_nhapkho_ct_moi", true);
+                            ms_focus_arr("page_duoc_nhapkho_ct_sodk");
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                //resultval = result;
-                //ms_sval(v_id, "value", result);
             },
             error: function (result) {
                 //ms_sval(v_id, "value", "");
@@ -977,10 +1010,6 @@ function f_gridview_show_record(v_obj, v_index) {
                 f_ctnhapkho_show(m_grid_ds, v_index, false)
                 ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", true);
                 break;
-            case "nhapkhocts":
-                f_ctnhapkho_showthuoc(m_grid_ds, v_index, false)
-                ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", true);
-                break;
             default:
                 break;
         }
@@ -991,17 +1020,16 @@ function f_gridview_show_record(v_obj, v_index) {
 }
 
 function f_gridview_row_click(v_obj, v_index) {
-    try{
+    try {
         switch (v_obj) {
             case "nhapkhocts":
-                f_ctnhapkho_duoc_show(m_grid_ds, v_index, false);                
+                f_ctnhapkho_duoc_show(m_grid_ds, v_index, false);
                 break;
             default:
                 break;
         }
     }
-    catch(ex)
-    {
+    catch (ex) {
         alert("Lỗi hệ thống ! Không lấy được dữ liệu")
     }
 }

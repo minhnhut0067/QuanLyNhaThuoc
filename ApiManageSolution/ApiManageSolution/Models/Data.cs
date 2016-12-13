@@ -101,6 +101,16 @@ namespace ApiManageSolution.Models
                                 }
                             }
                             return Nhapkhos.Get(v_conn, v_where);
+                        case "nhapkhocts":
+                            if (data.request != null && data.request != "")
+                            {
+                                v_where = "\nWHERE 1=1";
+                                if (data.request.Split('~')[0] != "")
+                                {
+                                    v_where += "\nAND a.idnhapkho=" + data.request.Split('~')[0];
+                                }
+                            }
+                            return Nhapkhocts.Get(v_conn, v_where);
                         case "thuocs":
                             return Thuocs.Get(v_conn, v_where);
                         #endregion
@@ -180,6 +190,9 @@ namespace ApiManageSolution.Models
                             break;
                         case "nhanviens":
                             data.result = Nhanviens.Del(data);
+                            break;
+                        case "nhapkhocts":
+                            data.result = Nhapkhocts.Del(data);
                             break;
                         default:
                             break;
@@ -1200,7 +1213,7 @@ namespace ApiManageSolution.Models
             public string idnguon { get; set; }
             public string tennguon { get; set; }
             public string idduoc { get; set; }
-            public string tenduoc { get; set; }            
+            public string tenduoc { get; set; }
             public string ma { get; set; }
             public string sodk { get; set; }
             public string hoatchat { get; set; }
@@ -1252,7 +1265,7 @@ namespace ApiManageSolution.Models
                     "\nLEFT JOIN dmduoc b ON b.id = a.idduoc" +
                     "\nLEFT JOIN dmnguon@root c ON c.id = a.idnguon" +
                     "\nLEFT JOIN users@root d ON c.id = a.userid" +
-                    "\nLEFT JOIN dmhangsx@root e ON e.id = b.idhangsx" + 
+                    "\nLEFT JOIN dmhangsx@root e ON e.id = b.idhangsx" +
                     v_where;
                     ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -1337,8 +1350,16 @@ namespace ApiManageSolution.Models
                 {
                     var sql = "";
                     var irec = 0;
-                    var v_id = data.id != null ? "" : data.id;
-                    if (v_id == null||v_id == "")
+                    var v_id = (data.id != null || data.id != "" ? data.id : "");
+
+                    //Kiem tra thuoc da nhap
+                    DataSet ds = new DataSet();
+                    ds = dbHelper.getDataSetbySql("select id from nhapkhoct where idduoc = " + data.idduoc + "and dongia = " + data.dongia + "and dongiadg =" + data.dongiadg, v_conn);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        v_id = ds.Tables[0].Rows[0]["id"].ToString();
+                    }
+                    if (v_id == null || v_id == "")
                     {
                         v_id = Getid(v_conn);
                     }
@@ -1352,12 +1373,12 @@ namespace ApiManageSolution.Models
                         "SET " +
                         "idnhapkho=" + data.idnhapkho + "" +
                         ",idduoc=" + data.idduoc + "" +
-                        ",idnguon='" + (data.idnguon == null ? "" : data.idnguon) + "'" +
+                        ",idnguon=" + (data.idnguon == null ? "0" : data.idnguon) + "" +
                         ",mavach='" + (data.mavach == null ? "" : data.mavach) + "'" +
                         ",losx='" + (data.losx == null ? "" : data.losx) + "'" +
                         ",ngaysx='" + (data.ngaysx == null ? "" : data.ngaysx) + "'" +
                         ",handung='" + (data.handung == null ? "" : data.handung) + "'" +
-                        ",baohanh='" + (data.baohanh == null ? "" : data.baohanh) + "'" +
+                        ",baohanh=" + (data.baohanh == null ? "0" : data.baohanh) + "" +
                         ",vat=" + (data.vat == null ? "0" : data.vat) + "" +
                         ",chietkhau=" + (data.chietkhau == null ? "0" : data.chietkhau) + "" +
                         ",soluongdg=" + (data.soluongdg == null ? "0" : data.soluongdg) + "" +
@@ -1371,7 +1392,7 @@ namespace ApiManageSolution.Models
                         ",sotiendg=" + v_sotiendg + "" +
                         ",sotienvat=" + v_sotienvat + "" +
                         ",sotiendgvat=" + v_sotiendgvat + "" +
-                        ",ghichu=" + (data.ghichu == null ? "" : data.ghichu) + "" +
+                        ",ghichu='" + (data.ghichu == null ? "" : data.ghichu) + "'" +
                         ",ngayud=now() " +
                         "WHERE id =" + v_id;
                     irec = dbHelper.ExecuteQuery(sql, v_conn);
@@ -1417,6 +1438,15 @@ namespace ApiManageSolution.Models
                     {
                         var sql = "";
                         var irec = 0;
+                        //var idnhapkho = "";
+                        //try
+                        //{
+                        //    if (data.key != null && data.key != "")
+                        //    {
+                        //        idnhapkho = dbHelper.getDataSetbySql("", v_conn).Tables[0].Rows[0]["idnguon"].ToString();
+                        //    }
+                        //}
+                        //catch (Exception ex) { }
                         sql = "delete nhapkhoct where id =" + data.key;
                         irec = dbHelper.ExecuteQuery(sql, v_conn);
                         if (irec == 1)
