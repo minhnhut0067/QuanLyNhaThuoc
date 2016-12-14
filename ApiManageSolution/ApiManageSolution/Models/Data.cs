@@ -8,7 +8,8 @@ namespace ApiManageSolution.Models
 {
     public class Data
     {
-        private static string ConnectionString = "Server=localhost;Port=5435;Database=ms_null;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
+        //private static string ConnectionString = "Server=localhost;Port=5435;Database=ms_null;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
+        private static string ConnectionString = "Server=172.168.1.244;Port=5434;Database=ms_null;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
         dbHelper dbh = new dbHelper();
         public class Search
         {
@@ -17,7 +18,6 @@ namespace ApiManageSolution.Models
             public string val { get; set; }
             public string request { get; set; }
             public string userid { get; set; }
-
             public static IEnumerable<Object> Filter(Search data)
             {
                 try
@@ -35,14 +35,14 @@ namespace ApiManageSolution.Models
                         {
                             if (v_where == "")
                             {
-                                v_where += "\nWHERE a." + item + "";
+                                v_where += "\nWHERE lower(a." + item + ")";
                             }
                             else
                             {
-                                v_where += "||a." + item + "";
+                                v_where += "||lower(a." + item + ")";
                             }
                         }
-                        v_where += " ILIKE '%" + data.val.ToLower() + "%'";
+                        v_where += " ILIKE '%" + (data.val != null ? data.val.ToLower() : "") + "%'";
                         v_where += "\nORDER BY a.ten";
                         v_where += "\nLIMIT 50";
                     }
@@ -130,6 +130,25 @@ namespace ApiManageSolution.Models
                 }
             }
         }
+        public class Check
+        {
+            public string obj { get; set; }
+            public string request { get; set; }
+            public string result { get; set; }
+            public string userid { get; set; }
+            public static Check Checked(Check data)
+            {
+                switch (data.obj)
+                {
+                    case "nhapkhocts":
+                        data.result = Nhapkhocts.Kiemtraphieunhap(data).ToString();
+                        break;
+                    default:
+                        break;
+                }
+                return data;
+            }
+        }
         public class CreateVal
         {
             public string obj { get; set; }
@@ -190,6 +209,9 @@ namespace ApiManageSolution.Models
                             break;
                         case "nhanviens":
                             data.result = Nhanviens.Del(data);
+                            break;
+                        case "nhapkhos":
+                            data.result = Nhapkhos.Del(data);
                             break;
                         case "nhapkhocts":
                             data.result = Nhapkhocts.Del(data);
@@ -1460,6 +1482,42 @@ namespace ApiManageSolution.Models
                     }
                 }
                 catch
+                {
+                    return false;
+                }
+            }
+            public static bool Kiemtraphieunhap(Check data)
+            {
+                string v_conn = "";
+                if (data.userid != null)
+                {
+                    v_conn = ConnectionString.Replace("null", data.userid.Substring(0, 10));
+                }
+                return Kiemtraphieunhap(v_conn, data);
+            }
+            public static bool Kiemtraphieunhap(string v_conn, Check data)
+            {
+                try
+                {
+                    if (data.request.Split('~')[0] != "" && data.request.Split('~')[1] != "")
+                    {
+                        DataSet ds = new DataSet();
+                        ds = dbHelper.getDataSetbySql("select id from nhapkhoct a where idnhapkho=" + data.request.Split('~')[0] + " and idduoc=" + data.request.Split('~')[1], v_conn);
+                        if (ds != null && ds.Tables[0].Rows.Count > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
                 {
                     return false;
                 }

@@ -244,5 +244,29 @@ namespace Medical.Controllers
                 return "";
             }
         }
+
+        [HttpPost]
+        public string Check(Data.Check data)
+        {
+            try
+            {
+                if (data.obj != null && data.request != null)
+                {
+                    if (data.userid == null)
+                    {
+                        data.userid = @Session["User_Id"].ToString();
+                    }
+                    return JObject.Parse(Bridge.HttpPostApi("Check", data))["result"].Value<string>();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
     }
 }

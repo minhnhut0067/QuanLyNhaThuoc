@@ -134,7 +134,7 @@ textarea {
         .header > .left > a > .logo {
             width: auto;
             max-width: 120%;
-            padding-top:20px;
+            padding-top:0;
         }
 
     .header > .right {
@@ -144,7 +144,7 @@ textarea {
     }
 
         .header > .right > a {
-            color: white;
+            color: #000;
             font-weight: bold;
         }
 

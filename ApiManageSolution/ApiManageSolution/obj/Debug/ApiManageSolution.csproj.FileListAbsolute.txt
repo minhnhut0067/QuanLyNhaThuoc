@@ -348,7 +348,6 @@ D:\nhut\project\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\bin\ko\System
 D:\nhut\project\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\bin\ru\System.Spatial.resources.dll
 D:\nhut\project\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\bin\zh-Hans\System.Spatial.resources.dll
 D:\nhut\project\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\bin\zh-Hant\System.Spatial.resources.dll
-D:\nhut\project\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\obj\Debug\ApiManageSolution.csprojResolveAssemblyReference.cache
 D:\nhut\project\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\obj\Debug\ApiManageSolution.dll
 D:\nhut\project\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\obj\Debug\ApiManageSolution.pdb
 E:\Source\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\bin\ApiManageSolution.dll.config

@@ -167,6 +167,8 @@
     <Content Include="Content\Images\home_background1.jpg" />
     <Content Include="Content\Images\home_background2.jpg" />
     <Content Include="Content\Images\home_background3.jpg" />
+    <Content Include="Content\Images\home_background4.png" />
+    <Content Include="Content\Images\home_background5.jpg" />
     <Content Include="Content\Images\icon_user.gif" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\JqueryUI\images\ui-bg_glass_45_0078ae_1x400.png" />

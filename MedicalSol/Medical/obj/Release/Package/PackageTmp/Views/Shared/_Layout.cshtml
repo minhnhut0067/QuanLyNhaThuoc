@@ -30,14 +30,14 @@
     <script type="text/javascript" src="~/Scripts/Custom/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/Scripts/Custom/dataTables.bootstrap.min.js"></script>
 </head>
-@*<body class="home-bg">*@
-<body>
+<body class="home-bg">
+@*<body>*@
     <div class="container-fluid" style="padding:0">
-        <div class="row">
+        <div class="row" style="margin:0;">
             <div id="notice" class="alert col-lg-12 col-md-12 col-sm-12 col-xs-12 fade" style="position:fixed; top:0; z-index:101">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
-            @*@Html.Partial("../Partial/_Header")*@
+            @Html.Partial("../Partial/_Header")
         </div>
         <div class="row" style="border-bottom:1px solid #cccccc;background-color:white;width:100%; margin:0">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index:100;">
@@ -48,8 +48,12 @@
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="padding-left: 0; padding-bottom: 15px; border-left: 1px solid #ccc;">
                 @RenderBody()
             </div>
-
         </div>
+        @*<div class="row" style="background-color:#fff; min-height:100px;">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="">
+                <span>Cpyright†Thi đầu bò</span>
+            </div>
+        </div>*@
     </div>
     @RenderSection("scripts", required: false)
 </body>

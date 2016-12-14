@@ -8,37 +8,32 @@ using System.Web.Http;
 
 namespace ApiManageSolution.Controllers
 {
-    public class DelRecordController : ApiController
+    public class CheckController : ApiController
     {
-        // GET api/delrecord
+        // GET api/check
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/delrecord/5
+        // GET api/check/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/delrecord
-        public Data.DelRecord Post([FromBody]Data.DelRecord data)
+        // POST api/check
+        public Data.Check Post([FromBody]Data.Check data)
         {
-            try
-            {
-                return Data.DelRecord.Del(data);
-            }
-            catch(Exception ex)
-            { return null; }
+            return Data.Check.Checked(data);
         }
 
-        // PUT api/delrecord/5
+        // PUT api/check/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/delrecord/5
+        // DELETE api/check/5
         public void Delete(int id)
         {
         }

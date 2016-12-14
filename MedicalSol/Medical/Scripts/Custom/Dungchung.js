@@ -349,8 +349,6 @@ function ms_grid_click(v_this, v_dg) {
     }
     try {
         v_this.style.color = "#915608";
-        //v_this.style.fontWeight = 0;
-        //v_this.style.backgroundColor = "#fff";
         v_this.style.background = "#f8da4e url(\"../Content/jqueryui/images/ui-bg_glass_55_f8da4e_1x400.png\") repeat-x scroll 50% 50%";
         ms_sval(v_dg, "lang", v_this.id);
         ms_sval(v_this.id + '_rh', "className", "ms_rcell_c_sel");
@@ -696,13 +694,14 @@ function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer, v_bt
         rhtml += "<table id=\"" + v_id + "_gidview\" class=\"table table-sm table-striped table-bordered dataTable\" role=\"grid\" aria-describedby=\"" + v_id + "_gidview_info\" style=\"width: 100%;\" width=\"100%\" cellspacing=\"0\">";
         rhtml += "<thead>";
         rhtml += "<tr role=\"row\">";
-        if (v_btn.split('~').length > 0) {
-            var length = v_btn.split('~').length;
-            do {
-                //rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"input-delete\"></th>";
-                rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"input-details\"></th>";//background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
-                length--;
-            } while (length > 0)
+        if (v_ds.Rows.length > 0) {
+            if (v_btn.split('~').length > 0) {
+                var length = v_btn.split('~').length;
+                do {
+                    rhtml += "<th class=\"\" tabindex=\"0\" aria-controls=\"" + v_id + "_gidview\" rowspan=\"1\" colspan=\"1\" style=\"width: auto;text-align: center;\" aria-label=\"input-details\"></th>";//background: rgba(0, 0, 0, 0) linear-gradient(#d4ffff, #ddfefe) repeat scroll 0 0;
+                    length--;
+                } while (length > 0)
+            }
         }
         for (var i = 0; i < v_col.split('~').length; i++) {
             if (i <= 0) {
@@ -1008,7 +1007,7 @@ function f_gridview_show_record(v_obj, v_index) {
                 break;
             case "nhapkhos":
                 f_ctnhapkho_show(m_grid_ds, v_index, false)
-                ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", true);
+                ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_them", true);
                 break;
             default:
                 break;

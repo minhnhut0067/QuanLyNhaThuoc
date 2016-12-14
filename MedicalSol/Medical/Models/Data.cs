@@ -135,6 +135,13 @@ namespace Medical.Models
             public string request { get; set; }
             public string userid { get; set; }
         }
+        public class Check
+        {
+            public string obj { get; set; }
+            public string request { get; set; }
+            public string result { get; set; }
+            public string userid { get; set; }
+        }
         public class Lydonx
         {
             public string id { get; set; }
