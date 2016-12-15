@@ -846,6 +846,9 @@ function f_filter_select(v_data) {
                     case "thuocs":
                         f_filter_thuoc_callback(v_ds);
                         break;
+                    case "mathuocs":
+                        f_filter_mathuoc_callback(v_ds);
+                        break;
                     default:
                         break;
                 }
@@ -890,6 +893,9 @@ function f_filter_select(v_data) {
                         break;
                     case "thuocs":
                         f_filter_thuoc_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
+                        break;
+                    case "mathuocs":
+                        f_filter_mathuoc_callback(JSON.parse("{\"Name\":\"Table\",\"Rows\":[]}"));
                         break;
                     default:
                         break;

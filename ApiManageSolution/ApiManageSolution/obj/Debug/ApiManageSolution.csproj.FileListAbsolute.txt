@@ -415,3 +415,4 @@ E:\Source\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\bin\zh-Hant\System.
 E:\Source\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\obj\Debug\ApiManageSolution.csprojResolveAssemblyReference.cache
 E:\Source\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\obj\Debug\ApiManageSolution.dll
 E:\Source\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\obj\Debug\ApiManageSolution.pdb
+D:\nhut\project\QuanLyNhaThuoc\ApiManageSolution\ApiManageSolution\obj\Debug\ApiManageSolution.csprojResolveAssemblyReference.cache

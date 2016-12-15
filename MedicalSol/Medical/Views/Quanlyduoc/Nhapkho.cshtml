@@ -105,21 +105,21 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="margin-bottom:10px;">
                     <div class="input-group">
                         <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_ct_sotien", "input", "Số tiền", ""));
+                            document.write(f_create_input("@ViewData["page"]_ct_sotien", "input", "Số tiền", "color:blue;font-weight:bold"));
                         </script>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="margin-bottom:10px;">
                     <div class="input-group">
                         <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_ct_sotientruck", "input", "Số tiền(-CK)", ""));
+                            document.write(f_create_input("@ViewData["page"]_ct_sotientruck", "input", "Số tiền(-CK)", "color:blue;font-weight:bold"));
                         </script>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="margin-bottom:10px;">
                     <div class="input-group">
                         <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_ct_sotientruckcongvat", "input", "Số tiền(-CK + VAT)", ""));
+                            document.write(f_create_input("@ViewData["page"]_ct_sotientruckcongvat", "input", "Số tiền(-CK + VAT)", "color:blue;font-weight:bold"));
                         </script>
                     </div>
                 </div>
@@ -141,18 +141,24 @@
                         </script>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6" style="margin-bottom:10px;">
+                @*<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6" style="margin-bottom:10px;">
+                        <div class="input-group">
+                            <script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_ct_ma", "input", "Mã", ""));
+                            </script>
+                        </div>
+                    </div>*@
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px;">
                     <div class="input-group">
-                        <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_ct_ma", "input", "Mã", ""));
-                        </script>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px;">
-                    <div class="input-group">
-                        <script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_ct_tenthuoc", "filter", "Tên thuốc", ""));
-                        </script>
+                        @*<script type="text/javascript">
+                                document.write(f_create_input("@ViewData["page"]_ct_tenthuoc", "filter", "Tên thuốc", ""));
+                            </script>*@
+                        <span style="" id="@ViewData["page"]_ct_ma_label" class="input-group-addon input-label">Nội dung</span>
+                        <input id="@ViewData["page"]_ct_ma" class="form-control input-sm" type="text" onkeyup="input_keyup(event, this);" onblur="input_onblur(this);" onkeypress="input_keypress(event,this);" aria-describedby="@ViewData["page"]_ct_ma_label" placeholder="" style="width:20%">
+                        <input type="text" onkeyup="input_keyup(event, this);" onblur="input_onblur(this);" onkeypress="input_keypress(event,this);" aria-describedby="@ViewData["page"]_ct_tenthuoc_label" placeholder="" class="form-control input-sm" style="width: 80%" id="@ViewData["page"]_ct_tenthuoc">
+                        <a onclick="filter_click(this);" id="@ViewData["page"]_ct_tenthuoc_filter" class="input-group-addon input-filter" href="#">
+                            <i class="fa fa-sort-desc"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -192,8 +198,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-bottom:10px;">
                     <div class="input-group">
                         @*<script type="text/javascript">
-                            document.write(f_create_input("@ViewData["page"]_ct_soluong", "input", "Số lượng", ""));
-                        </script>*@
+                                document.write(f_create_input("@ViewData["page"]_ct_soluong", "input", "Số lượng", ""));
+                            </script>*@
                         <span id="@ViewData["page"]_ct_soluong_label" class="input-group-addon input-label">Số lượng</span>
                         <input id="@ViewData["page"]_ct_soluong" class="form-control input-sm" placeholder="" aria-describedby="@ViewData["page"]_ct_soluong_label" onkeypress="input_keypress(event,this);" onblur="input_onblur(this);" onkeyup="input_keyup(event, this);" type="text">
                         <span id="@ViewData["page"]_ct_nhan_label" class="input-group-addon input-label" style="min-width:20px;">x</span>

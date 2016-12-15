@@ -113,6 +113,8 @@ namespace ApiManageSolution.Models
                             return Nhapkhocts.Get(v_conn, v_where);
                         case "thuocs":
                             return Thuocs.Get(v_conn, v_where);
+                        case "mathuocs":
+                            return Thuocs.Get(v_conn, v_where);
                         #endregion
                         #region Nhân sự
                         case "phongbans":

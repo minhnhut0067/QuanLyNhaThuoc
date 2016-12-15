@@ -67,6 +67,9 @@ namespace Medical.Controllers
                             case "thuocs":
                                 lts.Add(JsonConvert.DeserializeObject<Data.Thuoc>(jo.ToString()));
                                 break;
+                            case "mathuocs":
+                                lts.Add(JsonConvert.DeserializeObject<Data.Thuoc>(jo.ToString()));
+                                break;
                             default:
                                 break;
                         }
