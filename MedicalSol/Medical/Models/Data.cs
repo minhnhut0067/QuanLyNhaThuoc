@@ -9,7 +9,8 @@ namespace Medical.Models
 {
     public class Data
     {
-        private static string DefaultUrl = "http://localhost:48187/";
+        //private static string DefaultUrl = "http://localhost:48187/";
+        private static string DefaultUrl = "http://www.cybermedisoft.com/msapi";       
         #region Class Dung Chung
         public class User
         {

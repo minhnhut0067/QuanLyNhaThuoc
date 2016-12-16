@@ -12,7 +12,7 @@ namespace Medical.Models
         {
             HttpContext ctx = HttpContext.Current;
             // check  sessions here
-            if (HttpContext.Current.Session["User_Id"] == null)
+            if (HttpContext.Current.Session["ms_userid"] == null)
             {
                 filterContext.Result = new RedirectResult("~/User/Login");
                 return;

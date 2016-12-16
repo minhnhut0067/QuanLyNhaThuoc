@@ -11,7 +11,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @{
-        if (Session["User_name"] == null)
+        if (Session["ms_username"] == null)
         {
             Session.Abandon();
             Response.Redirect("~/User/Login");

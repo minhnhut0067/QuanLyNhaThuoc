@@ -19,5 +19,5 @@ CREATE DATABASE ms_9999999999 WITH OWNER = msolution ENCODING = 'UTF8'
 TABLESPACE = pg_default LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8'
 CONNECTION LIMIT = -1;
 
-CREATE public database link root connect to msolution identified by 'msolution' using libpq 'host=172.168.1.244 port=5434 dbname=ms_root';
 drop public database link root;
+CREATE public database link root connect to msolution identified by 'msolution' using libpq 'host=172.168.1.244 port=5444 dbname=ms_root';

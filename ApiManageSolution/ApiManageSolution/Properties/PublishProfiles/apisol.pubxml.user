@@ -52,7 +52,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/02/2016 09:35:26</publishTime>
     </File>
     <File Include="bin/ApiManageSolution.dll">
-      <publishTime>12/15/2016 14:24:34</publishTime>
+      <publishTime>12/16/2016 16:34:16</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>11/02/2016 09:35:26</publishTime>

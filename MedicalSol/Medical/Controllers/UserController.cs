@@ -33,8 +33,8 @@ namespace Medical.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(login.username_, login.rememberme);
                     var usr = new Data.User(login);
-                    Session["User_Name"] = usr.hoten;
-                    Session["User_Id"] = usr.iduser;
+                    Session["ms_username"] = usr.hoten;
+                    Session["ms_userid"] = usr.iduser;
                     return RedirectToAction("Index", "Trangchu");
                 }
                 else
@@ -70,7 +70,7 @@ namespace Medical.Controllers
         {
             try
             {
-                if (Session["User_Id"] != null)
+                if (Session["ms_userid"] != null)
                     return true;
                 else
                     return false;

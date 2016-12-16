@@ -10,7 +10,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @{
 
-        if (Session["User_name"] != null)
+        if (Session["ms_username"] != null)
         {
             Response.Redirect("~/Trangchu/Index");
         }

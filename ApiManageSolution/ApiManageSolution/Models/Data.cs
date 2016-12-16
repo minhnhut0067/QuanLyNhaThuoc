@@ -9,7 +9,7 @@ namespace ApiManageSolution.Models
     public class Data
     {
         //private static string ConnectionString = "Server=localhost;Port=5435;Database=ms_null;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
-        private static string ConnectionString = "Server=172.168.1.244;Port=5434;Database=ms_null;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
+        private static string ConnectionString = "Server=172.168.1.244;Port=5444;Database=ms_null;User Id=msolution;Password=msolution;TIMEOUT=15;POOLING=True;MINPOOLSIZE=1;MAXPOOLSIZE=20;COMMANDTIMEOUT=20;";
         dbHelper dbh = new dbHelper();
         public class Search
         {
@@ -1374,60 +1374,136 @@ namespace ApiManageSolution.Models
                 {
                     var sql = "";
                     var irec = 0;
-                    var v_id = (data.id != null || data.id != "" ? data.id : "");
-
-                    //Kiem tra thuoc da nhap
-                    DataSet ds = new DataSet();
-                    ds = dbHelper.getDataSetbySql("select id from nhapkhoct where idduoc = " + data.idduoc + "and dongia = " + data.dongia + "and dongiadg =" + data.dongiadg, v_conn);
-                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    var v_id = "";
+                    var v_dongiavat = "0";
+                    var v_dongiadgvat = "0";
+                    var v_sotien = "0";
+                    var v_sotiendg = "0";
+                    var v_sotienvat = "0";
+                    var v_sotiendgvat = "0";
+                    var v_idnguon = "0";
+                    if (data.id != null && data.id != "")
                     {
-                        v_id = ds.Tables[0].Rows[0]["id"].ToString();
+                        v_id = data.id;
                     }
                     if (v_id == null || v_id == "")
                     {
                         v_id = Getid(v_conn);
                     }
-                    var v_dongiavat = (decimal.Parse(data.dongia) + decimal.Parse(data.dongia) * decimal.Parse(data.vat) / 100).ToString();
-                    var v_dongiadgvat = (decimal.Parse(data.dongiadg) + decimal.Parse(data.dongiadg) * decimal.Parse(data.vat) / 100).ToString();
-                    var v_sotien = (data.dongia == null && data.soluongn == null ? 0 : decimal.Parse(data.soluongn) * decimal.Parse(data.dongia)).ToString();
-                    var v_sotiendg = (data.dongiadg == null && data.soluongn == null ? 0 : decimal.Parse(data.soluongn) * decimal.Parse(data.dongiadg)).ToString();
-                    var v_sotienvat = (v_dongiavat == null && data.soluongn == null ? 0 : decimal.Parse(data.soluongn) * decimal.Parse(v_dongiavat)).ToString();
-                    var v_sotiendgvat = (v_dongiadgvat == null && data.soluongn == null ? 0 : decimal.Parse(data.soluongn) * decimal.Parse(v_dongiadgvat)).ToString();
+                    //Kiem tra thuoc da nhap
+                    DataSet ds = new DataSet();
+                    ds = dbHelper.getDataSetbySql("select id from nhapkhoct where idnhapkho = " + data.idnhapkho + " and idduoc = " + data.idduoc + " and dongia = " + data.dongia + " and dongiadg =" + data.dongiadg, v_conn);
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        v_id = ds.Tables[0].Rows[0]["id"].ToString();
+                    }
+                    if (data.idnguon != null && data.idnguon != "")
+                    {
+                        v_idnguon = data.idnguon;
+                    }
+                    if (data.mavach == null || data.mavach == "")
+                    {
+                        data.mavach = "";
+                    }
+                    if (data.losx == null || data.losx == "")
+                    {
+                        data.losx = "";
+                    }
+                    if (data.ngaysx == null || data.ngaysx == "")
+                    {
+                        data.ngaysx = "";
+                    }
+                    if (data.handung == null || data.handung == "")
+                    {
+                        data.handung = "";
+                    }
+                    if (data.baohanh == null || data.baohanh == "")
+                    {
+                        data.baohanh = "0";
+                    }
+                    if (data.vat == null || data.vat == "")
+                    {
+                        data.vat = "0";
+                    }
+                    if (data.chietkhau == null || data.chietkhau == "")
+                    {
+                        data.chietkhau = "0";
+                    }
+                    if (data.vat == null || data.vat == "")
+                    {
+                        data.vat = "0";
+                    }
+                    if (data.soluongdg == null || data.soluongdg == "")
+                    {
+                        data.soluongdg = "0";
+                    }
+                    if (data.soluongsd == null || data.soluongsd == "")
+                    {
+                        data.soluongsd = "0";
+                    }
+                    if (data.soluongn == null || data.soluongn == "")
+                    {
+                        data.soluongn = "0";
+                    }
+                    if (data.dongiadg == null || data.dongiadg == "")
+                    {
+                        data.dongiadg = "0";
+                    }
+                    if (data.ghichu == null)
+                    {
+                        data.ghichu = "";
+                    }
+                    if (decimal.Parse(data.vat) != 0)
+                    {
+                        v_dongiavat = (decimal.Parse(data.dongia) + decimal.Parse(data.dongia) * (decimal.Parse(data.vat) / 100)).ToString();
+                        if (data.dongiadg != "0")
+                        {
+                            v_dongiadgvat = (decimal.Parse(data.dongiadg) + decimal.Parse(data.dongiadg) * (decimal.Parse(data.vat) / 100)).ToString();
+                        }
+                    }
+                    if (data.soluongn != "0")
+                    {
+                        v_sotien = (decimal.Parse(data.soluongn) * decimal.Parse(data.dongia)).ToString();
+                        v_sotiendg = (decimal.Parse(data.soluongn) * decimal.Parse(data.dongiadg)).ToString();
+                        v_sotienvat = (decimal.Parse(data.soluongn) * decimal.Parse(v_dongiavat)).ToString();
+                        v_sotiendgvat = (decimal.Parse(data.soluongn) * decimal.Parse(v_dongiadgvat)).ToString();
+                    }
                     sql = @"UPDATE nhapkhoct " +
                         "SET " +
                         "idnhapkho=" + data.idnhapkho + "" +
                         ",idduoc=" + data.idduoc + "" +
-                        ",idnguon=" + (data.idnguon == null ? "0" : data.idnguon) + "" +
-                        ",mavach='" + (data.mavach == null ? "" : data.mavach) + "'" +
-                        ",losx='" + (data.losx == null ? "" : data.losx) + "'" +
-                        ",ngaysx='" + (data.ngaysx == null ? "" : data.ngaysx) + "'" +
-                        ",handung='" + (data.handung == null ? "" : data.handung) + "'" +
-                        ",baohanh=" + (data.baohanh == null ? "0" : data.baohanh) + "" +
-                        ",vat=" + (data.vat == null ? "0" : data.vat) + "" +
-                        ",chietkhau=" + (data.chietkhau == null ? "0" : data.chietkhau) + "" +
-                        ",soluongdg=" + (data.soluongdg == null ? "0" : data.soluongdg) + "" +
-                        ",soluongsd=" + (data.soluongsd == null ? "0" : data.soluongsd) + "" +
-                        ",soluongn=" + (data.soluongn == null ? "0" : data.soluongn) + "" +
-                        ",dongia=" + (data.dongia == null ? 0 : decimal.Parse(data.dongia)) + "" +
-                        ",dongiadg=" + (data.dongiadg == null ? 0 : decimal.Parse(data.dongiadg)) + "" +
-                        ",dongiavat=" + v_dongiavat + "" +
-                        ",dongiadgvat=" + v_dongiadgvat + "" +
-                        ",sotien=" + v_sotien + "" +
-                        ",sotiendg=" + v_sotiendg + "" +
-                        ",sotienvat=" + v_sotienvat + "" +
-                        ",sotiendgvat=" + v_sotiendgvat + "" +
-                        ",ghichu='" + (data.ghichu == null ? "" : data.ghichu) + "'" +
+                        ",idnguon=" + decimal.Parse(v_idnguon) + "" +
+                        ",mavach='" + data.mavach + "'" +
+                        ",losx='" + data.losx + "'" +
+                        ",ngaysx='" + data.ngaysx + "'" +
+                        ",handung='" + data.handung + "'" +
+                        ",baohanh=" + data.baohanh + "" +
+                        ",vat=" + data.vat + "" +
+                        ",chietkhau=" + data.chietkhau + "" +
+                        ",soluongdg=to_number('" + data.soluongdg.Replace(',','.') + "')" +
+                        ",soluongsd=to_number('" + data.soluongsd.Replace(',', '.') + "')" +
+                        ",soluongn=to_number('" + data.soluongn.Replace(',', '.') + "')" +
+                        ",dongia=to_number('" + data.dongia.Replace(',', '.') + "')" +
+                        ",dongiadg=to_number('" + data.dongiadg.Replace(',', '.') + "')" +
+                        ",dongiavat=to_number('" + v_dongiavat.Replace(',', '.') + "')" +
+                        ",dongiadgvat=to_number('" + v_dongiadgvat.Replace(',', '.') + "')" +
+                        ",sotien=to_number('" + v_sotien.Replace(',', '.') + "')" +
+                        ",sotiendg=to_number('" + v_sotiendg.Replace(',', '.') + "')" +
+                        ",sotienvat=to_number('" + v_sotienvat.Replace(',', '.') + "')" +
+                        ",sotiendgvat=to_number('" + v_sotiendgvat.Replace(',', '.') + "')" +
+                        ",ghichu='" + data.ghichu + "'" +
                         ",ngayud=now() " +
                         "WHERE id =" + v_id;
                     irec = dbHelper.ExecuteQuery(sql, v_conn);
                     if (irec == 0)
                     {
-                        sql = @"INSERT INTO nhapkhoct(id, idnhapkho, idduoc, idnguon, mavach, losx, ngaysx, handung, baohanh, vat, chietkhau, soluongdg" +
-                            ", soluongsd, soluongn, dongia, dongiadg, dongiavat, dongiadgvat, sotien, sotiendg, sotienvat, sotiendgvat, ghichu) " +
-                            "VALUES(" + v_id + "," + data.idnhapkho + "," + data.idduoc + "," + (data.idnguon == null ? 0 : decimal.Parse(data.idnguon)) +
-                            ",'" + data.mavach + "','" + data.losx + "','" + data.ngaysx + "','" + data.handung + "'," + (data.baohanh == null ? 0 : decimal.Parse(data.baohanh)) +
-                            "," + data.vat + "," + data.chietkhau + "," + data.soluongdg + "" + "," + data.soluongsd + "," + data.soluongn + "," + data.dongia +
-                            "," + data.dongiadg + "," + v_dongiavat + "," + v_dongiadgvat + "," + v_sotien + "," + v_sotiendg + "," + v_sotienvat + "," + v_sotiendgvat + ",'" + data.ghichu + "') ";
+                        sql = @"INSERT INTO nhapkhoct(" +
+                            "id, idnhapkho, idduoc, idnguon, mavach, losx, ngaysx, handung, baohanh, vat" +
+                            ", chietkhau, soluongdg, soluongsd, soluongn, dongia, dongiadg, dongiavat, dongiadgvat, sotien, sotiendg" +
+                            ", sotienvat, sotiendgvat, ghichu) " +
+                            "VALUES(" +
+                            v_id + "," + data.idnhapkho + "," + data.idduoc + "," + decimal.Parse(v_idnguon) + ",'" + data.mavach + "','" + data.losx + "','" + data.ngaysx + "','" + data.handung + "'," + decimal.Parse(data.baohanh) + "," + data.vat +
+                            "," + data.chietkhau + ",to_number('" + data.soluongdg.Replace(',', '.') + "'),to_number('" + data.soluongsd.Replace(',', '.') + "'),to_number('" + data.soluongn.Replace(',', '.') + "'),to_number('" + data.dongia.Replace(',', '.') + "'),to_number('" + data.dongiadg.Replace(',', '.') + "'),to_number('" + v_dongiavat.Replace(',', '.') + "'),to_number('" + v_dongiadgvat.Replace(',', '.') + "'),to_number('" + v_sotien.Replace(',', '.') + "'),to_number('" + v_sotiendg.Replace(',', '.') + "'),to_number('" + v_sotienvat.Replace(',', '.') + "'),to_number('" + v_sotiendgvat.Replace(',', '.') + "'),'" + data.ghichu + "') ";
                         irec = dbHelper.ExecuteQuery(sql, v_conn);
                     }
                     if (irec == 1)
@@ -1685,7 +1761,7 @@ namespace ApiManageSolution.Models
                         ",vat=" + (data.vat == null ? "0" : data.vat) + "" +
                         ",nguoinhan='" + (data.nguoinhan == null ? "" : data.nguoinhan) + "'" +
                         ",nguoigiao='" + (data.nguoigiao == null ? "" : data.nguoigiao) + "'" +
-                        ",sotienhd=" + (data.sotienhd == null ? "0" : data.sotienhd) + "" +
+                        ",sotienhd=to_number('" + (data.sotienhd == null ? "0" : data.sotienhd) + "')" +
                         ",ngayud=now() " +
                         "WHERE id =" + data.idnhapkho;
                     irec = dbHelper.ExecuteQuery(sql, v_conn);
@@ -1700,7 +1776,7 @@ namespace ApiManageSolution.Models
                     }
                     if (irec == 1)
                     {
-                        IEnumerable<Nhapkhocts> lts = Nhapkhocts.Upd(data);
+                        IEnumerable<Nhapkhocts> lts = Nhapkhocts.Upd(v_conn, data);
                         if (lts != null && lts.Count() > 0)
                         {
                             sql = "update nhapkho a set a.sotien = b.sotien, a.sotiendg = b.sotiendg" +

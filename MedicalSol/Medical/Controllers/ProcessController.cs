@@ -21,7 +21,7 @@ namespace Medical.Controllers
                 {
                     if (data.Userid == null)
                     {
-                        data.Userid = @Session["User_Id"].ToString();
+                        data.Userid = @Session["ms_userid"].ToString();
                     }
                     List<Object> lts = new List<Object>();
                     foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Search", data)))
@@ -97,7 +97,7 @@ namespace Medical.Controllers
                 {
                     if (data.Userid == null)
                     {
-                        data.Userid = @Session["User_Id"].ToString();
+                        data.Userid = @Session["ms_userid"].ToString();
                     }
                     return JObject.Parse(Bridge.HttpPostApi("CreateVal", data))["result"].Value<string>();
                 }
@@ -118,7 +118,7 @@ namespace Medical.Controllers
                 {
                     if (data.userid == null)
                     {
-                        data.userid = @Session["User_Id"].ToString();
+                        data.userid = @Session["ms_userid"].ToString();
                     }
                     return JObject.Parse(Bridge.HttpPostApi("DelRecord", data))["result"].Value<string>();
                 }
@@ -140,7 +140,7 @@ namespace Medical.Controllers
             {
                 if (data.userid == null)
                 {
-                    data.userid = @Session["User_Id"].ToString();
+                    data.userid = @Session["ms_userid"].ToString();
                 }
                 if (data.obj != "")
                 {
@@ -186,7 +186,7 @@ namespace Medical.Controllers
             {
                 if (data.userid == null)
                 {
-                    data.userid = @Session["User_Id"].ToString();
+                    data.userid = @Session["ms_userid"].ToString();
                 }
                 List<Object> lts = new List<Object>();
                 foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Khos", data)))
@@ -209,7 +209,7 @@ namespace Medical.Controllers
             {
                 if (data.userid == null)
                 {
-                    data.userid = @Session["User_Id"].ToString();
+                    data.userid = @Session["ms_userid"].ToString();
                 }
                 List<Object> lts = new List<Object>();
                 foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("Thuocs", data)))
@@ -232,7 +232,7 @@ namespace Medical.Controllers
             {
                 if (data.userid == null)
                 {
-                    data.userid = @Session["User_Id"].ToString();
+                    data.userid = @Session["ms_userid"].ToString();
                 }
                 List<Object> lts = new List<Object>();
                 foreach (JObject jo in JArray.Parse(Bridge.HttpPostApi("nhapkhos", data)))
@@ -257,7 +257,7 @@ namespace Medical.Controllers
                 {
                     if (data.userid == null)
                     {
-                        data.userid = @Session["User_Id"].ToString();
+                        data.userid = @Session["ms_userid"].ToString();
                     }
                     return JObject.Parse(Bridge.HttpPostApi("Check", data))["result"].Value<string>();
                 }

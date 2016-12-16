@@ -518,7 +518,7 @@ function ms_lpad(str, max, char) {
     { return ex; }
 }
 
-function ms_money(v_val) {
+function ms_money(v_val, v_bol) {
     try {
         var DecimalSeparator = Number("1.2").toLocaleString().substr(1, 1);
 
@@ -527,8 +527,12 @@ function ms_money(v_val) {
         var intPart = arParts[0];
         var decPart = (arParts.length > 1 ? arParts[1] : '');
         decPart = (decPart + '00').substr(0, 2);
-
-        return intPart + DecimalSeparator + decPart + " VNĐ";
+        if (v_bol) {
+            return intPart + DecimalSeparator + decPart;
+        }
+        else {
+            return intPart;
+        }
     }
     catch (ex) {
         return "";
@@ -1028,7 +1032,8 @@ function f_gridview_row_click(v_obj, v_index) {
     try {
         switch (v_obj) {
             case "nhapkhocts":
-                f_ctnhapkho_duoc_show(m_grid_ds, v_index, false);
+                f_ctnhapkho_duoc_show(m_grid_ds, v_index, true);                
+                ms_enable_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu", true);
                 break;
             default:
                 break;

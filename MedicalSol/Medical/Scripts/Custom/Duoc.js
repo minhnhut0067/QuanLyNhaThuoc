@@ -1323,7 +1323,8 @@ function input_keypress(event, v_this) {
                 ms_focus_arr("page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_donvidg~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_dongiadg~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_dongiadgcu~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung");
                 break;
             case "page_duoc_nhapkho_ct_sotienhd":
-                if (!isNaN(ms_gval("page_duoc_nhapkho_ct_sotienhd", "value", ""))) {
+                if (!isNaN(ms_to_int(ms_gval("page_duoc_nhapkho_ct_sotienhd", "value", "")))) {
+                    ms_sval("page_duoc_nhapkho_ct_sotienhd", "value", ms_money(ms_to_decimal(ms_gval("page_duoc_nhapkho_ct_sotienhd", "value", "0").replace(',',''))));
                     ms_focus_arr("page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_donvidg~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_dongiadg~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_dongiadgcu~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung");
                 }
                 else {
@@ -1391,7 +1392,7 @@ function input_keypress(event, v_this) {
                 break;
                 break;
             case "page_duoc_nhapkho_ct_soluong":
-                if (ms_gval("page_duoc_nhapkho_ct_soluong", "value", "") != "") {
+                if (ms_gval("page_duoc_nhapkho_ct_soluong", "value", "") != "" && ms_gval("page_duoc_nhapkho_ct_soluong", "value", "") != "0") {
                     if (!isNaN(ms_gval("page_duoc_nhapkho_ct_soluong", "value", ""))) {
                         ms_focus_arr("page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_dongiadg~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_dongiadgcu~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung");
                     }
@@ -1580,13 +1581,14 @@ function btn_click(v_this) {
             ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", false);
             ms_focus_arr("page_duoc_nhapkho_ct_lydo");
             break;
-        case "page_duoc_nhapkho_ct_them":
-            f_clear_arr("nhapkhocts_thuoc");
-            ms_enable_arr("page_duoc_nhapkho_ct_moi", true);
-            ms_focus_arr("page_duoc_nhapkho_ct_sodk");
-            break;
-        case "page_duoc_nhapkho_ct_sua":
+        //case "page_duoc_nhapkho_ct_them":
+        //    f_clear_arr("nhapkhocts_thuoc");
+        //    ms_enable_arr("page_duoc_nhapkho_ct_moi", true);
+        //    ms_focus_arr("page_duoc_nhapkho_ct_sodk");
+        //    break;
+        case "page_duoc_nhapkho_ct_sua":            
             ctnhapkho_enable(true);
+            ms_enable_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu", true);
             ms_enable_arr("page_duoc_nhapkho_ct_xoa", false);
             break;
         case "page_duoc_nhapkho_ct_xoa":
@@ -1601,7 +1603,7 @@ function btn_click(v_this) {
         case "page_duoc_nhapkho_ct_boqua":
             f_clear_arr("nhapkhocts_thuoc");
             ctnhapkho_enable(false);
-            ms_enable_arr("page_duoc_nhapkho_ct_them", true);
+            //ms_enable_arr("page_duoc_nhapkho_ct_them", true);
             break;
         case "page_duoc_nhapkho_ct_ketthuc":
             window.location.href = "../Trangchu/index";
@@ -1715,48 +1717,51 @@ function f_save_nhapkho() {
     try {
         var data;
         var url = "";
-        if (ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue") == "") {
+        if (ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue","") == "") {
             alert("Vui lòng chọn lý do nhập");
             ms_focus("page_duoc_nhapkho_ct_lydo");
             return null;
         }
-        if (ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue") == "") {
+        if (ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue","") == "") {
             alert("Vui lòng chọn kho nhập");
             ms_focus("page_duoc_nhapkho_ct_kho");
             return null;
         }
-        if (ms_gval("page_duoc_nhapkho_ct_dongia", "value") == "") {
-            alert("Vui lòng nhập giá");
-            ms_focus("page_duoc_nhapkho_ct_dongia");
-            return null;
+        if (ms_gval("page_duoc_nhapkho_ct_tenthuoc", "selectedvalue", "") != "") {
+            if (ms_gval("page_duoc_nhapkho_ct_dongia", "value") == "") {
+                alert("Vui lòng nhập giá");
+                ms_focus("page_duoc_nhapkho_ct_dongia");
+                return null;
+            }
         }
         data = {
-            id: ms_gval("page_duoc_nhapkho_ct_id_hidden", "value"),
-            idnhapkho: ms_gval("page_duoc_nhapkho_ct_idnhapkho_hidden", "value"),
-            idlydonx: ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue"),
-            idnhacc: ms_gval("page_duoc_nhapkho_ct_nhacc", "selectedvalue"),
-            idkho: ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue"),
-            ngay: ms_gval("page_duoc_nhapkho_ct_ngay", "value"),
-            ngayhd: ms_gval("page_duoc_nhapkho_ct_ngayhd", "value"),
-            sohd: ms_gval("page_duoc_nhapkho_ct_sohd", "value"),
-            sotienhd: ms_gval("page_duoc_nhapkho_ct_sotienhd", "value"),
-            ngaynhan: ms_gval("page_duoc_nhapkho_ct_ngayn", "value"),
-            sophieu: ms_gval("page_duoc_nhapkho_ct_sophieu", "value"),
-            nguoigiao: ms_gval("page_duoc_nhapkho_ct_nguoigiao", "value"),
-            ghichu: ms_gval("page_duoc_nhapkho_ct_ghichu", "value"),
-            idduoc: ms_gval("page_duoc_nhapkho_ct_tenthuoc", "selectedvalue"),
-            losx: ms_gval("page_duoc_nhapkho_ct_losx", "value"),
-            ngaysx: ms_gval("page_duoc_nhapkho_ct_ngaysx", "value"),
-            handung: ms_gval("page_duoc_nhapkho_ct_handung", "value"),
-            soluongsd: ms_gval("page_duoc_nhapkho_ct_soluong", "value"),
-            soluongdg: ms_gval("page_duoc_nhapkho_ct_nhan", "value"),
-            soluongn: ms_gval("page_duoc_nhapkho_ct_bang", "value"),
-            dongia: ms_gval("page_duoc_nhapkho_ct_dongia", "value"),
-            dongiadg: ms_gval("page_duoc_nhapkho_ct_dongiadg", "value"),
-            chietkhau: ms_gval("page_duoc_nhapkho_ct_ck", "value").toString().replace("%", ""),
-            vat: ms_gval("page_duoc_nhapkho_ct_vat", "value").toString().replace("%", ""),
+            id: ms_gval("page_duoc_nhapkho_ct_id_hidden", "value",""),
+            idnhapkho: ms_gval("page_duoc_nhapkho_ct_idnhapkho_hidden", "value", ""),
+            idlydonx: ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue", ""),
+            idnhacc: ms_gval("page_duoc_nhapkho_ct_nhacc", "selectedvalue", ""),
+            idkho: ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue", ""),
+            ngay: ms_gval("page_duoc_nhapkho_ct_ngay", "value", ""),
+            ngayhd: ms_gval("page_duoc_nhapkho_ct_ngayhd", "value", ""),
+            sohd: ms_gval("page_duoc_nhapkho_ct_sohd", "value", ""),
+            sotienhd: ms_to_decimal(ms_gval("page_duoc_nhapkho_ct_sotienhd", "value", "0")),
+            ngaynhan: ms_gval("page_duoc_nhapkho_ct_ngayn", "value", ""),
+            sophieu: ms_gval("page_duoc_nhapkho_ct_sophieu", "value", ""),
+            nguoigiao: ms_gval("page_duoc_nhapkho_ct_nguoigiao", "value", ""),
+            ghichu: ms_gval("page_duoc_nhapkho_ct_ghichu", "value", ""),
+            idduoc: ms_gval("page_duoc_nhapkho_ct_tenthuoc", "selectedvalue", ""),
+            losx: ms_gval("page_duoc_nhapkho_ct_losx", "value", ""),
+            ngaysx: ms_gval("page_duoc_nhapkho_ct_ngaysx", "value", ""),
+            handung: ms_gval("page_duoc_nhapkho_ct_handung", "value", ""),
+            soluongsd: ms_gval("page_duoc_nhapkho_ct_soluong", "value", ""),
+            soluongdg: ms_gval("page_duoc_nhapkho_ct_nhan", "value", ""),
+            soluongn: ms_gval("page_duoc_nhapkho_ct_bang", "value", ""),
+            dongia: ms_gval("page_duoc_nhapkho_ct_dongia", "value", ""),
+            dongiadg: ms_gval("page_duoc_nhapkho_ct_dongiadg", "value", ""),
+            chietkhau: ms_gval("page_duoc_nhapkho_ct_ck", "value", "0").toString().replace("%", ""),
+            vat: ms_gval("page_duoc_nhapkho_ct_vat", "value", "0").toString().replace("%", ""),
         };
         url = "SaveNhapkho";
+        debugger;
         f_save_data(url, data);
 
     }
@@ -1833,7 +1838,7 @@ function f_ctnhapkho_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_lydo", "selectedvalue", ms_gfields(v_ds, v_index, "idlydonx", ""));
     ms_sval("page_duoc_nhapkho_ct_ngayhd", "value", ms_gfields(v_ds, v_index, "ngayhd", ""));
     ms_sval("page_duoc_nhapkho_ct_sohd", "value", ms_gfields(v_ds, v_index, "sohd", ""));
-    ms_sval("page_duoc_nhapkho_ct_sotienhd", "value", ms_gfields(v_ds, v_index, "sotienhd", ""));
+    ms_sval("page_duoc_nhapkho_ct_sotienhd", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotienhd", "")),false));
     ms_sval("page_duoc_nhapkho_ct_ngayn", "value", ms_gfields(v_ds, v_index, "ngayn", ""));
     ms_sval("page_duoc_nhapkho_ct_sophieu", "value", ms_gfields(v_ds, v_index, "sophieu", ""));
     ms_sval("page_duoc_nhapkho_ct_nguoigiao", "value", ms_gfields(v_ds, v_index, "nguoigiao", ""));
@@ -1842,9 +1847,9 @@ function f_ctnhapkho_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_nhacc", "value", ms_gfields(v_ds, v_index, "tennhacc", ""));
     ms_sval("page_duoc_nhapkho_ct_nhacc", "selectedvalue", ms_gfields(v_ds, v_index, "idnhacc", ""));
     ms_sval("page_duoc_nhapkho_ct_ghichu", "value", ms_gfields(v_ds, v_index, "ghichu", ""));
-    ms_sval("page_duoc_nhapkho_ct_sotien", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotien", ""))));
-    ms_sval("page_duoc_nhapkho_ct_sotientruck", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "")/100));
-    ms_sval("page_duoc_nhapkho_ct_sotientruckcongvat", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "")/100 + ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "vat", "")/100));
+    ms_sval("page_duoc_nhapkho_ct_sotien", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotien", "")), false));
+    ms_sval("page_duoc_nhapkho_ct_sotientruck", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "") / 100, false));
+    ms_sval("page_duoc_nhapkho_ct_sotientruckcongvat", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "") / 100 + ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "vat", "") / 100, false));
     if (ms_gval("page_duoc_nhapkho_ct_ngayhd", "value", "") == "") {
         ms_sval("page_duoc_nhapkho_ct_ngayhd", "value", defaultdate);
     }
@@ -1866,7 +1871,7 @@ function f_ctnhapkho_show(v_ds, v_index, v_bool) {
 
 function f_ctnhapkho_duoc_show(v_ds, v_index, v_bool) {
     ctnhapkho_enable(v_bool);
-    ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_them", !v_bool);
+    ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", !v_bool);
     ms_sval("page_duoc_nhapkho_ct_id_hidden", "value", ms_gfields(v_ds, v_index, "id", ""));
     ms_sval("page_duoc_nhapkho_ct_sodk", "value", ms_gfields(v_ds, v_index, "sodk", ""));
     ms_sval("page_duoc_nhapkho_ct_ma", "value", ms_gfields(v_ds, v_index, "ma", ""));
@@ -1875,8 +1880,8 @@ function f_ctnhapkho_duoc_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_hoatchat", "value", ms_gfields(v_ds, v_index, "hoatchat", ""));
     ms_sval("page_duoc_nhapkho_ct_hangsx", "value", ms_gfields(v_ds, v_index, "tenhangsx", ""));
     ms_sval("page_duoc_nhapkho_ct_hangsx", "selectedvalue", ms_gfields(v_ds, v_index, "idhangsx", ""));
-    ms_sval("page_duoc_nhapkho_ct_soluong", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongdg", "")));
-    ms_sval("page_duoc_nhapkho_ct_nhan", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongsd", "")));
+    ms_sval("page_duoc_nhapkho_ct_soluong", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongsd", "")));
+    ms_sval("page_duoc_nhapkho_ct_nhan", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongdg", "")));
     ms_sval("page_duoc_nhapkho_ct_bang", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongn", "")));
     ms_sval("page_duoc_nhapkho_ct_dongia", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "dongia", "")));
     ms_sval("page_duoc_nhapkho_ct_dongiadg", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "dongiadg", "")));
