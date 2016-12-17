@@ -729,7 +729,7 @@ function f_create_table_html(v_obj, v_ds, v_id, v_colname, v_col, v_footer, v_bt
         if (v_ds.Rows.length > 0) {
             rhtml += "<tbody>";
             for (var i = 0; i < v_ds.Rows.length; i++) {
-                rhtml += "<tr onclick =\"f_gridview_row_click('" + v_obj + "','" + i + "')\">";
+                rhtml += "<tr onclick =\"f_gridview_row_click('" + v_obj + "','" + i + "')\" ondblclick=\"f_gridview_row_dbclick('" + v_obj + "','" + i + "')\">";
                 if (v_btn != null && v_btn != "") {
                     for (var j = 0; j < v_btn.split('~').length; j++) {
                         switch (v_btn.split('~')[j]) {
@@ -1032,8 +1032,8 @@ function f_gridview_row_click(v_obj, v_index) {
     try {
         switch (v_obj) {
             case "nhapkhocts":
-                f_ctnhapkho_duoc_show(m_grid_ds, v_index, true);                
-                ms_enable_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu", true);
+                f_ctnhapkho_duoc_show(m_grid_ds, v_index, false);                
+                //ms_enable_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu", true);
                 break;
             default:
                 break;
@@ -1043,6 +1043,21 @@ function f_gridview_row_click(v_obj, v_index) {
         alert("Lỗi hệ thống ! Không lấy được dữ liệu")
     }
 }
-
+function f_gridview_row_dbclick(v_obj, v_index) {
+    try {
+        switch (v_obj) {
+            case "nhapkhos":
+                f_tab_show("danhsach", "thonhtin");
+                f_ctnhapkho_show(m_grid_ds, v_index, false)
+                ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_them", true);
+                break;
+            default:
+                break;
+        }
+    }
+    catch (ex) {
+        alert("Lỗi hệ thống ! Không lấy được dữ liệu")
+    }
+}
 
 
