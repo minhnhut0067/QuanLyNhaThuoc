@@ -1226,14 +1226,14 @@
 }
 
     .input-filter:hover {
-        background: #2191c0 url("../JqueryUI/images/ui-bg_glass_75_79c9ec_1x400.png") repeat-x scroll 50% 50%;        
+        background: #2191c0 url("../JqueryUI/images/ui-bg_glass_75_79c9ec_1x400.png") repeat-x scroll 50% 50%;
         /*background: #2191c0 url("../JqueryUI/images/ui-bg_gloss-wave_50_6eac2c_500x100.png") repeat-x scroll 50% 50%;*/
     }
 
-    .input-filter_dis{
-        cursor: not-allowed;
-        padding: 5px 10px;
-    }
+.input-filter_dis {
+    cursor: not-allowed;
+    padding: 5px 10px;
+}
 
 .input-datepicker {
     background: #2191c0 url("../JqueryUI/images/ui-bg_glass_45_0078ae_1x400.png") repeat-x scroll 50% 50%;
@@ -1251,11 +1251,12 @@
     cursor: not-allowed;
 }
 
-.input-sm{
-    height:26px;
+.input-sm {
+    height: 26px;
 }
-.input-sm_dis{
-    height:26px;
+
+.input-sm_dis {
+    height: 26px;
 }
 
 .custom-title {
@@ -1312,6 +1313,29 @@
     text-align: right;
 }
 
+.table-borderless {
+    line-height: 1.5;
+}
+
+    .table-borderless > thead > tr > th, .table-borderless > tbody > tr > th, .table-borderless > tfoot > tr > th, .table-borderless > thead > tr > td, .table-borderless > tbody > tr > td, .table-borderless > tfoot > tr > td {
+        border: none;
+    }
+
+.ms_dcell_c {
+    border-color: #ccc !important;
+    border-style: solid !important;
+    border-width: 2px !important;
+    padding: 4px 3px 1px;
+    text-align: center;
+    vertical-align: middle !important;
+}
+.cm_dcell {
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 1px;
+    padding: 4px 3px 1px;
+    text-align: left;
+    vertical-align: middle !important;
 /*Loader*/
 .loader {
     border: 10px solid #f3f3f3;

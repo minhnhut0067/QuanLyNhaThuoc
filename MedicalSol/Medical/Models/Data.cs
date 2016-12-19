@@ -29,6 +29,8 @@ namespace Medical.Models
             [Display(Name = "Địa chỉ")]
             public string diachi { get; set; }
 
+            public string tencoso { get; set; }
+
             public User(Object obj)
             {
                 try
@@ -37,6 +39,7 @@ namespace Medical.Models
                     var json = DataProcess.ConvertJsonStringToJsonObject(value);
                     if (json != null)
                     {
+                        tencoso = json["tencoso"].ToString();
                         iduser = json["iduser"].ToString();
                         hoten = json["hoten"].ToString();
                         ngaysinh = json["ngaysinh"].ToString();

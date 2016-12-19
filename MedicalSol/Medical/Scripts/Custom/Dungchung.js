@@ -538,13 +538,55 @@ function ms_money(v_val, v_bol) {
         return "";
     }
 }
+
+function ms_grid_html_header(v_title) {
+    var ahtml = "";
+    ahtml += "<html>";
+    ahtml += "<head>";
+    ahtml += "<meta charset=\"utf-8\" />";
+    ahtml += "<meta name=\"viewport\" content=\"width=device-width\" />";
+    ahtml += "<title>" + v_title + "</title>";
+    ahtml += "<link href=\"/Content/font-awesome.min.css\" rel=\"stylesheet\" />";
+    ahtml += "<link href=\"/Content/JqueryUI/jquery-ui.theme.min.css\" rel=\"stylesheet\" />";
+    ahtml += "<link href=\"/Content/JqueryUI/jquery-ui.structure.min.css\" rel=\"stylesheet\" />";
+    ahtml += "<link href=\"/Content/JqueryUI/jquery-ui.min.css\" rel=\"stylesheet\" />";
+
+    ahtml += "<link href=\"/Content/bootstrap.min.css\" rel=\"stylesheet\" />";
+    ahtml += "<link type=\"text/css\" href=\"/Content/Custom/dataTables.bootstrap.min.css\" rel=\"stylesheet\" />";
+    ahtml += "<link type=\"text/css\" href=\"/Content/Custom/Dungchung.css\" rel=\"stylesheet\" />";
+    ahtml += "<script type=\"text/javascript\" src=\"/Scripts/jquery-1.12.4.min.js\"></script>";
+    ahtml += "<script type=\"text/javascript\" src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>";
+    ahtml += "<script type=\"text/javascript\" src=\"/Scripts/Custom/Filter.js\"></script>";
+    ahtml += "<script type=\"text/javascript\" src=\"/Scripts/Custom/Dungchung.js\"></script>";
+    ahtml += "<script type=\"text/javascript\" src=\"/Scripts/bootstrap.min.js\"></script>";
+    ahtml += "<script type=\"text/javascript\" src=\"/Scripts/Custom/jquery.dataTables.min.js\"></script>";
+    ahtml += "<script type=\"text/javascript\" src=\"/Scripts/Custom/dataTables.bootstrap.min.js\"></script>";
+    ahtml += "</head>";
+    ahtml += "<body>";
+    return ahtml;
+}
+
+function ms_grid_html_footer() {
+    var ahtml = "";
+    ahtml += "</body>";
+    ahtml += "</html>";
+    return ahtml;
+}
+
 //basic
 
 function f_table_reload(v_obj) {
     try {
-        var data = null;
+        var data = null;        
         switch (v_obj) {
+            case "khos":
+                $("#page_duoc_khaibaokho_ds").html("<div class=\"loader\"></div>");
+                break;
+            case "thuocs":
+                $("#page_duoc_khaibaothuoc_ds").html("<div class=\"loader\"></div>");
+                break;
             case "nhapkhos":
+                $("#page_duoc_nhapkho_ds").html("<div class=\"loader\"></div>");
                 var v_dk = ms_gval("page_duoc_nhapkho_lydo", "selectedvalue", "") + "~" + ms_gval("page_duoc_nhapkho_kho", "selectedvalue", "") + "~" + ms_gval("page_duoc_nhapkho_nhanvien", "selectedvalue", "") + "~" + ms_gval("page_duoc_nhapkho_tn", "value", "") + "~" + ms_gval("page_duoc_nhapkho_dn", "value", "");
                 data = { obj: v_obj, request: v_dk };
                 break;
@@ -785,6 +827,7 @@ function f_tab_click(v_this, v_obj, v_bool) {
     try {
         if (v_bool) {
             if (!$(v_this).parent().hasClass("active")) {
+
                 f_table_reload(v_obj);
             }
         }
@@ -1032,7 +1075,7 @@ function f_gridview_row_click(v_obj, v_index) {
     try {
         switch (v_obj) {
             case "nhapkhocts":
-                f_ctnhapkho_duoc_show(m_grid_ds, v_index, false);                
+                f_ctnhapkho_duoc_show(m_grid_ds, v_index, false);
                 //ms_enable_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu", true);
                 break;
             default:
@@ -1043,12 +1086,14 @@ function f_gridview_row_click(v_obj, v_index) {
         alert("Lỗi hệ thống ! Không lấy được dữ liệu")
     }
 }
+
 function f_gridview_row_dbclick(v_obj, v_index) {
     try {
         switch (v_obj) {
             case "nhapkhos":
                 f_tab_show("danhsach", "thonhtin");
                 f_ctnhapkho_show(m_grid_ds, v_index, false)
+                f_clear_arr("nhapkhocts_thuoc");
                 ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_them", true);
                 break;
             default:

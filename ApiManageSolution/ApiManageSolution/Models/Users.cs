@@ -20,6 +20,7 @@ namespace ApiManageSolution.Models
         public string ngay { get; set; }
         public string ngayud { get; set; }
         public string loaiuser { get; set; }
+        public string tencoso { get; set; }
         public static IEnumerable<Users> GetAll()
         {
             try
@@ -27,8 +28,8 @@ namespace ApiManageSolution.Models
                 DataSet ds = new DataSet();
                 List<Users> lts = new List<Users>();
                 string sql = "";
-                sql = "SELECT id as iduser, username_, password_, hoten, ngaysinh, diachi, sdt, email, ngay, ngayud, loaiuser " +
-                "FROM users;";
+                sql = "SELECT b.ten as tencoso, a.id as iduser, a.username_, a.password_, a.hoten, a.ngaysinh, a.diachi, a.sdt, a.email, a.ngay, a.ngayud, a.loaiuser" +
+                "\nFROM users a LEFT JOIN dmcoso b on b.id = left(a.id,10);";
                 ds = dbHelper.getDataSetbySql(sql);
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -46,6 +47,7 @@ namespace ApiManageSolution.Models
                         item.ngay = dr["ngay"].ToString();
                         item.ngayud = dr["ngayud"].ToString();
                         item.loaiuser = dr["loaiuser"].ToString();
+                        item.tencoso = dr["tencoso"].ToString();
                         lts.Add(item);
                     }
                 }

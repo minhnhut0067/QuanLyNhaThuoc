@@ -1323,7 +1323,8 @@ function input_keypress(event, v_this) {
                 ms_focus_arr("page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_donvidg~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_dongiadg~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_dongiadgcu~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung");
                 break;
             case "page_duoc_nhapkho_ct_sotienhd":
-                if (!isNaN(ms_gval("page_duoc_nhapkho_ct_sotienhd", "value", ""))) {
+                if (!isNaN(ms_to_int(ms_gval("page_duoc_nhapkho_ct_sotienhd", "value", "")))) {
+                    ms_sval("page_duoc_nhapkho_ct_sotienhd", "value", ms_money(ms_to_decimal(ms_gval("page_duoc_nhapkho_ct_sotienhd", "value", "0").replace(',', ''))));
                     ms_focus_arr("page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu~page_duoc_nhapkho_ct_sodk~page_duoc_nhapkho_ct_ma~page_duoc_nhapkho_ct_tenthuoc~page_duoc_nhapkho_ct_hoatchat~page_duoc_nhapkho_ct_donvidg~page_duoc_nhapkho_ct_donvisd~page_duoc_nhapkho_ct_hangsx~page_duoc_nhapkho_ct_soluong~page_duoc_nhapkho_ct_nhan~page_duoc_nhapkho_ct_bang~page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_dongiadg~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_dongiadgcu~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung");
                 }
                 else {
@@ -1413,11 +1414,10 @@ function input_keypress(event, v_this) {
                             ms_sval("page_duoc_nhapkho_ct_bang", "value", ms_gval("page_duoc_nhapkho_ct_soluong", "value", "") * ms_gval("page_duoc_nhapkho_ct_nhan", "value", ""));
                             ms_focus_arr("page_duoc_nhapkho_ct_dongia~page_duoc_nhapkho_ct_dongiadg~page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_dongiadgcu~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung");
                         }
-                        else
-                        {
+                        else {
                             ms_focus_arr("page_duoc_nhapkho_ct_nhan");
                         }
-                    }                    
+                    }
                 }
                 else {
                     ms_sval("page_duoc_nhapkho_ct_nhan", "value", "1");
@@ -1440,12 +1440,10 @@ function input_keypress(event, v_this) {
                 }
                 break;
             case "page_duoc_nhapkho_ct_dongiadg":
-                if (ms_gval("page_duoc_nhapkho_ct_donvidg", "value", "") != "" && (ms_gval("page_duoc_nhapkho_ct_dongiadg", "value", "") == "" || ms_gval("page_duoc_nhapkho_ct_dongiadg", "value", "") == "0"))
-                {
+                if (ms_gval("page_duoc_nhapkho_ct_donvidg", "value", "") != "" && (ms_gval("page_duoc_nhapkho_ct_dongiadg", "value", "") == "" || ms_gval("page_duoc_nhapkho_ct_dongiadg", "value", "") == "0")) {
                     ms_focus_arr("page_duoc_nhapkho_ct_dongiadg");
                 }
-                else
-                {
+                else {
                     if (!isNaN(ms_gval("page_duoc_nhapkho_ct_dongiadg", "value", ""))) {
                         ms_focus_arr("page_duoc_nhapkho_ct_ck~page_duoc_nhapkho_ct_vat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_dongiadgcu~page_duoc_nhapkho_ct_losx~page_duoc_nhapkho_ct_ngaysx~page_duoc_nhapkho_ct_handung");
                     }
@@ -1580,13 +1578,14 @@ function btn_click(v_this) {
             ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", false);
             ms_focus_arr("page_duoc_nhapkho_ct_lydo");
             break;
-        case "page_duoc_nhapkho_ct_them":
-            f_clear_arr("nhapkhocts_thuoc");
-            ms_enable_arr("page_duoc_nhapkho_ct_moi", true);
-            ms_focus_arr("page_duoc_nhapkho_ct_sodk");
-            break;
+            //case "page_duoc_nhapkho_ct_them":
+            //    f_clear_arr("nhapkhocts_thuoc");
+            //    ms_enable_arr("page_duoc_nhapkho_ct_moi", true);
+            //    ms_focus_arr("page_duoc_nhapkho_ct_sodk");
+            //    break;
         case "page_duoc_nhapkho_ct_sua":
             ctnhapkho_enable(true);
+            ms_enable_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu", true);
             ms_enable_arr("page_duoc_nhapkho_ct_xoa", false);
             break;
         case "page_duoc_nhapkho_ct_xoa":
@@ -1601,7 +1600,11 @@ function btn_click(v_this) {
         case "page_duoc_nhapkho_ct_boqua":
             f_clear_arr("nhapkhocts_thuoc");
             ctnhapkho_enable(false);
-            ms_enable_arr("page_duoc_nhapkho_ct_them", true);
+            break;
+        case "page_duoc_nhapkho_ct_in":
+            //f_clear_arr("nhapkhocts_thuoc");
+            //ctnhapkho_enable(false);
+            f_phieunhap_in();
             break;
         case "page_duoc_nhapkho_ct_ketthuc":
             window.location.href = "../Trangchu/index";
@@ -1715,46 +1718,48 @@ function f_save_nhapkho() {
     try {
         var data;
         var url = "";
-        if (ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue") == "") {
+        if (ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue", "") == "") {
             alert("Vui lòng chọn lý do nhập");
             ms_focus("page_duoc_nhapkho_ct_lydo");
             return null;
         }
-        if (ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue") == "") {
+        if (ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue", "") == "") {
             alert("Vui lòng chọn kho nhập");
             ms_focus("page_duoc_nhapkho_ct_kho");
             return null;
         }
-        if (ms_gval("page_duoc_nhapkho_ct_dongia", "value") == "") {
-            alert("Vui lòng nhập giá");
-            ms_focus("page_duoc_nhapkho_ct_dongia");
-            return null;
+        if (ms_gval("page_duoc_nhapkho_ct_tenthuoc", "selectedvalue", "") != "") {
+            if (ms_gval("page_duoc_nhapkho_ct_dongia", "value") == "") {
+                alert("Vui lòng nhập giá");
+                ms_focus("page_duoc_nhapkho_ct_dongia");
+                return null;
+            }
         }
         data = {
-            id: ms_gval("page_duoc_nhapkho_ct_id_hidden", "value"),
-            idnhapkho: ms_gval("page_duoc_nhapkho_ct_idnhapkho_hidden", "value"),
-            idlydonx: ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue"),
-            idnhacc: ms_gval("page_duoc_nhapkho_ct_nhacc", "selectedvalue"),
-            idkho: ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue"),
-            ngay: ms_gval("page_duoc_nhapkho_ct_ngay", "value"),
-            ngayhd: ms_gval("page_duoc_nhapkho_ct_ngayhd", "value"),
-            sohd: ms_gval("page_duoc_nhapkho_ct_sohd", "value"),
-            sotienhd: ms_gval("page_duoc_nhapkho_ct_sotienhd", "value"),
-            ngaynhan: ms_gval("page_duoc_nhapkho_ct_ngayn", "value"),
-            sophieu: ms_gval("page_duoc_nhapkho_ct_sophieu", "value"),
-            nguoigiao: ms_gval("page_duoc_nhapkho_ct_nguoigiao", "value"),
-            ghichu: ms_gval("page_duoc_nhapkho_ct_ghichu", "value"),
-            idduoc: ms_gval("page_duoc_nhapkho_ct_tenthuoc", "selectedvalue"),
-            losx: ms_gval("page_duoc_nhapkho_ct_losx", "value"),
-            ngaysx: ms_gval("page_duoc_nhapkho_ct_ngaysx", "value"),
-            handung: ms_gval("page_duoc_nhapkho_ct_handung", "value"),
-            soluongsd: ms_gval("page_duoc_nhapkho_ct_soluong", "value"),
-            soluongdg: ms_gval("page_duoc_nhapkho_ct_nhan", "value"),
-            soluongn: ms_gval("page_duoc_nhapkho_ct_bang", "value"),
-            dongia: ms_gval("page_duoc_nhapkho_ct_dongia", "value"),
-            dongiadg: ms_gval("page_duoc_nhapkho_ct_dongiadg", "value"),
-            chietkhau: ms_gval("page_duoc_nhapkho_ct_ck", "value").toString().replace("%", ""),
-            vat: ms_gval("page_duoc_nhapkho_ct_vat", "value").toString().replace("%", ""),
+            id: ms_gval("page_duoc_nhapkho_ct_id_hidden", "value", ""),
+            idnhapkho: ms_gval("page_duoc_nhapkho_ct_idnhapkho_hidden", "value", ""),
+            idlydonx: ms_gval("page_duoc_nhapkho_ct_lydo", "selectedvalue", ""),
+            idnhacc: ms_gval("page_duoc_nhapkho_ct_nhacc", "selectedvalue", ""),
+            idkho: ms_gval("page_duoc_nhapkho_ct_kho", "selectedvalue", ""),
+            ngay: ms_gval("page_duoc_nhapkho_ct_ngay", "value", ""),
+            ngayhd: ms_gval("page_duoc_nhapkho_ct_ngayhd", "value", ""),
+            sohd: ms_gval("page_duoc_nhapkho_ct_sohd", "value", ""),
+            sotienhd: ms_to_decimal(ms_gval("page_duoc_nhapkho_ct_sotienhd", "value", "0")),
+            ngaynhan: ms_gval("page_duoc_nhapkho_ct_ngayn", "value", ""),
+            sophieu: ms_gval("page_duoc_nhapkho_ct_sophieu", "value", ""),
+            nguoigiao: ms_gval("page_duoc_nhapkho_ct_nguoigiao", "value", ""),
+            ghichu: ms_gval("page_duoc_nhapkho_ct_ghichu", "value", ""),
+            idduoc: ms_gval("page_duoc_nhapkho_ct_tenthuoc", "selectedvalue", ""),
+            losx: ms_gval("page_duoc_nhapkho_ct_losx", "value", ""),
+            ngaysx: ms_gval("page_duoc_nhapkho_ct_ngaysx", "value", ""),
+            handung: ms_gval("page_duoc_nhapkho_ct_handung", "value", ""),
+            soluongsd: ms_gval("page_duoc_nhapkho_ct_soluong", "value", ""),
+            soluongdg: ms_gval("page_duoc_nhapkho_ct_nhan", "value", ""),
+            soluongn: ms_gval("page_duoc_nhapkho_ct_bang", "value", ""),
+            dongia: ms_gval("page_duoc_nhapkho_ct_dongia", "value", ""),
+            dongiadg: ms_gval("page_duoc_nhapkho_ct_dongiadg", "value", ""),
+            chietkhau: ms_gval("page_duoc_nhapkho_ct_ck", "value", "0").toString().replace("%", ""),
+            vat: ms_gval("page_duoc_nhapkho_ct_vat", "value", "0").toString().replace("%", ""),
         };
         url = "SaveNhapkho";
         f_save_data(url, data);
@@ -1833,7 +1838,7 @@ function f_ctnhapkho_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_lydo", "selectedvalue", ms_gfields(v_ds, v_index, "idlydonx", ""));
     ms_sval("page_duoc_nhapkho_ct_ngayhd", "value", ms_gfields(v_ds, v_index, "ngayhd", ""));
     ms_sval("page_duoc_nhapkho_ct_sohd", "value", ms_gfields(v_ds, v_index, "sohd", ""));
-    ms_sval("page_duoc_nhapkho_ct_sotienhd", "value", ms_gfields(v_ds, v_index, "sotienhd", ""));
+    ms_sval("page_duoc_nhapkho_ct_sotienhd", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotienhd", "")), false));
     ms_sval("page_duoc_nhapkho_ct_ngayn", "value", ms_gfields(v_ds, v_index, "ngayn", ""));
     ms_sval("page_duoc_nhapkho_ct_sophieu", "value", ms_gfields(v_ds, v_index, "sophieu", ""));
     ms_sval("page_duoc_nhapkho_ct_nguoigiao", "value", ms_gfields(v_ds, v_index, "nguoigiao", ""));
@@ -1842,9 +1847,9 @@ function f_ctnhapkho_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_nhacc", "value", ms_gfields(v_ds, v_index, "tennhacc", ""));
     ms_sval("page_duoc_nhapkho_ct_nhacc", "selectedvalue", ms_gfields(v_ds, v_index, "idnhacc", ""));
     ms_sval("page_duoc_nhapkho_ct_ghichu", "value", ms_gfields(v_ds, v_index, "ghichu", ""));
-    ms_sval("page_duoc_nhapkho_ct_sotien", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotien", ""))));
-    ms_sval("page_duoc_nhapkho_ct_sotientruck", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "")/100));
-    ms_sval("page_duoc_nhapkho_ct_sotientruckcongvat", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "")/100 + ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "vat", "")/100));
+    ms_sval("page_duoc_nhapkho_ct_sotien", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotien", "")), false));
+    ms_sval("page_duoc_nhapkho_ct_sotientruck", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "") / 100, false));
+    ms_sval("page_duoc_nhapkho_ct_sotientruckcongvat", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "") / 100 + ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "vat", "") / 100, false));
     if (ms_gval("page_duoc_nhapkho_ct_ngayhd", "value", "") == "") {
         ms_sval("page_duoc_nhapkho_ct_ngayhd", "value", defaultdate);
     }
@@ -1866,7 +1871,7 @@ function f_ctnhapkho_show(v_ds, v_index, v_bool) {
 
 function f_ctnhapkho_duoc_show(v_ds, v_index, v_bool) {
     ctnhapkho_enable(v_bool);
-    ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_them", !v_bool);
+    ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", !v_bool);
     ms_sval("page_duoc_nhapkho_ct_id_hidden", "value", ms_gfields(v_ds, v_index, "id", ""));
     ms_sval("page_duoc_nhapkho_ct_sodk", "value", ms_gfields(v_ds, v_index, "sodk", ""));
     ms_sval("page_duoc_nhapkho_ct_ma", "value", ms_gfields(v_ds, v_index, "ma", ""));
@@ -1875,8 +1880,8 @@ function f_ctnhapkho_duoc_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_hoatchat", "value", ms_gfields(v_ds, v_index, "hoatchat", ""));
     ms_sval("page_duoc_nhapkho_ct_hangsx", "value", ms_gfields(v_ds, v_index, "tenhangsx", ""));
     ms_sval("page_duoc_nhapkho_ct_hangsx", "selectedvalue", ms_gfields(v_ds, v_index, "idhangsx", ""));
-    ms_sval("page_duoc_nhapkho_ct_soluong", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongdg", "")));
-    ms_sval("page_duoc_nhapkho_ct_nhan", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongsd", "")));
+    ms_sval("page_duoc_nhapkho_ct_soluong", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongsd", "")));
+    ms_sval("page_duoc_nhapkho_ct_nhan", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongdg", "")));
     ms_sval("page_duoc_nhapkho_ct_bang", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "soluongn", "")));
     ms_sval("page_duoc_nhapkho_ct_dongia", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "dongia", "")));
     ms_sval("page_duoc_nhapkho_ct_dongiadg", "value", ms_to_decimal(ms_gfields(v_ds, v_index, "dongiadg", "")));
@@ -1889,6 +1894,7 @@ function f_ctnhapkho_duoc_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_handung", "value", ms_gfields(v_ds, v_index, "handung", ""));
 }
 //Show-End
+
 //Enable-Start
 function khaibaokho_enable(v_bool) {
     ms_enable_arr(khaibaokho_input + "~page_duoc_khaibaokho_luu", v_bool);
@@ -1909,9 +1915,121 @@ function khaibaothuoc_enable(v_bool) {
 function ctnhapkho_enable(v_bool) {
     ms_enable_arr(ctnhapkho_input + "~page_duoc_nhapkho_ct_luu", v_bool);
     ms_enable_arr("page_duoc_nhapkho_ct_boqua~page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_xoa", v_bool);
-    ms_enable_arr("page_duoc_nhapkho_ct_moi~page_duoc_nhapkho_ct_moi", !v_bool);
+    ms_enable_arr("page_duoc_nhapkho_ct_moi~page_duoc_nhapkho_ct_moi~page_duoc_nhapkho_ct_in", !v_bool);
 
     ms_enable_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu", false);
     ms_enable_arr("page_duoc_nhapkho_ct_sotien~page_duoc_nhapkho_ct_sotientruck~page_duoc_nhapkho_ct_sotientruckcongvat~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_thanhtienvat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_dongiadgcu", false);
 }
 //Enable-End
+
+//Print-Start
+function f_phieunhap_in() {
+    var page = window.open("", "_blank", "");
+    var content = "";
+
+    content += ms_grid_html_header("Phiếu nhập kho");
+    page.document.writeln(content);
+    content = "";
+
+    content += "<div class = \"container-fluid\">";
+
+    content += "<div class = \"row\" style = \"padding: 20px 0px; font-size:12pt;\">";
+    content += "<div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:left\">" + $("#ls_tencoso").html() + "</div>";
+    content += "<div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:center\">CỘNG HÒA XÃ HỘI CHŨ NGHĨA VIỆT NAM<br />Độc lập - Tự do - Hạnh phúc</div>";
+    content += "<div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:right\">Số phiếu nhập :" + ms_gval("page_duoc_nhapkho_ct_sophieu", "value", "") + "</div>";
+    content += "</div>";
+
+    content += "<div class = \"row\" style = \"padding: 20px 0px; font-size:18pt;\">";
+    content += "<div class = \"col-lg-12 col-md-12 col-sm-12 col-xs-12\" style =\"text-align:center; text-transform: uppercase;\"><b>PHIẾU NHẬP KHO</b><br /><font style =\"font-size:12pt;\">Ngày :&nbsp;" + ms_gval("page_duoc_nhapkho_ct_ngayn", "value", "") + "</font></div>";
+    content += "</div>";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-12 col-md-12 col-sm-12 col-xs-12\" style =\"\"><b>Người giao:</b>&nbsp;" + ms_gval("page_duoc_nhapkho_ct_nguoigiao", "value", "") + "</div>";
+    content += "</div>";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-3 col-md-3 col-sm-3 col-xs-3\" style =\"\"><b>Số hóa đơn:</b>&nbsp;" + ms_gval("page_duoc_nhapkho_ct_sohd", "value", "") + "</div>";
+    content += "<div class = \"col-lg-3 col-md-3 col-sm-3 col-xs-3\" style =\"\"><b>Ngày hóa đơn:</b>&nbsp;" + ms_gval("page_duoc_nhapkho_ct_ngayhd", "value", "") + "</div>";
+    content += "<div class = \"col-lg-3 col-md-3 col-sm-3 col-xs-3\" style =\"\"><b>Số tiền hóa đơn:</b>&nbsp;" + ms_gval("page_duoc_nhapkho_ct_sotienhd", "value", "") + "&nbsp;VNĐ</div>";
+    content += "</div>";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-12 col-md-12 col-sm-12 col-xs-12\" style =\"\"><b>Nhà cung cấp:</b>&nbsp;" + ms_gval("page_duoc_nhapkho_ct_nhacc", "value", "") + "</div>";
+    content += "</div>";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-12 col-md-12 col-sm-12 col-xs-12\" style =\"\"><b>Kho nhập :</b>&nbsp;" + ms_gval("page_duoc_nhapkho_ct_kho", "value", "") + "</div>";
+    content += "</div>";
+
+    content += "<br />";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-12 col-md-12 col-sm-12 col-xs-12\" style =\"\">";
+    content += "<table class=\"table table-sm table-striped\" width=\"100%\" cellpadding =\"0\" cellspacing= \"0\" style = \"font-size:10pt;border: 2px solid #ccc\">";//table-sm table-striped no-footer table-borderless
+    content += "<thead>";
+    content += "<tr>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Số thứ tự</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Tên sản phẩm</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Đơn vị</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Mã thuốc</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Số đăng ký</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Lô sx</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Hạn dùng</th>";
+    content += "<th class = \"ms_dcell_c\" colspan = \"2\">Số lượng</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Đơn giá</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Chiết khấu</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Đơn giá(VAT)</th>";
+    content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Thành tiền(VAT)</th>";
+    content += "</tr>";
+    content += "<tr>";
+    content += "<th class = \"ms_dcell_c\">Chứng từ</th>";
+    content += "<th class = \"ms_dcell_c\">Thực tế</th>";
+    content += "</tr>";
+    content += "</thead>"
+    content += "<tbody>";
+    if (m_grid_ds != null && m_grid_ds.Rows.length > 0) {
+        var t_tongcong = "";
+        for (var i = 0; i < m_grid_ds.Rows.length; i++) {
+            content += "<tr>";
+            content += "<td class = \"cm_dcell\">" + (i + 1) + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "tenduoc", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "donvisd", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "ma", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "sodk", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "losx", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "handung", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "soluongn", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "soluongn", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "dongia", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "chietkhau", "") + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "dongia", "") * ms_gfields(m_grid_ds, i, "vat", "") / 100 + "</td>";
+            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "soluongn", "") * ms_gfields(m_grid_ds, i, "dongia", "") * ms_gfields(m_grid_ds, i, "vat", "") / 100 * ms_gfields(m_grid_ds, i, "vat", "") / 100 + "</td>";
+            content += "</tr>";
+        }
+    }
+    else {
+        content += "<tr><td>Không thể lấy được dữ liệu</td></tr>";
+    }
+    content += "</tbody>";
+    content += "</table>";
+    content += "</div>";
+    content += "</div>";
+
+    content += "</div>";
+    page.document.writeln(content);
+    content = "";
+    page.document.close();
+    //$.ajax({
+    //    type: "POST",
+    //    url: "../Process/Check",
+    //    data: data,
+    //    success: function (result) {
+    //        var page = window.open("", "_blank", "");
+    //        page.document.writeln(content);
+    //        content = "";
+    //        page.document.close();
+    //    },
+    //    error: function (result) { }
+    //});        
+}
+//Print_End

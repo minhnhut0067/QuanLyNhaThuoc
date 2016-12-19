@@ -35,6 +35,7 @@ namespace Medical.Controllers
                     var usr = new Data.User(login);
                     Session["ms_username"] = usr.hoten;
                     Session["ms_userid"] = usr.iduser;
+                    Session["ms_tencoso"] = usr.tencoso;
                     return RedirectToAction("Index", "Trangchu");
                 }
                 else
