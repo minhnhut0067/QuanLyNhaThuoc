@@ -462,6 +462,8 @@ function f_filter_thuoc_selected() {
                     ms_sval("page_duoc_nhapkho_ct_donvisd", "value", ms_gfields(g_filter_ds, g_filter_index, "donvisd", "") == "" ? ms_gfields(g_filter_ds, g_filter_index, "dang", "") : ms_gfields(g_filter_ds, g_filter_index, "donvisd", ""));
                     ms_sval("page_duoc_nhapkho_ct_hangsx", "selectedvalue", ms_gfields(g_filter_ds, g_filter_index, "id_hangsx", ""));
                     ms_sval("page_duoc_nhapkho_ct_hangsx", "value", ms_gfields(g_filter_ds, g_filter_index, "ten_hangsx", ""));
+                    ms_sval("page_duoc_nhapkho_ct_dongiacu", "value", ms_gfields(g_filter_ds, g_filter_index, "dongiacu", "0"));
+                    ms_sval("page_duoc_nhapkho_ct_dongiadgcu", "value", ms_gfields(g_filter_ds, g_filter_index, "dongiadgcu", "0"));
                     if (ms_gfields(g_filter_ds, g_filter_index, "donvidg", "") == "") {
                         ms_sval("page_duoc_nhapkho_ct_dongiadg", "value", "0");
                         ms_enable_arr("page_duoc_nhapkho_ct_dongiadg", false);
@@ -489,6 +491,8 @@ function f_filter_thuoc_selected() {
                 ms_sval("page_duoc_nhapkho_ct_donvisd", "value", ms_gfields(g_filter_ds, g_filter_index, "donvisd", "") == "" ? ms_gfields(g_filter_ds, g_filter_index, "dang", "") : ms_gfields(g_filter_ds, g_filter_index, "donvisd", ""));
                 ms_sval("page_duoc_nhapkho_ct_hangsx", "selectedvalue", ms_gfields(g_filter_ds, g_filter_index, "id_hangsx", ""));
                 ms_sval("page_duoc_nhapkho_ct_hangsx", "value", ms_gfields(g_filter_ds, g_filter_index, "ten_hangsx", ""));
+                ms_sval("page_duoc_nhapkho_ct_dongiacu", "value", ms_gfields(g_filter_ds, g_filter_index, "dongiacu", "0"));
+                ms_sval("page_duoc_nhapkho_ct_dongiadgcu", "value", ms_gfields(g_filter_ds, g_filter_index, "dongiadgcu", "0"));
                 if (ms_gfields(g_filter_ds, g_filter_index, "donvidg", "") == "") {
                     ms_sval("page_duoc_nhapkho_ct_dongiadg", "value", "0");
                     ms_enable_arr("page_duoc_nhapkho_ct_dongiadg", false);
@@ -499,6 +503,7 @@ function f_filter_thuoc_selected() {
         error: function (result) { }
     });
 }
+
 
 function f_filter_mathuoc_show(v_id_active) {
     strdatafilter = ms_gval(v_id_active + "_val", "value", "");
@@ -548,6 +553,8 @@ function f_filter_mathuoc_selected() {
                     ms_sval("page_duoc_nhapkho_ct_donvisd", "value", ms_gfields(g_filter_ds, g_filter_index, "donvisd", "") == "" ? ms_gfields(g_filter_ds, g_filter_index, "dang", "") : ms_gfields(g_filter_ds, g_filter_index, "donvisd", ""));
                     ms_sval("page_duoc_nhapkho_ct_hangsx", "selectedvalue", ms_gfields(g_filter_ds, g_filter_index, "id_hangsx", ""));
                     ms_sval("page_duoc_nhapkho_ct_hangsx", "value", ms_gfields(g_filter_ds, g_filter_index, "ten_hangsx", ""));
+                    ms_sval("page_duoc_nhapkho_ct_dongiacu", "value", ms_gfields(g_filter_ds, g_filter_index, "dongiacu", "0"));
+                    ms_sval("page_duoc_nhapkho_ct_dongiadgcu", "value", ms_gfields(g_filter_ds, g_filter_index, "dongiadgcu", "0"));
                     if (ms_gfields(g_filter_ds, g_filter_index, "donvidg", "") == "") {
                         ms_sval("page_duoc_nhapkho_ct_dongiadg", "value", "0");
                         ms_enable_arr("page_duoc_nhapkho_ct_dongiadg", false);
@@ -574,6 +581,8 @@ function f_filter_mathuoc_selected() {
                 ms_sval("page_duoc_nhapkho_ct_donvisd", "value", ms_gfields(g_filter_ds, g_filter_index, "donvisd", "") == "" ? ms_gfields(g_filter_ds, g_filter_index, "dang", "") : ms_gfields(g_filter_ds, g_filter_index, "donvisd", ""));
                 ms_sval("page_duoc_nhapkho_ct_hangsx", "selectedvalue", ms_gfields(g_filter_ds, g_filter_index, "id_hangsx", ""));
                 ms_sval("page_duoc_nhapkho_ct_hangsx", "value", ms_gfields(g_filter_ds, g_filter_index, "ten_hangsx", ""));
+                ms_sval("page_duoc_nhapkho_ct_dongiacu", "value", ms_gfields(g_filter_ds, g_filter_index, "dongiacu", "0"));
+                ms_sval("page_duoc_nhapkho_ct_dongiadgcu", "value", ms_gfields(g_filter_ds, g_filter_index, "dongiadgcu", "0"));
                 if (ms_gfields(g_filter_ds, g_filter_index, "donvidg", "") == "") {
                     ms_sval("page_duoc_nhapkho_ct_dongiadg", "value", "0");
                     ms_enable_arr("page_duoc_nhapkho_ct_dongiadg", false);
@@ -584,7 +593,6 @@ function f_filter_mathuoc_selected() {
         error: function (result) { }
     });
 }
-
 
 function filter_click(v_this) {
     try {
@@ -1578,11 +1586,11 @@ function btn_click(v_this) {
             ms_enable_arr("page_duoc_nhapkho_ct_xoa~page_duoc_nhapkho_ct_sua", false);
             ms_focus_arr("page_duoc_nhapkho_ct_lydo");
             break;
-            //case "page_duoc_nhapkho_ct_them":
-            //    f_clear_arr("nhapkhocts_thuoc");
-            //    ms_enable_arr("page_duoc_nhapkho_ct_moi", true);
-            //    ms_focus_arr("page_duoc_nhapkho_ct_sodk");
-            //    break;
+        case "page_duoc_nhapkho_ct_them":
+            f_clear_arr("nhapkhocts_thuoc");
+            ms_enable_arr("page_duoc_nhapkho_ct_moi", true);
+            ms_focus_arr("page_duoc_nhapkho_ct_sodk");
+            break;
         case "page_duoc_nhapkho_ct_sua":
             ctnhapkho_enable(true);
             ms_enable_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu", true);
@@ -1600,6 +1608,7 @@ function btn_click(v_this) {
         case "page_duoc_nhapkho_ct_boqua":
             f_clear_arr("nhapkhocts_thuoc");
             ctnhapkho_enable(false);
+            ms_enable_arr("page_duoc_nhapkho_ct_sua", true);
             break;
         case "page_duoc_nhapkho_ct_in":
             //f_clear_arr("nhapkhocts_thuoc");
@@ -1838,7 +1847,7 @@ function f_ctnhapkho_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_lydo", "selectedvalue", ms_gfields(v_ds, v_index, "idlydonx", ""));
     ms_sval("page_duoc_nhapkho_ct_ngayhd", "value", ms_gfields(v_ds, v_index, "ngayhd", ""));
     ms_sval("page_duoc_nhapkho_ct_sohd", "value", ms_gfields(v_ds, v_index, "sohd", ""));
-    ms_sval("page_duoc_nhapkho_ct_sotienhd", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotienhd", "")), false));
+    ms_sval("page_duoc_nhapkho_ct_sotienhd", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotienhd", ""))));
     ms_sval("page_duoc_nhapkho_ct_ngayn", "value", ms_gfields(v_ds, v_index, "ngayn", ""));
     ms_sval("page_duoc_nhapkho_ct_sophieu", "value", ms_gfields(v_ds, v_index, "sophieu", ""));
     ms_sval("page_duoc_nhapkho_ct_nguoigiao", "value", ms_gfields(v_ds, v_index, "nguoigiao", ""));
@@ -1847,9 +1856,9 @@ function f_ctnhapkho_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_nhacc", "value", ms_gfields(v_ds, v_index, "tennhacc", ""));
     ms_sval("page_duoc_nhapkho_ct_nhacc", "selectedvalue", ms_gfields(v_ds, v_index, "idnhacc", ""));
     ms_sval("page_duoc_nhapkho_ct_ghichu", "value", ms_gfields(v_ds, v_index, "ghichu", ""));
-    ms_sval("page_duoc_nhapkho_ct_sotien", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotien", "")), false));
-    ms_sval("page_duoc_nhapkho_ct_sotientruck", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "") / 100, false));
-    ms_sval("page_duoc_nhapkho_ct_sotientruckcongvat", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "") / 100 + ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "vat", "") / 100, false));
+    ms_sval("page_duoc_nhapkho_ct_sotien", "value", ms_money(ms_to_decimal(ms_gfields(v_ds, v_index, "sotien", ""))));
+    ms_sval("page_duoc_nhapkho_ct_sotientruck", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "") / 100));
+    ms_sval("page_duoc_nhapkho_ct_sotientruckcongvat", "value", ms_money(ms_gfields(v_ds, v_index, "sotien", "") - ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "chietkhau", "") / 100 + ms_gfields(v_ds, v_index, "sotien", "") * ms_gfields(v_ds, v_index, "vat", "") / 100));
     if (ms_gval("page_duoc_nhapkho_ct_ngayhd", "value", "") == "") {
         ms_sval("page_duoc_nhapkho_ct_ngayhd", "value", defaultdate);
     }
@@ -1892,6 +1901,8 @@ function f_ctnhapkho_duoc_show(v_ds, v_index, v_bool) {
     ms_sval("page_duoc_nhapkho_ct_losx", "value", ms_gfields(v_ds, v_index, "losx", ""));
     ms_sval("page_duoc_nhapkho_ct_ngaysx", "value", ms_gfields(v_ds, v_index, "ngaysx", ""));
     ms_sval("page_duoc_nhapkho_ct_handung", "value", ms_gfields(v_ds, v_index, "handung", ""));
+    ms_sval("page_duoc_nhapkho_ct_dongiacu", "value", ms_gfields(v_ds, v_index, "dongiacu", "0"));
+    ms_sval("page_duoc_nhapkho_ct_dongiadgcu", "value", ms_gfields(v_ds, v_index, "dongiadgcu", "0"));
 }
 //Show-End
 
@@ -1915,7 +1926,7 @@ function khaibaothuoc_enable(v_bool) {
 function ctnhapkho_enable(v_bool) {
     ms_enable_arr(ctnhapkho_input + "~page_duoc_nhapkho_ct_luu", v_bool);
     ms_enable_arr("page_duoc_nhapkho_ct_boqua~page_duoc_nhapkho_ct_sua~page_duoc_nhapkho_ct_xoa", v_bool);
-    ms_enable_arr("page_duoc_nhapkho_ct_moi~page_duoc_nhapkho_ct_moi~page_duoc_nhapkho_ct_in", !v_bool);
+    ms_enable_arr("page_duoc_nhapkho_ct_moi~page_duoc_nhapkho_ct_them~page_duoc_nhapkho_ct_moi~page_duoc_nhapkho_ct_in", !v_bool);
 
     ms_enable_arr("page_duoc_nhapkho_ct_lydo~page_duoc_nhapkho_ct_ngayhd~page_duoc_nhapkho_ct_sohd~page_duoc_nhapkho_ct_sotienhd~page_duoc_nhapkho_ct_sophieu~page_duoc_nhapkho_ct_ngayn~page_duoc_nhapkho_ct_nguoigiao~page_duoc_nhapkho_ct_kho~page_duoc_nhapkho_ct_nhacc~page_duoc_nhapkho_ct_ghichu", false);
     ms_enable_arr("page_duoc_nhapkho_ct_sotien~page_duoc_nhapkho_ct_sotientruck~page_duoc_nhapkho_ct_sotientruckcongvat~page_duoc_nhapkho_ct_thanhtienck~page_duoc_nhapkho_ct_thanhtienvat~page_duoc_nhapkho_ct_dongiacu~page_duoc_nhapkho_ct_dongiadgcu", false);
@@ -1965,7 +1976,7 @@ function f_phieunhap_in() {
 
     content += "<div class = \"row\" style = \"font-size:10pt;\">";
     content += "<div class = \"col-lg-12 col-md-12 col-sm-12 col-xs-12\" style =\"\">";
-    content += "<table class=\"table table-sm table-striped\" width=\"100%\" cellpadding =\"0\" cellspacing= \"0\" style = \"font-size:10pt;border: 2px solid #ccc\">";//table-sm table-striped no-footer table-borderless
+    content += "<table class=\"table table-sm\" width=\"100%\" cellpadding =\"0\" cellspacing= \"0\" style = \"font-size:10pt;border: 2px solid #ccc\">";//table-sm table-striped no-footer table-borderless
     content += "<thead>";
     content += "<tr>";
     content += "<th class = \"ms_dcell_c\" rowspan = \"2\">Số thứ tự</th>";
@@ -1988,7 +1999,7 @@ function f_phieunhap_in() {
     content += "</thead>"
     content += "<tbody>";
     if (m_grid_ds != null && m_grid_ds.Rows.length > 0) {
-        var t_tongcong = "";
+        var t_tongcong = 0;
         for (var i = 0; i < m_grid_ds.Rows.length; i++) {
             content += "<tr>";
             content += "<td class = \"cm_dcell\">" + (i + 1) + "</td>";
@@ -1998,14 +2009,18 @@ function f_phieunhap_in() {
             content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "sodk", "") + "</td>";
             content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "losx", "") + "</td>";
             content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "handung", "") + "</td>";
-            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "soluongn", "") + "</td>";
-            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "soluongn", "") + "</td>";
-            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "dongia", "") + "</td>";
-            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "chietkhau", "") + "</td>";
-            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "dongia", "") * ms_gfields(m_grid_ds, i, "vat", "") / 100 + "</td>";
-            content += "<td class = \"cm_dcell\">" + ms_gfields(m_grid_ds, i, "soluongn", "") * ms_gfields(m_grid_ds, i, "dongia", "") * ms_gfields(m_grid_ds, i, "vat", "") / 100 * ms_gfields(m_grid_ds, i, "vat", "") / 100 + "</td>";
+            content += "<td class = \"cm_dcell_r\">" + ms_gfields(m_grid_ds, i, "soluongn", "") + "</td>";
+            content += "<td class = \"cm_dcell_r\">" + ms_gfields(m_grid_ds, i, "soluongn", "") + "</td>";
+            content += "<td class = \"cm_dcell_r\">" + ms_money(ms_to_decimal(ms_gfields(m_grid_ds, i, "dongia", "0"))) + "</td>";
+            content += "<td class = \"cm_dcell_r\">" + ms_gfields(m_grid_ds, i, "chietkhau", "0") + "%</td>";
+            content += "<td class = \"cm_dcell_r\">" + ms_money(ms_to_decimal(ms_gfields(m_grid_ds, i, "dongia", "")) + ms_to_decimal(ms_gfields(m_grid_ds, i, "dongia", "") * ms_gfields(m_grid_ds, i, "vat", "") / 100)) + "</td>";
+            content += "<td class = \"cm_dcell_r\">" + ms_money(ms_gfields(m_grid_ds, i, "soluongn", "") * (ms_to_decimal(ms_gfields(m_grid_ds, i, "dongia", "")) + ms_to_decimal(ms_gfields(m_grid_ds, i, "dongia", "") * ms_gfields(m_grid_ds, i, "vat", "") / 100))) + "</td>";
             content += "</tr>";
+            t_tongcong += ms_to_decimal(ms_gfields(m_grid_ds, i, "soluongn", "")) * (ms_to_decimal(ms_gfields(m_grid_ds, i, "dongia", "")) + ms_to_decimal(ms_gfields(m_grid_ds, i, "dongia", "") * ms_gfields(m_grid_ds, i, "vat", "") / 100))
         }
+        content += "<tr>";
+        content += "<td class = \"cm_dcell_c\" colspan = \"12\" style = \"text-transform:uppercase;text-align: center;\" ><b>Tổng cộng:</b></td><td class = \"cm_dcell_r\"><b>" + ms_money(t_tongcong) + "</b></td>";
+        content += "</tr>";
     }
     else {
         content += "<tr><td>Không thể lấy được dữ liệu</td></tr>";
@@ -2013,6 +2028,32 @@ function f_phieunhap_in() {
     content += "</tbody>";
     content += "</table>";
     content += "</div>";
+    content += "</div>";
+
+    content += "<br />";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-12 col-md-12 col-sm-12 col-xs-12\" style =\"\">Thành tiền :&nbsp;<b>" + ms_money(t_tongcong) + "</b></div>";
+    content += "</div>";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-12 col-md-12 col-sm-12 col-xs-12\" style =\"\">Bằng chữ :&nbsp;<b>" + DocTienBangChu(t_tongcong) + "</b></div>";
+    content += "</div>";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-8 col-md-8 col-sm-8 col-xs-8\" style =\"\"></div><div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:center\">Ngày ... Tháng ... Năm 20...</div>";
+    content += "</div>";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:center;text-transform:uppercase;\"><b>Người lập</b></div>";
+    content += "<div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:center;text-transform:uppercase;\"><b>Ngươi giao hàng</b></div>";
+    content += "<div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:center;text-transform:uppercase;\"><b>Thủ kho</b></div>";
+    content += "</div>";
+
+    content += "<div class = \"row\" style = \"font-size:10pt;\">";
+    content += "<div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:center;\">(Ký, họ tên)</div>";
+    content += "<div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:center;\">(Ký, họ tên)</div>";
+    content += "<div class = \"col-lg-4 col-md-4 col-sm-4 col-xs-4\" style =\"text-align:center;\">(Ký, họ tên)</div>";
     content += "</div>";
 
     content += "</div>";

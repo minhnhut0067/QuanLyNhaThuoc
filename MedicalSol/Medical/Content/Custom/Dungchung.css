@@ -1321,6 +1321,14 @@
         border: none;
     }
 
+.cm_dcell_l {
+    border-color: #ccc !important;
+    border-style: solid !important;
+    border-width: 2px !important;
+    padding: 4px 3px 1px !important;
+    text-align: left;
+    vertical-align: middle !important;
+}
 .ms_dcell_c {
     border-color: #ccc !important;
     border-style: solid !important;
@@ -1329,13 +1337,22 @@
     text-align: center;
     vertical-align: middle !important;
 }
+.cm_dcell_r {
+    border-color: #ccc !important;
+    border-style: solid !important;
+    border-width: 2px !important;
+    padding: 4px 3px 1px !important;
+    text-align: right;
+    vertical-align: middle !important;
+}
 .cm_dcell {
-    border-color: #ccc;
-    border-style: solid;
-    border-width: 1px;
+    border-color: #ccc !important;
+    border-style: solid !important;
+    border-width: 2px !important;
     padding: 4px 3px 1px;
     text-align: left;
     vertical-align: middle !important;
+}
 /*Loader*/
 .loader {
     border: 10px solid #f3f3f3;

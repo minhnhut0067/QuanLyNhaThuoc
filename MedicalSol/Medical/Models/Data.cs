@@ -498,7 +498,6 @@ namespace Medical.Models
             }
         }
         #endregion
-        #region Class Duoc
         public class Kho
         {
             public string id { get; set; }
@@ -632,6 +631,8 @@ namespace Medical.Models
             public string ten_quocgia { get; set; }
             public string id_duongdung { get; set; }
             public string ten_duongdung { get; set; }
+            public string dongiacu { get; set; }
+            public string dongiadgcu { get; set; }
             public static string GetAll()
             {
                 try
@@ -687,6 +688,8 @@ namespace Medical.Models
                         thuoc.ten_quocgia = item.ten_quocgia;
                         thuoc.id_duongdung = item.id_duongdung;
                         thuoc.ten_duongdung = item.ten_duongdung;
+                        thuoc.dongiacu = item.dongiacu;
+                        thuoc.dongiadgcu = item.dongiadgcu;
                         dsthuoc.Add(thuoc);
                     }
                     return dsthuoc;
@@ -792,6 +795,8 @@ namespace Medical.Models
             public string userten { get; set; }
             public string ngayud { get; set; }
             public string soluongyeucau { get; set; }
+            public string dongiacu { get; set; }
+            public string dongiadgcu { get; set; }
             public static string GetAll()
             {
                 try
@@ -857,6 +862,8 @@ namespace Medical.Models
                         obj.userten = item.userten;
                         obj.ngayud = item.ngayud;
                         obj.soluongyeucau = item.soluongyeucau;
+                        obj.dongiacu = item.dongiacu;
+                        obj.dongiadgcu = item.dongiadgcu;
                         ds.Add(obj);
                     }
                     return ds;
@@ -973,6 +980,5 @@ namespace Medical.Models
                 }
             }
         }
-        #endregion
     }
 }

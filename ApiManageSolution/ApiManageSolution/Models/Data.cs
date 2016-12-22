@@ -672,6 +672,8 @@ namespace ApiManageSolution.Models
             public string ten_quocgia { get; set; }
             public string id_duongdung { get; set; }
             public string ten_duongdung { get; set; }
+            public string dongiacu { get; set; }
+            public string dongiadgcu { get; set; }
             public static string Getid(string v_conn)
             {
                 try
@@ -712,12 +714,16 @@ namespace ApiManageSolution.Models
                     a.hoatchat, a.thanhphan, a.tyle1, a.tyle2, a.tinhtrang, a.atc, a.route, 
                     a.generic, a.userid, a.stt_40, a.sodk, 
                     to_char(a.ngay, 'dd/mm/yyyy hh24:mi') as ngay, to_char(a.ngayud, 'dd/mm/yyyy hh24:mi') as ngayud, a.idloaiduoc as id_loaiduoc, b.ten as ten_loaiduoc,
-                    a.idhangsx as id_hangsx, c.ten as ten_hangsx, a.idquocgia as id_quocgia, d.ten as ten_quocgia, a.idduongdung as id_duongdung, e.ten as ten_duongdung
+                    a.idhangsx as id_hangsx, c.ten as ten_hangsx, a.idquocgia as id_quocgia, d.ten as ten_quocgia, a.idduongdung as id_duongdung, e.ten as ten_duongdung,
+                    f.dongia as dongiacu, f.dongiadg as dongiadgcu
                     FROM dmduoc a
                     LEFT JOIN dmloaiduoc b ON b.id = a.idloaiduoc
                     LEFT JOIN dmhangsx@root c ON c.id = a.idhangsx
                     LEFT JOIN dmquocgia@root d ON d.id = a.idquocgia
-                    LEFT JOIN dmduongdung@root e ON e.id = a.idduongdung " + v_where;
+                    LEFT JOIN dmduongdung@root e ON e.id = a.idduongdung 
+                    LEFT JOIN (
+                    select a.idduoc, a.dongia, a.dongiadg from nhapkhoct a inner join (select a.idduoc, max(to_char(a.ngayud,'yyyymmddhh24mi')) as ngayud from nhapkhoct a group by a.idduoc) b on b.idduoc = a.idduoc and to_char(a.ngayud,'yyyymmddhh24mi') = b.ngayud
+                    ) f ON f.idduoc = a.id " + v_where;
                     //"\nAND A.ID IN (4819,4817,4820,4434,4818,4154) LIMIT 500";
                     //+ "\nLIMIT 1500";
                     ds = dbHelper.getDataSetbySql(sql, v_conn);
@@ -756,6 +762,8 @@ namespace ApiManageSolution.Models
                             item.ten_quocgia = dr["ten_quocgia"].ToString();
                             item.id_duongdung = dr["id_duongdung"].ToString();
                             item.ten_duongdung = dr["ten_duongdung"].ToString();
+                            item.dongiacu = dr["dongiacu"].ToString();
+                            item.dongiadgcu = dr["dongiadgcu"].ToString();
                             lts.Add(item);
                         }
                     }
@@ -1269,6 +1277,8 @@ namespace ApiManageSolution.Models
             public string userid { get; set; }
             public string userten { get; set; }
             public string ngayud { get; set; }
+            public string dongiacu { get; set; }
+            public string dongiadgcu { get; set; }
             public string soluongyeucau { get; set; }
             public static IEnumerable<Nhapkhocts> Get(string v_where)
             {
@@ -1284,12 +1294,15 @@ namespace ApiManageSolution.Models
                     sql = "SELECT a.id, a.idnhapkho, a.idnguon, c.ten as tennguon, a.idduoc, b.ten as tenduoc, b.ma, b.sodk, b.hoatchat, b.donvidg" +
                     "\n, case when b.donvisd = '' then b.dang else b.donvisd end as donvisd,b.idhangsx,e.ten as tenhangsx, a.mavach, a.losx, a.ngaysx, a.handung, a.baohanh, a.vat, a.chietkhau" +
                     "\n, a.soluongdg, a.soluongsd, a.soluongn, a.soluongx, a.dongia, a.dongiadg, a.dongiavat, a.dongiadgvat, a.sotien, a.sotiendg, a.sotiendg, a.sotienvat, a.sotiendgvat" +
-                    "\n, a.ghichu, a.tinhtrang, a.userid, d.hoten as userten, a.ngayud, a.soluongyeucau" +
+                    "\n, a.ghichu, a.tinhtrang, a.userid, d.hoten as userten, a.ngayud, a.soluongyeucau, f.dongia as dongiacu, f.dongiadg as dongiadgcu" +
                     "\nFROM nhapkhoct a" +
                     "\nLEFT JOIN dmduoc b ON b.id = a.idduoc" +
                     "\nLEFT JOIN dmnguon@root c ON c.id = a.idnguon" +
                     "\nLEFT JOIN users@root d ON c.id = a.userid" +
                     "\nLEFT JOIN dmhangsx@root e ON e.id = b.idhangsx" +
+                    "\nLEFT JOIN (" +
+                    "\nselect a.idduoc, a.dongia, a.dongiadg from nhapkhoct a inner join (select a.idduoc, max(to_char(a.ngayud,'yyyymmddhh24mi')) as ngayud from nhapkhoct a group by a.idduoc) b on b.idduoc = a.idduoc and to_char(a.ngayud,'yyyymmddhh24mi') = b.ngayud" +
+                    "\n) f ON f.idduoc = a.idduoc" +
                     v_where;
                     ds = dbHelper.getDataSetbySql(sql, v_conn);
                     if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -1335,6 +1348,8 @@ namespace ApiManageSolution.Models
                             item.userten = dr["userten"].ToString();
                             item.ngayud = dr["ngayud"].ToString();
                             item.soluongyeucau = dr["soluongyeucau"].ToString();
+                            item.dongiacu = dr["dongiacu"].ToString();
+                            item.dongiadgcu = dr["dongiadgcu"].ToString();
                             lts.Add(item);
                         }
                     }
