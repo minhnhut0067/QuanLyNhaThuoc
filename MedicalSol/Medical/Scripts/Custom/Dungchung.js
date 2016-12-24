@@ -698,9 +698,11 @@ function f_table_reload(v_obj) {
         switch (v_obj) {
             case "khos":
                 $("#page_duoc_khaibaokho_ds").html("<div class=\"loader\"></div>");
+                data = { obj: v_obj, request: v_dk };
                 break;
             case "thuocs":
                 $("#page_duoc_khaibaothuoc_ds").html("<div class=\"loader\"></div>");
+                data = { obj: v_obj, request: v_dk };
                 break;
             case "nhapkhos":
                 $("#page_duoc_nhapkho_ds").html("<div class=\"loader\"></div>");

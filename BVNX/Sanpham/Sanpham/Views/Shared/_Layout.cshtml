@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Bệnh viện ĐK Nghi Xuân</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container wrapper header">
+            <div class="navbar-header" style="float: left;margin-left: 0">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="header-title hidden-xs">
+                @Html.ActionLink("Bệnh viện ĐK Nghi Xuân", "Index", "Home", null, new { @class = "" })
+            </div>
+            <div class="header-contact">
+                @*@Html.ActionLink("Giới thiệu", "Index", "Home", null, new { @class = "" }) |*@
+                @Html.ActionLink("Liên hệ", "Index", "Home", null, new { @class = "" }) |
+                @*@Html.ActionLink("Trợ giúp", "Index", "Home", null, new { @class = "" }) |*@
+                @Html.ActionLink("Đăng nhập", "Index", "Home", null, new { @class = "" })
+            </div>
+        </div>
+    </div>
+    <div class="container wrapper jumbotron hidden-xs" style="margin-bottom:0px; background-color: #fff;">
+        <h2><strong>B</strong>ệnh <strong>v</strong>iện <strong>N</strong>ghi <strong>X</strong>uân</h2>
+    </div>
+    <div class="" style="background-color: #eee;">
+        <div class="container wrapper navbar-collapse collapse" style="border-top: none;">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Students", "Index", "Student")</li>
+                <li>@Html.ActionLink("Courses", "Index", "Course")</li>
+                <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
+                <li>@Html.ActionLink("Departments", "Index", "Department")</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container body-content wrapper">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Bệnh viện ĐK Nghi Xuân</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
