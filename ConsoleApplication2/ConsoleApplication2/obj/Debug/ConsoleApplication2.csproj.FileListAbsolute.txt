@@ -1,0 +1,5 @@
+D:\nhut\project\QuanLyNhaThuoc\ConsoleApplication2\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe.config
+D:\nhut\project\QuanLyNhaThuoc\ConsoleApplication2\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe
+D:\nhut\project\QuanLyNhaThuoc\ConsoleApplication2\ConsoleApplication2\bin\Debug\ConsoleApplication2.pdb
+D:\nhut\project\QuanLyNhaThuoc\ConsoleApplication2\ConsoleApplication2\obj\Debug\ConsoleApplication2.exe
+D:\nhut\project\QuanLyNhaThuoc\ConsoleApplication2\ConsoleApplication2\obj\Debug\ConsoleApplication2.pdb

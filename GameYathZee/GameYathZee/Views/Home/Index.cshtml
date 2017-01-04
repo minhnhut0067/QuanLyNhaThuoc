@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4" style="margin-top:10%;">
+            <div class="input-group">
+                <input id="new" type="button" class="btn btn-primary" value="NEWGAME" />
+                <input id="change" type="button" class="btn btn-primary" disabled value="CHANGE" />
+                <input id="submit" type="button" class="btn btn-primary" disabled value="SUBMIT" />
+            </div>
+            <br />
+            @*<div id="ltsxingau" class="input-group"></div>*@
+        </div>
+        <div class="col-md-8" style="margin-top:10%;">
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <td>a</td>
+                        <td>b</td>
+                        <td>c</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="boxes">
+            <div id="dialog" class="window">
+                Your Content Goes Here
+                <div id="popupfoot"> <a href="#" class="close agree">I agree</a> | <a class="agree" style="color:red;" href="#">I do not agree</a> </div>
+            </div>
+            <div id="mask"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadallxingau();
+
+        $("#new").on("click", function () {
+            loadallxingau();
+            $(this).attr("disabled", true);
+            $("#change").attr("disabled", false);
+            $("#submit").attr("disabled", false);
+        });
+
+        $("#change").on("click", function () {
+            loadxingaudachon();
+        });
+
+        $("#submit").on("click", function () {
+            //$(this).attr("disabled", true);
+            loadallxingau();
+            //$("#new").attr("disabled", false);
+            $("#change").attr("disabled", false);
+            showpopup();
+            Guidiem();
+        });
+
+
+        //if close button is clicked
+        $('.window .close').click(function (e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            closepopup();
+        });
+
+        //if mask is clicked
+        $('#mask').click(function () {
+            closepopup();
+        });
+
+    });
+    function xingau_clcik(v_this) {
+        if ($(v_this).hasClass("chon")) {
+            $(v_this).removeClass("chon");
+        }
+        else {
+            $(v_this).addClass("chon");
+        }
+    }
+    function loadallxingau() {
+        ahtml = "";
+        $("#ltsxingau").html(ahtml);
+        for (var i = 0; i < 5; i++) {
+            var val = Math.floor((Math.random() * 6) + 1);
+            ahtml += "<input id=\"xingau" + (parseInt(i) + 1) + "\" type =\"hidden\" value=\"" + val + "\">"
+            ahtml += "<img class=\"xingau\" src=\"/Content/Images/" + val + ".JPG\" onclick =\"xingau_clcik(this)\" />";
+        }
+        $("#ltsxingau").html(ahtml);
+    }
+    function loadxingaudachon() {
+        for (var i = 0; i < $("#ltsxingau").children().length; i++) {
+            $("#ltsxingau").children("img").each(function () {
+                if ($(this).hasClass("chon")) {
+                    var val = Math.floor((Math.random() * 6) + 1);
+                    $(this).removeClass("chon");
+                    $(this).attr("src", $(this).attr("src").replace($(this).attr("src").split('/')[3].split('.')[0], val));
+                }
+            });
+        }
+    }
+    function showpopup() {
+        var id = '#dialog';
+
+        //Get the screen height and width
+        var maskHeight = $(document).height();
+        var maskWidth = $(window).width();
+
+        //Set heigth and width to mask to fill up the whole screen
+        $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+        //transition effect
+        $('#mask').fadeIn(500);
+        $('#mask').fadeTo("slow", 0.9);
+
+        //Get the window height and width
+        var winH = $(window).height();
+        var winW = $(window).width();
+
+        //Set the popup window to center
+        $(id).css('top', winH / 2 - $(id).height() / 2);
+        $(id).css('left', winW / 2 - $(id).width() / 2);
+
+        //transition effect
+        $(id).fadeIn(2000);
+    }
+    function closepopup() {
+        $('#mask').hide();
+        $('.window').hide();
+    }
+    function Guidiem() {
+        var v_data = { match: "van1", player: "Nhựt", choose:"3",point:"9" }
+        $.ajax({
+            type: "POST",
+            url: "/Home/Create",
+            data: v_data,
+            success: function (result) {
+            },
+            error: function (result) {
+            }
+        });
+    }
+</script>

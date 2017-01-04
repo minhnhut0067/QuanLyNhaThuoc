@@ -1,0 +1,86 @@
+﻿<DATA>
+  <ROW>
+    <DESCRIPTION>UPPER SEXTION</DESCRIPTION>
+    <TITLE>HOW TO SCORE</TITLE>    
+  </ROW>
+  <ROW>
+    <DESCRIPTION>Aces = 1</DESCRIPTION>
+    <TITLE>Count and Add /nOnly Aces</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>Twos = 2</DESCRIPTION>
+    <TITLE>Count and Add /nOnly Twos</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>Threes = 3</DESCRIPTION>
+    <TITLE>Count and Add /nOnly Threes</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>Fours = 4</DESCRIPTION>
+    <TITLE>Count and Add /nOnly Fours</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>Fives = 5</DESCRIPTION>
+    <TITLE>Count and Add /nOnly Fives</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>Sixes = 6</DESCRIPTION>
+    <TITLE>Count and Add /nOnly Sixes</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>TOTAL SCORE</DESCRIPTION>
+    <TITLE>----></TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>BONUS \n(Total score > 63)</DESCRIPTION>
+    <TITLE>SCORE 35</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>TOTAL \n(Upper section)</DESCRIPTION>
+    <TITLE>----></TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>3 of a kind</DESCRIPTION>
+    <TITLE>Add Total \nof all Dice</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>4 of a kind</DESCRIPTION>
+    <TITLE>Add Total \nof all Dice</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>FULL HOUSE</DESCRIPTION>
+    <TITLE>SCORE 25</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>Sm.Straight \n(Sequence of 4)</DESCRIPTION>
+    <TITLE>SCORE 30</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>Lg.Straight \n(Sequence of 5)</DESCRIPTION>
+    <TITLE>SCORE 40</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>YATHZEE \n(5 of a kind)</DESCRIPTION>
+    <TITLE>SCORE 50</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>Chance</DESCRIPTION>
+    <TITLE>Total \nof All 5 Dice</TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>YATH BONUS</DESCRIPTION>
+    <TITLE></TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>TOTAL \n(Lower section)</DESCRIPTION>
+    <TITLE>----></TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>TOTAL \n(Upper section)</DESCRIPTION>
+    <TITLE>----></TITLE>
+  </ROW>
+  <ROW>
+    <DESCRIPTION>GRAND TOTAL</DESCRIPTION>
+    <TITLE>----></TITLE>
+  </ROW>
+</DATA>

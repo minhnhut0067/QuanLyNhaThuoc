@@ -96,11 +96,25 @@ ul.navbar-nav li > a {
         background-color: #ccc;
     }
 
-.jumbotron > h2 {
-    color: #ccc;
+.jumbotron {
+    padding: 48px 15px;
 }
 
-.jumbotron h2 > strong {
-    color: #059bd8;
-    text-transform:uppercase;
+    .jumbotron > h2 {
+        color: #ccc;
+    }
+
+    .jumbotron h2 > strong {
+        color: #059bd8;
+        text-transform: uppercase;
+    }
+
+ul.navbar-nav li > a:focus {
+    background-color: #eee;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu {
+        background-color: #ddd;
+    }
 }
